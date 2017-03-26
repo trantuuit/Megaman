@@ -1,0 +1,4 @@
+﻿  MGMMap.cpp
+c:\users\h.sinh\desktop\ownmgm1\project1\mgmmap.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Project1.vcxproj -> C:\Users\H.Sinh\Desktop\OwnMGM1\Debug\OwnMGM.exe
+  Project1.vcxproj -> C:\Users\H.Sinh\Desktop\OwnMGM1\Debug\OwnMGM.pdb (Full PDB)

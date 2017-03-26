@@ -18,7 +18,7 @@ MGMGame::~MGMGame()
 }
 void MGMGame::init()
 {
-	
+
 	Megaman::getInstance()->x = 84;
 	Megaman::getInstance()->y = 111;
 
@@ -34,13 +34,17 @@ void MGMGame::render()
 
 	map->draw();
 	Megaman::getInstance()->render();
-	
+
 }
 void MGMGame::update(DWORD timesleep)
 {
-
-	Megaman::getInstance()->update(); // Cap nhat van toc cua MGM
-	map->update();
-	MGMCamera::getInstance()->update(); 
-	Megaman::getInstance()->updateLocation(); // Cap nhat toa do cua MGM
+	if (map->isUpdate)
+	{
+		Megaman::getInstance()->update(); // Cap nhat van toc cua MGM
+		map->update();
+	}
+	MGMCamera::getInstance()->update();
+	if (map->isUpdate)
+		Megaman::getInstance()->updateLocation(); // Cap nhat toa do cua MGM
+	map->updateStage();
 }

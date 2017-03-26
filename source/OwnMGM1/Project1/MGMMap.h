@@ -10,7 +10,7 @@ class MGMMap :
 {
 public:
 	int nObject;
-
+	bool isUpdate;
 	QuadTree* quadTree;
 	int nStage;
 	MGMObject** allObjects;
@@ -20,7 +20,7 @@ public:
 	void readObjects(char* objectsPath);
 
 	void readStage(char* stagePath);
-
+	void updateStage();
 	void update();
 	void draw();
 

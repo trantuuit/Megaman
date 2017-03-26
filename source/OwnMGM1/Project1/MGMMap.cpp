@@ -74,6 +74,35 @@ void MGMMap::readStage(char * stagePath)
 
 }
 
+void MGMMap::updateStage()
+{
+	for (int i = 0; i < nStage; i++)
+	{
+		//if (MGMStage::curStage->index == i) continue;
+		if (Collision::AABBCheck(Megaman::getInstance(), stages[i]))
+		{
+			MGMStage::curStage = stages[i];
+
+			if (MGMCamera::getInstance()->y > MGMStage::curStage->getTop())
+			{
+				MGMCamera::getInstance()->dy = -1;
+			}
+			if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
+			{
+				//if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
+				MGMCamera::getInstance()->dy = 1;
+			}
+			isUpdate = false;
+		}
+		//else isUpdate = true;
+	}
+	if (MGMStage::curStage->getBottom() <= MGMCamera::getInstance()->getBottom() &&MGMCamera::getInstance()->y <= MGMStage::curStage->getTop())
+	{
+		MGMCamera::getInstance()->dy = 0;
+		isUpdate = true;
+	}
+}
+
 void MGMMap::update()
 {
 
@@ -115,27 +144,7 @@ void MGMMap::update()
 		MGMCamera::getInstance()->objects.allObjects[i]->updateLocation();
 	}
 
-	//for (int i = 0; i < nStage; i++)
-	//{
-	//	if (MGMStage::curStage->index == i) continue;
-	//	if (Collision::AABBCheck(Megaman::getInstance(), stages[i]))
-	//	{
-	//		MGMStage::curStage = stages[i];
 
-	//		if (MGMCamera::getInstance()->y > MGMStage::curStage->getTop())
-	//		{
-	//			MGMCamera::getInstance()->dy = -3;
-	//		}
-	//		else MGMCamera::getInstance()->dy = 0;
-	//		if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
-	//		{
-	//			//if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
-	//				MGMCamera::getInstance()->dy = 3;
-	//			
-	//		}
-	//		else MGMCamera::getInstance()->dy = 0;
-	//	}
-	//}
 }
 
 void MGMMap::draw()
@@ -154,6 +163,7 @@ MGMMap::MGMMap(char * objectsPath, char * tileSheetPath, char * quadTreePath, ch
 	readObjects(objectsPath);
 	quadTree = new QuadTree(quadTreePath, allObjects, nRow * 16);
 	readStage(stagePath);
+	isUpdate = true;
 }
 
 MGMMap::~MGMMap()

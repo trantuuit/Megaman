@@ -49,12 +49,10 @@ int MGMRectangle::getBottom()
 int MGMRectangle::getXCenter()
 {
 	return x + width / 2;
-	//return 0;
 }
 int MGMRectangle::getYCenter()
 {
 	return y - height / 2;
-	//return 0;
 }
 MGMRectangle::~MGMRectangle()
 {
