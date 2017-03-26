@@ -1,7 +1,6 @@
 ﻿#include "MGMObject.h"
 #include"Collision.h"
 #include"MGMCamera.h"
-extern double gravity;
 MGMObject::MGMObject()
 {
 	curAction = 0;
@@ -13,7 +12,7 @@ MGMObject::MGMObject()
 	dx = 0;
 	dy = 0;
 	ax = 0;
-	ay = gravity;
+	ay = GRAVITY;
 	objectDirection = RIGHT;
 
 
@@ -33,8 +32,11 @@ void MGMObject::restoreObject()
 
 void MGMObject::setCurAction(int curAction)
 {
-	this->curFrame = 0;
-	this->curAction = curAction;
+	if (this->curAction != curAction)
+	{
+		this->curFrame = 0;
+		this->curAction = curAction;
+	}
 }
 
 
@@ -46,8 +48,14 @@ void MGMObject::update() // this
 		return;
 	MGMBox::update();
 	//updateMove();
-	if (timeFrame.atTime()){
+	if (timeFrame.atTime()) {
+
+		int lastFrame = curFrame;
+
 		this->sprite->Update(curAction, curFrame);
+
+		if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
+			onLastFrameAnimation(curAction);
 	}
 }
 
@@ -57,9 +65,15 @@ void MGMObject::update() // this
 void MGMObject::onCollision(MGMBox* other, int nx, int ny)
 {
 	if (ny != 0 && other->collisionCategory == CC_GROUND)
-		vy = 0;
-	if(other->collisionCategory==CC_GROUND) 
+	{
+		vy = -0.3;
+	}
+	if (other->collisionCategory == CC_GROUND)
 		Collision::preventMove(this, other);
+}
+
+void MGMObject::onLastFrameAnimation(int action)
+{
 }
 
 

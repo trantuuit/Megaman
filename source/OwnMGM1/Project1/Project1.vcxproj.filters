@@ -113,6 +113,9 @@
     <ClCompile Include="Megaman.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="MGMDelayTime.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Megaman.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMDelayTime.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

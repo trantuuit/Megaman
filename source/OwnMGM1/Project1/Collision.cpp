@@ -36,11 +36,11 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 
 	if (AABBCheck(broadPhaseBox, S))
 	{
+		delete broadPhaseBox;
 		if (AABBCheck(S, M))
 		{
 			S->onInterserct(M);
 			M->onInterserct(S);
-			delete broadPhaseBox;
 			return;
 		}
 		float nx, ny;
@@ -69,9 +69,6 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 
 			M->onCollision(S, nx, ny);
 			//S->onCollision(M, nx, ny);
-
-
-			delete broadPhaseBox;
 			return;
 		}
 	}

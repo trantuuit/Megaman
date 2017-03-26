@@ -11,11 +11,7 @@ MGMCamera* MGMCamera::getInstance(){
 }
 MGMCamera::MGMCamera()
 {
-	this->x = 0;
-	this->y = 2112;
-	this->width = CAMERA_WIDTH;
-	this->height = CAMERA_HEIGHT;
-	dy = 0;
+
 }
 
 

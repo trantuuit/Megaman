@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="BigEye.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="MGMDelayTime.cpp" />
     <ClCompile Include="OctopusBattery.cpp" />
     <ClCompile Include="Funtion.cpp" />
     <ClCompile Include="KEY.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="BigEye.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="MGMDelayTime.h" />
     <ClInclude Include="OctopusBattery.h" />
     <ClInclude Include="KEY.h" />
     <ClInclude Include="Keyboard.h" />

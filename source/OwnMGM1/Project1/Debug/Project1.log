@@ -1,4 +1,6 @@
-﻿  MGMMap.cpp
-c:\users\h.sinh\desktop\ownmgm1\project1\mgmmap.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Project1.vcxproj -> C:\Users\H.Sinh\Desktop\OwnMGM1\Debug\OwnMGM.exe
-  Project1.vcxproj -> C:\Users\H.Sinh\Desktop\OwnMGM1\Debug\OwnMGM.pdb (Full PDB)
+﻿  Megaman.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\megaman.cpp(125): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\megaman.cpp(130): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Project1.vcxproj -> C:\Users\H.Sinh\Desktop\Megaman.git\trunk\source\OwnMGM1\Debug\OwnMGM.exe
+  Project1.vcxproj -> C:\Users\H.Sinh\Desktop\Megaman.git\trunk\source\OwnMGM1\Debug\OwnMGM.pdb (Full PDB)

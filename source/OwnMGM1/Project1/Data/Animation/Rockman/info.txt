@@ -20,12 +20,11 @@ Index		Name
 1			Animation2
 
 			FramesCount
-			3
+			2
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			3				18				21				24
-			28				18				21				24
+			54				18				20				24
 			54				18				20				24
 
 

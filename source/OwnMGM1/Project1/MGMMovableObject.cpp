@@ -10,11 +10,11 @@ MGMMovableObject::MGMMovableObject()
 
 void MGMMovableObject::updateMove()
 {
-	vx = vx + ax*gameTime;
-	dx = vx*gameTime;
+	vx = vx + ax*GAMETIME;
+	dx = (int)(vx*GAMETIME);
 
-	vy = vy + ay*gameTime;
-	dy = vy*gameTime;
+	vy = vy + ay*GAMETIME;
+	dy = (vy*GAMETIME);
 }
 
 void MGMMovableObject::update()

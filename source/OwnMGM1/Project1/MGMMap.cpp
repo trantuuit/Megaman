@@ -78,7 +78,7 @@ void MGMMap::updateStage()
 {
 	for (int i = 0; i < nStage; i++)
 	{
-		//if (MGMStage::curStage->index == i) continue;
+		if (MGMStage::curStage->index == i) continue;
 		if (Collision::AABBCheck(Megaman::getInstance(), stages[i]))
 		{
 			MGMStage::curStage = stages[i];
@@ -168,4 +168,15 @@ MGMMap::MGMMap(char * objectsPath, char * tileSheetPath, char * quadTreePath, ch
 
 MGMMap::~MGMMap()
 {
+	for (int i = 0; i < nStage; i++)
+	{
+		delete stages[i];
+		
+	}
+	if(stages !=NULL) delete[] stages;
+	for (int i = 0; i < nObject; i++)
+	{
+		delete allObjects[i];
+	}
+	if (allObjects != NULL) delete[] allObjects;
 }
