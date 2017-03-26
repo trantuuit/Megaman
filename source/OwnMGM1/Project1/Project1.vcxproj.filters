@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Map">
+      <UniqueIdentifier>{09f7f0c4-9ca3-4d19-bc2d-f643b0bdd895}</UniqueIdentifier>
+      <Extensions>h;cpp</Extensions>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{78259525-9608-4656-b2f6-6c4ecd4711bf}</UniqueIdentifier>
+      <Extensions>h;cpp</Extensions>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ea646d49-eac2-4181-9f97-6af8ccc56cf3}</UniqueIdentifier>
+      <Extensions>h;cpp</Extensions>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;cpp</Extensions>
+    </Filter>
+    <Filter Include="Framework\BaseObject">
+      <UniqueIdentifier>{59aa372f-07ff-4891-99bd-78ed947dacac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Sprite">
+      <UniqueIdentifier>{2316b16b-4b48-47cb-8c7b-5354eeb008b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="KEY.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMAnimation.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMBox.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMCamera.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMDirectXTool.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMForm.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMGameTime.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMMovableObject.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadNode.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMTexture.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMTileMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMSpriteManager.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMSprite.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMObject.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMObjectsCategory.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMPoint.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMRectangle.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="MGMEnemy.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMStage.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Funtion.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="BigEye.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="OctopusBattery.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PicketMan.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Megaman.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Collision.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadNode.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMCamera.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="KEY.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMPoint.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMRectangle.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMObject.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMObjectsCategory.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMBox.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMMovableObject.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMTileMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="MGMGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMForm.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMAnimation.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMDirectXTool.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMSprite.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMSpriteManager.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMTexture.h">
+      <Filter>Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMEnemy.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMGameTime.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMStage.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BigEye.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="OctopusBattery.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PicketMan.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Megaman.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,30 @@
+﻿#pragma once
+#include "MGMTileMap.h"
+#include"MGMObject.h"
+#include"QuadTree.h"
+#include"MGMStage.h"
+#include<fstream>
+using namespace std;
+class MGMMap :
+	public MGMTileMap
+{
+public:
+	int nObject;
+
+	QuadTree* quadTree;
+	int nStage;
+	MGMObject** allObjects;
+	MGMStage** stages;
+
+	/*Đọc object và tạo sprite cho object*/
+	void readObjects(char* objectsPath);
+
+	void readStage(char* stagePath);
+
+	void update();
+	void draw();
+
+	MGMMap(char* objectsPath,char* tileSheetPath,char* quadTreePath,char* matrixPath,char* stagePath);
+	~MGMMap();
+};
+

@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MGMMap">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAADBACAAAIAAAAEAAwACAAAAAAAAAAEAAA=</HashCode>
+      <FileName>MGMMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMTileMap" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACgIAAAAAAAIAACABAAAAAABAAAEAAAAAAAg=</HashCode>
+      <FileName>MGMTileMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collision" Collapsed="true">
+    <Position X="23" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAQAICAAAAAAAAAAAAAAIAAAAAAIAAAAAAAACA=</HashCode>
+      <FileName>Collision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KEY" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAQYAAAAAASAAAAABAAAQAEBAAAAAEAAA=</HashCode>
+      <FileName>KEY.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKeyboard" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAABBAAAAAhAAAAAAFQAEQgAAACQBAAAAQ=</HashCode>
+      <FileName>Keyboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMCamera">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAQBAAAQAAQAAAAgEAAA=</HashCode>
+      <FileName>MGMCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuadNode" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQQAAAgAAAAEAAAAAAAAZBAAAACAAAAAAAAAgA=</HashCode>
+      <FileName>QuadNode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuadTree" Collapsed="true">
+    <Position X="18.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAEAAAAABCUAAA=</HashCode>
+      <FileName>QuadTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMBox" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAACAAAAAAAAAAgAJAAAAAAABAgAgAAAAACAEJAE=</HashCode>
+      <FileName>MGMBox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMEnemy" Collapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MGMEnemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMMovableObject" Collapsed="true">
+    <Position X="11.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAgEAAQAEAAA=</HashCode>
+      <FileName>MGMMovableObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMObject" Collapsed="true">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAABBAAQAgAAAAAAAAAAAABEAAAIEAAAAACAUAQA=</HashCode>
+      <FileName>MGMObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMObjectsCategory" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAIAAAAAAAAAAAAAEACgAAAwAAQAAAAAAAAACAAA=</HashCode>
+      <FileName>MGMObjectsCategory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMPoint" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAACAAAAAAYAA=</HashCode>
+      <FileName>MGMPoint.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMRectangle" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAAAAgAAAAAQAQBAAAAAACIYAAAIAAAhgAAAAAAA=</HashCode>
+      <FileName>MGMRectangle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMAnimation" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAgAAAAAAAAAAAAAAAAIAAAAABQIAAAA=</HashCode>
+      <FileName>MGMAnimation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMDirectXTool" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAACCAAAIAEEAAAEAEAIAAABBBACQ4AAAEAABIAAAA=</HashCode>
+      <FileName>MGMDirectXTool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMSprite" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAKAAAAAAIAgAAAAAAAAAEAAAABABAAAAAAA=</HashCode>
+      <FileName>MGMSprite.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMSpriteManager" Collapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEAAAAAAAAAABAAAQAAAAAAACAAAA=</HashCode>
+      <FileName>MGMSpriteManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMTexture" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAIAgBAAAAAAAAAAAAkAAAAACAAAACAACAAAAAAA=</HashCode>
+      <FileName>MGMTexture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMForm" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEBAIIAAAAABAAAQAAAAIQAAAAAA=</HashCode>
+      <FileName>MGMForm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMGame" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAEAAAAAACAAACAAAAAAAAAABAIAYIAAAAAAoUAAA=</HashCode>
+      <FileName>MGMGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMGameTime" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAGQAAAgAAAgAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MGMGameTime.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MGMStage" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAAAACAABAAA=</HashCode>
+      <FileName>MGMStage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BigEye" Collapsed="true">
+    <Position X="12.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>BigEye.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctopusBattery" Collapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAACAAAAAEAAA=</HashCode>
+      <FileName>OctopusBattery.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PicketMan" Collapsed="true">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAACAAAAAAAAAAAUAAA=</HashCode>
+      <FileName>PicketMan.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Megaman" Collapsed="true">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAABAAAQAAQAAICAUAAA=</HashCode>
+      <FileName>Megaman.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="List&lt;className&gt;" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAAAAAAAAABAgKAAAAQAAAEAQkAAgAAAABBAAAI=</HashCode>
+      <FileName>List.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="COLLISION_CATEGORY" Collapsed="true">
+    <Position X="17" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACQAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAABA=</HashCode>
+      <FileName>MGMBox.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SPRITE_LIST" Collapsed="true">
+    <Position X="20.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAIJAAAAAIQAAA=</HashCode>
+      <FileName>MGMSpriteManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Direction" Collapsed="true">
+    <Position X="18.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>MGMTexture.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
