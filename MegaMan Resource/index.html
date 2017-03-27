@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Đăng ký học phần</title>
+	<style>
+		#id:focus{
+			background-color: blue;
+		}
+		#name:focus{
+			background-color: blue;
+		}
+		#address:focus{
+			background-color: blue;
+		}
+		#phone:focus{
+			background-color: blue;
+		}
+		#email:focus{
+			background-color: blue;
+		}
+		table {
+		    font-family: arial, sans-serif;
+		    border-collapse: collapse;
+		    width: 100%;
+		}
+
+		td, th {
+		    border: 1px solid #dddddd;
+		    text-align: left;
+		    padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		    background-color: #dddddd;
+		}
+		#container
+		{
+		    text-align:center;
+		}
+		#block1, #block2
+		{
+		    display:inline;
+		}
+		div {
+			width: 40%;
+			padding: 20px;
+			display: inline-block;
+}
+	</style>
+</head>
+<body>
+	
+	<form action="" style="text-align:center;">
+		<h1>ĐĂNG KÝ HỌC PHẦN</h1>
+		<div style="margin:auto;width: 25%;">
+					<fieldset>
+            <label for="avatar">Mã số:</label>
+            <input type="text" id="id" name="id" pattern="[0-9]{8}" title="Mã số gồm 8 chữ số" required placeholder="Vui lòng nhập mã số!">
+        </fieldset>
+        <fieldset>
+            <label for="avatar">Họ và tên:</label>
+            <input type="text" id="name" name="name" pattern="[a-zA-Z _\.]{6,50}$" title="Có ít nhất 6 ký tự và tối đa là 50 ký tự, ký tự số không được chấp nhận"  required placeholder="Vui lòng nhập họ và tên!">
+        </fieldset>
+        <fieldset>
+            <label for="avatar">Địa chỉ:</label>
+            <input type="text" id="address" name="address" pattern="[a-zA-Z0-9 ]{6,50}$" title="Có ít nhất 6 ký tự và tối đa là 50 ký tự" required placeholder="Vui lòng nhập địa chỉ!">
+        </fieldset>
+        <fieldset>
+            <label for="phone">Điện thoại:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10,11}"  title="Tối tiểu 10 số, tối đa 11 số!"  required placeholder="Vui lòng nhập điện thoại!">
+        </fieldset>
+        <fieldset>
+            <label for="gender">Giới tính:</label>
+            <input type="radio" id="avatar" name="gender" value="male" title="Giới tính là bắt buộc!" required placeholder="Vui lòng chọn giới tính!">
+            <label for="male">Nam</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Nữ</label>
+        </fieldset>
+        <fieldset>
+			<label for="birthday">Ngày sinh:</label>
+            <input type="date" id="birthday" name="birthday" min="1990-01-01" max="2017-12-12" required placeholder="Vui lòng chọn ngày sinh!">
+        </fieldset>
+        <fieldset>
+			<label for="email">Email:</label>
+            <input type="email" id="email"  pattern="[^@]+@gmail.com|[^@]+@gm.uit.edu.vn" title="Email bắt buộc là gmail hoặc @gm.uit.edu.vn" name="email" required placeholder="Vui lòng nhập email!">
+        </fieldset>
+		</div>
+					<div id="container">
+			<div id="block1">
+				<table>
+					<tr>
+						<th>Các môn học</th>
+					</tr>
+					<tr>
+						<td>LT hướng đối tượng</td>
+					</tr>
+					<tr>
+						<td>Cấu trúc dữ liệu</td>
+					</tr>
+					<tr>
+						<td>LT C trên Window</td>
+					</tr>
+					<tr>
+						<td>NM CNPM</td>
+					</tr>
+					<tr>
+						<td>Trí tuệ nhân tạo</td>
+					</tr>
+					<tr>
+						<td>CSDL và Web</td>
+					</tr>
+					<tr>
+						<td>CĐ Java</td>
+					</tr>
+					<tr>
+						<td>Cơ sở dữ liệu</td>
+					</tr>
+					<tr>
+						<td>Hợp ngữ</td>
+					</tr>
+				</table>
+			</div>
+			<div id="block2">
+				<button>></button>
+				<button>>></button>
+				<button><</button>
+				<button><<</button>
+			</div>
+			<div id="block3">
+				<table>
+					<tr>
+						<th>Các môn học đã chọn</th>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+        <input type="submit" value="Đăng ký">
+	</form>
+
+</body>
+</html>
