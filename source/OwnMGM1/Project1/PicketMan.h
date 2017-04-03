@@ -7,6 +7,7 @@ public:
 	void update();
 	void render();
 
+	void onCollision(MGMBox* other, int nx, int ny);
 	PicketMan();
 	~PicketMan();
 };

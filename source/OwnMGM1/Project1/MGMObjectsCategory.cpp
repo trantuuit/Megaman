@@ -15,6 +15,9 @@ void MGMObjectsCategory::addObject(MGMObject * obj)
 	case CC_ITEM:	
 		itemObjects._Add(obj);
 		break;
+	case CC_STAIRS:
+		stairObjects._Add(obj);
+		break;
 		//add
 	default:
 		break;

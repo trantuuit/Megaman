@@ -14,7 +14,7 @@ MGMObject::MGMObject()
 	ax = 0;
 	ay = GRAVITY;
 	objectDirection = RIGHT;
-
+	isUpdateFrameAnimation = true;
 
 }
 
@@ -42,7 +42,7 @@ void MGMObject::setCurAction(int curAction)
 
 
 
-void MGMObject::update() // this
+void MGMObject::updateFrameAnimation() // this
 {
 	if (sprite == 0)
 		return;
@@ -52,7 +52,8 @@ void MGMObject::update() // this
 
 		int lastFrame = curFrame;
 
-		this->sprite->Update(curAction, curFrame);
+		if(isUpdateFrameAnimation)
+			this->sprite->Update(curAction, curFrame);
 
 		if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 			onLastFrameAnimation(curAction);
@@ -64,18 +65,17 @@ void MGMObject::update() // this
 
 void MGMObject::onCollision(MGMBox* other, int nx, int ny)
 {
-	if (ny != 0 && other->collisionCategory == CC_GROUND)
-	{
-		vy = -0.3;
-	}
-	if (other->collisionCategory == CC_GROUND)
-		Collision::preventMove(this, other);
+
 }
 
 void MGMObject::onLastFrameAnimation(int action)
 {
 }
 
+
+void MGMObject::update()
+{
+}
 
 void MGMObject::render()
 {

@@ -17,10 +17,25 @@ void MGMMovableObject::updateMove()
 	dy = (vy*GAMETIME);
 }
 
+
+
 void MGMMovableObject::update()
 {
-	MGMObject::update();
+	MGMObject::updateFrameAnimation();
 	updateMove();
+}
+
+void MGMMovableObject::onCollision(MGMBox * other, int nx, int ny)
+{
+	if (ny != 0 && other->collisionCategory == CC_GROUND)
+	{
+		vy = -0.3;
+	}
+	if (other->collisionCategory == CC_GROUND)
+	{
+		Collision::preventMove(this, other);
+		//if (ny == 1) isOnGround = true;
+	}
 }
 
 MGMMovableObject::~MGMMovableObject()

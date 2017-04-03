@@ -4,6 +4,8 @@ class KEY
 {
 public:
 	bool	isLeftDown,
+			isUpHold,
+			isDownHold,
 			isRightDown,
 			isJumpDown,
 			isMoveDown,

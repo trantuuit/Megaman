@@ -8,6 +8,7 @@ public:
 	List<MGMObject*> groundObjects;
 	List<MGMObject*> enemyObjects;
 	List<MGMObject*> itemObjects;
+	List<MGMObject*> stairObjects;
 
 	void addObject(MGMObject* obj);
 	void removeObject(MGMObject* obj);

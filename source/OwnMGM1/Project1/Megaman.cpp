@@ -105,12 +105,23 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
+	isUpdateFrameAnimation = true;
 	bool isKeyLeftDown = KEY::getInstance()->isLeftDown;
 	bool isKeyRightDown = KEY::getInstance()->isRightDown;
 	bool isKeyMoveDown = KEY::getInstance()->isMoveDown;
 	bool isKeyJumpPress = KEY::getInstance()->isJumpPress;
 	bool isKeyMovePress = KEY::getInstance()->isMovePress;
-
+	if (isOnStairs)
+	{
+		isKeyMoveDown = false;
+		isKeyLeftDown = false;
+		isKeyRightDown = false;
+		/*Megaman::getInstance()->setCurAction(MGM_CLIMB);*/
+		/*if (KEY::getInstance()->isUpHold|| KEY::getInstance()->isDownHold)
+		{
+			setCurAction(MGM_CLIMB);
+		}*/
+	}
 	if (isKeyLeftDown)
 	{
 		objectDirection = LEFT;
@@ -128,17 +139,18 @@ void Megaman::update()
 	{
 		setCurAction(MGM_PRE_RUN);
 		vx = objectDirection*MEGAMAN_VX_GO;
+
 	}
 	else
 	{
 		vx = 0;
-		setCurAction(MGM_STAND);
+		if (!isOnStairs) setCurAction(MGM_STAND);
 	}
 
-	if(!isOnGround)
+	if (!isOnGround && !isOnStairs)
 		setCurAction(MGM_JUMP);
 
-	MGMMovableObject::update();
+	this->updateMove();
 	isOnGround = false;
 
 
@@ -151,10 +163,25 @@ void Megaman::render()
 
 void Megaman::setCurAction(int action)
 {
+
 	if (this->action == MGM_RUN && action == MGM_PRE_RUN)
 		return;
 	this->action = action;
+	if (action == MGM_CLIMB || action == MGM_JUMP)
+		this->width = 16;
+	else 
+		this->width = 20;
+
 	MGMMovableObject::setCurAction(action);
+}
+
+void Megaman::onInterserct(MGMBox * other)
+{
+
+	if (other->collisionCategory == CC_GROUND 
+		&& this->getRight() > other->getLeft()
+		&& this->getLeft()<other->getLeft()) 
+		this->x = other->getLeft() - this->width;
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -166,20 +193,33 @@ void Megaman::onLastFrameAnimation(int action)
 	}
 }
 
+void Megaman::updateFrameAnimation()
+{
+	if(!pauseAnimation)
+		MGMMovableObject::updateFrameAnimation();
+}
+
 void Megaman::onCollision(MGMBox * other, int nx, int ny)
 {
-	if(ny == 1)
+	if (ny == 1)
+	{
 		isOnGround = true;
+		isOnStairs = false;
+	}
 	MGMMovableObject::onCollision(other, nx, ny);
 }
 
 Megaman::Megaman()
 {
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_MEGAMAN];
-	width = 21;
+	width = 20;
 	height = 23;
 	ax = 0;
-	isOnGround = 0;
+	isOnGround = false;
+	isOnStairs = false;
+	isUpdateFrameAnimation = true;
+	pauseAnimation = false;
+	collisionCategory = CC_MEGAMAN;
 }
 
 

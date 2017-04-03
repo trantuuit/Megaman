@@ -99,6 +99,7 @@
     <ClCompile Include="MGMTileMap.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="stairs.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="MGMTileMap.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="stairs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

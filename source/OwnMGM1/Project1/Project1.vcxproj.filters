@@ -113,8 +113,11 @@
     <ClCompile Include="Megaman.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="stairs.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
     <ClCompile Include="MGMDelayTime.cpp">
-      <Filter>Map</Filter>
+      <Filter>Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,8 +209,11 @@
     <ClInclude Include="Megaman.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="stairs.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
     <ClInclude Include="MGMDelayTime.h">
-      <Filter>Map</Filter>
+      <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

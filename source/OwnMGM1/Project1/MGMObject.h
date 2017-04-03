@@ -7,8 +7,10 @@ public:
 	Direction objectDirection;
 	MGMSprite* sprite;
 	MGMGameTime timeFrame;
+	bool isOnGround;
 	int curAction;
 	int curFrame;
+	bool isUpdateFrameAnimation;
 	
 	MGMRectangle oldRect;
 	
@@ -18,11 +20,12 @@ public:
 	virtual void restoreObject();
 	
 	virtual void setCurAction(int curAction);
-	void onCollision(MGMBox* other, int nx, int ny);
+	virtual	void onCollision(MGMBox* other, int nx, int ny);
 
 	virtual void onLastFrameAnimation(int action);
 
 	void update();
+	virtual void updateFrameAnimation();
 	void render();
 	MGMObject();
 	~MGMObject();

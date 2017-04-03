@@ -41,7 +41,7 @@ void MGMSprite::initInfo(char* infor)
 
 void MGMSprite::Update(int curAction, int& curFrame)
 {
-	animations[curAction].next(curFrame);
+	 animations[curAction].next(curFrame);
 }
 void MGMSprite::Render(int x, int y, int curAction, int curFrame)
 {

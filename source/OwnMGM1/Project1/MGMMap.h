@@ -4,6 +4,7 @@
 #include"QuadTree.h"
 #include"MGMStage.h"
 #include<fstream>
+#include"MGMBox.h"
 using namespace std;
 class MGMMap :
 	public MGMTileMap

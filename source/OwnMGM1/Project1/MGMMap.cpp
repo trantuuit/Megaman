@@ -5,7 +5,7 @@
 #include"Collision.h"
 #include"BigEye.h"
 #include"Megaman.h"
-
+#include"stairs.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -36,6 +36,9 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_BIGEYE:
 			obj = new BigEye();
+			break;
+		case SPR_STAIRS:
+			obj = new stairs();
 			break;
 		default:
 			obj = new MGMObject();
@@ -85,12 +88,12 @@ void MGMMap::updateStage()
 
 			if (MGMCamera::getInstance()->y > MGMStage::curStage->getTop())
 			{
-				MGMCamera::getInstance()->dy = -1;
+				MGMCamera::getInstance()->dy = -3;
 			}
 			if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
 			{
 				//if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
-				MGMCamera::getInstance()->dy = 1;
+				MGMCamera::getInstance()->dy = 3;
 			}
 			isUpdate = false;
 		}
@@ -119,7 +122,9 @@ void MGMMap::update()
 
 	List<MGMObject*>& enemyObjects = MGMCamera::getInstance()->objects.enemyObjects;
 	List<MGMObject*>& groundObjects = MGMCamera::getInstance()->objects.groundObjects;
+	List<MGMObject*>& stairObjects = MGMCamera::getInstance()->objects.stairObjects;
 
+	
 	int nGround = groundObjects.size();
 
 	for (int iGround = 0; iGround < nGround; iGround++)
@@ -127,6 +132,14 @@ void MGMMap::update()
 		Collision::checkCollision(Megaman::getInstance(), groundObjects[iGround]);
 	}
 
+	int nStair = stairObjects.size();
+	stairs* s;
+	for (int i = 0; i < nStair; i++)
+	{
+		s = (stairs*) stairObjects[i];
+		s->climbStairs();
+		/*Collision::checkCollision(Megaman::getInstance(), stairObjects[i]);*/
+	}
 	int nEnemy = enemyObjects.size();
 
 	for (int iEnemy = 0; iEnemy < nEnemy; iEnemy++)
@@ -139,6 +152,7 @@ void MGMMap::update()
 		}
 	}
 
+	
 	for (int i = 0; i < nObjectsCam; i++)
 	{
 		MGMCamera::getInstance()->objects.allObjects[i]->updateLocation();
