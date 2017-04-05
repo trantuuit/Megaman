@@ -56,7 +56,7 @@ void MGMCamera::update()
 
 	if (getRight() + dx > MGMStage::curStage->getRight())
 	{
-		x = MGMStage::curStage->getRight() - width;
+		x = MGMStage::curStage->getRight() - width+1;
 		dx = 0;
 	}
 

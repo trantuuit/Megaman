@@ -15,7 +15,8 @@ enum COLLISION_CATEGORY
 class MGMBox : public MGMRectangle
 {
 public:
-	float dx, vx, ax, dy, vy, ay;
+	int dx, dy;
+	float vx, ax, vy, ay;
 	MGMBox();
 	~MGMBox();
 

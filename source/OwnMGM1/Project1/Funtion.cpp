@@ -13,6 +13,6 @@ void ignoreLineIfstream(ifstream& fs, int lineCount)
 }
 
 int GAMETIME = 6;
-double GRAVITY = -0.003;
+double GRAVITY = -0.005;
 double MEGAMAN_VY_JUMP = 1;
 double MEGAMAN_VX_GO = 0.3;

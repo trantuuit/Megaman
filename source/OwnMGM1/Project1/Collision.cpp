@@ -26,8 +26,8 @@ MGMBox* Collision::GetSweptBroadphaseBox(MGMBox* box)
 
 bool Collision::AABBCheck(MGMRectangle* M, MGMRectangle* S)
 {
-	return ((M->getLeft() < S->getRight() - 1 && M->getRight() - 1 > S->getLeft()) &&
-		(M->getBottom() + 1 < S->getTop() && M->getTop() > S->getBottom() + 1));
+	return ((M->getLeft() <= S->getRight()  && M->getRight()  >= S->getLeft()) &&
+		(M->getBottom()  <= S->getTop() && M->getTop() >= S->getBottom() ));
 }
 
 void Collision::checkCollision(MGMBox*M, MGMBox*S)
@@ -52,14 +52,14 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		}
 		float nx, ny;
 
-		/*float sweptTime = SweptAABB(M, S, nx, ny);
-		if (sweptTime < 1.0)*/
+		float sweptTime = SweptAABB(M, S, nx, ny);
+		if (sweptTime < 1.0)
 		{
 			//chac chan co va cham
 			M->isCollision = true;
-			nx = 0;
+			/*nx = 0;
 			ny = 0;
-			if (M->getLeft() < S->getRight() - 1 && M->getRight() - 1 > S->getLeft())
+			if (M->getLeft() <= S->getRight()  && M->getRight()  >= S->getLeft())
 			{
 				if (M->dy > 0)
 					ny = -1;
@@ -72,7 +72,7 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 					nx = -1;
 				else
 					nx = 1;
-			}
+			}*/
 			M->onCollision(S, nx, ny);
 			S->onCollision(M, nx, ny);
 		}
@@ -84,39 +84,39 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 
 void Collision::preventMove(MGMBox*M, MGMBox*S)
 {
-	if (M->getTop() > S->getBottom() + 1 && M->getBottom() + 1 < S->getTop())
+	if (M->getTop() >= S->getBottom()  && M->getBottom()  <= S->getTop())
 	{
 		if (M->dx > 0)
 		{
-			M->dx = S->getLeft() - M->getRight() + 1;
+			M->dx = S->getLeft() - M->getRight()-1;
 		}
 		else
 		{
-			M->dx = S->getRight() - 1 - M->getLeft();
+			M->dx = S->getRight() - M->getLeft()+1;
 		}
 		M->isChangeDelta = true;
 	}
 
-	if (M->getRight() - 1 > S->getLeft() && M->getLeft() < S->getRight() - 1)
+	if (M->getRight() >= S->getLeft() && M->getLeft() <= S->getRight())
 	{
 		if (M->dy > 0)
 		{
-			M->dy = S->getBottom() + 1 - M->getTop();
+			M->dy = S->getBottom()  - M->getTop()-1;
 		}
 		else
 		{
-			M->dy = S->getTop() - M->getBottom() - 1;
+			M->dy = S->getTop() - M->getBottom()+1 ;
 		}
 		M->isChangeDelta = true;
 	}
 
-	//float nx, ny;
-	//float sweptTime = SweptAABB(M, S, nx, ny);
+	/*float nx, ny;
+	float sweptTime = SweptAABB(M, S, nx, ny);
 
 
-	//if (nx != 0) M->dx = int(sweptTime*M->dx);
-	//else if (ny != 0) M->dy = int(sweptTime*M->dy);
-	//if (nx != 0 || ny != 0) M->isChangeDelta = true;
+	if (nx != 0) M->dx = int(sweptTime*M->dx);
+	else if (ny != 0) M->dy = int(sweptTime*M->dy);
+	if (nx != 0 || ny != 0) M->isChangeDelta = true;*/
 	/*if (nx == -1)
 	{
 		M->dx = S->getLeft() - M->getRight();
@@ -147,24 +147,24 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 	// Tính khoảng cách cần để xảy ra va chạm (InvEntry) và khoảng cách để ra khỏi va chạm (InvExit):
 	if (M->dx > 0.0f)
 	{
-		xInvEntry = S->x - M->getRight();
+		xInvEntry = S->x - M->getRight()-1;
 		xInvExit = S->getRight() - M->x;
 	}
 	else
 	{
-		xInvEntry = S->getRight() - M->x;
+		xInvEntry = S->getRight() - M->x+1;
 		xInvExit = S->x - M->getRight();
 	}
 
 	if (M->dy < 0.0f)
 	{
-		yInvEntry = S->y - M->getBottom(); // +-
+		yInvEntry = S->y - M->getBottom()+1; // +-
 		yInvExit = S->getBottom() - M->y;
 	}
 	else
 	{
-		yInvEntry = S->getBottom() - M->y;
-		yInvExit = S->y - M->getBottom();////////////////////////////////////////////////////
+		yInvEntry = S->getBottom() - M->y-1;
+		yInvExit = S->y - M->getBottom();
 	}
 
 	// Tính thời gian để bắt đầu và chạm và thời gian để kết thúc va chạm theo mỗi phương:
@@ -211,7 +211,7 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 		// Xác định hướng của pháp tuyến khi va chạm:
 		if (xEntry > yEntry)
 		{
-			if (xInvEntry < 0.0f) // Chạm vào bề mặt bên phải của block:
+			if (M->dx < 0.0f) // Chạm vào bề mặt bên phải của block:
 			{
 				normalx = 1.0f;
 				normaly = 0.0f;
@@ -224,7 +224,7 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 		}
 		else
 		{
-			if (yInvEntry < 0.0f) // Chạm vào bề mặt phía trên của block:
+			if (M->dy < 0.0f) // Chạm vào bề mặt phía trên của block:
 			{
 				normalx = 0.0f;
 				normaly = 1.0f;

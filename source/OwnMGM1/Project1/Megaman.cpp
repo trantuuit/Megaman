@@ -178,10 +178,10 @@ void Megaman::setCurAction(int action)
 void Megaman::onInterserct(MGMBox * other)
 {
 
-	if (other->collisionCategory == CC_GROUND 
+	/*if (other->collisionCategory == CC_GROUND 
 		&& this->getRight() > other->getLeft()
 		&& this->getLeft()<other->getLeft()) 
-		this->x = other->getLeft() - this->width;
+		this->x = other->getLeft() - this->width;*/
 }
 
 void Megaman::onLastFrameAnimation(int action)

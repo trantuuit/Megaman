@@ -23,7 +23,7 @@ void MGMRectangle::init(float x, float y, float width, float height)
 RECT MGMRectangle::toRect()
 {
 	RECT r;
-	SetRect(&r, getLeft(), getTop(), getRight(), y+height);
+	SetRect(&r, getLeft(), getTop(), getRight()+1, y + height);
 	return r;
 }
 
@@ -38,12 +38,12 @@ int MGMRectangle::getTop()
 }
 int MGMRectangle::getRight()
 {
-	return x + width;
+	return x + width -1;
 
 }
 int MGMRectangle::getBottom()
 {
-	return y - height;
+	return y - height + 1;
 
 }
 int MGMRectangle::getXCenter()

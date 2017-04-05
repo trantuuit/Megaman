@@ -138,7 +138,7 @@ void MGMMap::update()
 	{
 		s = (stairs*) stairObjects[i];
 		s->climbStairs();
-		/*Collision::checkCollision(Megaman::getInstance(), stairObjects[i]);*/
+		
 	}
 	int nEnemy = enemyObjects.size();
 

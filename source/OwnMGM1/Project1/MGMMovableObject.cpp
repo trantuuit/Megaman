@@ -27,10 +27,10 @@ void MGMMovableObject::update()
 
 void MGMMovableObject::onCollision(MGMBox * other, int nx, int ny)
 {
-	if (ny != 0 && other->collisionCategory == CC_GROUND)
+	/*if (ny != 0 && other->collisionCategory == CC_GROUND)
 	{
 		vy = -0.3;
-	}
+	}*/
 	if (other->collisionCategory == CC_GROUND)
 	{
 		Collision::preventMove(this, other);
