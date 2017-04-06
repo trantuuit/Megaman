@@ -45,7 +45,7 @@ void MGMGame::update(DWORD timesleep)
 	MGMCamera::getInstance()->update();
 	if (map->isUpdate)
 	{
-		Megaman::getInstance()->updateFrameAnimation();
+		//Megaman::getInstance()->updateFrameAnimation();
 		Megaman::getInstance()->updateLocation(); // Cap nhat toa do cua MGM
 	}
 	map->updateStage();

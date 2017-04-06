@@ -105,7 +105,7 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
-	isUpdateFrameAnimation = true;
+	//pauseAnimation = false;
 	bool isKeyLeftDown = KEY::getInstance()->isLeftDown;
 	bool isKeyRightDown = KEY::getInstance()->isRightDown;
 	bool isKeyMoveDown = KEY::getInstance()->isMoveDown;
@@ -150,7 +150,9 @@ void Megaman::update()
 	if (!isOnGround && !isOnStairs)
 		setCurAction(MGM_JUMP);
 
+	
 	this->updateMove();
+	updateFrameAnimation();
 	isOnGround = false;
 
 
@@ -178,10 +180,10 @@ void Megaman::setCurAction(int action)
 void Megaman::onInterserct(MGMBox * other)
 {
 
-	/*if (other->collisionCategory == CC_GROUND 
+	if (other->collisionCategory == CC_GROUND 
 		&& this->getRight() > other->getLeft()
 		&& this->getLeft()<other->getLeft()) 
-		this->x = other->getLeft() - this->width;*/
+		this->x = other->getLeft() - this->width-1;
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -201,6 +203,7 @@ void Megaman::updateFrameAnimation()
 
 void Megaman::onCollision(MGMBox * other, int nx, int ny)
 {
+
 	if (ny == 1)
 	{
 		isOnGround = true;
@@ -217,7 +220,6 @@ Megaman::Megaman()
 	ax = 0;
 	isOnGround = false;
 	isOnStairs = false;
-	isUpdateFrameAnimation = true;
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
 }

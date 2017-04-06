@@ -14,7 +14,6 @@ MGMObject::MGMObject()
 	ax = 0;
 	ay = GRAVITY;
 	objectDirection = RIGHT;
-	isUpdateFrameAnimation = true;
 
 }
 
@@ -52,7 +51,7 @@ void MGMObject::updateFrameAnimation() // this
 
 		int lastFrame = curFrame;
 
-		if(isUpdateFrameAnimation)
+		//if(isUpdateFrameAnimation)
 			this->sprite->Update(curAction, curFrame);
 
 		if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)

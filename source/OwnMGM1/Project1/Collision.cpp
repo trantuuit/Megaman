@@ -57,9 +57,9 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		{
 			//chac chan co va cham
 			M->isCollision = true;
-			/*nx = 0;
+			nx = 0;
 			ny = 0;
-			if (M->getLeft() <= S->getRight()  && M->getRight()  >= S->getLeft())
+			if (M->getLeft() <= S->getRight() && M->getRight() >= S->getLeft())
 			{
 				if (M->dy > 0)
 					ny = -1;
@@ -72,7 +72,7 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 					nx = -1;
 				else
 					nx = 1;
-			}*/
+			}
 			M->onCollision(S, nx, ny);
 			S->onCollision(M, nx, ny);
 		}
@@ -84,6 +84,7 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 
 void Collision::preventMove(MGMBox*M, MGMBox*S)
 {
+	M->isChangeDelta = false;
 	if (M->getTop() >= S->getBottom()  && M->getBottom()  <= S->getTop())
 	{
 		if (M->dx > 0)
@@ -109,7 +110,27 @@ void Collision::preventMove(MGMBox*M, MGMBox*S)
 		}
 		M->isChangeDelta = true;
 	}
-
+	/*if (!M->isChangeDelta)
+	{
+		if (M->dx > 0)
+		{
+			M->dx = S->getLeft() - M->getRight() - 1;
+		}
+		else
+		{
+			M->dx = S->getRight() - M->getLeft() + 1;
+		}
+		M->isChangeDelta = true;
+		if (M->dy > 0)
+		{
+			M->dy = S->getBottom() - M->getTop() - 1;
+		}
+		else
+		{
+			M->dy = S->getTop() - M->getBottom() + 1;
+		}
+	}
+*/
 	/*float nx, ny;
 	float sweptTime = SweptAABB(M, S, nx, ny);
 
@@ -158,7 +179,7 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 
 	if (M->dy < 0.0f)
 	{
-		yInvEntry = S->y - M->getBottom()+1; // +-
+		yInvEntry = S->y - M->getBottom()+1; 
 		yInvExit = S->getBottom() - M->y;
 	}
 	else

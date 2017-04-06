@@ -10,7 +10,6 @@ public:
 	bool isOnGround;
 	int curAction;
 	int curFrame;
-	bool isUpdateFrameAnimation;
 	
 	MGMRectangle oldRect;
 	

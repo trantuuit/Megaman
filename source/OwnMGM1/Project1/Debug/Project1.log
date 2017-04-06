@@ -1,17 +1,3 @@
-﻿  MGMMovableObject.cpp
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\mgmmovableobject.cpp(8): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\mgmmovableobject.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Collision.cpp
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(150): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(151): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(155): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(156): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(161): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(162): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(166): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\h.sinh\desktop\megaman.git\trunk\source\ownmgm1\project1\collision.cpp(167): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+﻿  Funtion.cpp
   Project1.vcxproj -> C:\Users\H.Sinh\Desktop\Megaman.git\trunk\source\OwnMGM1\Debug\OwnMGM.exe
   Project1.vcxproj -> C:\Users\H.Sinh\Desktop\Megaman.git\trunk\source\OwnMGM1\Debug\OwnMGM.pdb (Full PDB)
