@@ -18,18 +18,23 @@ void KEY::update()
 	isLeftDown = CKeyboard::getInstance()->IsKeyDown(DIK_LEFT) || CKeyboard::getInstance()->IsKeyDown(DIK_A);
 	isRightDown = CKeyboard::getInstance()->IsKeyDown(DIK_RIGHT) || CKeyboard::getInstance()->IsKeyDown(DIK_D);
 	isMoveDown = isLeftDown || isRightDown;
-	isJumpDown = CKeyboard::getInstance()->IsKeyDown(DIK_SPACE);
 
 	isLeftPress = isLeftDown && !isPreviousLeftDown;
 	isRightPress = isRightDown && !isPreviousRightDown;
 	isMovePress = isLeftPress || isRightPress;
-	isJumpPress = isJumpDown && !isPreviousJumpDown;
-
-
 
 	isPreviousLeftDown = isLeftDown;
 	isPreviousRightDown = isRightDown;
+
+
+
+	isJumpDown = CKeyboard::getInstance()->IsKeyDown(DIK_SPACE);
+	isJumpPress = isJumpDown && !isPreviousJumpDown;
 	isPreviousJumpDown = isJumpDown;
+
+	isAttackDown = CKeyboard::getInstance()->IsKeyDown(DIK_Z);
+	isAttackPress = isAttackDown && !isPreviousAttackDown;
+	isPreviousAttackDown = isAttackDown;
 
 
 }

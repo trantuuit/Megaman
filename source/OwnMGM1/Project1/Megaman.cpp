@@ -1,4 +1,5 @@
-﻿//#include "Megaman.h"
+﻿#include"MGMCamera.h"
+//#include "Megaman.h"
 //#include"MGMSpriteManager.h"
 //#include"KEY.h"
 //#include<string>
@@ -93,6 +94,7 @@
 #include"MGMSpriteManager.h"
 #include"KEY.h"
 #include<string>
+#include"MegamanBullet.h"
 
 
 Megaman * Megaman::instance = 0;
@@ -105,12 +107,35 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
+	//timeStand.update();
+	//timeGo.update();
+	//if (timeStand.isReady() && timeGo.isTerminated())
+	//{
+	//	timeStand.start();
+	//}
+	//if (timeGo.isReady() && timeStand.isTerminated())
+	//{
+	//	timeGo.start();
+	//}
+	//if (timeStand.isOnTime())
+	//{
+	//	setCurAction(MGM_STAND);
+	//}
+	//if (timeGo.isOnTime())
+	//{
+	//	setCurAction(MGM_RUN);
+	//}
+
+	//MGMMovableObject::update();
+
 	//pauseAnimation = false;
 	bool isKeyLeftDown = KEY::getInstance()->isLeftDown;
 	bool isKeyRightDown = KEY::getInstance()->isRightDown;
 	bool isKeyMoveDown = KEY::getInstance()->isMoveDown;
 	bool isKeyJumpPress = KEY::getInstance()->isJumpPress;
 	bool isKeyMovePress = KEY::getInstance()->isMovePress;
+	bool isAttackPress = KEY::getInstance()->isAttackPress;
+
 	if (isOnStairs)
 	{
 		isKeyMoveDown = false;
@@ -150,7 +175,16 @@ void Megaman::update()
 	if (!isOnGround && !isOnStairs)
 		setCurAction(MGM_JUMP);
 
-	
+	if (!delayShoot.isOnTime() && isOnGround && isAttackPress && MegamanBullet::getBullets()->Count<3)
+	{
+		MegamanBullet* bullet = new MegamanBullet();
+		bullet->dx = 2 * objectDirection;
+		bullet->x = x;
+		bullet->y = y;
+		delayShoot.start();
+	}
+
+	delayShoot.update();
 	this->updateMove();
 	updateFrameAnimation();
 	isOnGround = false;
@@ -160,7 +194,39 @@ void Megaman::update()
 
 void Megaman::render()
 {
-	MGMMovableObject::render();
+
+	if (sprite == 0)
+		return;
+	float xDraw, yDraw;
+	MGMCamera::getInstance()->Transform(x, y, xDraw, yDraw);
+	//Nếu hướng object khác hướng hình vẽ( hướng hình vẽ = left(-1))
+
+	int widthSprite = sprite->animations[curAction].frames[curFrame].width;
+	if(curAction !=MGM_CLIMB)
+		xDraw -= (widthSprite - width) / 2;
+
+	if (objectDirection != sprite->pImage->imageDirection)
+	{
+		//Lật x bằng cách nhân tất cả điểm ảnh cho ma trận bên dưới
+		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+			-1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			2 * (xDraw + widthSprite / 2), 0, 0, 1)));
+	}
+
+
+
+	this->sprite->Render(xDraw, yDraw, curAction, curFrame);
+
+	if (objectDirection != sprite->pImage->imageDirection)
+	{
+		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1)));
+	}
 }
 
 void Megaman::setCurAction(int action)
@@ -170,9 +236,9 @@ void Megaman::setCurAction(int action)
 		return;
 	this->action = action;
 	if (action == MGM_CLIMB || action == MGM_JUMP)
-		this->width = 16;
+		setWidth(15);
 	else 
-		this->width = 20;
+		setWidth(20);
 
 	MGMMovableObject::setCurAction(action);
 }
@@ -201,6 +267,17 @@ void Megaman::updateFrameAnimation()
 		MGMMovableObject::updateFrameAnimation();
 }
 
+void Megaman::setWidth(int width)
+{
+	if (objectDirection == RIGHT)
+	{
+		x += this->width - width;
+	}
+
+	this->width = width;
+}
+
+
 void Megaman::onCollision(MGMBox * other, int nx, int ny)
 {
 
@@ -218,10 +295,13 @@ Megaman::Megaman()
 	width = 20;
 	height = 23;
 	ax = 0;
+	delayShoot.init(300);
 	isOnGround = false;
 	isOnStairs = false;
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
+
+
 }
 
 

@@ -18,6 +18,11 @@ public:
 			isLeftPress,
 			isRightPress,
 			isJumpPress,
+
+			isAttackDown,
+			isPreviousAttackDown,
+			isAttackPress,
+
 			isMovePress;
 
 

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "MGMMovableObject.h"
+#include "MGMDelayTime.h"
 
 enum MEGAMAN_ACTION
 {
@@ -14,8 +15,12 @@ class Megaman :
 	public MGMMovableObject
 {
 public:
+
+	MGMDelayTime delayShoot;
+
+	//MGMDelayTime timeStand, timeGo;
+
 	bool isOnStairs;
-	
 	static Megaman* instance;
 	static Megaman* getInstance();
 
@@ -31,6 +36,8 @@ public:
 
 	void onLastFrameAnimation(int action);
 	void updateFrameAnimation();
+
+	void setWidth(int width);
 
 
 	void onCollision(MGMBox* other, int nx, int ny);

@@ -2,6 +2,7 @@
 #include"Keyboard.h"
 #include"MGMDirectXTool.h"
 #include"KEY.h"
+#include"MegamanBullet.h"
 MGMGame::MGMGame()
 {
 }
@@ -34,6 +35,12 @@ void MGMGame::render()
 	map->draw();
 	Megaman::getInstance()->render();
 
+	for (List<MegamanBullet*>::Node* p = MegamanBullet::getBullets()->pHead; p; p = p->pNext)
+	{
+		MegamanBullet* bullet = p->m_value;
+		bullet->render();
+	}
+
 }
 void MGMGame::update(DWORD timesleep)
 {
@@ -49,4 +56,21 @@ void MGMGame::update(DWORD timesleep)
 		Megaman::getInstance()->updateLocation(); // Cap nhat toa do cua MGM
 	}
 	map->updateStage();
+
+	for (List<MegamanBullet*>::Node* p = MegamanBullet::getBullets()->pHead; p; p = p->pNext)
+	{
+		MegamanBullet* bullet = p->m_value;
+		bullet->updateLocation();
+	}
+
+	for (int i = 0; i < MegamanBullet::getBullets()->Count; i++)
+	{
+		MegamanBullet*bullet = MegamanBullet::getBullets()->at(i);
+		if (!Collision::AABBCheck(bullet , MGMCamera::getInstance()))
+		{
+			MegamanBullet::getBullets()->_Remove(bullet);
+			delete bullet;
+			i--;
+		}
+	}
 }
