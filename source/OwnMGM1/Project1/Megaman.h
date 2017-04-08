@@ -15,7 +15,9 @@ class Megaman :
 	public MGMMovableObject
 {
 public:
-
+	MGMDelayTime eyesTime1;
+	MGMDelayTime eyesTime2;
+	/*MGMGameTime eyesTime;*/
 	MGMDelayTime delayShoot;
 
 	//MGMDelayTime timeStand, timeGo;
@@ -23,7 +25,7 @@ public:
 	bool isOnStairs;
 	static Megaman* instance;
 	static Megaman* getInstance();
-
+	
 	int action;
 	bool pauseAnimation;
 

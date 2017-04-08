@@ -20,10 +20,10 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 
-	Megaman::getInstance()->x = 784;
+	Megaman::getInstance()->x = 30;
 	Megaman::getInstance()->y = 111;
 
-	MGMCamera::getInstance()->init(768, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(0, BACKBUFFER_HEIGHT, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
@@ -44,6 +44,7 @@ void MGMGame::render()
 }
 void MGMGame::update(DWORD timesleep)
 {
+
 	if (map->isUpdate)
 	{
 		Megaman::getInstance()->update(); // Cap nhat van toc cua MGM

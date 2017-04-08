@@ -1,95 +1,4 @@
 ﻿#include"MGMCamera.h"
-//#include "Megaman.h"
-//#include"MGMSpriteManager.h"
-//#include"KEY.h"
-//#include<string>
-//extern double jumpVolume;
-//
-//Megaman * Megaman::instance = 0;
-//Megaman * Megaman::getInstance()
-//{
-//	if (instance == 0)
-//		instance = new Megaman();
-//	return instance;
-//}
-///*Cập nhật vận tốc */
-//void Megaman::update()
-//{
-//	bool isKeyLeftDown = KEY::getInstance()->isLeftDown;
-//	bool isKeyRightDown = KEY::getInstance()->isRightDown;
-//	bool isKeyMoveDown = KEY::getInstance()->isMoveDown;
-//	bool isKeyJumpPress = KEY::getInstance()->isJumpPress;
-//	bool isKeyMovePress = KEY::getInstance()->isMovePress;
-//	if (isKeyLeftDown)
-//		objectDirection = LEFT;
-//	if (isKeyRightDown)
-//		objectDirection = RIGHT;
-//
-//	
-//	//if (isKeyMovePress) curAction = 0;
-//	if (isKeyMoveDown&&!isKeyMovePress)
-//	{
-//		vx = objectDirection*0.3;
-//		if (isOnGround)
-//		{
-//			curAction = 2;
-//		}
-//	}
-//	else
-//	{
-//		vx = 0;
-//	}
-//	if (isOnGround)
-//	{
-//		if (isKeyJumpPress)
-//		{
-//			vy = jumpVolume;
-//			curAction = 3;
-//			isOnGround = false;
-//		}
-//	}
-//	//if (!isOnGround) curAction = 3;
-//	if (vx == 0 && isOnGround) curAction = 0;
-//	MGMMovableObject::update();
-//	
-//}
-//
-//void Megaman::render()
-//{
-//	MGMMovableObject::render();
-//}
-//
-//void Megaman::onCollision(MGMBox * other, int nx, int ny)
-//{
-//	MGMMovableObject::onCollision(other, nx, ny);
-//	isOnGround = ny;
-//	/*if (ny == 1)
-//	{
-//		if (KEY::getInstance()->isJumpPress)
-//		{
-//			vy = jumpVolume;
-//		}
-//	}*/
-//}
-//
-//Megaman::Megaman()
-//{
-//	sprite = MGMSpriteManager::getInstance()->sprites[SPR_MEGAMAN];
-//	width = 10;
-//	height = 24;
-//	ax = 0;
-//	isOnGround = 0;
-//}
-//
-//
-//Megaman::~Megaman()
-//{
-//}
-
-
-//hung fix
-
-
 #include "Megaman.h"
 #include"MGMSpriteManager.h"
 #include"KEY.h"
@@ -156,22 +65,24 @@ void Megaman::update()
 		objectDirection = RIGHT;
 	}
 
+	//@Tu-Đang đứng trên gạch và nhận sự kiện nhảy từ bán phím thì gán vận tốc vy = MEGAMAN_VY_JUMP
 	if (isOnGround && isKeyJumpPress)
 	{
 		vy = MEGAMAN_VY_JUMP;
 	}
-	if (isKeyMoveDown)
+	if (isKeyMoveDown) //@Tu_Nếu đang di chuyển thì thực hiện xét action chạy cho megaman đồng thời set vx cho nó
 	{
 		setCurAction(MGM_PRE_RUN);
 		vx = objectDirection*MEGAMAN_VX_GO;
 
 	}
-	else
+	else //@Tu-Ngược lại set vx=0 đồng thời set action đứng cho megaman
 	{
 		vx = 0;
-		if (!isOnStairs) setCurAction(MGM_STAND);
+		if (!isOnStairs) 
+			setCurAction(MGM_STAND);
 	}
-
+	//@Tu-Nếu không va chạm với gạch và không đứng trên cầu thanh thì chuyển hành động nhảy
 	if (!isOnGround && !isOnStairs)
 		setCurAction(MGM_JUMP);
 
@@ -261,10 +172,49 @@ void Megaman::onLastFrameAnimation(int action)
 	}
 }
 
+/*
+*@TranTu
+*Override lại hàm updateFrameAnimation
+*
+*/
 void Megaman::updateFrameAnimation()
 {
-	if(!pauseAnimation)
-		MGMMovableObject::updateFrameAnimation();
+	if (!pauseAnimation){
+		if (sprite == 0)
+			return;
+		MGMBox::update();
+		//updateMove();
+		if (timeFrame.atTime()) {
+			int lastFrame = curFrame;
+			if (!curAction == MGM_STAND){
+				this->sprite->Update(curAction, curFrame);
+				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
+					onLastFrameAnimation(curAction);
+			}
+			else{
+				if (!eyesTime1.isOnTime()){
+					eyesTime1.start();
+
+				}
+				else{
+					//Xử lý mở mắt
+					this->sprite->Update(MGM_STAND, curFrame = 0);
+
+				}
+				if (!eyesTime2.isOnTime()){
+					eyesTime2.start();
+
+				}
+				else{
+					//Xử lý nhắm mắt
+					this->sprite->Update(MGM_STAND, curFrame = 1);
+
+				}
+				eyesTime1.update();
+				eyesTime2.update();
+			}
+		}
+	}
 }
 
 void Megaman::setWidth(int width)
@@ -300,7 +250,11 @@ Megaman::Megaman()
 	isOnStairs = false;
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
-
+	
+	//@TranTu-khoi tao thoi gian nham mo mat 5 giay, nham mat 2 giay
+	eyesTime1.init(5000);
+	eyesTime2.init(2000);
+	
 
 }
 

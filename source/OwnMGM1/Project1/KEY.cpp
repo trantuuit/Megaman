@@ -13,8 +13,8 @@ KEY * KEY::getInstance()
 void KEY::update()
 {
 	CKeyboard::getInstance()->UpdateKeyboard();
-	isUpHold = CKeyboard::getInstance()->IsKeyDown(DIK_UP);
-	isDownHold= CKeyboard::getInstance()->IsKeyDown(DIK_DOWN);
+	isUpHold = CKeyboard::getInstance()->IsKeyDown(DIK_UP) || CKeyboard::getInstance()->IsKeyDown(DIK_W);
+	isDownHold = CKeyboard::getInstance()->IsKeyDown(DIK_DOWN) || CKeyboard::getInstance()->IsKeyDown(DIK_S);
 	isLeftDown = CKeyboard::getInstance()->IsKeyDown(DIK_LEFT) || CKeyboard::getInstance()->IsKeyDown(DIK_A);
 	isRightDown = CKeyboard::getInstance()->IsKeyDown(DIK_RIGHT) || CKeyboard::getInstance()->IsKeyDown(DIK_D);
 	isMoveDown = isLeftDown || isRightDown;

@@ -5,7 +5,7 @@ MGMObject::MGMObject()
 {
 	curAction = 0;
 	curFrame = 0;
-	timeFrame.tickPerFrame = 100;
+	timeFrame.tickPerFrame = 80;
 
 	//ay = -0.005;
 	//vy = -0.4;

@@ -88,12 +88,12 @@ void MGMMap::updateStage()
 
 			if (MGMCamera::getInstance()->y > MGMStage::curStage->getTop())
 			{
-				MGMCamera::getInstance()->dy = -3;
+				MGMCamera::getInstance()->dy = -4;
 			}
 			if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
 			{
-				//if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
-				MGMCamera::getInstance()->dy = 3;
+				if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
+				MGMCamera::getInstance()->dy = 4;
 			}
 			isUpdate = false;
 		}
