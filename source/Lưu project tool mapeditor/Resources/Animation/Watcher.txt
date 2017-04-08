@@ -1,0 +1,19 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Watcher
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			16				318				16				42
+			56				318				16				42
+			96				318				16				42
+			132				318				24				42
+

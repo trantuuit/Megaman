@@ -1,0 +1,17 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Fire 4
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			114				515				14				16
+			131				515				12				16
+

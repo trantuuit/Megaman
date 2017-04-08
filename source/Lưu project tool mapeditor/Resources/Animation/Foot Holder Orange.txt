@@ -1,0 +1,19 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Foot Holder Orange
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			292				367				24				24
+			332				367				24				24
+			372				367				24				24
+			412				367				24				24
+

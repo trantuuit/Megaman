@@ -1,0 +1,20 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Brick Orange
+
+			FramesCount
+			5
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			256				8				16				22
+			296				8				16				22
+			336				8				16				22
+			376				8				16				22
+			416				8				16				22
+

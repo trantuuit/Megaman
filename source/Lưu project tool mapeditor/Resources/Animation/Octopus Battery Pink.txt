@@ -1,0 +1,18 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Octopus Battery Pink
+
+			FramesCount
+			3
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			16				131				16				16
+			56				131				16				16
+			96				131				16				16
+

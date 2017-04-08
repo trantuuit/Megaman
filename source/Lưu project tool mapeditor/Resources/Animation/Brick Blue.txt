@@ -1,0 +1,20 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Brick Blue
+
+			FramesCount
+			5
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			256				48				16				22
+			296				48				16				22
+			336				48				16				22
+			376				48				16				22
+			416				48				16				22
+

@@ -1,0 +1,19 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Screw Bomber Pink
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			296				131				16				16
+			336				131				15				16
+			376				131				15				16
+			416				131				16				16
+

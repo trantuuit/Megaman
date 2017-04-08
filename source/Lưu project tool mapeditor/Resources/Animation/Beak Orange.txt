@@ -1,0 +1,20 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Beak
+
+			FramesCount
+			5
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			281				211				6				16
+			296				211				15				16
+			339				211				9				16
+			380				211				8				16
+			419				211				9				16
+

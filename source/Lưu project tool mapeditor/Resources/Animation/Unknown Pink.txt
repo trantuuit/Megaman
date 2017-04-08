@@ -1,0 +1,18 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Unknown Pink
+
+			FramesCount
+			3
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			168				325				32				28
+			212				325				24				28
+			258				325				12				28
+

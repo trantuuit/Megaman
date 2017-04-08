@@ -1,0 +1,19 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Picket
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			10				374				12				12
+			30				374				11				12
+			48				374				12				12
+			69				374				11				12
+

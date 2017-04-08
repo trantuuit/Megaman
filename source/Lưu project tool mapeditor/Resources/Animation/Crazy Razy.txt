@@ -1,0 +1,18 @@
+R		G		B
+109		167		131
+Count
+1
+Sprite Info
+
+Index		Name
+0			Crazy Razy
+
+			FramesCount
+			3
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			168				203				32				31
+			205				203				32				31
+			242				203				32				31
+
