@@ -12,7 +12,7 @@ void ignoreLineIfstream(ifstream& fs, int lineCount)
 	}
 }
 
-int GAMETIME = 3;
+int GAMETIME = 6;
 double GRAVITY = -0.007;
 double MEGAMAN_VY_JUMP = 0.93;
 //xet van toc di chuyen mac dinh cho memgaman

@@ -79,6 +79,13 @@ void MGMMap::readStage(char * stagePath)
 
 void MGMMap::updateStage()
 {
+	Megaman * mgm = Megaman::getInstance();
+	MGMStage * curstage = MGMStage::curStage;
+	if (mgm->getLeft() < curstage->getLeft())
+		mgm->x = curstage->getLeft();
+
+	if (mgm->getRight() > curstage->getRight())
+		mgm->x = curstage->getRight() - mgm->width + 1;
 	for (int i = 0; i < nStage; i++)
 	{
 		if (MGMStage::curStage->index == i) continue;
@@ -93,13 +100,12 @@ void MGMMap::updateStage()
 			if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
 			{
 				if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
-				MGMCamera::getInstance()->dy = 4;
+					MGMCamera::getInstance()->dy = 4;
 			}
 			isUpdate = false;
 		}
-		//else isUpdate = true;
 	}
-	if (MGMStage::curStage->getBottom() <= MGMCamera::getInstance()->getBottom() &&MGMCamera::getInstance()->y <= MGMStage::curStage->getTop())
+	if (MGMStage::curStage->getBottom() <= MGMCamera::getInstance()->getBottom() && MGMCamera::getInstance()->y <= MGMStage::curStage->getTop())
 	{
 		MGMCamera::getInstance()->dy = 0;
 		isUpdate = true;
@@ -124,7 +130,7 @@ void MGMMap::update()
 	List<MGMObject*>& groundObjects = MGMCamera::getInstance()->objects.groundObjects;
 	List<MGMObject*>& stairObjects = MGMCamera::getInstance()->objects.stairObjects;
 
-	
+
 	int nGround = groundObjects.size();
 
 	for (int iGround = 0; iGround < nGround; iGround++)
@@ -136,9 +142,9 @@ void MGMMap::update()
 	stairs* s;
 	for (int i = 0; i < nStair; i++)
 	{
-		s = (stairs*) stairObjects[i];
+		s = (stairs*)stairObjects[i];
 		s->climbStairs();
-		
+
 	}
 	int nEnemy = enemyObjects.size();
 
@@ -152,7 +158,7 @@ void MGMMap::update()
 		}
 	}
 
-	
+
 	for (int i = 0; i < nObjectsCam; i++)
 	{
 		MGMCamera::getInstance()->objects.allObjects[i]->updateLocation();
@@ -185,9 +191,9 @@ MGMMap::~MGMMap()
 	for (int i = 0; i < nStage; i++)
 	{
 		delete stages[i];
-		
+
 	}
-	if(stages !=NULL) delete[] stages;
+	if (stages != NULL) delete[] stages;
 	for (int i = 0; i < nObject; i++)
 	{
 		delete allObjects[i];

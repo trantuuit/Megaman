@@ -50,11 +50,7 @@ void Megaman::update()
 		isKeyMoveDown = false;
 		isKeyLeftDown = false;
 		isKeyRightDown = false;
-		/*Megaman::getInstance()->setCurAction(MGM_CLIMB);*/
-		/*if (KEY::getInstance()->isUpHold|| KEY::getInstance()->isDownHold)
-		{
-			setCurAction(MGM_CLIMB);
-		}*/
+		if (isKeyJumpPress) isOnStairs = false; // đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
 	}
 	if (isKeyLeftDown)
 	{
@@ -83,7 +79,7 @@ void Megaman::update()
 			setCurAction(MGM_STAND);
 	}
 	//@Tu-Nếu không va chạm với gạch và không đứng trên cầu thanh thì chuyển hành động nhảy
-	if (!isOnGround && !isOnStairs)
+	if (!isOnGround && !isOnStairs )
 		setCurAction(MGM_JUMP);
 
 	if (!delayShoot.isOnTime() && isOnGround && isAttackPress && MegamanBullet::getBullets()->Count<3)

@@ -32,14 +32,7 @@ bool Collision::AABBCheck(MGMRectangle* M, MGMRectangle* S)
 
 void Collision::checkCollision(MGMBox*M, MGMBox*S)
 {
-	// + them van toc de S->dx va dy hoan toan bang 0
-	//float oldDx = M->dx;
-	//float oldDy = M->dy;
-	//M->dx -= S->dx;
-	//M->dy -= S->dy;
 	MGMBox* broadPhaseBox = GetSweptBroadphaseBox(M);
-	//M->dx = oldDx;
-	//M->dy = oldDy;
 	if (AABBCheck(broadPhaseBox, S))
 	{
 		delete broadPhaseBox;
