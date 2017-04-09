@@ -199,8 +199,8 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 	}
 	else
 	{
-		xEntry = xInvEntry / M->dx;
-		xExit = xInvExit / M->dx;
+		xEntry = xInvEntry / (float)M->dx;
+		xExit = xInvExit / (float)M->dx;
 	}
 
 	if (M->dy == 0.0f)
@@ -210,8 +210,8 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 	}
 	else
 	{
-		yEntry = yInvEntry / M->dy;
-		yExit = yInvExit / M->dy;
+		yEntry = yInvEntry / (float)M->dy;
+		yExit = yInvExit / (float)M->dy;
 	}
 
 	// Thời gian để Box bắt đầu va chạm và thời gian để kết thúc va chạm:

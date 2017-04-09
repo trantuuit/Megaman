@@ -34,17 +34,15 @@ void MGMTileMap::drawTile(int rowIndex, int colIndex)
 
 	float xTileRender, yTileRender;
 
-	//camera->Transform(colIndex * 16, (nRow - rowIndex) * 16, xTileRender, yTileRender);
-
+	//Tinh toa do cua tile tren backbuffer
 	xTileRender = colIndex * 16 - camera->x;
 	yTileRender = rowIndex * 16 - (nRow * 16 - camera->y);
 
 
-	RECT rectIndex;
-	int xRect = (indexInTileSheet % tilesColCount) * 16;
+	RECT rectIndex; // tinh toa do cua tile trong tilesheet.
+	int xRect = (indexInTileSheet % tilesColCount) * 16; 
 	int yRect = (indexInTileSheet / tilesColCount) * 16;
-	SetRect(&rectIndex, xRect , 
-		yRect, xRect + 16, yRect + 16);
+	SetRect(&rectIndex, xRect , yRect, xRect + 16, yRect + 16);
 
 	tileSheet.RenderTexture(xTileRender, yTileRender, &rectIndex);
 
