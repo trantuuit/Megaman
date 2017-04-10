@@ -9,15 +9,20 @@ enum MEGAMAN_ACTION
 	MGM_RUN,
 	MGM_JUMP,
 	MGM_CLIMB,
+	MGM_STAND_ATTACK,
+	MGM_RUN_ATTACK,
+	MGM_JUMP_ATTACK,
 };
 
 class Megaman :
 	public MGMMovableObject
 {
 public:
-	MGMDelayTime eyesTime1;
-	MGMDelayTime eyesTime2;
-	/*MGMGameTime eyesTime;*/
+	MGMDelayTime eyesTime;
+	//MGMDelayTime eyesTime2;
+	MGMDelayTime delayAnimateStandShoot;
+	MGMDelayTime delayAnimateRunShoot;
+	MGMDelayTime delayAnimateJumpShoot;
 	MGMDelayTime delayShoot;
 
 	//MGMDelayTime timeStand, timeGo;
@@ -27,6 +32,9 @@ public:
 	static Megaman* getInstance();
 	
 	int action;
+	bool lastKeyDownStandAttack;
+	bool lastKeyDownRunAttack;
+	bool lastStatusJumpAttack;
 	bool pauseAnimation;
 
 	/*Cập nhật vận tốc*/

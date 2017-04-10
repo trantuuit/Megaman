@@ -16,27 +16,6 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
-	//timeStand.update();
-	//timeGo.update();
-	//if (timeStand.isReady() && timeGo.isTerminated())
-	//{
-	//	timeStand.start();
-	//}
-	//if (timeGo.isReady() && timeStand.isTerminated())
-	//{
-	//	timeGo.start();
-	//}
-	//if (timeStand.isOnTime())
-	//{
-	//	setCurAction(MGM_STAND);
-	//}
-	//if (timeGo.isOnTime())
-	//{
-	//	setCurAction(MGM_RUN);
-	//}
-
-	//MGMMovableObject::update();
-
 	//pauseAnimation = false;
 	bool isKeyLeftDown = KEY::getInstance()->isLeftDown;
 	bool isKeyRightDown = KEY::getInstance()->isRightDown;
@@ -50,7 +29,8 @@ void Megaman::update()
 		isKeyMoveDown = false;
 		isKeyLeftDown = false;
 		isKeyRightDown = false;
-		if (isKeyJumpPress) isOnStairs = false; // đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
+		if (isKeyJumpPress) 
+			isOnStairs = false; // đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
 	}
 	if (isKeyLeftDown)
 	{
@@ -68,29 +48,117 @@ void Megaman::update()
 	}
 	if (isKeyMoveDown) //@Tu_Nếu đang di chuyển thì thực hiện xét action chạy cho megaman đồng thời set vx cho nó
 	{
-		setCurAction(MGM_PRE_RUN);
+		if (lastKeyDownRunAttack){
+			if (delayAnimateRunShoot.isReady())
+			{
+				delayAnimateRunShoot.start();
+			}
+			
+			if (delayAnimateRunShoot.isTerminated()){
+				setCurAction(MGM_RUN);
+				lastKeyDownRunAttack = false;
+			}
+			delayAnimateRunShoot.update();
+		}
+		else{
+			setCurAction(MGM_PRE_RUN);
+		}
 		vx = objectDirection*MEGAMAN_VX_GO;
-
+		lastKeyDownStandAttack = false;
 	}
 	else //@Tu-Ngược lại set vx=0 đồng thời set action đứng cho megaman
 	{
 		vx = 0;
-		if (!isOnStairs) 
-			setCurAction(MGM_STAND);
+		if (!isOnStairs) {
+			if (lastKeyDownStandAttack){
+				if (delayAnimateStandShoot.isReady())
+				{
+					delayAnimateStandShoot.start();
+				}
+				if (delayAnimateStandShoot.isTerminated()){
+					setCurAction(MGM_STAND);
+					lastKeyDownStandAttack = false;
+				}
+				delayAnimateStandShoot.update();
+			}
+			else{
+				setCurAction(MGM_STAND);
+			}
+		}
 	}
+	//if (isOnGround && !isOnStairs){
+	//	setCurAction(MGM_STAND);
+	//}
 	//@Tu-Nếu không va chạm với gạch và không đứng trên cầu thanh thì chuyển hành động nhảy
-	if (!isOnGround && !isOnStairs )
-		setCurAction(MGM_JUMP);
+	if (!isOnGround && !isOnStairs){
+		if (lastStatusJumpAttack){
+			if (delayAnimateJumpShoot.isReady())
+			{
+				delayAnimateJumpShoot.start();
+			}
+			if (delayAnimateJumpShoot.isOnTime()){
+				setCurAction(MGM_JUMP_ATTACK);
+			}
+			if (delayAnimateJumpShoot.isTerminated()){
+				setCurAction(MGM_JUMP);
+				lastStatusJumpAttack = false;
+			}
+			delayAnimateJumpShoot.update();
+		}
+		else{
+			setCurAction(MGM_JUMP);
+		}
+	}
+
+	if (!delayShoot.isOnTime() && isKeyMoveDown && isOnGround && isAttackPress && MegamanBullet::getBullets()->Count < 3){
+		MegamanBullet* bullet = new MegamanBullet();
+		bullet->dx = 4 * objectDirection;
+		if (objectDirection == 1){
+			bullet->x = x + 19;
+		}
+		else{
+			bullet->x = x - 7;
+		}
+
+		bullet->y = y - 7;
+		delayShoot.start();
+		setCurAction(MGM_RUN_ATTACK);
+		lastKeyDownRunAttack = true;
+	}
 
 	if (!delayShoot.isOnTime() && isOnGround && isAttackPress && MegamanBullet::getBullets()->Count<3)
 	{
+		
 		MegamanBullet* bullet = new MegamanBullet();
-		bullet->dx = 2 * objectDirection;
-		bullet->x = x;
-		bullet->y = y;
+		bullet->dx = 4 * objectDirection;
+		if (objectDirection == 1){
+			bullet->x = x + 19;
+		}
+		else{
+			bullet->x = x - 7;
+		}
+
+		bullet->y = y - 8;
 		delayShoot.start();
+		setCurAction(MGM_STAND_ATTACK);
+		lastKeyDownStandAttack = true;
 	}
 
+	if (!delayShoot.isOnTime() && !isOnGround && !isOnStairs && isAttackPress && MegamanBullet::getBullets()->Count < 3){
+		MegamanBullet* bullet = new MegamanBullet();
+		bullet->dx = 4 * objectDirection;
+		if (objectDirection == 1){
+			bullet->x = x + 17;
+		}
+		else{
+			bullet->x = x - 7;
+		}
+
+		bullet->y = y - 8;
+		delayShoot.start();
+ 		setCurAction(MGM_JUMP_ATTACK);
+		lastStatusJumpAttack = true;
+	}
 	delayShoot.update();
 	this->updateMove();
 	updateFrameAnimation();
@@ -178,37 +246,25 @@ void Megaman::updateFrameAnimation()
 	if (!pauseAnimation){
 		if (sprite == 0)
 			return;
-		MGMBox::update();
-		//updateMove();
 		if (timeFrame.atTime()) {
 			int lastFrame = curFrame;
-			if (!curAction == MGM_STAND){
+			if (curAction == MGM_STAND){
+					this->sprite->Update(MGM_STAND, curFrame = 0);
+					if (!eyesTime.isOnTime()){
+						eyesTime.start();
+					}
+					else{
+						//Xử lý nhắm mắt
+						this->sprite->Update(MGM_STAND, curFrame = 1);
+					}
+					eyesTime.update();
+				}
+			else{
 				this->sprite->Update(curAction, curFrame);
 				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 					onLastFrameAnimation(curAction);
 			}
-			else{
-				if (!eyesTime1.isOnTime()){
-					eyesTime1.start();
-
-				}
-				else{
-					//Xử lý mở mắt
-					this->sprite->Update(MGM_STAND, curFrame = 0);
-
-				}
-				if (!eyesTime2.isOnTime()){
-					eyesTime2.start();
-
-				}
-				else{
-					//Xử lý nhắm mắt
-					this->sprite->Update(MGM_STAND, curFrame = 1);
-
-				}
-				eyesTime1.update();
-				eyesTime2.update();
-			}
+			//lastAction = curAction;
 		}
 	}
 }
@@ -241,17 +297,19 @@ Megaman::Megaman()
 	width = 20;
 	height = 23;
 	ax = 0;
-	delayShoot.init(300);
+	delayShoot.init(150);
 	isOnGround = false;
 	isOnStairs = false;
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
 	
 	//@TranTu-khoi tao thoi gian nham mo mat 5 giay, nham mat 2 giay
-	eyesTime1.init(5000);
-	eyesTime2.init(2000);
-	
-
+	eyesTime.init(2000);
+	/*eyesTime2.init(4000);*/
+	timeFrame.tickPerFrame = 80;
+	delayAnimateStandShoot.init(250);
+	delayAnimateRunShoot.init(300);
+	delayAnimateJumpShoot.init(200);
 }
 
 
