@@ -29,8 +29,11 @@ void Megaman::update()
 		isKeyMoveDown = false;
 		isKeyLeftDown = false;
 		isKeyRightDown = false;
-		if (isKeyJumpPress) 
-			isOnStairs = false; // đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
+		if (isKeyJumpPress) {
+			isOnStairs = false;
+			pauseAnimation = false;
+		}
+			 // đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
 	}
 	if (isKeyLeftDown)
 	{
