@@ -8,6 +8,8 @@
 #include"stairs.h"
 #include "Blader.h"
 #include"Beak.h"
+#include"MGMGameTime.h"
+#include"Flea.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -48,6 +50,8 @@ void MGMMap::readObjects(char* objectsPath)
 		case SPR_BEAK: //@Dung - Add
 			obj = new Beak();
 			break;
+		case SPR_FLEA: 
+			obj = new Flea();
 		default:
 			obj = new MGMObject();
 			break;
@@ -87,6 +91,7 @@ void MGMMap::readStage(char * stagePath)
 
 void MGMMap::updateStage()
 {
+
 	Megaman * mgm = Megaman::getInstance();
 	MGMStage * curstage = MGMStage::curStage;
 	if (mgm->getLeft() < curstage->getLeft())
@@ -94,28 +99,44 @@ void MGMMap::updateStage()
 
 	if (mgm->getRight() > curstage->getRight())
 		mgm->x = curstage->getRight() - mgm->width + 1;
-	for (int i = 0; i < nStage; i++)
-	{
-		if (MGMStage::curStage->index == i) continue;
-		if (Collision::AABBCheck(Megaman::getInstance(), stages[i]))
-		{
-			MGMStage::curStage = stages[i];
 
-			if (MGMCamera::getInstance()->y > MGMStage::curStage->getTop())
+	if (mgm->getYCenter() > MGMStage::curStage->getTop() || mgm->getYCenter() < MGMStage::curStage->getBottom())
+	{
+		isChangeStage = false;
+		isUpdate = false;
+		for (int i = 0; i < nStage; i++)
+		{
+			if (MGMStage::curStage->index == i) continue;
+			if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
 			{
-				MGMCamera::getInstance()->dy = -2;
+				MGMStage::curStage = stages[i];
+				isChangeStage = true;
 			}
-			if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
-			{
-				if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
-					MGMCamera::getInstance()->dy = 2;
-			}
-			isUpdate = false;
+		}
+	}
+	
+	if (!isUpdate)
+	{
+		if(mgm->getYCenter() > MGMStage::curStage->getTop())
+		{
+			mgm->y +=0.5f;
+			mgm->pauseAnimation = false;
+			mgm->updateFrameAnimation();
+			MGMCamera::getInstance()->dy = 4;
+		
+		}
+		if(mgm->getYCenter() < MGMStage::curStage->getBottom())
+		{
+			mgm->y -= 0.5f;
+			mgm->pauseAnimation = false;
+			mgm->updateFrameAnimation();
+			MGMCamera::getInstance()->dy = -4;
+			
 		}
 	}
 	if (MGMStage::curStage->getBottom() <= MGMCamera::getInstance()->getBottom() && MGMCamera::getInstance()->y <= MGMStage::curStage->getTop())
 	{
-		MGMCamera::getInstance()->dy = 0;
+		if(isChangeStage) MGMCamera::getInstance()->dy = 0;
 		isUpdate = true;
 	}
 }

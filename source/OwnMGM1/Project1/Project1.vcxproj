@@ -74,6 +74,7 @@
     <ClCompile Include="BigEye.cpp" />
     <ClCompile Include="Blader.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Flea.cpp" />
     <ClCompile Include="MegamanBullet.cpp" />
     <ClCompile Include="MGMDelayTime.cpp" />
     <ClCompile Include="OctopusBattery.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="Blader.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Flea.h" />
     <ClInclude Include="MegamanBullet.h" />
     <ClInclude Include="MGMDelayTime.h" />
     <ClInclude Include="OctopusBattery.h" />

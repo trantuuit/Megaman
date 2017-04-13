@@ -20,6 +20,10 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_MEGAMAN] = new MGMSprite("Data\\Animation\\Rockman\\info.txt", "Data\\Animation\\Rockman\\image.png");
 	sprites[SPR_BULLET] = new MGMSprite("Data\\Animation\\Rockman\\bullet-info.txt", "Data\\Animation\\Rockman\\bullet.png");
 	
+	sprites[SPR_FLEA] = new MGMSprite();
+	sprites[SPR_FLEA]->initInfo("Data\\Animation\\Flea.txt");
+	sprites[SPR_FLEA]->pImage = sprites[SPR_PICKETMAN]->pImage;
+	//add
 
 	sprites[SPR_BIGEYE] = new MGMSprite();
 	sprites[SPR_BIGEYE]->initInfo("Data\\Animation\\BigEye.txt");

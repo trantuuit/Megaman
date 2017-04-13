@@ -16,6 +16,7 @@ public:
 	int nStage;
 	MGMObject** allObjects;
 	MGMStage** stages;
+	bool isChangeStage;
 
 	/*Đọc object và tạo sprite cho object*/
 	void readObjects(char* objectsPath);

@@ -81,7 +81,6 @@ void stairs::climbStairs()
 		if (isKeyUpHold&&mgm->isOnStairs)
 		{
 			mgm->dy = 1;
-
 		}
 		else if (isKeyDownHold&&mgm->isOnStairs)
 		{

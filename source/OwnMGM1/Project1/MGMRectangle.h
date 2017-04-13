@@ -3,7 +3,8 @@
 class MGMRectangle
 {
 public:
-	int x, y, width, height;
+	float x, y;
+	int width, height;
 	MGMRectangle();
 	RECT toRect();
 
