@@ -1,0 +1,33 @@
+R		G		B
+109		167		131
+Count
+2
+Sprite Info
+
+Index		Name
+0			Open
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			287				251				15				16
+			310				251				15				16
+			332				251				15				16
+			360				251				15				16
+
+
+Index		Name
+1			Close
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			360				251				15				16
+			383				251				15				16
+			406				251				15				16
+			425				251				15				16
+

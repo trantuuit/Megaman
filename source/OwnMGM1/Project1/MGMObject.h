@@ -25,7 +25,7 @@ public:
 
 	void update();
 	virtual void updateFrameAnimation();
-	void render();
+	virtual void render();
 	MGMObject();
 	~MGMObject();
 };

@@ -12,6 +12,7 @@ enum MEGAMAN_ACTION
 	MGM_STAND_ATTACK,
 	MGM_RUN_ATTACK,
 	MGM_JUMP_ATTACK,
+	MGM_STAND_STAIR_ATTACK,
 };
 
 class Megaman :
@@ -23,6 +24,7 @@ public:
 	MGMDelayTime delayAnimateStandShoot;
 	MGMDelayTime delayAnimateRunShoot;
 	MGMDelayTime delayAnimateJumpShoot;
+	MGMDelayTime delayAnimateStandStairShoot;
 	MGMDelayTime delayShoot;
 
 	//MGMDelayTime timeStand, timeGo;
@@ -32,8 +34,9 @@ public:
 	static Megaman* getInstance();
 	
 	int action;
-	bool lastKeyDownStandAttack;
-	bool lastKeyDownRunAttack;
+	bool lastStatusStandStairAttack;
+	bool lastStatusStandAttack;
+	bool lastStatusRunAttack;
 	bool lastStatusJumpAttack;
 	bool pauseAnimation;
 

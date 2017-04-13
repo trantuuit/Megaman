@@ -32,22 +32,16 @@ void QuadTree::removeObjectFromCamera()
 	for (int i = 0; i < nObject; i++)
 	{
 		auto obj = allObjectInCams->at(i);
-		if (obj->sprite != 0)
+		if (obj->sprite >= 0)
 		{
 			MGMMovableObject* mov = (MGMMovableObject*)obj;
-			if (!Collision::AABBCheck(MGMCamera::getInstance(), &mov->spaceMove))
+			if (!Collision::AABBCheck(MGMCamera::getInstance(), &mov->spaceMove) && (!Collision::AABBCheck(MGMCamera::getInstance(),mov)))
 			{
 				obj->restoreObject();
 			}
 		}
 	}
-
 	MGMCamera::getInstance()->objects.clear();
-
-
-
-
-
 }
 
 void QuadTree::fillObjectFromQNodeToCamera()

@@ -37,7 +37,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			Sleep(timeDelay.tickPerFrame);
 
 	}
-
-	//delete instance
-
 }

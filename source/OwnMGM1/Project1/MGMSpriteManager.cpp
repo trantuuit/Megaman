@@ -20,11 +20,23 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_MEGAMAN] = new MGMSprite("Data\\Animation\\Rockman\\info.txt", "Data\\Animation\\Rockman\\image.png");
 	sprites[SPR_BULLET] = new MGMSprite("Data\\Animation\\Rockman\\bullet-info.txt", "Data\\Animation\\Rockman\\bullet.png");
 	
-	//add
 
 	sprites[SPR_BIGEYE] = new MGMSprite();
 	sprites[SPR_BIGEYE]->initInfo("Data\\Animation\\BigEye.txt");
 	sprites[SPR_BIGEYE]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	//@Tu-Add enemy Blader
+	sprites[SPR_BLADER] = new MGMSprite();
+	sprites[SPR_BLADER]->initInfo("Data\\Animation\\Blader.txt");
+	sprites[SPR_BLADER]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	//@Dung - Add:
+	sprites[SPR_BEAK] = new MGMSprite();
+	sprites[SPR_BEAK]->initInfo("Data\\Animation\\Beak.txt");
+	sprites[SPR_BEAK]->pImage = sprites[SPR_PICKETMAN]->pImage;
+	sprites[SPR_BEAK_BULLET] = new MGMSprite("Data\\Animation\\Enemy Bullet\\beak-bullet-info.txt", "Data\\Animation\\Enemy Bullet\\Beak Bullet.png");
+	//add
+	//your code
 }
 
 

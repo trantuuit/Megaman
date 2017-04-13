@@ -6,6 +6,8 @@
 #include"BigEye.h"
 #include"Megaman.h"
 #include"stairs.h"
+#include "Blader.h"
+#include"Beak.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -39,6 +41,12 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_STAIRS:
 			obj = new stairs();
+			break;
+		case SPR_BLADER:
+			obj = new Blader();
+			break;
+		case SPR_BEAK: //@Dung - Add
+			obj = new Beak();
 			break;
 		default:
 			obj = new MGMObject();
@@ -95,12 +103,12 @@ void MGMMap::updateStage()
 
 			if (MGMCamera::getInstance()->y > MGMStage::curStage->getTop())
 			{
-				MGMCamera::getInstance()->dy = -4;
+				MGMCamera::getInstance()->dy = -2;
 			}
 			if (MGMCamera::getInstance()->getBottom() < MGMStage::curStage->getBottom())
 			{
 				if (MGMCamera::getInstance()->y < MGMStage::curStage->getBottom() + MGMCamera::getInstance()->height)
-					MGMCamera::getInstance()->dy = 4;
+					MGMCamera::getInstance()->dy = 2;
 			}
 			isUpdate = false;
 		}

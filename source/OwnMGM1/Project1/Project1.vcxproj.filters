@@ -122,6 +122,15 @@
     <ClCompile Include="MegamanBullet.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Blader.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Beak.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BeakBullet.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -219,6 +228,15 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="MegamanBullet.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Blader.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Beak.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BeakBullet.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
