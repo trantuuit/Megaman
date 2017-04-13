@@ -3,6 +3,7 @@
 #include"MGMDirectXTool.h"
 #include"KEY.h"
 #include"MegamanBullet.h"
+#include"BeakBullet.h"
 MGMGame::MGMGame()
 {
 }
@@ -20,10 +21,10 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 
-	Megaman::getInstance()->x = 900;
+	Megaman::getInstance()->x = 700;
 	Megaman::getInstance()->y = 220;
 
-	MGMCamera::getInstance()->init(700, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(600, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
@@ -41,6 +42,11 @@ void MGMGame::render()
 		bullet->render();
 	}
 
+	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
+	{
+		BeakBullet *_bullet = p->m_value;
+		_bullet->render();
+	}
 }
 void MGMGame::update(DWORD timesleep)
 {
@@ -70,6 +76,27 @@ void MGMGame::update(DWORD timesleep)
 		if (!Collision::AABBCheck(bullet , MGMCamera::getInstance()))
 		{
 			MegamanBullet::getBullets()->_Remove(bullet);
+			delete bullet;
+			i--;
+		}
+	}
+
+
+	//------------------------------------------------------------------------------------------------------------------
+	// Update tọa độ các viên đạn:
+	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
+	{
+		BeakBullet *_bullet = p->m_value;
+		_bullet->updateLocation();
+	}
+
+	// Xóa các viên đạn không nằm trong Camera:
+	for (int i = 0; i < BeakBullet::getBullets()->Count; i++)
+	{
+		BeakBullet* bullet = BeakBullet::getBullets()->at(i);
+		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()))
+		{
+			BeakBullet::getBullets()->_Remove(bullet);
 			delete bullet;
 			i--;
 		}

@@ -97,4 +97,13 @@ void stairs::climbStairs()
 		}
 		else mgm->pauseAnimation = true;
 	}
+
+
+	if (mgm->isOnStairs)
+	{
+		if (KEY::getInstance()->isAttackDown)
+		{
+			mgm->setCurAction(MGM_STAND_STAIR_ATTACK);
+		}
+	}
 }

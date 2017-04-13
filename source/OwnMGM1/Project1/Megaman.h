@@ -18,7 +18,10 @@ enum MEGAMAN_ACTION
 class Megaman :
 	public MGMMovableObject
 {
+	int life;
+	int health;
 public:
+	void setHealth(int health);
 	MGMDelayTime eyesTime;
 	//MGMDelayTime eyesTime2;
 	MGMDelayTime delayAnimateStandShoot;

@@ -70,36 +70,14 @@ void Beak::update()
 	if (!pauseAnimation)
 		MGMObject::updateFrameAnimation();
 
-	//------------------------------------------------------------------------------------------------------------------
-	// Update tọa độ các viên đạn:
-	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
-	{
-		BeakBullet *_bullet = p->m_value;
-		_bullet->updateLocation();
-	}
 
-	// Xóa các viên đạn không nằm trong Camera:
-	for (int i = 0; i < BeakBullet::getBullets()->Count; i++)
-	{
-		BeakBullet* bullet = BeakBullet::getBullets()->at(i);
-		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()))
-		{
-			BeakBullet::getBullets()->_Remove(bullet);
-			delete bullet;
-			i--;
-		}
-	}
 }
 
 void Beak::render()
 {
 	MGMEnemy::render();
 
-	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
-	{
-		BeakBullet *_bullet = p->m_value;
-		_bullet->render();
-	}
+
 }
 
 void Beak::onCollision(MGMBox * other, int nx, int ny)

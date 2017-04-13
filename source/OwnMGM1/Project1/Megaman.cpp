@@ -7,6 +7,10 @@
 
 
 Megaman * Megaman::instance = 0;
+void Megaman::setHealth(int health)
+{
+	this->health = health;
+}
 Megaman * Megaman::getInstance()
 {
 	if (instance == 0)
@@ -35,42 +39,42 @@ void Megaman::update()
 			pauseAnimation = false;
 
 		}
-		//if (!delayShoot.isOnTime()&& isAttackPress && MegamanBullet::getBullets()->Count < 3){
-		//	MegamanBullet* bullet = new MegamanBullet();
-		//	bullet->dx = 4 * objectDirection;
-		//	if (objectDirection == 1){
-		//		bullet->x = x + 17;
-		//	}
-		//	else{
-		//		bullet->x = x - 7;
-		//	}
+		if (!delayShoot.isOnTime()&& isAttackPress && MegamanBullet::getBullets()->Count < 3){
+			MegamanBullet* bullet = new MegamanBullet();
+			bullet->dx = 4 * objectDirection;
+			if (objectDirection == 1){
+				bullet->x = x + 17;
+			}
+			else{
+				bullet->x = x - 7;
+			}
 
-		//	bullet->y = y - 8;
-		//	delayShoot.start();
-		//	setCurAction(MGM_STAND_STAIR_ATTACK);
-		//	lastStatusStandStairAttack = true;
-		//	pauseAnimation = false;
-		//}
+			bullet->y = y - 8;
+			delayShoot.start();
+			setCurAction(MGM_STAND_STAIR_ATTACK);
+			lastStatusStandStairAttack = true;
+			pauseAnimation = false;
+		}
 		if (isAttackPress){
 			setCurAction(MGM_STAND_STAIR_ATTACK);
 		}
 	}
 
-	//if (lastStatusStandStairAttack){
-	//	if (delayAnimateStandStairShoot.isReady())
-	//	{
-	//		delayAnimateStandStairShoot.start();
-	//	}
-	//	if (delayAnimateStandStairShoot.isOnTime()){
-	//		pauseAnimation = false;
-	//		setCurAction(MGM_STAND_STAIR_ATTACK);
-	//	}
-	//	if (delayAnimateStandStairShoot.isTerminated()){
-	//		//setCurAction(MGM_CLIMB);
-	//		lastStatusStandStairAttack = false;
-	//	}
-	//	delayAnimateStandStairShoot.update();
-	//}
+	if (lastStatusStandStairAttack){
+		if (delayAnimateStandStairShoot.isReady())
+		{
+			delayAnimateStandStairShoot.start();
+		}
+		if (delayAnimateStandStairShoot.isOnTime()){
+			pauseAnimation = false;
+			setCurAction(MGM_STAND_STAIR_ATTACK);
+		}
+		if (delayAnimateStandStairShoot.isTerminated()){
+			setCurAction(MGM_CLIMB);
+			lastStatusStandStairAttack = false;
+		}
+		delayAnimateStandStairShoot.update();
+	}
 	// 
 	if (isKeyLeftDown)
 	{
@@ -204,6 +208,7 @@ void Megaman::update()
 	isOnGround = false;
 
 
+
 }
 
 void Megaman::render()
@@ -249,8 +254,8 @@ void Megaman::setCurAction(int action)
 	if (this->action == MGM_RUN && action == MGM_PRE_RUN)
 		return;
 	this->action = action;
-	if (action == MGM_CLIMB || action == MGM_JUMP)
-		setWidth(15);
+	if (action == MGM_CLIMB || action == MGM_JUMP || action == MGM_STAND_STAIR_ATTACK)
+		setWidth(16);
 	else 
 		setWidth(20);
 

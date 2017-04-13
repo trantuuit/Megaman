@@ -27,7 +27,7 @@ void MGMMap::readObjects(char* objectsPath)
 	{
 		fs >> id >> x >> y >> width >> height;
 		y = nRow * 16 - y; // Chuyển tọa độ y hướng lên (tọa độ trong map)
-		switch (id)
+		switch (id % 100)
 		{
 		case SPR_GROUND:
 			obj = new MGMObject();
@@ -56,6 +56,8 @@ void MGMMap::readObjects(char* objectsPath)
 			obj = new MGMObject();
 			break;
 		}
+
+		obj->id = id;
 
 		allObjects[i] = obj;
 
