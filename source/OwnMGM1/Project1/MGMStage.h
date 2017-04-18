@@ -8,7 +8,8 @@ class MGMStage :
 public:
 	static MGMStage* curStage;
 	int index;
-	static bool checkMegamanInStage(MGMRectangle* M, MGMRectangle* S);
+	static bool checkMegamanInStage(MGMRectangle* M, MGMRectangle* S);// phuc vu cho viec chuyen stage
+	static bool checkObjectInStage(MGMRectangle* M, MGMRectangle* S); // phuc vu viec fix loi nhay cham gach
 	MGMStage(ifstream& fs);
 	~MGMStage();
 };

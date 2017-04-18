@@ -6,7 +6,6 @@ extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 QuadTree::QuadTree(char * quadtreepath, MGMObject** allObjects,int heightMap)
 {
 	ifstream fs(quadtreepath);
-
 	ignoreLineIfstream(fs, 1);
 	root = new QuadNode(fs, allObjects, heightMap);
 }

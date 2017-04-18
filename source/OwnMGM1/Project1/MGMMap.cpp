@@ -102,7 +102,7 @@ void MGMMap::updateStage()
 	if (mgm->getRight() > curstage->getRight())
 		mgm->x = curstage->getRight() - mgm->width + 1;
 
-	if (mgm->getYCenter() > MGMStage::curStage->getTop() || mgm->getYCenter() < MGMStage::curStage->getBottom())
+	if ((mgm->isOnStairs&&mgm->getYCenter() > MGMStage::curStage->getTop()) || mgm->getYCenter() < MGMStage::curStage->getBottom())
 	{
 		isChangeStage = false;
 		isUpdate = false;
@@ -119,7 +119,7 @@ void MGMMap::updateStage()
 	
 	if (!isUpdate)
 	{
-		if(mgm->getYCenter() > MGMStage::curStage->getTop())
+		if(mgm->isOnStairs &&mgm->getYCenter() > MGMStage::curStage->getTop())
 		{
 			mgm->y +=0.5f;
 			mgm->pauseAnimation = false;
@@ -166,6 +166,7 @@ void MGMMap::update()
 
 	for (int iGround = 0; iGround < nGround; iGround++)
 	{
+		if(MGMStage::checkObjectInStage(groundObjects[iGround],MGMStage::curStage ))
 		Collision::checkCollision(Megaman::getInstance(), groundObjects[iGround]);
 	}
 
