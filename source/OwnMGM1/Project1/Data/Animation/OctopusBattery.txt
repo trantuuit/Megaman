@@ -5,14 +5,14 @@ Count
 Sprite Info
 
 Index		Name
-0			Animation1
+0			Octopus Battery Pink
 
 			FramesCount
 			3
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			16				91				16				16
-			56				91				16				16
-			96				91				16				16
+			16				131				16				16
+			56				131				16				16
+			96				131				16				16
 
