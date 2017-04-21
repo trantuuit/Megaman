@@ -87,7 +87,7 @@ void MGMMap::readStage(char * stagePath)
 		stages[i]->index = i;
 	}
 
-	MGMStage::curStage = stages[0];
+	MGMStage::curStage = stages[4];
 
 }
 

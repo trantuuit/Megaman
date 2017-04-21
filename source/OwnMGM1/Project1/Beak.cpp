@@ -4,9 +4,12 @@
 
 void Beak::update()
 {
-	if ((this->x == 833 && this->y==544) || (this->x==881 && this->y==752)){
+	//@Tu-Add
+	//chuyen huong cho trai sang phai cho enemy
+	if ((this->x == 832 && this->y == 544) || (this->x == 880 && this->y == 752)){
 		this->objectDirection = Direction::RIGHT;
 	}
+	//---
 	switch (beakActivity)
 	{
 	case BEAK_OPEN:
@@ -60,17 +63,21 @@ void Beak::update()
 			default:
 				break;
 			}
-			newBullet->x = this->x - 3;
-			newBullet->y = this->y - 5;
+			//@Tu-add
+			if ((this->x == 832 && this->y == 544) || (this->x == 880 && this->y == 752)){
+				newBullet->x = this->x + 9;
+				newBullet->y = this->y - 5;
+			}
+			else{
+				newBullet->x = this->x - 3;
+				newBullet->y = this->y - 5;
+			}
+			//-----
 		}
 		delayShoot.update();
 	}
-
-
 	if (!pauseAnimation)
 		MGMObject::updateFrameAnimation();
-
-
 }
 
 void Beak::render()
@@ -88,8 +95,8 @@ void Beak::onCollision(MGMBox * other, int nx, int ny)
 		if (nx != 0)
 			vx = (abs)(vx)* nx;
 	}
-	if (other->collisionCategory == CC_MEGAMAN)
-		Collision::preventMove(Megaman::getInstance(), this);
+	//if (other->collisionCategory == CC_MEGAMAN)
+	//	Collision::preventMove(Megaman::getInstance(), this);
 }
 
 //Override lại hàm:
