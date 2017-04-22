@@ -1,5 +1,6 @@
 #include "QuadTree.h"
 #include<string>
+#include "MGMSpriteManager.h"
 #include"MGMMovableObject.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
@@ -37,6 +38,11 @@ void QuadTree::removeObjectFromCamera()
 			if (!Collision::AABBCheck(MGMCamera::getInstance(), &mov->spaceMove) && (!Collision::AABBCheck(MGMCamera::getInstance(),mov)))
 			{
 				obj->restoreObject();
+			}
+			if (mov->id == SPR_FLYING_SHELL){
+				if (!Collision::AABBCheck(MGMCamera::getInstance(), mov)){
+					obj->restoreObject();
+				}
 			}
 		}
 	}

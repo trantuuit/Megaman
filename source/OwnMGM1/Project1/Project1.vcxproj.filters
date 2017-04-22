@@ -131,6 +131,12 @@
     <ClCompile Include="BeakBullet.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Flea.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingShell.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -237,6 +243,12 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="BeakBullet.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Flea.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingShell.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

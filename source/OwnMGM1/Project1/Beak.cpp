@@ -83,8 +83,6 @@ void Beak::update()
 void Beak::render()
 {
 	MGMEnemy::render();
-
-
 }
 
 void Beak::onCollision(MGMBox * other, int nx, int ny)

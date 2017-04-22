@@ -10,6 +10,7 @@
 #include"Beak.h"
 #include"MGMGameTime.h"
 #include"Flea.h"
+#include "FlyingShell.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -32,6 +33,7 @@ void MGMMap::readObjects(char* objectsPath)
 		case SPR_GROUND:
 			obj = new MGMObject();
 			break;
+		//@Tu-Add
 		case SPR_OCTOPUSBATTERY:
 			obj = new OctopusBattery();
 			break;
@@ -44,6 +46,7 @@ void MGMMap::readObjects(char* objectsPath)
 		case SPR_STAIRS:
 			obj = new stairs();
 			break;
+		//@Tu-Add
 		case SPR_BLADER:
 			obj = new Blader();
 			break;
@@ -52,6 +55,10 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_FLEA: 
 			obj = new Flea();
+			break;
+		//@Tu-Add
+		case SPR_FLYING_SHELL:
+			obj = new FlyingShell();
 			break;
 		default:
 			obj = new MGMObject();
@@ -89,8 +96,7 @@ void MGMMap::readStage(char * stagePath)
 		if (MGMStage::checkMegamanInStage(Megaman::getInstance(),stages[i] ))
 			MGMStage::curStage = stages[i];
 	}
-	
-	
+	MGMStage::curStage = stages[0];
 
 }
 

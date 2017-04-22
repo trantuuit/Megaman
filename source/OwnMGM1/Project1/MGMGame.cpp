@@ -21,14 +21,14 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 
-	Megaman::getInstance()->x =900;
-	Megaman::getInstance()->y = 1100;
+	Megaman::getInstance()->x = 22;
+	Megaman::getInstance()->y = 111;
 
-	MGMCamera::getInstance()->init(1168, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	//Megaman::getInstance()->x = 950;
-	//Megaman::getInstance()->y = 712;
-	//MGMCamera::getInstance()->init(768, 712, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	//Megaman::getInstance()->y = 1192;
+	//MGMCamera::getInstance()->init(768, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map

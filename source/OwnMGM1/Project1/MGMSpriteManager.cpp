@@ -36,6 +36,11 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_BLADER]->initInfo("Data\\Animation\\Blader.txt");
 	sprites[SPR_BLADER]->pImage = sprites[SPR_PICKETMAN]->pImage;
 
+	//@Tu-Add Flying Shell
+	sprites[SPR_FLYING_SHELL] = new MGMSprite();
+	sprites[SPR_FLYING_SHELL]->initInfo("Data\\Animation\\FlyingShell.txt");
+	sprites[SPR_FLYING_SHELL]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
 	//@Dung - Add:
 	sprites[SPR_BEAK] = new MGMSprite();
 	sprites[SPR_BEAK]->initInfo("Data\\Animation\\Beak.txt");
