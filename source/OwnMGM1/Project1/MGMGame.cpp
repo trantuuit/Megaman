@@ -21,7 +21,7 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 
-	Megaman::getInstance()->x = 1250;
+	Megaman::getInstance()->x =900;
 	Megaman::getInstance()->y = 1100;
 
 	MGMCamera::getInstance()->init(1168, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
