@@ -96,7 +96,7 @@ void MGMMap::readStage(char * stagePath)
 		if (MGMStage::checkMegamanInStage(Megaman::getInstance(),stages[i] ))
 			MGMStage::curStage = stages[i];
 	}
-	MGMStage::curStage = stages[0];
+	//MGMStage::curStage = stages[0];
 
 }
 

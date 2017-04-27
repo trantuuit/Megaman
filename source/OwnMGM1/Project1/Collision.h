@@ -17,7 +17,7 @@ public:
 	static float SweptAABB(MGMBox* box1, MGMBox* box2, float &normalX, float &normalY);
 	static void checkCollision(MGMBox*M, MGMBox*S);
 
-	static void preventMove(MGMBox*M, MGMBox*S);
+	static void preventMove(MGMBox*M, MGMBox*S,int nx,int ny);
 
 };
 

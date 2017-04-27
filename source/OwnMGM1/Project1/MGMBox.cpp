@@ -24,12 +24,9 @@ void MGMBox::onCollision(MGMBox* other, int nx, int ny)
 
 void MGMBox::updateLocation()
 {
-	if (isCollision && !isChangeDelta)
+	if (isCollision && !isChangeDelta )
 	{
-		if (abs(dx) > abs(dy))
-			dy = 0;
-		else
-			dx = 0;
+		dy = 0;
 	}
 	x += dx;
 	y += dy;

@@ -26,8 +26,8 @@ MGMBox* Collision::GetSweptBroadphaseBox(MGMBox* box)
 
 bool Collision::AABBCheck(MGMRectangle* M, MGMRectangle* S)
 {
-	return ((M->getLeft() <= S->getRight()  && M->getRight()  >= S->getLeft()) &&
-		(M->getBottom()  <= S->getTop() && M->getTop() >= S->getBottom() ));
+	return ((M->getLeft() <= S->getRight() && M->getRight() >= S->getLeft()) &&
+		(M->getBottom() <= S->getTop() && M->getTop() >= S->getBottom()));
 }
 
 void Collision::checkCollision(MGMBox*M, MGMBox*S)
@@ -50,22 +50,12 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		{
 			//chac chan co va cham
 			M->isCollision = true;
-			nx = 0;
-			ny = 0;
-			if (M->getLeft() <= S->getRight() && M->getRight() >= S->getLeft())
-			{
-				if (M->dy > 0)
-					ny = -1;
-				else
-					ny = 1;
-			}
-			else
-			{
-				if (M->dx > 0)
-					nx = -1;
-				else
-					nx = 1;
-			}
+			bool nyCheck = M->getLeft() <= S->getRight() && M->getRight() >= S->getLeft();  //Kiểm tra có giao nhau theo phương x
+			if (!nyCheck) 
+				ny = 0;     // Va chạm theo phương y nhưng ko giao nhau theo phương x thì nx=0
+
+			//bool nxCheck = M->getBottom() <= S->getTop() && M->getTop() >= S->getBottom();  //Kiểm tra có giao nhau theo phương y
+			//if (!nxCheck) nx = 0;     // Va chạm theo  phương x nhưng không giao nhau theo phương y thì ny=0( cái này ko cần thiết trong game này)
 			M->onCollision(S, nx, ny);
 			S->onCollision(M, nx, ny);
 		}
@@ -75,35 +65,34 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 
 }
 
-void Collision::preventMove(MGMBox*M, MGMBox*S)
+void Collision::preventMove(MGMBox*M, MGMBox*S, int nx, int ny)
 {
 	M->isChangeDelta = false;
-	if (M->getTop() >= S->getBottom()  && M->getBottom()  <= S->getTop())
+
+	if (nx == -1)
 	{
-		if (M->dx > 0)
-		{
-			M->dx = S->getLeft() - M->getRight()-1;
-		}
-		else
-		{
-			M->dx = S->getRight() - M->getLeft()+1;
-		}
+		M->dx = S->getLeft() - M->getRight() - 1;
+		M->isChangeDelta = true;
+	}
+	else if (nx == 1)
+	{
+		M->dx = S->getRight() - M->getLeft() + 1;
 		M->isChangeDelta = true;
 	}
 
-	if (M->getRight() >= S->getLeft() && M->getLeft() <= S->getRight())
+	if (ny == -1)
 	{
-		if (M->dy > 0)
-		{
-			M->dy = S->getBottom()  - M->getTop()-1;
-		}
-		else
-		{
-			M->dy = S->getTop() - M->getBottom()+1 ;
-		}
+		M->dy = S->getBottom() - M->getTop() - 1;
 		M->isChangeDelta = true;
 	}
-	/*if (!M->isChangeDelta)
+	else if (ny == 1)
+	{
+		M->dy = S->getTop() - M->getBottom() + 1;
+		M->isChangeDelta = true;
+	}
+
+
+	/*if (M->getTop() >= S->getBottom() && M->getBottom() <= S->getTop())
 	{
 		if (M->dx > 0)
 		{
@@ -114,6 +103,10 @@ void Collision::preventMove(MGMBox*M, MGMBox*S)
 			M->dx = S->getRight() - M->getLeft() + 1;
 		}
 		M->isChangeDelta = true;
+	}
+
+	if (M->getRight() >= S->getLeft() && M->getLeft() <= S->getRight())
+	{
 		if (M->dy > 0)
 		{
 			M->dy = S->getBottom() - M->getTop() - 1;
@@ -122,32 +115,8 @@ void Collision::preventMove(MGMBox*M, MGMBox*S)
 		{
 			M->dy = S->getTop() - M->getBottom() + 1;
 		}
-	}
-*/
-	/*float nx, ny;
-	float sweptTime = SweptAABB(M, S, nx, ny);
-
-
-	if (nx != 0) M->dx = int(sweptTime*M->dx);
-	else if (ny != 0) M->dy = int(sweptTime*M->dy);
-	if (nx != 0 || ny != 0) M->isChangeDelta = true;*/
-	/*if (nx == -1)
-	{
-		M->dx = S->getLeft() - M->getRight();
-	}
-	else if (nx == 1)
-	{
-		M->dx = S->getRight() - M->getLeft();
-	}
-	if (ny == -1)
-	{
-		M->dy = S->getBottom() - M->getTop();
-	}
-	else if (ny == 1)
-	{
-		M->dy = S->getTop() - M->getBottom();
-	}
-	if (nx != 0 || ny != 0) M->isChangeDelta = true;*/
+		M->isChangeDelta = true;
+	}*/
 
 }
 
@@ -161,23 +130,23 @@ float Collision::SweptAABB(MGMBox* M, MGMBox* S, float & normalx, float & normal
 	// Tính khoảng cách cần để xảy ra va chạm (InvEntry) và khoảng cách để ra khỏi va chạm (InvExit):
 	if (M->dx > 0.0f)
 	{
-		xInvEntry = S->x - M->getRight()-1;
+		xInvEntry = S->x - M->getRight() - 1;
 		xInvExit = S->getRight() - M->x;
 	}
 	else
 	{
-		xInvEntry = S->getRight() - M->x+1;
+		xInvEntry = S->getRight() - M->x + 1;
 		xInvExit = S->x - M->getRight();
 	}
 
 	if (M->dy < 0.0f)
 	{
-		yInvEntry = S->y - M->getBottom()+1; 
+		yInvEntry = S->y - M->getBottom() + 1;
 		yInvExit = S->getBottom() - M->y;
 	}
 	else
 	{
-		yInvEntry = S->getBottom() - M->y-1;
+		yInvEntry = S->getBottom() - M->y - 1;
 		yInvExit = S->y - M->getBottom();
 	}
 

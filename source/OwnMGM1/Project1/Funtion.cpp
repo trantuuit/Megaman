@@ -16,4 +16,4 @@ int GAMETIME = 6;
 double GRAVITY = -0.007;
 double MEGAMAN_VY_JUMP = 0.93;
 //xet van toc di chuyen mac dinh cho memgaman
-double MEGAMAN_VX_GO = 0.333;
+double MEGAMAN_VX_GO = 0.233;

@@ -25,6 +25,8 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_FLEA] = new MGMSprite();
 	sprites[SPR_FLEA]->initInfo("Data\\Animation\\Flea.txt");
 	sprites[SPR_FLEA]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	sprites
 	//add
 
 	sprites[SPR_BIGEYE] = new MGMSprite();
