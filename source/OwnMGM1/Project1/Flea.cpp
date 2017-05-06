@@ -6,7 +6,7 @@
 Flea::Flea()
 {
 	vx = 0;
-	vy = 0.8f;
+	vy = 0;
 	ax = 0;
 	timeSit.init(800);
 }
@@ -34,6 +34,12 @@ void Flea::update()
 	isOnGround = false;
 	this->updateMove();
 	timeSit.update();
+}
+void Flea::restoreObject()
+{
+	x = oldRect.x;
+	y = oldRect.y;
+	vy = 0;
 }
 void Flea::SetVy()
 {

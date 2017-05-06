@@ -25,7 +25,8 @@ void MGMAnimation::init(ifstream& fs)
 
 MGMAnimation::~MGMAnimation()
 {
-	delete[]frames;
+	if (frames != NULL)
+		delete[]frames;
 }
 void MGMAnimation::next(int& curFrame){
 	if (curFrame >= framesCount - 1){

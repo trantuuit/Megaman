@@ -329,7 +329,6 @@ void Megaman::setWidth(int width)
 
 void Megaman::onCollision(MGMBox * other, int nx, int ny)
 {
-
 	if (ny == 1)
 	{
 		isOnGround = true;
@@ -349,6 +348,7 @@ Megaman::Megaman()
 	isOnStairs = false;
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
+	IntersectDoor = -1;
 	
 	//@TranTu-khoi tao thoi gian nham mo mat 5 giay, nham mat 2 giay
 	eyesTime.init(2000);

@@ -5,6 +5,7 @@
 #include"MGMStage.h"
 #include<fstream>
 #include"MGMBox.h"
+#include"Door.h"
 using namespace std;
 class MGMMap :
 	public MGMTileMap
@@ -17,7 +18,7 @@ public:
 	MGMObject** allObjects;
 	MGMStage** stages;
 	bool isChangeStage;
-
+	Door**doors;
 	/*Đọc object và tạo sprite cho object*/
 	void readObjects(char* objectsPath);
 

@@ -48,16 +48,16 @@ void MGMCamera::update()
 		)
 	dx = Megaman::getInstance()->dx;
 
-	if (x + dx < MGMStage::curStage->getLeft())
+	if (x>= MGMStage::curStage->getLeft()&& x + dx < MGMStage::curStage->getLeft())
 	{
-		x = MGMStage::curStage->getLeft();
-		dx = 0;
+		//x = MGMStage::curStage->getLeft();
+		dx = MGMStage::curStage->getLeft()-x;
 	}
 
-	if (getRight() + dx > MGMStage::curStage->getRight())
+	if (this->getRight()<= MGMStage::curStage->getRight()&&this->getRight() + dx > MGMStage::curStage->getRight())
 	{
-		x = MGMStage::curStage->getRight() - width+1;
-		dx = 0;
+		//x = MGMStage::curStage->getRight() - width+1;
+		dx = MGMStage::curStage->getRight()-this->getRight();
 	}
 	x += dx;
 	y += dy;

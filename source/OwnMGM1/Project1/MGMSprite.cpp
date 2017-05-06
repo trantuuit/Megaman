@@ -51,4 +51,6 @@ void MGMSprite::Render(int x, int y, int curAction, int curFrame)
 
 MGMSprite::~MGMSprite()
 {
+	if (pImage != NULL) delete pImage;
+	if (animations != NULL)delete[]animations;
 }

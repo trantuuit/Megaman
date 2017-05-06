@@ -33,6 +33,7 @@ public:
 	//MGMDelayTime timeStand, timeGo;
 
 	bool isOnStairs;
+	int IntersectDoor;
 	static Megaman* instance;
 	static Megaman* getInstance();
 	

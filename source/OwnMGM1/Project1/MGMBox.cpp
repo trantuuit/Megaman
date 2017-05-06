@@ -8,7 +8,7 @@ MGMBox::MGMBox()
 
 void MGMBox::update()
 {
-	isChangeDelta = false;
+	isChangeDelta = true;
 	isCollision = false;
 }
 

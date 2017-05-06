@@ -23,7 +23,7 @@ void PicketMan::onCollision(MGMBox * other, int nx, int ny)
 	}
 	if (other == Megaman::getInstance())
 	{
-		Collision::preventMove(Megaman::getInstance(), this);
+		Collision::preventMove(Megaman::getInstance(), this, nx,ny);
 	}
 }
 

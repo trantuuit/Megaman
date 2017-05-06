@@ -21,14 +21,21 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 
-	/*Megaman::getInstance()->x = 22;
+	Megaman::getInstance()->x = 22;
 	Megaman::getInstance()->y = 111;
 
-	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
-	Megaman::getInstance()->x = 950;
+	/*Megaman::getInstance()->x = 950;
 	Megaman::getInstance()->y = 1100;
-	MGMCamera::getInstance()->init(768, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(768, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+	//tọa độ gần screwbomber
+	Megaman::getInstance()->x = 2250;
+	Megaman::getInstance()->y = 1350;
+
+	MGMCamera::getInstance()->init(2040, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map

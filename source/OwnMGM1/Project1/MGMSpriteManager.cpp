@@ -13,6 +13,7 @@ MGMSpriteManager* MGMSpriteManager::getInstance()
 MGMSpriteManager::MGMSpriteManager()
 {
 	sprites = new MGMSprite*[SPR_COUNT];
+
 	sprites[SPR_PICKETMAN] = new MGMSprite("Data\\Animation\\PicketMan.txt", "Data\\Animation\\Enemies.png");
 	//@Tu-Add
 	sprites[SPR_OCTOPUSBATTERY] = new MGMSprite();
@@ -21,12 +22,16 @@ MGMSpriteManager::MGMSpriteManager()
 
 	sprites[SPR_MEGAMAN] = new MGMSprite("Data\\Animation\\Rockman\\info.txt", "Data\\Animation\\Rockman\\image.png");
 	sprites[SPR_BULLET] = new MGMSprite("Data\\Animation\\Rockman\\bullet-info.txt", "Data\\Animation\\Rockman\\bullet.png");
-	
+
 	sprites[SPR_FLEA] = new MGMSprite();
 	sprites[SPR_FLEA]->initInfo("Data\\Animation\\Flea.txt");
 	sprites[SPR_FLEA]->pImage = sprites[SPR_PICKETMAN]->pImage;
 
-	sprites
+	sprites[SPR_SCREWBOMBER] = new MGMSprite();
+	sprites[SPR_SCREWBOMBER]->initInfo("Data\\Animation\\ScrewBomber.txt");
+	sprites[SPR_SCREWBOMBER]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	sprites[SPR_DOOR] = new MGMSprite("Data\\Animation\\Door\\Door.txt", "Data\\Animation\\Door\\Door.png");
 	//add
 
 	sprites[SPR_BIGEYE] = new MGMSprite();
@@ -55,6 +60,12 @@ MGMSpriteManager::MGMSpriteManager()
 
 MGMSpriteManager::~MGMSpriteManager()
 {
+	for (int i = 0; i < SPR_COUNT; i++)
+	{
+		if (sprites[i] != 0) delete sprites[i];
+	}
+	if (sprites != 0) delete[] sprites;
+
 	if (instance != 0)
 		delete	instance;
 }

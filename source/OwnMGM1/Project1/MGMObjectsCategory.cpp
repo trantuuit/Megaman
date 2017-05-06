@@ -38,7 +38,6 @@ void MGMObjectsCategory::removeObject(MGMObject * obj)
 	case CC_ITEM:
 		itemObjects._Remove(obj);
 		break;
-		
 	default:
 		break;
 	}
@@ -51,6 +50,7 @@ void MGMObjectsCategory::clear()
 	/*allObjects.Clear();*/
 	groundObjects.Clear();
 	itemObjects.Clear();
+	stairObjects.Clear();
 }
 
 MGMObjectsCategory::MGMObjectsCategory()
