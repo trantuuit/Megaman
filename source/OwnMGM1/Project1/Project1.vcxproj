@@ -74,6 +74,7 @@
     <ClCompile Include="BigEye.cpp" />
     <ClCompile Include="Blader.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Flea.cpp" />
     <ClCompile Include="FlyingShell.cpp" />
     <ClCompile Include="MegamanBullet.cpp" />
@@ -105,7 +106,9 @@
     <ClCompile Include="MGMTileMap.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="ScrewBomber.cpp" />
     <ClCompile Include="stairs.cpp" />
+    <ClCompile Include="SuperCutter.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +118,7 @@
     <ClInclude Include="Blader.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Flea.h" />
     <ClInclude Include="FlyingShell.h" />
     <ClInclude Include="MegamanBullet.h" />
@@ -146,7 +150,9 @@
     <ClInclude Include="MGMTileMap.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="ScrewBomber.h" />
     <ClInclude Include="stairs.h" />
+    <ClInclude Include="SuperCutter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
