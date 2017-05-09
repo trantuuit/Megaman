@@ -4,6 +4,7 @@
 #include"KEY.h"
 #include"MegamanBullet.h"
 #include"BeakBullet.h"
+#include"SuperCutter.h"
 MGMGame::MGMGame()
 {
 }
@@ -92,7 +93,55 @@ void MGMGame::update(DWORD timesleep)
 		}
 	}
 
+	//----------------------------------------------------SUPER CUTTER-------------------------------------------------------------
 
+	// Xét tọa độ của Megaman so với ngôi nhà (nhằm new SuperCuterr())
+	if (SuperCutter::isAppear())
+	{
+		int distance;
+		if (SuperCutter::location == LOCATION_1)
+			distance = Megaman::getInstance()->getXCenter() - 912;  // Tâm nơi SuperCutter được sinh ra có tọa độ là 913
+		else
+			distance = Megaman::getInstance()->getXCenter() - 1424; // Tâm nơi SuperCutter được sinh ra có tọa độ là 1424
+		if (SuperCutter::timeDelay.isTerminated())
+		{
+			SuperCutter *supperCutter = new SuperCutter();
+			if (SuperCutter::location == LOCATION_1)
+			{
+				supperCutter->x = 905;
+				supperCutter->y = 1040;
+			}
+			else
+			{
+				supperCutter->x = 1416;
+				supperCutter->y = 2000;
+			}
+			SuperCutter::timeDelay.start(300);
+			supperCutter->vx = (float)distance / 232;  // Xác định 1 hằng số để tính ra vận tốc phù hợp
+			supperCutter->objectDirection = (supperCutter->vx < 0) ? LEFT : RIGHT;
+
+		}
+		SuperCutter::timeDelay.update();
+	}
+	// Cập nhật tọa độ các SuperCutter:
+	for (int i = 0; i < SuperCutter::getSuperCutters()->Count; i++)
+	{
+		SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
+		s->update();
+		s->updateLocation();
+	}
+
+	// Xóa các Super Cutter không nằm trong Camera:
+	for (int i = 0; i < SuperCutter::getSuperCutters()->Count; i++)
+	{
+		SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
+		if (!Collision::AABBCheck(s, MGMCamera::getInstance()))
+		{
+			SuperCutter::getSuperCutters()->_Remove(s);
+			delete s;
+			i--;
+		}
+	}
 	//------------------------------------------------------------------------------------------------------------------
 	// Update tọa độ các viên đạn:
 	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)

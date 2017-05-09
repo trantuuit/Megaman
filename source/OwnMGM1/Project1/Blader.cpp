@@ -15,7 +15,7 @@ Blader::Blader()
 	objectDirection = Direction::LEFT;
 }
 boolean Blader::checkNearMegaman(){
-	int xM, yM, xB, yB;
+	float xM, yM, xB, yB;
 	xM = Megaman::getInstance()->x;
 	yM = Megaman::getInstance()->y;
 	xB = x;

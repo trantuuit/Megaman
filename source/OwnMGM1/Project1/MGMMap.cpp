@@ -12,6 +12,7 @@
 #include"Flea.h"
 #include "FlyingShell.h"
 #include"ScrewBomber.h"
+#include"SuperCutter.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -63,6 +64,9 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_SCREWBOMBER:
 			obj = new ScrewBomber();
+			break;
+		case SPR_SUPER_CUTTER:
+			obj = new SuperCutter();
 			break;
 		default:
 			obj = new MGMObject();
