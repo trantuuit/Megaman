@@ -21,21 +21,50 @@ MGMGame::~MGMGame()
 }
 void MGMGame::init()
 {
-
-	Megaman::getInstance()->x = 22;
+	// Mặc định map Cutman:
+	/*Megaman::getInstance()->x = 22;
 	Megaman::getInstance()->y = 111;
-
-	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	/*Megaman::getInstance()->x = 950;
 	Megaman::getInstance()->y = 1100;
 	MGMCamera::getInstance()->init(768, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
-	//tọa độ gần screwbomber
-	Megaman::getInstance()->x = 2250;
-	Megaman::getInstance()->y = 1350;
+	//tọa độ gần BigEye
+	/*Megaman::getInstance()->x = 1880;
+	Megaman::getInstance()->y = 1400;
+	MGMCamera::getInstance()->init(1780, 1460, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
-	MGMCamera::getInstance()->init(2040, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	// Vị trí mặc định map GutsMan
+	/*Megaman::getInstance()->x = 50;
+	Megaman::getInstance()->y = 1150;
+	MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+
+	//// Vị trí 2 map GutsMan
+	//Megaman::getInstance()->x = 1230;
+	//Megaman::getInstance()->y = 1150;
+	//MGMCamera::getInstance()->init(1200, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+
+	// Vị trí 3 map GutsMan
+	/*Megaman::getInstance()->x = 2360;
+	Megaman::getInstance()->y = 1090;
+	MGMCamera::getInstance()->init(2350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+	// Test SuperCutter vị trí 1
+	Megaman::getInstance()->x = 830;
+	Megaman::getInstance()->y = 1100;
+	MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+
+	// Test SuperCutter vị trí 2
+	/*Megaman::getInstance()->x = 1322;
+	Megaman::getInstance()->y = 1975;
+	MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+	// Test BigEye
+	/*Megaman::getInstance()->x = 1900;
+	Megaman::getInstance()->y = 1335;
+	MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
@@ -54,10 +83,18 @@ void MGMGame::render()
 		bullet->render();
 	}
 
+	// Render BeakBullet:
 	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
 	{
 		BeakBullet *_bullet = p->m_value;
 		_bullet->render();
+	}
+
+	// Render Super Cutter:
+	for (int i = 0; i < SuperCutter::getSuperCutters()->Count; i++)
+	{
+		SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
+		s->render();
 	}
 }
 void MGMGame::update(DWORD timesleep)
@@ -127,7 +164,8 @@ void MGMGame::update(DWORD timesleep)
 	for (int i = 0; i < SuperCutter::getSuperCutters()->Count; i++)
 	{
 		SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
-		s->update();
+		s->updateMove();
+		s->updateFrameAnimation();
 		s->updateLocation();
 	}
 

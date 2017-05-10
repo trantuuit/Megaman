@@ -40,7 +40,7 @@ void BigEye::update()
 			objectDirection = (Megaman::getInstance()->getXCenter() < this->getXCenter()) ? LEFT : RIGHT;
 			curFrame = 1;
 			vx = 0.33 * objectDirection;
-			vy = ramdomVy() == 0 ? 0.58 : 0.85;
+			vy = ramdomVy() == 0 ? 0.67 : 0.95;
 			ay = GRAVITY;
 			activity = BIGEYE_JUMP;
 		}

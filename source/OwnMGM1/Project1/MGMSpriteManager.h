@@ -4,7 +4,8 @@
 enum SPRITE_LIST
 {
 	//add
-	
+
+	SPR_SUPER_CUTTER = -6,
 	SPR_BEAK_BULLET = -5,     
 	SPR_BULLET=-4,
 	SPR_DOOR = -3,
@@ -19,7 +20,6 @@ enum SPRITE_LIST
 	SPR_BEAK=6,
 	SPR_FLEA=7,
 	SPR_SCREWBOMBER = 8,
-	SPR_SUPER_CUTTER =9,
 	
 	SPR_COUNT
 };

@@ -44,6 +44,25 @@ SuperCutter::SuperCutter(int x, int y, int w, int h)
 	SuperCutter();
 }
 
+void SuperCutter::updateMove()
+{
+	vx = vx + ax * GAMETIME;
+	dx = vx * GAMETIME;
+
+	vy = vy + ay * GAMETIME;
+	dy = vy * GAMETIME;
+}
+
+void SuperCutter::updateLocation()
+{
+	if (isCollision && !isChangeDelta)
+	{
+		dy = 0;
+	}
+	x += dx;
+	y += dy;
+}
+
 
 SuperCutter::~SuperCutter()
 {

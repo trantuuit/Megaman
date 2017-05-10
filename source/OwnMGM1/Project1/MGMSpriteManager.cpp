@@ -34,9 +34,6 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_DOOR] = new MGMSprite("Data\\Animation\\Door\\Door.txt", "Data\\Animation\\Door\\Door.png");
 	//add
 
-	sprites[SPR_BIGEYE] = new MGMSprite();
-	sprites[SPR_BIGEYE]->initInfo("Data\\Animation\\BigEye.txt");
-	sprites[SPR_BIGEYE]->pImage = sprites[SPR_PICKETMAN]->pImage;
 
 	//@Tu-Add enemy Blader
 	sprites[SPR_BLADER] = new MGMSprite();
@@ -53,6 +50,15 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_BEAK]->initInfo("Data\\Animation\\Beak.txt");
 	sprites[SPR_BEAK]->pImage = sprites[SPR_PICKETMAN]->pImage;
 	sprites[SPR_BEAK_BULLET] = new MGMSprite("Data\\Animation\\Enemy Bullet\\beak-bullet-info.txt", "Data\\Animation\\Enemy Bullet\\Beak Bullet.png");
+
+	//@Dung - BigEye
+	sprites[SPR_BIGEYE] = new MGMSprite();
+	sprites[SPR_BIGEYE]->initInfo("Data\\Animation\\BigEye Pink.txt");
+	sprites[SPR_BIGEYE]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	//@Dung - SuperCutter
+	sprites[SPR_SUPER_CUTTER] = new MGMSprite("Data\\Animation\\Super Cutter\\Super Cutter.txt", "Data\\Animation\\Super Cutter\\Super Cutter.png");
+
 	//add
 	//your code
 }

@@ -30,6 +30,6 @@ public:
 
 	virtual void onInterserct(MGMBox* other);
 	virtual void onCollision(MGMBox* other, int nx, int ny);
-	void updateLocation();
+	virtual void updateLocation();
 
 };
