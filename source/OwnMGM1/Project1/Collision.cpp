@@ -32,6 +32,10 @@ bool Collision::AABBCheck(MGMRectangle* M, MGMRectangle* S)
 
 void Collision::checkCollision(MGMBox*M, MGMBox*S)
 {
+	int oldDx = M->dx;
+	int oldDy = M->dy;
+	M->dx -= S->dx;
+	M->dy -= S->dy;
 	MGMBox* broadPhaseBox = GetSweptBroadphaseBox(M);
 	if (AABBCheck(broadPhaseBox, S))
 	{
@@ -39,6 +43,8 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		broadPhaseBox = NULL;
 		if (AABBCheck(S, M))
 		{
+			M->dx = oldDx;
+			M->dy = oldDy;
 			S->onInterserct(M);
 			M->onInterserct(S);
 			return;
@@ -46,12 +52,14 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		float nx, ny;
 
 		float sweptTime = SweptAABB(M, S, nx, ny);
+		M->dx = oldDx;
+		M->dy = oldDy;
 		if (sweptTime < 1.0)
 		{
 			//chac chan co va cham
 			M->isCollision = true;
 			bool nyCheck = M->getLeft() <= S->getRight() && M->getRight() >= S->getLeft();  //Kiểm tra có giao nhau theo phương x
-			if (!nyCheck) 
+			if (!nyCheck)
 				ny = 0;     // Va chạm theo phương y nhưng ko giao nhau theo phương x thì nx=0
 
 			//bool nxCheck = M->getBottom() <= S->getTop() && M->getTop() >= S->getBottom();  //Kiểm tra có giao nhau theo phương y
@@ -60,6 +68,10 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 			S->onCollision(M, nx, ny);
 		}
 		return;
+	}
+	else {
+		M->dx = oldDx;
+		M->dy = oldDy;
 	}
 	if (broadPhaseBox != NULL) delete broadPhaseBox;
 
@@ -90,33 +102,6 @@ void Collision::preventMove(MGMBox*M, MGMBox*S, int nx, int ny)
 		M->dy = S->getTop() - M->getBottom() + 1;
 		M->isChangeDelta = true;
 	}
-
-
-	/*if (M->getTop() >= S->getBottom() && M->getBottom() <= S->getTop())
-	{
-		if (M->dx > 0)
-		{
-			M->dx = S->getLeft() - M->getRight() - 1;
-		}
-		else
-		{
-			M->dx = S->getRight() - M->getLeft() + 1;
-		}
-		M->isChangeDelta = true;
-	}
-
-	if (M->getRight() >= S->getLeft() && M->getLeft() <= S->getRight())
-	{
-		if (M->dy > 0)
-		{
-			M->dy = S->getBottom() - M->getTop() - 1;
-		}
-		else
-		{
-			M->dy = S->getTop() - M->getBottom() + 1;
-		}
-		M->isChangeDelta = true;
-	}*/
 
 }
 
