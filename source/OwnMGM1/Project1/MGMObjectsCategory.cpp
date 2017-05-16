@@ -47,7 +47,7 @@ void MGMObjectsCategory::removeObject(MGMObject * obj)
 void MGMObjectsCategory::clear()
 {
 	enemyObjects.Clear();
-	/*allObjects.Clear();*/
+	allObjects.Clear();
 	groundObjects.Clear();
 	itemObjects.Clear();
 	stairObjects.Clear();

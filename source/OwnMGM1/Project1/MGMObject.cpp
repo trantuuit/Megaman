@@ -27,6 +27,7 @@ void MGMObject::restoreObject()
 {
 	x = oldRect.x;
 	y = oldRect.y;
+	isKill = false;
 }
 
 void MGMObject::setCurAction(int curAction)

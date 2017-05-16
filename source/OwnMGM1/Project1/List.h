@@ -99,7 +99,7 @@ struct List
 		}
 		Node() 
 		{
-			//m_value = value;
+			m_value = 0;
 			//pNext = pPre = 0;
 		}
 	};

@@ -47,11 +47,21 @@ void QuadNode::fillObjectToCamera()
 	if (nObjects != 0)
 	{
 		//loai 2
+		//for (int i = 0; i < nObjects; i++)
+		//{
+		//	if (Collision::AABBCheck(objects[i], MGMCamera::getInstance()))
+		//		MGMCamera::getInstance()->objects.addObject(objects[i]);
+
+		//}
+		//return;
 		for (int i = 0; i < nObjects; i++)
 		{
 			if (Collision::AABBCheck(objects[i], MGMCamera::getInstance()))
-				MGMCamera::getInstance()->objects.addObject(objects[i]);
-
+			{
+				if (!objects[i]->isKill)
+					MGMCamera::getInstance()->objects.addObject(objects[i]);
+				else MGMCamera::getInstance()->objects.isKilledObject._Add(objects[i]);
+			}
 		}
 		return;
 	}

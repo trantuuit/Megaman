@@ -275,18 +275,18 @@ void MGMMap::update()
 	{
 
 		MGMObject*enemy = enemyObjects.at(iEnemy);
-		if (enemy->isKill){
-			MGMCamera::getInstance()->objects.removeObject(enemy);
-			/*delete enemy;*/
-			iEnemy--;
-		}
-		else{
+		//if (enemy->isKill){
+		//	MGMCamera::getInstance()->objects.removeObject(enemy);
+		//	/*delete enemy;*/
+		//	iEnemy--;
+		//}
+		//else{
 			Collision::checkCollision(Megaman::getInstance(), enemy);
 			for (int iGround = 0; iGround < nGround; iGround++)
 			{
 				Collision::checkCollision(enemy, groundObjects[iGround]);
 			}
-		}
+		/*}*/
 	}
 
 	int nDoor = 2;
