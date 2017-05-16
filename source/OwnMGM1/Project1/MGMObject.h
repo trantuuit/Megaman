@@ -6,6 +6,7 @@ class MGMObject : public MGMBox
 public:
 	Direction objectDirection;
 	int id;
+	boolean isKill;
 	MGMSprite* sprite;
 	MGMGameTime timeFrame;
 	bool isOnGround;

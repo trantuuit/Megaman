@@ -44,7 +44,7 @@ public:
 	bool lastStatusJumpAttack;
 	bool pauseAnimation;
 
-	/*Cập nhật vận tốc*/
+	/*Cập nhật*/
 	void update();
 	void render();
 

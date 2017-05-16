@@ -5,6 +5,8 @@
 #include"MegamanBullet.h"
 #include"BeakBullet.h"
 #include"SuperCutter.h"
+#include "CutmanBullet.h"
+#include"MGMItem.h"
 MGMGame::MGMGame()
 {
 }
@@ -22,13 +24,13 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 	// Mặc định map Cutman:
-	/*Megaman::getInstance()->x = 22;
+	Megaman::getInstance()->x = 22;
 	Megaman::getInstance()->y = 111;
-	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
-	/*Megaman::getInstance()->x = 950;
-	Megaman::getInstance()->y = 1100;
-	MGMCamera::getInstance()->init(768, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	//Megaman::getInstance()->x = 950;
+	//Megaman::getInstance()->y = 1100;
+	//MGMCamera::getInstance()->init(768, 1192, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	//tọa độ gần BigEye
 	/*Megaman::getInstance()->x = 1880;
@@ -52,9 +54,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->init(2350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	// Test SuperCutter vị trí 1
-	Megaman::getInstance()->x = 830;
+	/*Megaman::getInstance()->x = 830;
 	Megaman::getInstance()->y = 1100;
-	MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	// Test SuperCutter vị trí 2
 	/*Megaman::getInstance()->x = 1322;
@@ -65,6 +67,11 @@ void MGMGame::init()
 	/*Megaman::getInstance()->x = 1900;
 	Megaman::getInstance()->y = 1335;
 	MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+	//stage dau voi cutman
+	/*Megaman::getInstance()->x = 3120;
+	Megaman::getInstance()->y = 1432;
+	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
@@ -96,6 +103,16 @@ void MGMGame::render()
 		SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
 		s->render();
 	}
+
+	//
+	if (CutmanBullet::bullet != NULL){
+		CutmanBullet::getBullet()->render();
+	}
+	//render item
+	for (List<MGMItem*>::Node*p = MGMItem::getListItem()->pHead; p; p = p->pNext){
+		MGMItem* item = p->m_value;
+		item->render();
+	}
 }
 void MGMGame::update(DWORD timesleep)
 {
@@ -104,6 +121,12 @@ void MGMGame::update(DWORD timesleep)
 	{
 		Megaman::getInstance()->update(); // Cap nhat van toc cua MGM
 		map->update();
+		//Cap nhat vi tri item
+		//Xet va cham voi gach
+		for (List<MGMItem*>::Node*p = MGMItem::getListItem()->pHead; p; p = p->pNext){
+			MGMItem* item = p->m_value;
+			item->update();
+		}
 	}
 	MGMCamera::getInstance()->update();
 	if (map->isUpdate)
@@ -113,16 +136,26 @@ void MGMGame::update(DWORD timesleep)
 	}
 	map->updateStage();
 
+	List<MGMObject*>& enemyObjects = MGMCamera::getInstance()->objects.enemyObjects;
+	int nEnemy = enemyObjects.size();
+
+
+	//Cap nhat vi tri cua vien dan megaman
 	for (List<MegamanBullet*>::Node* p = MegamanBullet::getBullets()->pHead; p; p = p->pNext)
 	{
 		MegamanBullet* bullet = p->m_value;
+		for (int iEnemy = 0; iEnemy < nEnemy; iEnemy++)
+		{
+			auto enemy = enemyObjects[iEnemy];
+			Collision::checkCollision(bullet, enemy);
+		}
 		bullet->updateLocation();
 	}
-
+	//Xoa vien dan cua megaman
 	for (int i = 0; i < MegamanBullet::getBullets()->Count; i++)
 	{
 		MegamanBullet*bullet = MegamanBullet::getBullets()->at(i);
-		if (!Collision::AABBCheck(bullet , MGMCamera::getInstance()))
+		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()) || bullet->isKill)
 		{
 			MegamanBullet::getBullets()->_Remove(bullet);
 			delete bullet;
@@ -130,6 +163,26 @@ void MGMGame::update(DWORD timesleep)
 		}
 	}
 
+	//Cap nhat vi tri item
+	//Xet va cham voi gach
+	List<MGMObject*>& groundObjects = MGMCamera::getInstance()->objects.groundObjects;
+	for (List<MGMItem*>::Node*p = MGMItem::getListItem()->pHead; p; p = p->pNext){
+		MGMItem* item = p->m_value;
+		for (int i = 0; i < groundObjects.size(); i++){
+			auto ground = groundObjects[i];
+			Collision::checkCollision(item, ground);
+		}
+		item->updateLocation();
+	}
+	//Xoa item 
+	for (int i = 0; i < MGMItem::getListItem()->Count; i++){
+		MGMItem* item = MGMItem::getListItem()->at(i);
+		if (!Collision::AABBCheck(item, MGMCamera::getInstance())){
+			MGMItem::getListItem()->_Remove(item);
+			delete item;
+			i--;
+		}
+	}
 	//----------------------------------------------------SUPER CUTTER-------------------------------------------------------------
 
 	// Xét tọa độ của Megaman so với ngôi nhà (nhằm new SuperCuterr())
@@ -199,4 +252,11 @@ void MGMGame::update(DWORD timesleep)
 			i--;
 		}
 	}
+
+	//Cutman bullet
+	if (CutmanBullet::bullet != NULL){
+		CutmanBullet::getBullet()->update();
+		CutmanBullet::getBullet()->updateLocation();
+	}
+
 }

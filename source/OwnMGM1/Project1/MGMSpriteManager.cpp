@@ -59,7 +59,49 @@ MGMSpriteManager::MGMSpriteManager()
 	//@Dung - SuperCutter
 	sprites[SPR_SUPER_CUTTER] = new MGMSprite("Data\\Animation\\Super Cutter\\Super Cutter.txt", "Data\\Animation\\Super Cutter\\Super Cutter.png");
 
+	//@Tu-bullet cut man
+	sprites[SPR_CUTMANBULLET] = new MGMSprite();
+	sprites[SPR_CUTMANBULLET]->initInfo("Data\\Animation\\cutmanbullet.txt");
+	sprites[SPR_CUTMANBULLET]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	//@Tu-cut man
+	sprites[SPR_CUTMAN] = new MGMSprite();
+	sprites[SPR_CUTMAN]->initInfo("Data\\Animation\\cutman.txt");
+	sprites[SPR_CUTMAN]->pImage = sprites[SPR_PICKETMAN]->pImage;
 	//add
+	//@Tu-Khoi tao sprite cho item
+	//@item bonus ball
+	sprites[SPR_ITEM_BONUS_BALL] = new MGMSprite("Data\\Item\\bonus_ball.txt", "Data\\Item\\Items.png");
+
+	//@item life energy big
+	sprites[SPR_ITEM_LIFE_ENERGY_BIG] = new MGMSprite();
+	sprites[SPR_ITEM_LIFE_ENERGY_BIG]->initInfo("Data\\Item\\life_energy_big.txt");
+	sprites[SPR_ITEM_LIFE_ENERGY_BIG]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
+
+	//@item life energy small
+	sprites[SPR_ITEM_LIFE_ENERGY_SMALL] = new MGMSprite();
+	sprites[SPR_ITEM_LIFE_ENERGY_SMALL]->initInfo("Data\\Item\\life_energy_small.txt");
+	sprites[SPR_ITEM_LIFE_ENERGY_SMALL]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
+
+	//@item weapon energy big
+	sprites[SPR_ITEM_WEAPON_ENERGY_BIG] = new MGMSprite();
+	sprites[SPR_ITEM_WEAPON_ENERGY_BIG]->initInfo("Data\\Item\\weapon_energy_big.txt");
+	sprites[SPR_ITEM_WEAPON_ENERGY_BIG]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
+
+	//@item weapon energy small
+	sprites[SPR_ITEM_WEAPON_ENERGY_SMALL] = new MGMSprite();
+	sprites[SPR_ITEM_WEAPON_ENERGY_SMALL]->initInfo("Data\\Item\\weapon_energy_small.txt");
+	sprites[SPR_ITEM_WEAPON_ENERGY_SMALL]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
+
+	//@item up
+	sprites[SPR_ITEM_UP] = new MGMSprite();
+	sprites[SPR_ITEM_UP]->initInfo("Data\\Item\\up.txt");
+	sprites[SPR_ITEM_UP]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
+
+	//@item weapon energy small
+	sprites[SPR_ITEM_YASHICHI] = new MGMSprite();
+	sprites[SPR_ITEM_YASHICHI]->initInfo("Data\\Item\\yashichi.txt");
+	sprites[SPR_ITEM_YASHICHI]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
 	//your code
 }
 

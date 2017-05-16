@@ -23,6 +23,9 @@
     <Filter Include="Framework\Sprite">
       <UniqueIdentifier>{2316b16b-4b48-47cb-8c7b-5354eeb008b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{0beeec31-ec86-4331-899a-bc221f337dd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp">
@@ -146,6 +149,36 @@
     <ClCompile Include="SuperCutter.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="CutmanBullet.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CutMan.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMItem.cpp">
+      <Filter>Framework\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusBall.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeEnergyBig.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeEnergySmall.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Up.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponEnergyBig.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponEnergySmall.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Yashichi.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -268,6 +301,36 @@
     </ClInclude>
     <ClInclude Include="SuperCutter.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CutmanBullet.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CutMan.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMItem.h">
+      <Filter>Framework\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusBall.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeEnergyBig.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeEnergySmall.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Up.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponEnergyBig.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponEnergySmall.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Yashichi.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

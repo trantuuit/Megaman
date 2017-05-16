@@ -4,6 +4,7 @@ class MGMEnemy :
 	public MGMMovableObject
 {
 public:
+	
 	MGMEnemy();
 	~MGMEnemy();
 };

@@ -46,7 +46,6 @@ void MGMObject::updateFrameAnimation() // this
 	if (sprite == 0)
 		return;
 	MGMBox::update();
-	//updateMove();
 	if (timeFrame.atTime()) {
 
 		int lastFrame = curFrame;

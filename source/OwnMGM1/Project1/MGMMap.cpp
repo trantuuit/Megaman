@@ -13,6 +13,9 @@
 #include "FlyingShell.h"
 #include"ScrewBomber.h"
 #include"SuperCutter.h"
+#include"CutMan.h"
+#include"CutmanBullet.h"
+#include "MGMItem.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -68,8 +71,11 @@ void MGMMap::readObjects(char* objectsPath)
 		case SPR_SUPER_CUTTER:
 			obj = new SuperCutter();
 			break;
+		case SPR_CUTMAN:
+			obj = CutMan::getInstance();
+			break;
 		default:
-			obj = new MGMObject();
+
 			break;
 		}
 
@@ -87,9 +93,11 @@ void MGMMap::readObjects(char* objectsPath)
 			mov->spaceMove.y = nRow * 16 - mov->spaceMove.y; // Chuyển tọa độ y hướng lên (tọa độ trong map)
 
 		}
-		doors = new Door*[3];
+		doors = new Door*[2];
 		doors[0] = new Door(2272, 1344, 32, 64);
+		doors[0]->id = -3;
 		doors[1] = new Door(3072, 1344, 32, 64);
+		doors[1]->id = -3;
 		//doors[2]=new Door
 	}
 
@@ -141,12 +149,12 @@ void MGMMap::updateStage()
 
 	/*if (Collision::AABBCheck(mgm, doors[0]))
 	{
-		isUpdate = false;
-		if (mgm->IntersectDoor != 0)
-		{
-			mgm->IntersectDoor = 0;
-			MGMStage::curStage = stages[MGMStage::curStage->index + mgm->objectDirection];
-		}
+	isUpdate = false;
+	if (mgm->IntersectDoor != 0)
+	{
+	mgm->IntersectDoor = 0;
+	MGMStage::curStage = stages[MGMStage::curStage->index + mgm->objectDirection];
+	}
 	}*/
 	for (int i = 0; i < 2; i++)
 	{
@@ -229,7 +237,6 @@ void MGMMap::update()
 
 
 	int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
-
 	for (int i = 0; i < nObjectsCam; i++)
 	{
 		MGMCamera::getInstance()->objects.allObjects[i]->update();
@@ -246,6 +253,10 @@ void MGMMap::update()
 	{
 		if (MGMStage::checkObjectInStage(groundObjects[iGround], MGMStage::curStage))
 			Collision::checkCollision(Megaman::getInstance(), groundObjects[iGround]);
+		if (CutmanBullet::bullet != NULL){
+			Collision::checkCollision(CutmanBullet::getBullet(), groundObjects[iGround]);
+		}
+
 	}
 
 	int nStair = stairObjects.size();
@@ -256,35 +267,53 @@ void MGMMap::update()
 		s->climbStairs();
 
 	}
-	int nEnemy = enemyObjects.size();
 
-	for (int iEnemy = 0; iEnemy < nEnemy; iEnemy++)
+	/*int nEnemy = enemyObjects.size();*/
+	
+
+	for (int iEnemy = 0; iEnemy < enemyObjects.size(); iEnemy++)
 	{
-		auto enemy = enemyObjects[iEnemy];
-		Collision::checkCollision(Megaman::getInstance(), enemy);
-		for (int iGround = 0; iGround < nGround; iGround++)
-		{
-			Collision::checkCollision(enemy, groundObjects[iGround]);
+
+		MGMObject*enemy = enemyObjects.at(iEnemy);
+		if (enemy->isKill){
+			MGMCamera::getInstance()->objects.removeObject(enemy);
+			/*delete enemy;*/
+			iEnemy--;
+		}
+		else{
+			Collision::checkCollision(Megaman::getInstance(), enemy);
+			for (int iGround = 0; iGround < nGround; iGround++)
+			{
+				Collision::checkCollision(enemy, groundObjects[iGround]);
+			}
 		}
 	}
 
-
+	int nDoor = 2;
+	for (int i = 0; i < nDoor; i++){
+		Collision::checkCollision(CutMan::getInstance(), this->doors[i]);
+	}
+	//test
+	//for (List<MGMItem*>::Node*p = MGMItem::getListItem()->pHead; p; p = p->pNext){
+	//	MGMItem* item = p->m_value;
+	//	Collision::checkCollision(Megaman::getInstance(), item);
+	//}
+	nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
 	for (int i = 0; i < nObjectsCam; i++)
 	{
 		MGMCamera::getInstance()->objects.allObjects[i]->updateLocation();
 	}
-
-
 }
 
 void MGMMap::draw()
 {
 	MGMTileMap::draw();
-	int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
+
 	for (int i = 0; i < 2; i++)
 	{
 		doors[i]->render();
 	}
+	int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
 	for (int i = 0; i < nObjectsCam; i++)
 	{
 		MGMCamera::getInstance()->objects.allObjects[i]->render();
@@ -292,7 +321,7 @@ void MGMMap::draw()
 }
 
 MGMMap::MGMMap(char * objectsPath, char * tileSheetPath, char * quadTreePath, char * matrixPath, char* stagePath) :
-	MGMTileMap(matrixPath, tileSheetPath) //Doc tile map
+MGMTileMap(matrixPath, tileSheetPath) //Doc tile map
 {
 	readObjects(objectsPath);
 	quadTree = new QuadTree(quadTreePath, allObjects, nRow * 16);

@@ -4,7 +4,7 @@
 #include"MGMMovableObject.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
-QuadTree::QuadTree(char * quadtreepath, MGMObject** allObjects,int heightMap)
+QuadTree::QuadTree(char * quadtreepath, MGMObject** allObjects, int heightMap)
 {
 	ifstream fs(quadtreepath);
 	ignoreLineIfstream(fs, 1);
@@ -15,24 +15,11 @@ void QuadTree::removeObjectFromCamera()
 {
 	List<MGMObject*>* allObjectInCams = &MGMCamera::getInstance()->objects.allObjects;
 	int nObject = allObjectInCams->size();
-	//cach cu khong can vung di chuyen
-	//for (int i = 0; i < nObject; i++)
-	//{
-	//	auto obj = allObjectInCams->at(i);
-	//	if (!Collision::AABBCheck(MGMCamera::getInstance(), obj) &&
-	//		!Collision::AABBCheck(MGMCamera::getInstance(), &obj->oldRect))
-	//	{
-	//		obj->restoreObject();
-	//		MGMCamera::getInstance()->objects.removeObject(obj);
-	//		nObject--;
-	//		i--;
-	//	}
-	//}
 
 	for (int i = 0; i < nObject; i++)
 	{
 		auto obj = allObjectInCams->at(i);
-		if (obj->sprite)
+		if (obj->id > 0)
 		{
 			MGMMovableObject* mov = (MGMMovableObject*)obj;
 			if (!Collision::AABBCheck(MGMCamera::getInstance(), &mov->oldRect) && (!Collision::AABBCheck(MGMCamera::getInstance(),mov)))
@@ -46,7 +33,10 @@ void QuadTree::removeObjectFromCamera()
 			}
 		}
 	}
-	MGMCamera::getInstance()->objects.clear();
+	if (nObject > 0){
+		MGMCamera::getInstance()->objects.clear();
+	}
+	
 }
 
 void QuadTree::fillObjectFromQNodeToCamera()

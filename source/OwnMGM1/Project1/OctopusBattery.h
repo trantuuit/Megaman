@@ -20,7 +20,6 @@ public:
 	void update();
 	void render();
 	void onCollision(MGMBox *other, int nx, int ny);
-	void onLastFrameAnimation(int action);
 	OctopusBattery();
 	~OctopusBattery();
 };

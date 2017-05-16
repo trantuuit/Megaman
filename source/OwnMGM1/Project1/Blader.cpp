@@ -13,6 +13,7 @@ Blader::Blader()
 	updateTarget.tickPerFrame=500;
 	bladerActivity = BLADER_STEP1;
 	objectDirection = Direction::LEFT;
+	isKill = false;
 }
 boolean Blader::checkNearMegaman(){
 	float xM, yM, xB, yB;
@@ -161,16 +162,9 @@ void Blader::render(){
 	MGMEnemy::render();
 }
 void Blader::onCollision(MGMBox* other, int nx, int ny){
-	/*MGMEnemy::onCollision(other, nx, ny);*/
-	//if (other->collisionCategory == CC_GROUND)
-	//{
-	//	if (nx != 0)
-	//		vx = abs(vx)*nx;
-	//}
-	//if (other == Megaman::getInstance())
-	//{
-	//	Collision::preventMove(Megaman::getInstance(), this);
-	//}
+	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		isKill = true;
+	}
 }
 
 

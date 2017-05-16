@@ -34,7 +34,6 @@ void MGMMovableObject::onCollision(MGMBox * other, int nx, int ny)
 	if (other->collisionCategory == CC_GROUND)
 	{
 		Collision::preventMove(this, other,nx,ny);
-		//if (ny == 1) isOnGround = true;
 	}
 }
 

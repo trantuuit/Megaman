@@ -1,7 +1,7 @@
 #include "QuadNode.h"
 #include"MGMCamera.h"
 #include"Collision.h"
-
+#include "MGMMovableObject.h"
 
 QuadNode::QuadNode(ifstream& fs, MGMObject** allObjects, int heightMap)
 {
@@ -49,8 +49,9 @@ void QuadNode::fillObjectToCamera()
 		//loai 2
 		for (int i = 0; i < nObjects; i++)
 		{
-			if(Collision::AABBCheck(objects[i],MGMCamera::getInstance()))
+			if (Collision::AABBCheck(objects[i], MGMCamera::getInstance()))
 				MGMCamera::getInstance()->objects.addObject(objects[i]);
+
 		}
 		return;
 	}

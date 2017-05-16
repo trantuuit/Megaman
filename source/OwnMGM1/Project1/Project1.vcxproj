@@ -73,12 +73,18 @@
     <ClCompile Include="BeakBullet.cpp" />
     <ClCompile Include="BigEye.cpp" />
     <ClCompile Include="Blader.cpp" />
+    <ClCompile Include="BonusBall.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="CutMan.cpp" />
+    <ClCompile Include="CutmanBullet.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Flea.cpp" />
     <ClCompile Include="FlyingShell.cpp" />
+    <ClCompile Include="LifeEnergyBig.cpp" />
+    <ClCompile Include="LifeEnergySmall.cpp" />
     <ClCompile Include="MegamanBullet.cpp" />
     <ClCompile Include="MGMDelayTime.cpp" />
+    <ClCompile Include="MGMItem.cpp" />
     <ClCompile Include="OctopusBattery.cpp" />
     <ClCompile Include="Funtion.cpp" />
     <ClCompile Include="KEY.cpp" />
@@ -109,20 +115,30 @@
     <ClCompile Include="ScrewBomber.cpp" />
     <ClCompile Include="stairs.cpp" />
     <ClCompile Include="SuperCutter.cpp" />
+    <ClCompile Include="Up.cpp" />
+    <ClCompile Include="WeaponEnergyBig.cpp" />
+    <ClCompile Include="WeaponEnergySmall.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Yashichi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Beak.h" />
     <ClInclude Include="BeakBullet.h" />
     <ClInclude Include="BigEye.h" />
     <ClInclude Include="Blader.h" />
+    <ClInclude Include="BonusBall.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="CutMan.h" />
+    <ClInclude Include="CutmanBullet.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Flea.h" />
     <ClInclude Include="FlyingShell.h" />
+    <ClInclude Include="LifeEnergyBig.h" />
+    <ClInclude Include="LifeEnergySmall.h" />
     <ClInclude Include="MegamanBullet.h" />
     <ClInclude Include="MGMDelayTime.h" />
+    <ClInclude Include="MGMItem.h" />
     <ClInclude Include="OctopusBattery.h" />
     <ClInclude Include="KEY.h" />
     <ClInclude Include="Keyboard.h" />
@@ -153,6 +169,10 @@
     <ClInclude Include="ScrewBomber.h" />
     <ClInclude Include="stairs.h" />
     <ClInclude Include="SuperCutter.h" />
+    <ClInclude Include="Up.h" />
+    <ClInclude Include="WeaponEnergyBig.h" />
+    <ClInclude Include="WeaponEnergySmall.h" />
+    <ClInclude Include="Yashichi.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -7,11 +7,9 @@ void OctopusBattery::update()
 	switch (OctActivity)
 	{
 	case OCTOPUSBATTERY_OPEN:
-		pauseAnimation = false;
+		//pauseAnimation = true;
 		curFrame = 0;
-		if ((oldRect.x == 1344 && oldRect.y == 1038) || (oldRect.x == 1376 && oldRect.y == 1102)
-			|| (oldRect.x == 1360 && oldRect.y == 1309) || (oldRect.x == 1408 && oldRect.y == 1502)
-			|| (oldRect.x == 1473 && oldRect.y == 1886) || (oldRect.x == 1328 && oldRect.y == 1805)){
+		if (id==102){
 			dy = (int)(vy*GAMETIME);
 			return;
 		}
@@ -28,9 +26,10 @@ void OctopusBattery::update()
 		}
 		if (delayCloseActivity.isTerminated())
 		{
-			pauseAnimation = false;
+			//pauseAnimation = false;
 			OctActivity = OCTOPUSBATTERY_OPEN;
 		}
+		delayCloseActivity.update();
 		break;
 	case OCTOPUSBATTERY_RUN_CLOSE:
 		if (delayRunCloseActivity.isReady()){
@@ -43,30 +42,16 @@ void OctopusBattery::update()
 		}
 		if (delayRunCloseActivity.isTerminated())
 		{
-			pauseAnimation = false;
+			//pauseAnimation = false;
 			OctActivity = OCTOPUSBATTERY_CLOSE;
 		}
+		delayRunCloseActivity.update();
 		break;
 	default:
 		break;
 	}
-	delayCloseActivity.update();
-	delayRunCloseActivity.update();
-	/*MGMEnemy::updateFrameAnimation();*/
-	/*MGMEnemy::update();*/
-	//if ((oldRect.x == 1344 && oldRect.y == 1040) || (oldRect.x == 1376 && oldRect.y == 1104)
-	//	|| (oldRect.x == 1360 && oldRect.y == 1311) || (oldRect.x == 1408 && oldRect.y == 1504)
-	//	|| (oldRect.x == 1473 && oldRect.y == 1887) || (oldRect.x == 1328 && oldRect.y==1807)){
-	//	dy = (int)(vy*GAMETIME);
-	//	/*dy = 0;*/
-	//	return;
-	//}
-	//else{
-	//	dx = (int)(vx*GAMETIME);
-	//}
-	/*dx = (int)(vx*GAMETIME);*/
-	//if (!pauseAnimation)
-	//	MGMObject::updateFrameAnimation();
+
+
 }
 void OctopusBattery::render(){
 	MGMEnemy::render();
@@ -92,12 +77,7 @@ void OctopusBattery::onCollision(MGMBox * other, int nx, int ny){
 	//if (other->collisionCategory == CC_MEGAMAN)
 	//	Collision::preventMove(other, this);
 }
-void OctopusBattery::onLastFrameAnimation(int action){
-	//if (OctActivity == OCTOPUSBATTERY_CLOSE){
-	//	delayActivity.start();
-	//	curFrame = 1;
-	//}
-}
+
 OctopusBattery::OctopusBattery()
 {
 	pauseAnimation = false;

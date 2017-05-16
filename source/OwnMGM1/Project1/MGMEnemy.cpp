@@ -5,6 +5,7 @@
 MGMEnemy::MGMEnemy()
 {
 	collisionCategory = CC_ENEMY;
+	isKill = false;
 }
 
 
