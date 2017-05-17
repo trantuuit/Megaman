@@ -1,6 +1,7 @@
 #include "Blader.h"
 #include "Megaman.h"
 #include "MGMCamera.h"
+#include "MegamanBullet.h"
 Blader::Blader()
 {
 	curAction = 0;
@@ -163,7 +164,10 @@ void Blader::render(){
 }
 void Blader::onCollision(MGMBox* other, int nx, int ny){
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		mgmbullet->x = this->x;
+		mgmbullet->y = this->y;
+		mgmbullet->setAction(FIRE);
 		isKill = true;
 	}
 }

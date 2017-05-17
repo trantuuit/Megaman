@@ -2,7 +2,7 @@
 #include "Megaman.h"
 #include <stdlib.h>
 #include <time.h>
-
+#include "MegamanBullet.h"
 
 
 BigEye::BigEye()
@@ -25,7 +25,20 @@ void BigEye::onCollision(MGMBox * other, int nx, int ny)
 	}
 	MGMMovableObject::onCollision(other, nx, ny);
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		isKill = true;
+		count++;
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		if (count == 20){
+			
+			mgmbullet->x = this->x+this->width/2;
+			mgmbullet->y = this->y-this->height/2;
+			mgmbullet->setAction(FIRE);
+			isKill = true;
+			count = 0;
+		}
+		else{
+			mgmbullet->setAction(NONE);
+		}
+		
 	}
 }
 

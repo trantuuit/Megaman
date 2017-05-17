@@ -4,6 +4,7 @@
 #include"MGMDelayTime.h"
 enum MEGAMANBULLET_ACTION{
 	FIRE,
+	NORMAL,
 	NONE
 };
 class MegamanBullet :
@@ -18,6 +19,7 @@ public:
 	static List<MegamanBullet*>* getBullets();
 	MegamanBullet();
 	void update();
+	void setAction(MEGAMANBULLET_ACTION);
 	void onCollision(MGMBox* other, int nx, int ny);
 	~MegamanBullet();
 };

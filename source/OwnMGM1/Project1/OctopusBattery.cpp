@@ -1,6 +1,6 @@
 #include "OctopusBattery.h"
 #include "Megaman.h"
-
+#include "MegamanBullet.h"
 
 void OctopusBattery::update()
 {
@@ -9,7 +9,7 @@ void OctopusBattery::update()
 	case OCTOPUSBATTERY_OPEN:
 		//pauseAnimation = true;
 		curFrame = 0;
-		if (id==102){
+		if (id == 102){
 			dy = (int)(vy*GAMETIME);
 			return;
 		}
@@ -65,17 +65,29 @@ void OctopusBattery::onCollision(MGMBox * other, int nx, int ny){
 			OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
 			return;
 		}
-			
+
 		if (ny != 0){
 			vy = (abs)(vy)*ny;
 			OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
 			/*this->curFrame = 2;*/
 			return;
 		}
-		
+
 	}
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		isKill = true;
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		count++;
+		if (count == 5){
+
+			mgmbullet->x = this->x;
+			mgmbullet->y = this->y;
+			mgmbullet->setAction(FIRE);
+			isKill = true;
+			count = 0;
+		}
+		else{
+			mgmbullet->setAction(NONE);
+		}
 	}
 }
 

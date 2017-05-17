@@ -2,6 +2,7 @@
 #include"Megaman.h"
 #include"BeakBullet.h"
 #include"MGMCamera.h"
+#include "MegamanBullet.h"
 ScrewBomber::ScrewBomber()
 {
 	vx = 0;
@@ -157,6 +158,18 @@ void ScrewBomber::CreateBullet()
 
 void  ScrewBomber::onCollision(MGMBox * other, int nx, int ny){
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		isKill = true;
+		count++;
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		if (count == 3){
+
+			mgmbullet->x = this->x;
+			mgmbullet->y = this->y;
+			mgmbullet->setAction(FIRE);
+			isKill = true;
+			count = 0;
+		}
+		else{
+			mgmbullet->setAction(NONE);
+		}
 	}
 }

@@ -1,5 +1,5 @@
 #include "FlyingShell.h"
-
+#include "MegamanBullet.h"
 
 FlyingShell::FlyingShell()
 {
@@ -104,7 +104,16 @@ void FlyingShell::render(){
 }
 void FlyingShell::onCollision(MGMBox *other, int nx, int ny){
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		isKill = true;
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		if (flyingShellActivity == FLYINGSHELL_OPEN){
+			mgmbullet->x = this->x;
+			mgmbullet->y = this->y;
+			mgmbullet->setAction(FIRE);
+			isKill = true;
+		}
+		else{
+			mgmbullet->setAction(NONE);
+		}
 	}
 }
 FlyingShell::~FlyingShell()

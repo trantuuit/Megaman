@@ -12,7 +12,7 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			40				0				8				8
+			40				0				7				6
 			
 			
 Index		Name

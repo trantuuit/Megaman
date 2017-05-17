@@ -325,18 +325,18 @@ void Megaman::onCollision(MGMBox * other, int nx, int ny)
 	}
 	MGMMovableObject::onCollision(other, nx, ny);
 	if (other->collisionCategory == CC_ENEMY){
-		if (nx == -1){
-			vx = -0.9;
-		}
-		if (nx == 1){
-			vx = 0.9;
-		}
-		if (ny == 1){
-			vy = 0.93;
-		}
-		if (ny == -1){
-			vy = 0;
-		}
+		//if (nx == -1){
+		//	vx = -0.9;
+		//}
+		//if (nx == 1){
+		//	vx = 0.9;
+		//}
+		//if (ny == 1){
+		//	vy = 0.93;
+		//}
+		//if (ny == -1){
+		//	vy = 0;
+		//}
 	}
 }
 

@@ -1,7 +1,7 @@
 #include "Flea.h"
 #include"Megaman.h"
 #include<ctime>
-
+#include "MegamanBullet.h"
 
 Flea::Flea()
 {
@@ -69,6 +69,10 @@ void Flea::updateMove()
 void Flea::onCollision(MGMBox * other, int nx, int ny)
 {
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		mgmbullet->x = this->x;
+		mgmbullet->y = this->y;
+		mgmbullet->setAction(FIRE);
 		isKill = true;
 	}
 	if (ny == 1)

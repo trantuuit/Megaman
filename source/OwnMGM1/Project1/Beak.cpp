@@ -1,5 +1,5 @@
 ﻿#include "Beak.h"
-
+#include "MegamanBullet.h"
 
 
 void Beak::update()
@@ -97,7 +97,17 @@ void Beak::onCollision(MGMBox * other, int nx, int ny)
 			vx = (abs)(vx)* nx;
 	}
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		isKill = true;
+		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		if (beakActivity == BEAK_CLOSE){
+			mgmbullet->x = this->x;
+			mgmbullet->y = this->y;
+			mgmbullet->setAction(FIRE);
+			isKill = true;
+		}
+		else{
+			mgmbullet->setAction(NONE);
+		}
+			
 	}
 }
 
