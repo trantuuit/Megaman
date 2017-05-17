@@ -19,15 +19,38 @@ List<MegamanBullet*>* MegamanBullet::getBullets()
 
 MegamanBullet::MegamanBullet()
 {
+	this->width = this->height = 8;
 	collisionCategory = CC_MEGAMAN_BULLET;
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_BULLET];
+	curAction = 0;
+	curFrame = 0;
+	timedelay.init(100);
+	action = NONE;
 	getBullets()->_Add(this);
+}
+void MegamanBullet::update(){
+	if (action == FIRE){
+		if (timedelay.isReady()){
+			timedelay.start();
+		}
+		if (timedelay.isOnTime()){
+			curAction = 1;
+			/*curFrame = 0;*/
+		}
+		else{
+			isKill = true;
+		}
+		timedelay.update();
+	}
+	MGMMovableObject::updateFrameAnimation();
+
 }
 void MegamanBullet::onCollision(MGMBox* other, int nx, int ny){
 	if (other->collisionCategory == CC_ENEMY){
 		dx = 0;
 		dy = 0;
-		isKill = true;
+		action = FIRE;
+		/*isKill = true;*/
 		srand(time(NULL));
 		int result = rand() % 7;
 
@@ -66,6 +89,7 @@ void MegamanBullet::onCollision(MGMBox* other, int nx, int ny){
 			yashichi->x = this->x;
 			yashichi->y = this->y;
 		}
+
 	}
 }
 

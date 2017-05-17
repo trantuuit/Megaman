@@ -74,8 +74,9 @@ void OctopusBattery::onCollision(MGMBox * other, int nx, int ny){
 		}
 		
 	}
-	//if (other->collisionCategory == CC_MEGAMAN)
-	//	Collision::preventMove(other, this);
+	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		isKill = true;
+	}
 }
 
 OctopusBattery::OctopusBattery()

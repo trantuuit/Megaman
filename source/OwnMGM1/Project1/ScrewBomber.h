@@ -14,12 +14,13 @@ class ScrewBomber :
 	MGMDelayTime delayShot;
 	int prvHeight;
 public:
-
+	
 	ScrewBomber();
 	~ScrewBomber();
 	void update();
 	void setCurAction(int action);
 	void render();
 	void CreateBullet();
+	void onCollision(MGMBox * other, int nx, int ny);
 };
 

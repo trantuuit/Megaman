@@ -24,6 +24,9 @@ void BigEye::onCollision(MGMBox * other, int nx, int ny)
 		delayBeforeJump.start();
 	}
 	MGMMovableObject::onCollision(other, nx, ny);
+	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		isKill = true;
+	}
 }
 
 void BigEye::update()

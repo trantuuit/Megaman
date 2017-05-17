@@ -154,3 +154,9 @@ void ScrewBomber::CreateBullet()
 		newBullet5->y = this->y - 9;
 	}
 }
+
+void  ScrewBomber::onCollision(MGMBox * other, int nx, int ny){
+	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		isKill = true;
+	}
+}

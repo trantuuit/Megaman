@@ -163,6 +163,7 @@ void Blader::render(){
 }
 void Blader::onCollision(MGMBox* other, int nx, int ny){
 	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		
 		isKill = true;
 	}
 }

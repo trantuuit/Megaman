@@ -144,11 +144,13 @@ void MGMGame::update(DWORD timesleep)
 	for (List<MegamanBullet*>::Node* p = MegamanBullet::getBullets()->pHead; p; p = p->pNext)
 	{
 		MegamanBullet* bullet = p->m_value;
+		bullet->update();
 		for (int iEnemy = 0; iEnemy < nEnemy; iEnemy++)
 		{
 			auto enemy = enemyObjects[iEnemy];
 			Collision::checkCollision(bullet, enemy);
 		}
+		
 		bullet->updateLocation();
 	}
 	//Xoa vien dan cua megaman
@@ -164,10 +166,11 @@ void MGMGame::update(DWORD timesleep)
 	}
 
 	//Cap nhat vi tri item
-	//Xet va cham voi gach
+	//Xet va cham voi gach, voi megaman
 	List<MGMObject*>& groundObjects = MGMCamera::getInstance()->objects.groundObjects;
 	for (List<MGMItem*>::Node*p = MGMItem::getListItem()->pHead; p; p = p->pNext){
 		MGMItem* item = p->m_value;
+		Collision::checkCollision(Megaman::getInstance(), item);
 		for (int i = 0; i < groundObjects.size(); i++){
 			auto ground = groundObjects[i];
 			Collision::checkCollision(item, ground);
@@ -177,7 +180,7 @@ void MGMGame::update(DWORD timesleep)
 	//Xoa item 
 	for (int i = 0; i < MGMItem::getListItem()->Count; i++){
 		MGMItem* item = MGMItem::getListItem()->at(i);
-		if (!Collision::AABBCheck(item, MGMCamera::getInstance())){
+		if (!Collision::AABBCheck(item, MGMCamera::getInstance()) || item->isKill){
 			MGMItem::getListItem()->_Remove(item);
 			delete item;
 			i--;

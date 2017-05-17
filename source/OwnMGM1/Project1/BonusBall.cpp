@@ -3,9 +3,11 @@
 
 BonusBall::BonusBall()
 {
+	/*MGMItem();*/
 	this->width = 8;
 	this->height = 8;
 	this->sprite = MGMSpriteManager::getInstance()->sprites[SPR_ITEM_BONUS_BALL];
+	
 	getListItem()->_Add(this);
 }
 

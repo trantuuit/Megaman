@@ -68,7 +68,9 @@ void Flea::updateMove()
 
 void Flea::onCollision(MGMBox * other, int nx, int ny)
 {
-
+	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+		isKill = true;
+	}
 	if (ny == 1)
 	{
 		isOnGround = true;
