@@ -30,8 +30,8 @@ private:
 public:
 	static CutmanBullet * bullet;
 	static CutmanBullet* getBullet();
-	void updateMove();
-	void onCollision(MGMBox* other, int nx, int ny);
+	void movingUpdate();
+	void onCollision(MGMBox* otherObject, int nx, int ny);
 	CutmanBullet();
 	~CutmanBullet();
 };

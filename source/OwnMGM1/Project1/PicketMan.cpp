@@ -13,15 +13,15 @@ void PicketMan::render()
 	MGMEnemy::render();
 }
 
-void PicketMan::onCollision(MGMBox * other, int nx, int ny)
+void PicketMan::onCollision(MGMBox * otherObject, int nx, int ny)
 {
-	MGMEnemy::onCollision(other, nx, ny);
-	if (other->collisionCategory == CC_GROUND)
+	MGMEnemy::onCollision(otherObject, nx, ny);
+	if (otherObject->collisionCategory == CC_GROUND)
 	{
 		if(nx!=0)
 			vx = abs(vx)*nx;
 	}
-	if (other == Megaman::getInstance())
+	if (otherObject == Megaman::getInstance())
 	{
 		Collision::preventMove(Megaman::getInstance(), this, nx,ny);
 	}

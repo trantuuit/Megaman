@@ -21,8 +21,8 @@ public:
 	static List<SuperCutter*>* getSuperCutters();
 	SuperCutter();
 	SuperCutter(int x, int y, int w, int h);
-	void updateMove();
-	void updateLocation();
+	void movingUpdate();
+	void terrainUpdate();
 	~SuperCutter();
 };
 

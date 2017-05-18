@@ -10,10 +10,10 @@ private:
 	MGMDelayTime timeDie;
 public:
 	static List<MGMItem*>* getListItem();
-	void onCollision(MGMBox* other, int nx, int ny);
+	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void CountDownDie();
 	void update();
-	void onInterserct(MGMBox* other);
+	void onInterserct(MGMBox* otherObject);
 	MGMItem();
 	~MGMItem();
 };

@@ -19,8 +19,9 @@ class Megaman :
 	public MGMMovableObject
 {
 	int life;
-	int health;
+	
 public:
+	int healthPoint;
 	void setHealth(int health);
 	MGMDelayTime eyesTime;
 	//MGMDelayTime eyesTime2;
@@ -49,7 +50,7 @@ public:
 	void render();
 
 	void setCurAction(int action);
-	void onInterserct(MGMBox* other);
+	void onInterserct(MGMBox* otherObject);
 
 	void onLastFrameAnimation(int action);
 	void updateFrameAnimation();
@@ -57,7 +58,7 @@ public:
 	void setWidth(int width);
 
 
-	void onCollision(MGMBox* other, int nx, int ny);
+	void onCollision(MGMBox* otherObject, int nx, int ny);
 
 	Megaman();
 	~Megaman();

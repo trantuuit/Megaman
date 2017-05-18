@@ -8,7 +8,7 @@ MGMMovableObject::MGMMovableObject()
 	vx = 0.3;
 }
 
-void MGMMovableObject::updateMove()
+void MGMMovableObject::movingUpdate()
 {
 	vx = vx + ax*GAMETIME;
 	dx = (int)(vx*GAMETIME);
@@ -22,18 +22,18 @@ void MGMMovableObject::updateMove()
 void MGMMovableObject::update()
 {
 	MGMObject::updateFrameAnimation();
-	updateMove();
+	movingUpdate();
 }
 
-void MGMMovableObject::onCollision(MGMBox * other, int nx, int ny)
+void MGMMovableObject::onCollision(MGMBox * otherObject, int nx, int ny)
 {
-	if (ny != 0 && other->collisionCategory == CC_GROUND)
+	if (ny != 0 && otherObject->collisionCategory == CC_GROUND)
 	{
 		vy = -0.25;
 	}
-	if (other->collisionCategory == CC_GROUND)
+	if (otherObject->collisionCategory == CC_GROUND)
 	{
-		Collision::preventMove(this, other,nx,ny);
+		Collision::preventMove(this, otherObject,nx,ny);
 	}
 }
 

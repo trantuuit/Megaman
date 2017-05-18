@@ -79,28 +79,28 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 
 void Collision::preventMove(MGMBox*M, MGMBox*S, int nx, int ny)
 {
-	M->isChangeDelta = false;
+	M->isPreventMove = false;
 
 	if (nx == -1)
 	{
 		M->dx = S->getLeft() - M->getRight() - 1;
-		M->isChangeDelta = true;
+		M->isPreventMove = true;
 	}
 	else if (nx == 1)
 	{
 		M->dx = S->getRight() - M->getLeft() + 1;
-		M->isChangeDelta = true;
+		M->isPreventMove = true;
 	}
 
 	if (ny == -1)
 	{
 		M->dy = S->getBottom() - M->getTop() - 1;
-		M->isChangeDelta = true;
+		M->isPreventMove = true;
 	}
 	else if (ny == 1)
 	{
 		M->dy = S->getTop() - M->getBottom() + 1;
-		M->isChangeDelta = true;
+		M->isPreventMove = true;
 	}
 
 }

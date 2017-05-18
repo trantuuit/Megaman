@@ -88,16 +88,16 @@ void Beak::render()
 	MGMEnemy::render();
 }
 
-void Beak::onCollision(MGMBox * other, int nx, int ny)
+void Beak::onCollision(MGMBox * otherObject, int nx, int ny)
 {
-	MGMEnemy::onCollision(other, nx, ny);
-	if (other->collisionCategory == CC_GROUND)
+	MGMEnemy::onCollision(otherObject, nx, ny);
+	if (otherObject->collisionCategory == CC_GROUND)
 	{
 		if (nx != 0)
 			vx = (abs)(vx)* nx;
 	}
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (beakActivity == BEAK_CLOSE){
 			mgmbullet->x = this->x;
 			mgmbullet->y = this->y;

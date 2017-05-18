@@ -15,17 +15,17 @@ MGMItem::MGMItem()
 	vy = 0.6;
 	collisionCategory = CC_ITEM;
 }
-void MGMItem::onInterserct(MGMBox* other){
-	if (other->collisionCategory == CC_MEGAMAN){
+void MGMItem::onInterserct(MGMBox* otherObject){
+	if (otherObject->collisionCategory == CC_MEGAMAN){
 		isKill = true;
 	}
 }
-void MGMItem::onCollision(MGMBox* other, int nx, int ny){
-	if (other->collisionCategory == CC_GROUND){
-		Collision::preventMove(this, other,nx, ny);
+void MGMItem::onCollision(MGMBox* otherObject, int nx, int ny){
+	if (otherObject->collisionCategory == CC_GROUND){
+		Collision::preventMove(this, otherObject,nx, ny);
 		vx = 0;
 	}
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		vy = 1;
 	}
 }

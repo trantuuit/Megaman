@@ -96,15 +96,15 @@ void FlyingShell::update(){
 	}
 	move.update();
 	stop.update();
-	MGMEnemy::updateMove();
+	MGMEnemy::movingUpdate();
 }
 
 void FlyingShell::render(){
 	MGMEnemy::render();
 }
-void FlyingShell::onCollision(MGMBox *other, int nx, int ny){
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+void FlyingShell::onCollision(MGMBox *otherObject, int nx, int ny){
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (flyingShellActivity == FLYINGSHELL_OPEN){
 			mgmbullet->x = this->x;
 			mgmbullet->y = this->y;

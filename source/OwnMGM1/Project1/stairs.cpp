@@ -14,16 +14,16 @@ stairs::~stairs()
 {
 }
 
-void stairs::onCollision(MGMBox * other, int nx, int ny)
+void stairs::onCollision(MGMBox * otherObject, int nx, int ny)
 {
 	/*bool isKeyUpHold = KEY::getInstance()->isUpHold;
-	if (other->vx > 0 && other->getRight() > this->getXCenter())
+	if (otherObject->vx > 0 && otherObject->getRight() > this->getXCenter())
 	{
-		if (isKeyUpHold) other->dy = 0.3;
+		if (isKeyUpHold) otherObject->dy = 0.3;
 	}
-	else if (other->vx < 0 && other->getLeft() < this->getXCenter())
+	else if (otherObject->vx < 0 && otherObject->getLeft() < this->getXCenter())
 	{
-		if (isKeyUpHold) other->dy = 0.3;
+		if (isKeyUpHold) otherObject->dy = 0.3;
 	}*/
 }
 

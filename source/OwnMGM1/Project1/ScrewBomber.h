@@ -21,6 +21,6 @@ public:
 	void setCurAction(int action);
 	void render();
 	void CreateBullet();
-	void onCollision(MGMBox * other, int nx, int ny);
+	void onCollision(MGMBox * otherObject, int nx, int ny);
 };
 

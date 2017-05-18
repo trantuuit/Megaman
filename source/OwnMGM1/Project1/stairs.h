@@ -7,7 +7,7 @@ public:
 	bool isHaveMGM;
 	stairs();
 	~stairs();
-	void onCollision(MGMBox* other, int nx, int ny);
+	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void climbStairs();
 };
 

@@ -80,6 +80,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Flea.cpp" />
     <ClCompile Include="FlyingShell.cpp" />
+    <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="LifeEnergyBig.cpp" />
     <ClCompile Include="LifeEnergySmall.cpp" />
     <ClCompile Include="MegamanBullet.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Flea.h" />
     <ClInclude Include="FlyingShell.h" />
+    <ClInclude Include="HPBar.h" />
     <ClInclude Include="LifeEnergyBig.h" />
     <ClInclude Include="LifeEnergySmall.h" />
     <ClInclude Include="MegamanBullet.h" />

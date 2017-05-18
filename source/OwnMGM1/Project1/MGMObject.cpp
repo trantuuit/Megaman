@@ -62,7 +62,7 @@ void MGMObject::updateFrameAnimation() // this
 
 
 
-void MGMObject::onCollision(MGMBox* other, int nx, int ny)
+void MGMObject::onCollision(MGMBox* otherObject, int nx, int ny)
 {
 
 }

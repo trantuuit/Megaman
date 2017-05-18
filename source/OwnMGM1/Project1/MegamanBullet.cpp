@@ -93,8 +93,8 @@ void MegamanBullet::update(){
 	MGMMovableObject::updateFrameAnimation();
 
 }
-void MegamanBullet::onCollision(MGMBox* other, int nx, int ny){
-	if (other->collisionCategory == CC_ENEMY){
+void MegamanBullet::onCollision(MGMBox* otherObject, int nx, int ny){
+	if (otherObject->collisionCategory == CC_ENEMY){
 		dx = 0;
 		dy = 0;
 		/*action = FIRE;*/

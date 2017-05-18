@@ -83,7 +83,7 @@ void Blader::attackMegaman(){
 void Blader::stopAttack(){
 	dx = (int)(vx*GAMETIME);
 }
-void Blader::updateMove(){
+void Blader::movingUpdate(){
 	
 	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >50)){
 		vx = 0.2f;
@@ -156,15 +156,15 @@ void Blader::updateMove(){
 void Blader::update()
 {
 	MGMEnemy::updateFrameAnimation();
-	updateMove();
+	movingUpdate();
 }
 
 void Blader::render(){
 	MGMEnemy::render();
 }
-void Blader::onCollision(MGMBox* other, int nx, int ny){
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		mgmbullet->x = this->x;
 		mgmbullet->y = this->y;
 		mgmbullet->setAction(FIRE);

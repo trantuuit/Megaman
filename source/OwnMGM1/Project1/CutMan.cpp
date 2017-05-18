@@ -27,9 +27,9 @@ CutMan::CutMan()
 
 void CutMan::update(){
 	MGMEnemy::updateFrameAnimation();
-	updateMove();
+	movingUpdate();
 }
-void CutMan::updateMove(){
+void CutMan::movingUpdate(){
 	if (Megaman::getInstance()->getXCenter() < this->getXCenter()){
 		objectDirection = LEFT;
 	}
@@ -105,8 +105,8 @@ void CutMan::updateMove(){
 		break;
 	}
 }
-void CutMan::onCollision(MGMBox* other, int nx, int ny){
-	MGMEnemy::onCollision(other, nx, ny);
+void CutMan::onCollision(MGMBox* otherObject, int nx, int ny){
+	MGMEnemy::onCollision(otherObject, nx, ny);
 	if (ny == 1)
 	{
 		isOnGround = true;
@@ -114,12 +114,12 @@ void CutMan::onCollision(MGMBox* other, int nx, int ny){
 	//if (nx == 1){
 	//	action = CM_JUMP;
 	//}
-	if (other == Megaman::getInstance())
+	if (otherObject == Megaman::getInstance())
 	{
 		
 		Collision::preventMove(Megaman::getInstance(), this,nx,ny);
 	}
-	MGMObject* temp = (MGMObject*)other;
+	MGMObject* temp = (MGMObject*)otherObject;
 	if (temp->collisionCategory==CC_DOOR){
 		Collision::preventMove(CutMan::getInstance(), temp, nx, ny);
 	}

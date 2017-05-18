@@ -19,7 +19,7 @@ public:
 	bool pauseAnimation;
 	void update();
 	void render();
-	void onCollision(MGMBox *other, int nx, int ny);
+	void onCollision(MGMBox *otherObject, int nx, int ny);
 	OctopusBattery();
 	~OctopusBattery();
 };

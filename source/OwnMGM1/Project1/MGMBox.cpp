@@ -8,23 +8,23 @@ MGMBox::MGMBox()
 
 void MGMBox::update()
 {
-	isChangeDelta = true;
+	isPreventMove = true;
 	isCollision = false;
 }
 
 
-void MGMBox::onInterserct(MGMBox * other)
+void MGMBox::onInterserct(MGMBox * otherObject)
 {
 }
 
-void MGMBox::onCollision(MGMBox* other, int nx, int ny)
+void MGMBox::onCollision(MGMBox* otherObject, int nx, int ny)
 {
 
 }
 
-void MGMBox::updateLocation()
+void MGMBox::terrainUpdate()
 {
-	if (isCollision && !isChangeDelta )
+	if (isCollision && !isPreventMove )
 	{
 		dy = 0;
 	}

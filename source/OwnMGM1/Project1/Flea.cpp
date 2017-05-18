@@ -32,7 +32,7 @@ void Flea::update()
 
 
 	isOnGround = false;
-	this->updateMove();
+	this->movingUpdate();
 	timeSit.update();
 }
 void Flea::restoreObject()
@@ -57,7 +57,7 @@ void Flea::SetVy()
 	}
 
 }
-void Flea::updateMove()
+void Flea::movingUpdate()
 {
 	vx = vx + ax*GAMETIME;
 	dx = (int)(vx*GAMETIME);
@@ -66,10 +66,10 @@ void Flea::updateMove()
 	dy = (vy*GAMETIME);
 }
 
-void Flea::onCollision(MGMBox * other, int nx, int ny)
+void Flea::onCollision(MGMBox * otherObject, int nx, int ny)
 {
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		mgmbullet->x = this->x;
 		mgmbullet->y = this->y;
 		mgmbullet->setAction(FIRE);
@@ -79,7 +79,7 @@ void Flea::onCollision(MGMBox * other, int nx, int ny)
 	{
 		isOnGround = true;
 	}
-	MGMMovableObject::onCollision(other, nx, ny);
+	MGMMovableObject::onCollision(otherObject, nx, ny);
 }
 void Flea::setCurAction(int action)
 {

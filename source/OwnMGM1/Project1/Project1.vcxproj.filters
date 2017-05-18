@@ -26,6 +26,9 @@
     <Filter Include="Item">
       <UniqueIdentifier>{0beeec31-ec86-4331-899a-bc221f337dd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{0ef54002-ea63-4b54-9ab0-1ffc93023341}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp">
@@ -140,9 +143,6 @@
     <ClCompile Include="Flea.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Door.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="ScrewBomber.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -178,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="Yashichi.cpp">
       <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HPBar.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +299,6 @@
     <ClInclude Include="Flea.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="ScrewBomber.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -331,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="Yashichi.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HPBar.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

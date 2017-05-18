@@ -18,7 +18,7 @@ CutmanBullet::CutmanBullet()
 	isUpdateTarget = true;
 }
 
-void CutmanBullet::updateMove(){
+void CutmanBullet::movingUpdate(){
 	if (isUpdateTarget){
 		xMegeman = Megaman::getInstance()->x;
 		yMegeman = Megaman::getInstance()->y;
@@ -90,8 +90,8 @@ void CutmanBullet::updateMove(){
 		break;
 	}
 }
-void CutmanBullet::onCollision(MGMBox* other, int nx, int ny){
-	MGMEnemy::onCollision(other, nx, ny);
+void CutmanBullet::onCollision(MGMBox* otherObject, int nx, int ny){
+	MGMEnemy::onCollision(otherObject, nx, ny);
 	if (nx != 0){
 		if (nx == 1){
 			direction = CUTMANBULLET_RIGHT;
@@ -111,7 +111,7 @@ void CutmanBullet::onCollision(MGMBox* other, int nx, int ny){
 		}
 		action = BACK;
 	}
-	if (other == CutMan::getInstance()){
+	if (otherObject == CutMan::getInstance()){
 		Collision::preventMove(this, CutMan::getInstance(), nx, ny);
 	}
 }

@@ -21,7 +21,7 @@ public:
 	virtual void restoreObject();
 	
 	virtual void setCurAction(int curAction);
-	virtual	void onCollision(MGMBox* other, int nx, int ny);
+	virtual	void onCollision(MGMBox* otherObject, int nx, int ny);
 
 	virtual void onLastFrameAnimation(int action);
 

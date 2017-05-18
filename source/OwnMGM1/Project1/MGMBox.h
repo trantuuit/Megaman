@@ -24,12 +24,12 @@ public:
 	COLLISION_CATEGORY collisionCategory;
 
 	bool isCollision;
-	bool isChangeDelta;
+	bool isPreventMove;
 
 	virtual void update();
 
-	virtual void onInterserct(MGMBox* other);
-	virtual void onCollision(MGMBox* other, int nx, int ny);
-	virtual void updateLocation();
+	virtual void onInterserct(MGMBox* otherObject);
+	virtual void onCollision(MGMBox* otherObject, int nx, int ny);
+	virtual void terrainUpdate();
 
 };

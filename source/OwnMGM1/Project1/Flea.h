@@ -12,12 +12,12 @@ class Flea :
 public:
 	Flea();
 	int prvHeight;
-	void onCollision(MGMBox * other, int nx, int ny);
+	void onCollision(MGMBox * otherObject, int nx, int ny);
 	void setCurAction(int action);
 	void update();
 	void restoreObject();
 	void SetVy();
-	void updateMove();
+	void movingUpdate();
 	void render();
 	MGMDelayTime timeSit;
 	~Flea();

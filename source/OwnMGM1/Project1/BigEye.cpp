@@ -16,17 +16,17 @@ BigEye::BigEye()
 
 }
 
-void BigEye::onCollision(MGMBox * other, int nx, int ny)
+void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
 {
 	if (ny == 1)
 	{
 		activity = BIGEYE_STAND;
 		delayBeforeJump.start();
 	}
-	MGMMovableObject::onCollision(other, nx, ny);
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+	MGMMovableObject::onCollision(otherObject, nx, ny);
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		count++;
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (count == 20){
 			
 			mgmbullet->x = this->x+this->width/2;
@@ -68,7 +68,7 @@ void BigEye::update()
 	}
 	delayBeforeJump.update();
 
-	MGMMovableObject::updateMove();
+	MGMMovableObject::movingUpdate();
 	//MGMBox::update();
 }
 

@@ -4,12 +4,13 @@
 #include"KEY.h"
 #include<string>
 #include"MegamanBullet.h"
+#include"MGMEnemy.h"
 #define DX 1
 
 Megaman * Megaman::instance = 0;
 void Megaman::setHealth(int health)
 {
-	this->health = health;
+	
 }
 Megaman * Megaman::getInstance()
 {
@@ -195,7 +196,7 @@ void Megaman::update()
 		lastStatusJumpAttack = true;
 	}
 	delayShoot.update();
-	this->updateMove();
+	this->movingUpdate();
 	updateFrameAnimation();
 	isOnGround = false;
 }
@@ -251,13 +252,13 @@ void Megaman::setCurAction(int action)
 	MGMMovableObject::setCurAction(action);
 }
 
-void Megaman::onInterserct(MGMBox * other)
+void Megaman::onInterserct(MGMBox * otherObject)
 {
 
-	if (other->collisionCategory == CC_GROUND
-		&& this->getRight() > other->getLeft()
-		&& this->getLeft() < other->getLeft())
-		this->x = other->getLeft() - this->width - 1;
+	if (otherObject->collisionCategory == CC_GROUND
+		&& this->getRight() > otherObject->getLeft()
+		&& this->getLeft() < otherObject->getLeft())
+		this->x = otherObject->getLeft() - this->width - 1;
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -316,27 +317,37 @@ void Megaman::setWidth(int width)
 }
 
 
-void Megaman::onCollision(MGMBox * other, int nx, int ny)
+void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 {
 	if (ny == 1)
 	{
 		isOnGround = true;
 		isOnStairs = false;
 	}
-	MGMMovableObject::onCollision(other, nx, ny);
-	if (other->collisionCategory == CC_ENEMY){
-		//if (nx == -1){
-		//	vx = -0.9;
-		//}
-		//if (nx == 1){
-		//	vx = 0.9;
-		//}
-		//if (ny == 1){
-		//	vy = 0.93;
-		//}
-		//if (ny == -1){
-		//	vy = 0;
-		//}
+	MGMMovableObject::onCollision(otherObject, nx, ny);
+	if (otherObject->collisionCategory == CC_ENEMY){
+		MGMEnemy* enemy = (MGMEnemy*)otherObject;
+		if (enemy->id == 5){
+			healthPoint -= 3;
+		}
+		if (enemy->id == 6 || enemy->id==106){
+			healthPoint--;
+		}
+		if (enemy->id == 2 || enemy->id == 102){
+			healthPoint -= 4;
+		}
+		if (enemy->id == 3){
+			healthPoint -= 10;
+		}
+		if (enemy->id == 4){
+			healthPoint -= 1;
+		}
+		if (enemy->id == 7){
+			healthPoint -= 2;
+		}
+		if (enemy->id == 8 || enemy->id==108){
+			healthPoint -= 1;
+		}
 	}
 }
 
@@ -353,7 +364,7 @@ Megaman::Megaman()
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
 	IntersectDoor = -1;
-
+	healthPoint = 28;
 	//@TranTu-khoi tao thoi gian nham mo mat 5 giay, nham mat 2 giay
 	eyesTime.init(2000);
 	/*eyesTime2.init(4000);*/

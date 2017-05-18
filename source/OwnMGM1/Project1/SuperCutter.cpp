@@ -44,7 +44,7 @@ SuperCutter::SuperCutter(int x, int y, int w, int h)
 	SuperCutter();
 }
 
-void SuperCutter::updateMove()
+void SuperCutter::movingUpdate()
 {
 	vx = vx + ax * GAMETIME;
 	dx = vx * GAMETIME;
@@ -53,9 +53,9 @@ void SuperCutter::updateMove()
 	dy = vy * GAMETIME;
 }
 
-void SuperCutter::updateLocation()
+void SuperCutter::terrainUpdate()
 {
-	if (isCollision && !isChangeDelta)
+	if (isCollision && !isPreventMove)
 	{
 		dy = 0;
 	}

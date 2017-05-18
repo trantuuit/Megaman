@@ -301,7 +301,7 @@ void MGMMap::update()
 	nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
 	for (int i = 0; i < nObjectsCam; i++)
 	{
-		MGMCamera::getInstance()->objects.allObjects[i]->updateLocation();
+		MGMCamera::getInstance()->objects.allObjects[i]->terrainUpdate();
 	}
 }
 

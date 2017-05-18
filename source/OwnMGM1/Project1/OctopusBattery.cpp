@@ -4,6 +4,7 @@
 
 void OctopusBattery::update()
 {
+
 	switch (OctActivity)
 	{
 	case OCTOPUSBATTERY_OPEN:
@@ -50,14 +51,14 @@ void OctopusBattery::update()
 	default:
 		break;
 	}
-
-
+	isPreventMove = true;
+	
 }
 void OctopusBattery::render(){
 	MGMEnemy::render();
 }
-void OctopusBattery::onCollision(MGMBox * other, int nx, int ny){
-	if (other->collisionCategory == CC_GROUND)
+void OctopusBattery::onCollision(MGMBox * otherObject, int nx, int ny){
+	if (otherObject->collisionCategory == CC_GROUND)
 	{
 		if (nx != 0){
 			/*this->curFrame = 2;*/
@@ -65,17 +66,25 @@ void OctopusBattery::onCollision(MGMBox * other, int nx, int ny){
 			OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
 			return;
 		}
-
-		if (ny != 0){
-			vy = (abs)(vy)*ny;
-			OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
-			/*this->curFrame = 2;*/
-			return;
+		if (id == 102){
+			if (ny != 0){
+				vy = (abs)(vy)*ny;
+				OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
+				/*this->curFrame = 2;*/
+				return;
+			}
 		}
 
+		//if (ny == 1){
+		//	dy = 1;
+		//}
+		//if (ny == -1){
+		//	vy = abs(vy)*ny;
+		//}
+
 	}
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		count++;
 		if (count == 5){
 
@@ -94,12 +103,14 @@ void OctopusBattery::onCollision(MGMBox * other, int nx, int ny){
 OctopusBattery::OctopusBattery()
 {
 	pauseAnimation = false;
+	this->width = this->height = 16;
 	delayRunCloseActivity.init(150);
 	delayCloseActivity.init(1300);
 	curAction = 0;
 	curFrame = 2;
 	vx = -0.4f;
 	vy = -0.4f;
+	ay = 0;
 	ax = 0;
 }
 

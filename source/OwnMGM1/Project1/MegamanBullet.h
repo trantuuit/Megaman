@@ -20,7 +20,7 @@ public:
 	MegamanBullet();
 	void update();
 	void setAction(MEGAMANBULLET_ACTION);
-	void onCollision(MGMBox* other, int nx, int ny);
+	void onCollision(MGMBox* otherObject, int nx, int ny);
 	~MegamanBullet();
 };
 

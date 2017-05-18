@@ -156,10 +156,10 @@ void ScrewBomber::CreateBullet()
 	}
 }
 
-void  ScrewBomber::onCollision(MGMBox * other, int nx, int ny){
-	if (other->collisionCategory == CC_MEGAMAN_BULLET){
+void  ScrewBomber::onCollision(MGMBox * otherObject, int nx, int ny){
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		count++;
-		MegamanBullet* mgmbullet = (MegamanBullet*)other;
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (count == 3){
 
 			mgmbullet->x = this->x;
