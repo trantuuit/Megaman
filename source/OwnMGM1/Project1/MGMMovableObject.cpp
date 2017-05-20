@@ -8,10 +8,10 @@ MGMMovableObject::MGMMovableObject()
 	vx = 0.3;
 }
 
-void MGMMovableObject::movingUpdate()
+void MGMMovableObject::deltaUpdate()
 {
 	vx = vx + ax*GAMETIME;
-	dx = (int)(vx*GAMETIME);
+	dx = int(vx*GAMETIME);
 
 	vy = vy + ay*GAMETIME;
 	dy = (vy*GAMETIME);
@@ -22,7 +22,7 @@ void MGMMovableObject::movingUpdate()
 void MGMMovableObject::update()
 {
 	MGMObject::updateFrameAnimation();
-	movingUpdate();
+	deltaUpdate();
 }
 
 void MGMMovableObject::onCollision(MGMBox * otherObject, int nx, int ny)

@@ -15,6 +15,7 @@ Blader::Blader()
 	bladerActivity = BLADER_STEP1;
 	objectDirection = Direction::LEFT;
 	isKill = false;
+	categoryEnemy = CREP_BLADER;
 }
 boolean Blader::checkNearMegaman(){
 	float xM, yM, xB, yB;
@@ -43,7 +44,7 @@ void Blader::attackMegaman(){
 		attack.start();
 	}
 
-	if(attack.isOnTime()){
+	if(attack.isSchedule()){
 		vy = -0.93;
 		ay = 0.007;
 		if (vx > 0){
@@ -67,7 +68,7 @@ void Blader::attackMegaman(){
 		dx = (int)(vx*GAMETIME);
 
 	}
-	if (attack.isTerminated()){
+	if (attack.isFinish()){
 		if (vx > 0){
 			vx = 0.2f;
 
@@ -83,7 +84,7 @@ void Blader::attackMegaman(){
 void Blader::stopAttack(){
 	dx = (int)(vx*GAMETIME);
 }
-void Blader::movingUpdate(){
+void Blader::deltaUpdate(){
 	
 	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >50)){
 		vx = 0.2f;
@@ -97,7 +98,7 @@ void Blader::movingUpdate(){
 		switch (bladerActivity)
 		{
 		case BLADER_STEP1:
-			if (!attack.isOnTime()){
+			if (!attack.isSchedule()){
 				attack.start();
 				if (vx > 0){
 					vx = 0.4f;
@@ -121,7 +122,7 @@ void Blader::movingUpdate(){
 			attack.update();
 			break;
 		case BLADER_STEP2:
-			if (!attack.isOnTime()){
+			if (!attack.isSchedule()){
 				attack.start();
 				if (vx > 0){
 					vx = 0.4f;
@@ -156,7 +157,7 @@ void Blader::movingUpdate(){
 void Blader::update()
 {
 	MGMEnemy::updateFrameAnimation();
-	movingUpdate();
+	deltaUpdate();
 }
 
 void Blader::render(){

@@ -61,6 +61,9 @@ void QuadNode::fillObjectToCamera()
 				if (!objects[i]->isKill)
 					MGMCamera::getInstance()->objects.addObject(objects[i]);
 				else MGMCamera::getInstance()->objects.isKilledObject._Add(objects[i]);
+				if (objects[i]->collisionCategory == CC_ITEM){
+					return;
+				}
 			}
 		}
 		return;

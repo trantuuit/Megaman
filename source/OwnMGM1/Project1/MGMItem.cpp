@@ -15,7 +15,7 @@ MGMItem::MGMItem()
 	vy = 0.6;
 	collisionCategory = CC_ITEM;
 }
-void MGMItem::onInterserct(MGMBox* otherObject){
+void MGMItem::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN){
 		isKill = true;
 	}
@@ -37,7 +37,7 @@ void MGMItem::CountDownDie(){
 	if (timeDie.isReady()){
 		timeDie.start();
 	}
-	if (!timeDie.isOnTime()){
+	if (!timeDie.isSchedule()){
 		isKill = true;
 	}
 	timeDie.update();

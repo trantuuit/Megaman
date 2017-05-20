@@ -16,6 +16,7 @@
 #include"CutMan.h"
 #include"CutmanBullet.h"
 #include "MGMItem.h"
+#include "LifeEnergyBig.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -74,8 +75,9 @@ void MGMMap::readObjects(char* objectsPath)
 		case SPR_CUTMAN:
 			obj = CutMan::getInstance();
 			break;
+		case SPR_ITEM_LIFE_ENERGY_BIG:
+			obj = new LifeEnergyBig();
 		default:
-
 			break;
 		}
 
@@ -93,14 +95,14 @@ void MGMMap::readObjects(char* objectsPath)
 			mov->spaceMove.y = nRow * 16 - mov->spaceMove.y; // Chuyển tọa độ y hướng lên (tọa độ trong map)
 
 		}
-		doors = new Door*[2];
-		doors[0] = new Door(2272, 1344, 32, 64);
-		doors[0]->id = -3;
-		doors[1] = new Door(3072, 1344, 32, 64);
-		doors[1]->id = -3;
+
 		//doors[2]=new Door
 	}
-
+	doors = new Door*[2];
+	doors[0] = new Door(2272, 1344, 32, 64);
+	doors[0]->id = -3;
+	doors[1] = new Door(3072, 1344, 32, 64);
+	doors[1]->id = -3;
 }
 
 void MGMMap::readStage(char * stagePath)
@@ -301,7 +303,7 @@ void MGMMap::update()
 	nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
 	for (int i = 0; i < nObjectsCam; i++)
 	{
-		MGMCamera::getInstance()->objects.allObjects[i]->terrainUpdate();
+		MGMCamera::getInstance()->objects.allObjects[i]->coordinateUpdate();
 	}
 }
 

@@ -24,7 +24,7 @@ private:
 public:
 	static CutMan* getInstance();
 	void update();
-	void movingUpdate();
+	void deltaUpdate();
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	CutMan();
 	~CutMan();

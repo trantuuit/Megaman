@@ -31,6 +31,7 @@ PicketMan::PicketMan()
 {
 	curAction = 1;
 	curFrame = 0;
+	categoryEnemy = CREP_PICKET_MAN;
 }
 
 

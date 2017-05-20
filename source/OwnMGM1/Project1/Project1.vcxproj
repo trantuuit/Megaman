@@ -70,7 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Beak.cpp" />
-    <ClCompile Include="BeakBullet.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="BigEye.cpp" />
     <ClCompile Include="Blader.cpp" />
     <ClCompile Include="BonusBall.cpp" />
@@ -124,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Beak.h" />
-    <ClInclude Include="BeakBullet.h" />
+    <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="BigEye.h" />
     <ClInclude Include="Blader.h" />
     <ClInclude Include="BonusBall.h" />

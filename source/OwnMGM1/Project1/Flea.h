@@ -17,7 +17,7 @@ public:
 	void update();
 	void restoreObject();
 	void SetVy();
-	void movingUpdate();
+	void deltaUpdate();
 	void render();
 	MGMDelayTime timeSit;
 	~Flea();

@@ -10,6 +10,7 @@ FlyingShell::FlyingShell()
 	ay = 0;
 	objectDirection = LEFT;
 	flyingShellActivity = FLYINGSHELL_CLOSE;
+	categoryEnemy = CREP_FLYING_SHELL;
 }
 
 void FlyingShell::update(){
@@ -19,55 +20,63 @@ void FlyingShell::update(){
 		if (stop.isReady()){
 			stop.start(500);
 		}
-		if (stop.isOnTime()){
+		if (stop.isSchedule()){
 			vx = 0;
 			curFrame = 1;
-			if (!delayShoot.isOnTime()){
+			if (!delayShoot.isSchedule()){
 				delayShoot.start(500);
 				//Ban 8 vien cung 1 luc
-				BeakBullet *newBullet1 = new BeakBullet();
+				EnemyBullet *newBullet1 = new EnemyBullet();
+				newBullet1->categoryBullet = FOR_FLYING_SHELL;
 				newBullet1->dx = 0;
 				newBullet1->dy = 3;
 				newBullet1->x = this->x + 8;
 				newBullet1->y = this->y+1;
 
-				BeakBullet *newBullet2 = new BeakBullet();
+				EnemyBullet *newBullet2 = new EnemyBullet();
+				newBullet2->categoryBullet = FOR_FLYING_SHELL;
 				newBullet2->dy = 3;
 				newBullet2->dx = 3;
 				newBullet2->x = this->x + 12;
 				newBullet2->y = this->y-1;
 
-				BeakBullet *newBullet3 = new BeakBullet();
+				EnemyBullet *newBullet3 = new EnemyBullet();
+				newBullet3->categoryBullet = FOR_FLYING_SHELL;
 				newBullet3->dy = 0;
 				newBullet3->dx = 3;
 				newBullet3->x = this->x + 16;
 				newBullet3->y = this->y - 11;
 
-				BeakBullet *newBullet4 = new BeakBullet();
+				EnemyBullet *newBullet4 = new EnemyBullet();
+				newBullet4->categoryBullet = FOR_FLYING_SHELL;
 				newBullet4->dy = -3;
 				newBullet4->dx = 3;
 				newBullet4->x = this->x + 12;
 				newBullet4->y = this->y - 11;
 
-				BeakBullet *newBullet5 = new BeakBullet();
+				EnemyBullet *newBullet5 = new EnemyBullet();
+				newBullet5->categoryBullet = FOR_FLYING_SHELL;
 				newBullet5->dy = -3;
 				newBullet5->dx = 0;
 				newBullet5->x = this->x + 8;
 				newBullet5->y = this->y - 21;
 
-				BeakBullet *newBullet6 = new BeakBullet();
+				EnemyBullet *newBullet6 = new EnemyBullet();
+				newBullet6->categoryBullet = FOR_FLYING_SHELL;
 				newBullet6->dy = -3;
 				newBullet6->dx = -3;
 				newBullet6->x = this->x;
 				newBullet6->y = this->y - 18;
 
-				BeakBullet *newBullet7 = new BeakBullet();
+				EnemyBullet *newBullet7 = new EnemyBullet();
+				newBullet7->categoryBullet = FOR_FLYING_SHELL;
 				newBullet7->dy = 0;
 				newBullet7->dx = -3;
 				newBullet7->x = this->x;
 				newBullet7->y = this->y - 11;
 
-				BeakBullet *newBullet8 = new BeakBullet();
+				EnemyBullet *newBullet8 = new EnemyBullet();
+				newBullet8->categoryBullet = FOR_FLYING_SHELL;
 				newBullet8->dy = 3;
 				newBullet8->dx = -3;
 				newBullet8->x = this->x+4;
@@ -75,7 +84,7 @@ void FlyingShell::update(){
 			}
 			delayShoot.update();
 		}
-		if (stop.isTerminated()){
+		if (stop.isFinish()){
 			flyingShellActivity = FLYINGSHELL_CLOSE;
 			vx = -0.2f;
 		}
@@ -84,10 +93,10 @@ void FlyingShell::update(){
 		if (move.isReady()){
 			move.start(1500);
 		}
-		if (move.isOnTime()){
+		if (move.isSchedule()){
 			curFrame = 0;
 		}
-		if (move.isTerminated()){
+		if (move.isFinish()){
 			flyingShellActivity = FLYINGSHELL_OPEN;
 		}
 		break;
@@ -96,7 +105,7 @@ void FlyingShell::update(){
 	}
 	move.update();
 	stop.update();
-	MGMEnemy::movingUpdate();
+	MGMEnemy::deltaUpdate();
 }
 
 void FlyingShell::render(){

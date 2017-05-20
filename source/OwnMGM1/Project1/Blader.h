@@ -18,7 +18,7 @@ public:
 	bool detectMegaman;
 	void update();
 	void render();
-	void movingUpdate();
+	void deltaUpdate();
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	boolean checkNearMegaman();
 	void attackMegaman();

@@ -4,7 +4,7 @@
 void MGMDelayTime::start(DWORD time)
 {
 	ready = false;
-	terminated = false;
+	finished = false;
 	startTime = GetTickCount();
 	if (time != (DWORD)-1)
 	{
@@ -20,26 +20,26 @@ void MGMDelayTime::init(DWORD time)
 MGMDelayTime::MGMDelayTime()
 {
 	ready = true;
-	terminated = false;
+	finished = false;
 }
 
 bool MGMDelayTime::isReady()
 {
 	return ready;
 }
-bool MGMDelayTime::isTerminated()
+bool MGMDelayTime::isFinish()
 {
-	if (terminated)
+	if (finished)
 	{
 		ready = true;
-		terminated = false;
+		finished = false;
 		return true;
 	}
 	return false;
 }
-bool MGMDelayTime::isOnTime()
+bool MGMDelayTime::isSchedule()
 {
-	return !terminated && !ready;
+	return !finished && !ready;
 }
 void MGMDelayTime::update()
 {
@@ -47,7 +47,7 @@ void MGMDelayTime::update()
 	DWORD deltaTime = now - startTime;
 	if (deltaTime >= tickPerFrame)
 	{
-		terminated = true;
+		finished = true;
 	}
 }
 

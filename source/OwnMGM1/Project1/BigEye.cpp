@@ -13,7 +13,7 @@ BigEye::BigEye()
 	activity = BIGEYE_STAND;
 	delayBeforeJump.init(500);
 	delayBeforeJump.start(500);
-
+	categoryEnemy = CREP_BIG_EYE;
 }
 
 void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
@@ -51,7 +51,7 @@ void BigEye::update()
 		vy = 0;
 		ay = 0;
 		curFrame = 0;
-		if (delayBeforeJump.isTerminated())
+		if (delayBeforeJump.isFinish())
 		{
 			objectDirection = (Megaman::getInstance()->getXCenter() < this->getXCenter()) ? LEFT : RIGHT;
 			curFrame = 1;
@@ -68,7 +68,7 @@ void BigEye::update()
 	}
 	delayBeforeJump.update();
 
-	MGMMovableObject::movingUpdate();
+	MGMMovableObject::deltaUpdate();
 	//MGMBox::update();
 }
 

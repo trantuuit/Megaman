@@ -34,6 +34,8 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 {
 	int oldDx = M->dx;
 	int oldDy = M->dy;
+	//float oldDx = M->dx;
+	//float oldDy = M->dy;
 	M->dx -= S->dx;
 	M->dy -= S->dy;
 	MGMBox* broadPhaseBox = GetSweptBroadphaseBox(M);
@@ -45,8 +47,8 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		{
 			M->dx = oldDx;
 			M->dy = oldDy;
-			S->onInterserct(M);
-			M->onInterserct(S);
+			S->onIntersectRect(M);
+			M->onIntersectRect(S);
 			return;
 		}
 		float nx, ny;

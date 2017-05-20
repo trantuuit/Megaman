@@ -20,12 +20,12 @@ void OctopusBattery::update()
 		if (delayCloseActivity.isReady()){
 			delayCloseActivity.start();
 		}
-		if (delayCloseActivity.isOnTime()){
+		if (delayCloseActivity.isSchedule()){
 			dx = 0;
 			dy = 0;
 			curFrame = 2;
 		}
-		if (delayCloseActivity.isTerminated())
+		if (delayCloseActivity.isFinish())
 		{
 			//pauseAnimation = false;
 			OctActivity = OCTOPUSBATTERY_OPEN;
@@ -36,12 +36,12 @@ void OctopusBattery::update()
 		if (delayRunCloseActivity.isReady()){
 			delayRunCloseActivity.start();
 		}
-		if (delayRunCloseActivity.isOnTime()){
+		if (delayRunCloseActivity.isSchedule()){
 			dx = 0;
 			dy = 0;
 			curFrame = 1;
 		}
-		if (delayRunCloseActivity.isTerminated())
+		if (delayRunCloseActivity.isFinish())
 		{
 			//pauseAnimation = false;
 			OctActivity = OCTOPUSBATTERY_CLOSE;
@@ -112,6 +112,7 @@ OctopusBattery::OctopusBattery()
 	vy = -0.4f;
 	ay = 0;
 	ax = 0;
+	categoryEnemy = CREP_OCTOPUS_BATTERY;
 }
 
 

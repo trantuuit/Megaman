@@ -16,7 +16,8 @@ enum COLLISION_CATEGORY
 class MGMBox : public MGMRectangle
 {
 public:
-	int dx, dy;
+	//int dx, dy;
+	float dx, dy;
 	float vx, ax, vy, ay;
 	MGMBox();
 	~MGMBox();
@@ -28,8 +29,8 @@ public:
 
 	virtual void update();
 
-	virtual void onInterserct(MGMBox* otherObject);
+	virtual void onIntersectRect(MGMBox* otherObject);
 	virtual void onCollision(MGMBox* otherObject, int nx, int ny);
-	virtual void terrainUpdate();
+	virtual void coordinateUpdate();
 
 };

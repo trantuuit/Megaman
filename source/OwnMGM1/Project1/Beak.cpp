@@ -14,14 +14,14 @@ void Beak::update()
 		switch (beakActivity)
 		{
 		case BEAK_OPEN:
-			if (delayActivity.isTerminated())
+			if (delayActivity.isFinish())
 			{
 				pauseAnimation = false;
 				setCurAction(0);
 			}
 			break;
 		case BEAK_CLOSE:
-			if (delayActivity.isTerminated())
+			if (delayActivity.isFinish())
 			{
 				pauseAnimation = false;
 				setCurAction(1);
@@ -33,12 +33,13 @@ void Beak::update()
 		delayActivity.update();
 
 		// Delay giữa 2 viên đạn
-		if (beakActivity == BEAK_CLOSE && delayActivity.isOnTime())
+		if (beakActivity == BEAK_CLOSE && delayActivity.isSchedule())
 		{
-			if (!delayShoot.isOnTime())
+			if (!delayShoot.isSchedule())
 			{
 				delayShoot.start();
-				BeakBullet *newBullet = new BeakBullet();
+				EnemyBullet *newBullet = new EnemyBullet();
+				newBullet->categoryBullet = FOR_BEAK;
 				switch (bulletType)
 				{
 				case BULLET_1:
@@ -141,7 +142,7 @@ Beak::Beak()
 	curFrame = 0;
 	vx = 0;
 	ax = 0;
-
+	categoryEnemy = CREP_BEAK;
 	beakActivity = BEAK_ACTIVITY::BEAK_OPEN;
 	pauseAnimation = true;
 	delayActivity.start(2000);

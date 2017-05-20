@@ -5,12 +5,16 @@
 #include<string>
 #include"MegamanBullet.h"
 #include"MGMEnemy.h"
+#include "MGMItem.h"
+#include <stdlib.h>
+#include <time.h>
+#include "EnemyBullet.h"
 #define DX 1
 
 Megaman * Megaman::instance = 0;
 void Megaman::setHealth(int health)
 {
-	
+
 }
 Megaman * Megaman::getInstance()
 {
@@ -46,7 +50,7 @@ void Megaman::update()
 			pauseAnimation = false;
 
 		}
-		if (!delayShoot.isOnTime() && isAttackPress && MegamanBullet::getBullets()->Count < 3){
+		if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
 			MegamanBullet* bullet = new MegamanBullet();
 			bullet->dx = 4 * objectDirection;
 			if (objectDirection == 1){
@@ -66,11 +70,11 @@ void Megaman::update()
 			{
 				delayAnimateStandStairShoot.start();
 			}
-			if (delayAnimateStandStairShoot.isOnTime()){
+			if (delayAnimateStandStairShoot.isSchedule()){
 				pauseAnimation = false;
 				setCurAction(MGM_STAND_STAIR_ATTACK);
 			}
-			if (delayAnimateStandStairShoot.isTerminated()){
+			if (delayAnimateStandStairShoot.isFinish()){
 				setCurAction(MGM_CLIMB);
 				lastStatusStandStairAttack = false;
 			}
@@ -90,7 +94,7 @@ void Megaman::update()
 				delayAnimateRunShoot.start();
 			}
 
-			if (delayAnimateRunShoot.isTerminated()){
+			if (delayAnimateRunShoot.isFinish()){
 				setCurAction(MGM_RUN);
 				lastStatusRunAttack = false;
 			}
@@ -112,7 +116,7 @@ void Megaman::update()
 			//	{
 			//		delayAnimateStandShoot.start();
 			//	}
-			//	if (delayAnimateStandShoot.isTerminated()){
+			//	if (delayAnimateStandShoot.isFinish()){
 			//		setCurAction(MGM_STAND);
 			//		lastStatusStandAttack = false;
 			//	}
@@ -132,10 +136,10 @@ void Megaman::update()
 			{
 				delayAnimateJumpShoot.start();
 			}
-			if (delayAnimateJumpShoot.isOnTime()){
+			if (delayAnimateJumpShoot.isSchedule()){
 				setCurAction(MGM_JUMP_ATTACK);
 			}
-			if (delayAnimateJumpShoot.isTerminated()){
+			if (delayAnimateJumpShoot.isFinish()){
 				setCurAction(MGM_JUMP);
 				lastStatusJumpAttack = false;
 			}
@@ -146,7 +150,7 @@ void Megaman::update()
 		}
 	}
 
-	if (!delayShoot.isOnTime() && isKeyMoveDown && isOnGround && isAttackPress && MegamanBullet::getBullets()->Count < 3){
+	if (!delayShoot.isSchedule() && isKeyMoveDown && isOnGround && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
 		MegamanBullet* bullet = new MegamanBullet();
 		bullet->dx = 4 * objectDirection;
 		if (objectDirection == 1){
@@ -162,7 +166,7 @@ void Megaman::update()
 		lastStatusRunAttack = true;
 	}
 
-	if (!delayShoot.isOnTime() && isOnGround && isAttackPress && MegamanBullet::getBullets()->Count < 3)
+	if (!delayShoot.isSchedule() && isOnGround && isAttackPress && MegamanBullet::getListBullet()->Count < 3)
 	{
 
 		MegamanBullet* bullet = new MegamanBullet();
@@ -180,7 +184,7 @@ void Megaman::update()
 		lastStatusStandAttack = true;
 	}
 
-	if (!delayShoot.isOnTime() && !isOnGround && !isOnStairs && isAttackPress && MegamanBullet::getBullets()->Count < 3){
+	if (!delayShoot.isSchedule() && !isOnGround && !isOnStairs && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
 		MegamanBullet* bullet = new MegamanBullet();
 		bullet->dx = 4 * objectDirection;
 		if (objectDirection == 1){
@@ -196,11 +200,17 @@ void Megaman::update()
 		lastStatusJumpAttack = true;
 	}
 	delayShoot.update();
-	this->movingUpdate();
+	this->deltaUpdate();
 	updateFrameAnimation();
 	isOnGround = false;
 }
+void Megaman::deltaUpdate(){
+	vx = vx + ax * GAMETIME;
+	dx = vx * GAMETIME;
 
+	vy = vy + ay * GAMETIME;
+	dy = vy * GAMETIME;
+}
 void Megaman::render()
 {
 
@@ -252,13 +262,25 @@ void Megaman::setCurAction(int action)
 	MGMMovableObject::setCurAction(action);
 }
 
-void Megaman::onInterserct(MGMBox * otherObject)
+void Megaman::onIntersectRect(MGMBox * otherObject)
 {
+	if (otherObject->collisionCategory == CC_ITEM){
+		MGMItem* item = (MGMItem*)otherObject;
+		srand(time(NULL));
 
-	if (otherObject->collisionCategory == CC_GROUND
-		&& this->getRight() > otherObject->getLeft()
-		&& this->getLeft() < otherObject->getLeft())
-		this->x = otherObject->getLeft() - this->width - 1;
+		if (item->categoryItem == CI_LIFE_ENERGY_BIG){
+			int result = rand() % 3 + 8;
+			healthPoint += result;
+		}
+		if (item->categoryItem == CI_LIFE_ENERGY_SMALL){
+			int result = rand() % 3 + 2;
+			healthPoint += result;
+		}
+
+	}
+	if (healthPoint > 28){
+		healthPoint = 28;
+	}
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -270,11 +292,6 @@ void Megaman::onLastFrameAnimation(int action)
 	}
 }
 
-/*
-*@TranTu
-*Override lại hàm updateFrameAnimation
-*
-*/
 void Megaman::updateFrameAnimation()
 {
 	if (!pauseAnimation){
@@ -285,7 +302,7 @@ void Megaman::updateFrameAnimation()
 			if (curAction == MGM_STAND){
 				//Xu ly mo mat
 				this->sprite->Update(MGM_STAND, curFrame = 0);
-				if (!eyesTime.isOnTime()){
+				if (!eyesTime.isSchedule()){
 					eyesTime.start();
 				}
 				else{
@@ -327,27 +344,46 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 	MGMMovableObject::onCollision(otherObject, nx, ny);
 	if (otherObject->collisionCategory == CC_ENEMY){
 		MGMEnemy* enemy = (MGMEnemy*)otherObject;
-		if (enemy->id == 5){
+		if (enemy->categoryEnemy ==CREP_BLADER ){
 			healthPoint -= 3;
 		}
-		if (enemy->id == 6 || enemy->id==106){
+		if (enemy->categoryEnemy == CREP_BEAK){
 			healthPoint--;
 		}
-		if (enemy->id == 2 || enemy->id == 102){
+		if (enemy->categoryEnemy == CREP_OCTOPUS_BATTERY){
 			healthPoint -= 4;
 		}
-		if (enemy->id == 3){
+		if (enemy->categoryEnemy == CREP_BIG_EYE){
 			healthPoint -= 10;
 		}
-		if (enemy->id == 4){
+		if (enemy->categoryEnemy == CREP_FLYING_SHELL){
 			healthPoint -= 1;
 		}
-		if (enemy->id == 7){
+		if (enemy->categoryEnemy == CREP_FLEA){
 			healthPoint -= 2;
 		}
-		if (enemy->id == 8 || enemy->id==108){
+		if (enemy->categoryEnemy==CREP_SCREW_BOMBER){
 			healthPoint -= 1;
 		}
+		if (enemy->categoryEnemy==CREP_SUPER_CUTTER){
+			healthPoint -= 4;
+		}
+
+	}
+	if (otherObject->collisionCategory == CC_ENEMY_BULLET){
+		EnemyBullet* bullet = (EnemyBullet*)otherObject;
+		if (bullet->categoryBullet == FOR_BEAK){
+			healthPoint -= 1;
+		}
+		if (bullet->categoryBullet == FOR_FLYING_SHELL){
+			healthPoint -= 2;
+		}
+		if (bullet->categoryBullet == FOR_SCREW_BOMBER){
+			healthPoint -= 2;
+		}
+	}
+	if (healthPoint < 0){
+		healthPoint = 0;
 	}
 }
 

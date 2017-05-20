@@ -18,7 +18,7 @@ CutmanBullet::CutmanBullet()
 	isUpdateTarget = true;
 }
 
-void CutmanBullet::movingUpdate(){
+void CutmanBullet::deltaUpdate(){
 	if (isUpdateTarget){
 		xMegeman = Megaman::getInstance()->x;
 		yMegeman = Megaman::getInstance()->y;

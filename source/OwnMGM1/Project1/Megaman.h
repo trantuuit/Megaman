@@ -24,42 +24,31 @@ public:
 	int healthPoint;
 	void setHealth(int health);
 	MGMDelayTime eyesTime;
-	//MGMDelayTime eyesTime2;
 	MGMDelayTime delayAnimateStandShoot;
 	MGMDelayTime delayAnimateRunShoot;
 	MGMDelayTime delayAnimateJumpShoot;
 	MGMDelayTime delayAnimateStandStairShoot;
 	MGMDelayTime delayShoot;
-
-	//MGMDelayTime timeStand, timeGo;
-
 	bool isOnStairs;
 	int IntersectDoor;
 	static Megaman* instance;
 	static Megaman* getInstance();
-	
 	int action;
 	bool lastStatusStandStairAttack;
 	bool lastStatusStandAttack;
 	bool lastStatusRunAttack;
 	bool lastStatusJumpAttack;
 	bool pauseAnimation;
-
 	/*Cập nhật*/
 	void update();
 	void render();
-
 	void setCurAction(int action);
-	void onInterserct(MGMBox* otherObject);
-
-	void onLastFrameAnimation(int action);
-	void updateFrameAnimation();
-
-	void setWidth(int width);
-
-
+	void onIntersectRect(MGMBox* otherObject);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
-
+	void onLastFrameAnimation(int action);
+	void deltaUpdate();
+	void updateFrameAnimation();
+	void setWidth(int width);
 	Megaman();
 	~Megaman();
 };

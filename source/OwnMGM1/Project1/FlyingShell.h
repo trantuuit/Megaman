@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "MGMEnemy.h"
 #include"MGMDelayTime.h"
-#include"BeakBullet.h"
+#include"EnemyBullet.h"
 enum FLYINGSHELL_ACTIVITY //Phân loại hoạt động
 {
 	FLYINGSHELL_OPEN,

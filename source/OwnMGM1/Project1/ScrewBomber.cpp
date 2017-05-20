@@ -1,6 +1,6 @@
 #include "ScrewBomber.h"
 #include"Megaman.h"
-#include"BeakBullet.h"
+#include"EnemyBullet.h"
 #include"MGMCamera.h"
 #include "MegamanBullet.h"
 ScrewBomber::ScrewBomber()
@@ -10,6 +10,7 @@ ScrewBomber::ScrewBomber()
 	ay = 0;
 	timeAttack.init(1000);
 	timeSleep.init(700);
+	categoryEnemy = CREP_SCREW_BOMBER;
 }
 
 
@@ -26,25 +27,25 @@ void ScrewBomber::update()
 	Megaman*mgm = Megaman::getInstance();
 	if (abs(x - mgm->x) <= 85)
 	{
-		if (timeAttack.isReady() && !timeSleep.isOnTime()) timeAttack.start();
+		if (timeAttack.isReady() && !timeSleep.isSchedule()) timeAttack.start();
 
-		if (timeSleep.isReady() && !timeAttack.isOnTime()) timeSleep.start();
-		if (timeSleep.isOnTime()) setCurAction(SLEEP);
-		timeSleep.isTerminated();
+		if (timeSleep.isReady() && !timeAttack.isSchedule()) timeSleep.start();
+		if (timeSleep.isSchedule()) setCurAction(SLEEP);
+		timeSleep.isFinish();
 	}
-	else if (!timeAttack.isOnTime()) setCurAction(SLEEP);
+	else if (!timeAttack.isSchedule()) setCurAction(SLEEP);
 
-	if (timeAttack.isOnTime())
+	if (timeAttack.isSchedule())
 	{
 		setCurAction(ATTACK);
 		
 		
-		if (delayShot.isTerminated())
+		if (delayShot.isFinish())
 		{
 			CreateBullet();
 		}
 	}
-	timeAttack.isTerminated();
+	timeAttack.isFinish();
 
 	
 	
@@ -92,31 +93,36 @@ void ScrewBomber::CreateBullet()
 {
 	if (id != 100 + SPR_SCREWBOMBER)
 	{
-		BeakBullet *newBullet1 = new BeakBullet();
+		EnemyBullet *newBullet1 = new EnemyBullet();
+		newBullet1->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet1->dx = 0;
 		newBullet1->dy = 3;
 		newBullet1->x = this->x + 5;
 		newBullet1->y = this->y + 1;
 
-		BeakBullet *newBullet2 = new BeakBullet();
+		EnemyBullet *newBullet2 = new EnemyBullet();
+		newBullet2->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet2->dx = -3;
 		newBullet2->dy = 0;
 		newBullet2->x = this->x - 1;
 		newBullet2->y = this->y - 1;
 
-		BeakBullet *newBullet3 = new BeakBullet();
+		EnemyBullet *newBullet3 = new EnemyBullet();
+		newBullet3->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet3->dx = 3;
 		newBullet3->dy = 0;
 		newBullet3->x = this->x + 9;
 		newBullet3->y = this->y - 1;
 
-		BeakBullet *newBullet4 = new BeakBullet();
+		EnemyBullet *newBullet4 = new EnemyBullet();
+		newBullet4->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet4->dx = -3;
 		newBullet4->dy = 3;
 		newBullet4->x = this->x - 1;
 		newBullet4->y = this->y + 1;
 
-		BeakBullet *newBullet5 = new BeakBullet();
+		EnemyBullet *newBullet5 = new EnemyBullet();
+		newBullet5->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet5->dx = 3;
 		newBullet5->dy = 3;
 		newBullet5->x = this->x + 9;
@@ -124,31 +130,36 @@ void ScrewBomber::CreateBullet()
 	}
 	else
 	{
-		BeakBullet *newBullet1 = new BeakBullet();
+		EnemyBullet *newBullet1 = new EnemyBullet();
+		newBullet1->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet1->dx = 0;
 		newBullet1->dy = -3;
 		newBullet1->x = this->x + 5;
 		newBullet1->y = this->y - 9;
 
-		BeakBullet *newBullet2 = new BeakBullet();
+		EnemyBullet *newBullet2 = new EnemyBullet();
+		newBullet2->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet2->dx = -3;
 		newBullet2->dy = 0;
 		newBullet2->x = this->x + 5;
 		newBullet2->y = this->y - 9;
 
-		BeakBullet *newBullet3 = new BeakBullet();
+		EnemyBullet *newBullet3 = new EnemyBullet();
+		newBullet3->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet3->dx = 3;
 		newBullet3->dy = 0;
 		newBullet3->x = this->x + 5;
 		newBullet3->y = this->y - 9;
 
-		BeakBullet *newBullet4 = new BeakBullet();
+		EnemyBullet *newBullet4 = new EnemyBullet();
+		newBullet4->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet4->dx = -3;
 		newBullet4->dy = -3;
 		newBullet4->x = this->x + 5;
 		newBullet4->y = this->y - 9;
 
-		BeakBullet *newBullet5 = new BeakBullet();
+		EnemyBullet *newBullet5 = new EnemyBullet();
+		newBullet5->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet5->dx = 3;
 		newBullet5->dy = -3;
 		newBullet5->x = this->x + 5;

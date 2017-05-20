@@ -5,12 +5,12 @@ class MGMDelayTime
 private:
 	DWORD startTime;
 	DWORD tickPerFrame;
-	bool ready, terminated;
+	bool ready, finished;
 public:
 	void start(DWORD time = -1);
 	bool isReady();
-	bool isTerminated();
-	bool isOnTime();
+	bool isFinish();
+	bool isSchedule();
 	void update();
 	void init(DWORD time = -1);
 	MGMDelayTime();

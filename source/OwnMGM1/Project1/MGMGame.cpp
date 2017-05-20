@@ -3,7 +3,7 @@
 #include"MGMDirectXTool.h"
 #include"KEY.h"
 #include"MegamanBullet.h"
-#include"BeakBullet.h"
+#include"EnemyBullet.h"
 #include"SuperCutter.h"
 #include "CutmanBullet.h"
 #include"MGMItem.h"
@@ -25,9 +25,9 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 	// Mặc định map Cutman:
-	/*Megaman::getInstance()->x = 22;
+	Megaman::getInstance()->x = 22;
 	Megaman::getInstance()->y = 111;
-	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	//Megaman::getInstance()->x = 950;
 	//Megaman::getInstance()->y = 1100;
@@ -65,9 +65,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	// Test BigEye
-	Megaman::getInstance()->x = 1900;
+	/*Megaman::getInstance()->x = 1900;
 	Megaman::getInstance()->y = 1335;
-	MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	//stage dau voi cutman
 	/*Megaman::getInstance()->x = 3120;
@@ -86,16 +86,16 @@ void MGMGame::render()
 	HPBar::getInstance()->render();
 	Megaman::getInstance()->render();
 
-	for (List<MegamanBullet*>::Node* p = MegamanBullet::getBullets()->pHead; p; p = p->pNext)
+	for (List<MegamanBullet*>::Node* p = MegamanBullet::getListBullet()->pHead; p; p = p->pNext)
 	{
 		MegamanBullet* bullet = p->m_value;
 		bullet->render();
 	}
 
-	// Render BeakBullet:
-	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
+	// Render EnemyBullet:
+	for (List<EnemyBullet*>::Node *p = EnemyBullet::getListBullet()->pHead; p; p = p->pNext)
 	{
-		BeakBullet *_bullet = p->m_value;
+		EnemyBullet *_bullet = p->m_value;
 		_bullet->render();
 	}
 
@@ -135,7 +135,7 @@ void MGMGame::update(DWORD timesleep)
 	if (map->isUpdate)
 	{
 		//Megaman::getInstance()->updateFrameAnimation();
-		Megaman::getInstance()->terrainUpdate(); // Cap nhat toa do cua MGM
+		Megaman::getInstance()->coordinateUpdate(); // Cap nhat toa do cua MGM
 	}
 	map->updateStage();
 
@@ -144,7 +144,7 @@ void MGMGame::update(DWORD timesleep)
 
 
 	//Cap nhat vi tri cua vien dan megaman
-	for (List<MegamanBullet*>::Node* p = MegamanBullet::getBullets()->pHead; p; p = p->pNext)
+	for (List<MegamanBullet*>::Node* p = MegamanBullet::getListBullet()->pHead; p; p = p->pNext)
 	{
 		MegamanBullet* bullet = p->m_value;
 		bullet->update();
@@ -154,15 +154,15 @@ void MGMGame::update(DWORD timesleep)
 			Collision::checkCollision(bullet, enemy);
 		}
 		
-		bullet->terrainUpdate();
+		bullet->coordinateUpdate();
 	}
 	//Xoa vien dan cua megaman
-	for (int i = 0; i < MegamanBullet::getBullets()->Count; i++)
+	for (int i = 0; i < MegamanBullet::getListBullet()->Count; i++)
 	{
-		MegamanBullet*bullet = MegamanBullet::getBullets()->at(i);
+		MegamanBullet*bullet = MegamanBullet::getListBullet()->at(i);
 		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()) || bullet->isKill)
 		{
-			MegamanBullet::getBullets()->_Remove(bullet);
+			MegamanBullet::getListBullet()->_Remove(bullet);
 			delete bullet;
 			i--;
 		}
@@ -178,7 +178,7 @@ void MGMGame::update(DWORD timesleep)
 			auto ground = groundObjects[i];
 			Collision::checkCollision(item, ground);
 		}
-		item->terrainUpdate();
+		item->coordinateUpdate();
 	}
 	//Xoa item 
 	for (int i = 0; i < MGMItem::getListItem()->Count; i++){
@@ -199,7 +199,7 @@ void MGMGame::update(DWORD timesleep)
 			distance = Megaman::getInstance()->getXCenter() - 912;  // Tâm nơi SuperCutter được sinh ra có tọa độ là 913
 		else
 			distance = Megaman::getInstance()->getXCenter() - 1424; // Tâm nơi SuperCutter được sinh ra có tọa độ là 1424
-		if (SuperCutter::timeDelay.isTerminated())
+		if (SuperCutter::timeDelay.isFinish())
 		{
 			SuperCutter *supperCutter = new SuperCutter();
 			if (SuperCutter::location == LOCATION_1)
@@ -223,9 +223,11 @@ void MGMGame::update(DWORD timesleep)
 	for (int i = 0; i < SuperCutter::getSuperCutters()->Count; i++)
 	{
 		SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
-		s->movingUpdate();
-		s->updateFrameAnimation();
-		s->terrainUpdate();
+		Collision::checkCollision(Megaman::getInstance(),s );
+		/*s->deltaUpdate();
+		s->updateFrameAnimation();*/
+		s->update();
+		s->coordinateUpdate();
 	}
 
 	// Xóa các Super Cutter không nằm trong Camera:
@@ -241,19 +243,21 @@ void MGMGame::update(DWORD timesleep)
 	}
 	//------------------------------------------------------------------------------------------------------------------
 	// Update tọa độ các viên đạn:
-	for (List<BeakBullet*>::Node *p = BeakBullet::getBullets()->pHead; p; p = p->pNext)
+	for (List<EnemyBullet*>::Node *p = EnemyBullet::getListBullet()->pHead; p; p = p->pNext)
 	{
-		BeakBullet *_bullet = p->m_value;
-		_bullet->terrainUpdate();
+
+		EnemyBullet *bullet = p->m_value;
+		Collision::checkCollision(bullet, Megaman::getInstance());
+		bullet->coordinateUpdate();
 	}
 
 	// Xóa các viên đạn không nằm trong Camera:
-	for (int i = 0; i < BeakBullet::getBullets()->Count; i++)
+	for (int i = 0; i < EnemyBullet::getListBullet()->Count; i++)
 	{
-		BeakBullet* bullet = BeakBullet::getBullets()->at(i);
-		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()))
+		EnemyBullet* bullet = EnemyBullet::getListBullet()->at(i);
+		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance())|| bullet->isKill)
 		{
-			BeakBullet::getBullets()->_Remove(bullet);
+			EnemyBullet::getListBullet()->_Remove(bullet);
 			delete bullet;
 			i--;
 		}
@@ -262,7 +266,7 @@ void MGMGame::update(DWORD timesleep)
 	//Cutman bullet
 	if (CutmanBullet::bullet != NULL){
 		CutmanBullet::getBullet()->update();
-		CutmanBullet::getBullet()->terrainUpdate();
+		CutmanBullet::getBullet()->coordinateUpdate();
 	}
 
 }

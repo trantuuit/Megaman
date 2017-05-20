@@ -27,11 +27,18 @@ List<SuperCutter*>* SuperCutter::getSuperCutters()
 }
 SuperCutter::SuperCutter()
 {
+	this->width = 16;
+	this->height = 13;
+	categoryEnemy = CREP_SUPER_CUTTER;
+	id = -6;
+	vx = 0;
+	vy = 0;
 	curAction = 0;
 	curFrame = 0;
 	ay = GRAVITY;
 	//vx = -0.25;
 	vy = 0.78;
+	/*vy = 0;*/
 	//timeFrame.tickPerFrame = 300;
 
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_SUPER_CUTTER];
@@ -43,8 +50,7 @@ SuperCutter::SuperCutter(int x, int y, int w, int h)
 	MGMObject::init(x, y, w, h);
 	SuperCutter();
 }
-
-void SuperCutter::movingUpdate()
+void SuperCutter::deltaUpdate()
 {
 	vx = vx + ax * GAMETIME;
 	dx = vx * GAMETIME;
@@ -52,18 +58,6 @@ void SuperCutter::movingUpdate()
 	vy = vy + ay * GAMETIME;
 	dy = vy * GAMETIME;
 }
-
-void SuperCutter::terrainUpdate()
-{
-	if (isCollision && !isPreventMove)
-	{
-		dy = 0;
-	}
-	x += dx;
-	y += dy;
-}
-
-
 SuperCutter::~SuperCutter()
 {
 

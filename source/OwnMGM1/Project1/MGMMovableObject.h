@@ -6,11 +6,9 @@ class MGMMovableObject :
 {
 public:
 	MGMRectangle spaceMove;
-	virtual void movingUpdate();
+	virtual void deltaUpdate();
 	virtual void update();
 	virtual	void onCollision(MGMBox* otherObject, int nx, int ny);
-
-
 	MGMMovableObject();
 	~MGMMovableObject();
 };

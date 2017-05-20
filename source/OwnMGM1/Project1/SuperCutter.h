@@ -13,7 +13,7 @@ class SuperCutter :
 	public MGMEnemy
 {
 	static List<SuperCutter*> *superCutters;
-	float dx, dy;
+	/*float dx, dy;*/
 public:
 	static Location location;
 	static MGMDelayTime timeDelay;
@@ -21,8 +21,7 @@ public:
 	static List<SuperCutter*>* getSuperCutters();
 	SuperCutter();
 	SuperCutter(int x, int y, int w, int h);
-	void movingUpdate();
-	void terrainUpdate();
+	void deltaUpdate();
 	~SuperCutter();
 };
 

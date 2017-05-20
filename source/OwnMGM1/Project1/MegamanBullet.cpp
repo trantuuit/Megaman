@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 List<MegamanBullet*>* MegamanBullet::bullets = 0;
-List<MegamanBullet*>* MegamanBullet::getBullets()
+List<MegamanBullet*>* MegamanBullet::getListBullet()
 {
 	if (bullets == 0)
 		bullets = new List<MegamanBullet*>();
@@ -27,7 +27,7 @@ MegamanBullet::MegamanBullet()
 	curFrame = 0;
 	timedelay.init(100);
 	action = NORMAL;
-	getBullets()->_Add(this);
+	getListBullet()->_Add(this);
 }
 void MegamanBullet::update(){
 	switch (action)
@@ -36,7 +36,7 @@ void MegamanBullet::update(){
 		if (timedelay.isReady()){
 			timedelay.start();
 		}
-		if (timedelay.isOnTime()){
+		if (timedelay.isSchedule()){
 			curAction = 1;
 			/*curFrame = 0;*/
 		}

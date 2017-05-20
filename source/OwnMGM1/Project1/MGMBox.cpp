@@ -13,7 +13,7 @@ void MGMBox::update()
 }
 
 
-void MGMBox::onInterserct(MGMBox * otherObject)
+void MGMBox::onIntersectRect(MGMBox * otherObject)
 {
 }
 
@@ -22,7 +22,7 @@ void MGMBox::onCollision(MGMBox* otherObject, int nx, int ny)
 
 }
 
-void MGMBox::terrainUpdate()
+void MGMBox::coordinateUpdate()
 {
 	if (isCollision && !isPreventMove )
 	{

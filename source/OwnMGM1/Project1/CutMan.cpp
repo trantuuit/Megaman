@@ -27,9 +27,9 @@ CutMan::CutMan()
 
 void CutMan::update(){
 	MGMEnemy::updateFrameAnimation();
-	movingUpdate();
+	deltaUpdate();
 }
-void CutMan::movingUpdate(){
+void CutMan::deltaUpdate(){
 	if (Megaman::getInstance()->getXCenter() < this->getXCenter()){
 		objectDirection = LEFT;
 	}
@@ -43,7 +43,7 @@ void CutMan::movingUpdate(){
 		if (standTime.isReady()){
 			standTime.start();
 		}
-		if (standTime.isOnTime()){
+		if (standTime.isSchedule()){
 			
 			dx = 0;
 		}
@@ -55,10 +55,10 @@ void CutMan::movingUpdate(){
 		break;
 	case CM_JUMP:
 		curAction = 1;
-		if (jumpTime.isReady()&&jumpTime.isTerminated()){
+		if (jumpTime.isReady()&&jumpTime.isFinish()){
 			jumpTime.start();
 		}
-		if (jumpTime.isOnTime()){
+		if (jumpTime.isSchedule()){
 			dy = 5;
 
 		}
@@ -76,7 +76,7 @@ void CutMan::movingUpdate(){
 		if (runTime.isReady()){
 			runTime.start();
 		}
-		if (runTime.isOnTime()){
+		if (runTime.isSchedule()){
 			dx = -1;
 		}
 		else{

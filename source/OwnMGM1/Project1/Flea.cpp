@@ -9,6 +9,7 @@ Flea::Flea()
 	vy = 0;
 	ax = 0;
 	timeSit.init(800);
+	categoryEnemy = CREP_FLEA;
 }
 
 void Flea::update()
@@ -23,7 +24,7 @@ void Flea::update()
 		setCurAction(FLEA_SIT);
 		if (timeSit.isReady())
 			timeSit.start();
-		if (timeSit.isTerminated())
+		if (timeSit.isFinish())
 		{
 			this->SetVy();
 		}
@@ -32,7 +33,7 @@ void Flea::update()
 
 
 	isOnGround = false;
-	this->movingUpdate();
+	this->deltaUpdate();
 	timeSit.update();
 }
 void Flea::restoreObject()
@@ -57,7 +58,7 @@ void Flea::SetVy()
 	}
 
 }
-void Flea::movingUpdate()
+void Flea::deltaUpdate()
 {
 	vx = vx + ax*GAMETIME;
 	dx = (int)(vx*GAMETIME);

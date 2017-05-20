@@ -16,7 +16,7 @@ private:
 	static List<MegamanBullet*>* bullets;
 public:
 	boolean isKill;
-	static List<MegamanBullet*>* getBullets();
+	static List<MegamanBullet*>* getListBullet();
 	MegamanBullet();
 	void update();
 	void setAction(MEGAMANBULLET_ACTION);

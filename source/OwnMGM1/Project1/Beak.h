@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "MGMEnemy.h"
 #include "Megaman.h"
-#include"BeakBullet.h"
+#include"EnemyBullet.h"
 #include"MGMCamera.h"
 #include"MGMDelayTime.h"
 

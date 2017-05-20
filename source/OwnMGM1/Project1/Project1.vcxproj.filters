@@ -134,9 +134,6 @@
     <ClCompile Include="Beak.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="BeakBullet.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="FlyingShell.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -183,6 +180,9 @@
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -290,9 +290,6 @@
     <ClInclude Include="Beak.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="BeakBullet.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="FlyingShell.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -339,6 +336,9 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
