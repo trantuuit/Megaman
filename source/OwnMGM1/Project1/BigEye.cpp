@@ -34,6 +34,7 @@ void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
 			mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
+			Megaman::getInstance()->score += 9000;
 		}
 		else{
 			mgmbullet->setAction(NONE);

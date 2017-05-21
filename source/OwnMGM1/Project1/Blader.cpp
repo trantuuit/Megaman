@@ -170,6 +170,7 @@ void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
 		mgmbullet->y = this->y;
 		mgmbullet->setAction(FIRE);
 		isKill = true;
+		Megaman::getInstance()->score += 500;
 	}
 }
 

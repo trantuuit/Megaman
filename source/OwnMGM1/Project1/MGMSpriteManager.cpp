@@ -102,9 +102,11 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_ITEM_YASHICHI] = new MGMSprite();
 	sprites[SPR_ITEM_YASHICHI]->initInfo("Data\\Item\\yashichi.txt");
 	sprites[SPR_ITEM_YASHICHI]->pImage = sprites[SPR_ITEM_BONUS_BALL]->pImage;
-
+	////@score
+	sprites[SPR_SCORE] = new MGMSprite("Data\\Animation\\Score\\score.txt", "Data\\Animation\\Score\\score.png");
 	//@hp
 	sprites[SPR_HP] = new MGMSprite("Data\\Animation\\HP\\hp.txt", "Data\\Animation\\HP\\hp.png");
+	
 	//your code
 }
 

@@ -76,7 +76,7 @@ void MGMMap::readObjects(char* objectsPath)
 			obj = CutMan::getInstance();
 			break;
 		case SPR_ITEM_LIFE_ENERGY_BIG:
-			obj = new LifeEnergyBig();
+			obj = new LifeEnergyBig(0);
 		default:
 			break;
 		}
@@ -247,7 +247,7 @@ void MGMMap::update()
 	List<MGMObject*>& enemyObjects = MGMCamera::getInstance()->objects.enemyObjects;
 	List<MGMObject*>& groundObjects = MGMCamera::getInstance()->objects.groundObjects;
 	List<MGMObject*>& stairObjects = MGMCamera::getInstance()->objects.stairObjects;
-
+	List<MGMObject*>& itemObjects = MGMCamera::getInstance()->objects.itemObjects;
 
 	int nGround = groundObjects.size();
 
@@ -258,9 +258,15 @@ void MGMMap::update()
 		if (CutmanBullet::bullet != NULL){
 			Collision::checkCollision(CutmanBullet::getBullet(), groundObjects[iGround]);
 		}
-
+		for (int i = 0; i < itemObjects.size(); i++){
+			MGMObject* item = itemObjects.at(i);
+			Collision::checkCollision(item, groundObjects[iGround]);	
+		}
 	}
-
+	for (int i = 0; i < itemObjects.size(); i++){
+		MGMObject* item = itemObjects.at(i);
+		Collision::checkCollision(Megaman::getInstance(), item);
+	}
 	int nStair = stairObjects.size();
 	stairs* s;
 	for (int i = 0; i < nStair; i++)

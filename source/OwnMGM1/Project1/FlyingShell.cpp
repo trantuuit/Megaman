@@ -1,6 +1,6 @@
 #include "FlyingShell.h"
 #include "MegamanBullet.h"
-
+#include"Megaman.h"
 FlyingShell::FlyingShell()
 {
 	curAction = 0;
@@ -31,14 +31,14 @@ void FlyingShell::update(){
 				newBullet1->dx = 0;
 				newBullet1->dy = 3;
 				newBullet1->x = this->x + 8;
-				newBullet1->y = this->y+1;
+				newBullet1->y = this->y + 1;
 
 				EnemyBullet *newBullet2 = new EnemyBullet();
 				newBullet2->categoryBullet = FOR_FLYING_SHELL;
 				newBullet2->dy = 3;
 				newBullet2->dx = 3;
 				newBullet2->x = this->x + 12;
-				newBullet2->y = this->y-1;
+				newBullet2->y = this->y - 1;
 
 				EnemyBullet *newBullet3 = new EnemyBullet();
 				newBullet3->categoryBullet = FOR_FLYING_SHELL;
@@ -79,7 +79,7 @@ void FlyingShell::update(){
 				newBullet8->categoryBullet = FOR_FLYING_SHELL;
 				newBullet8->dy = 3;
 				newBullet8->dx = -3;
-				newBullet8->x = this->x+4;
+				newBullet8->x = this->x + 4;
 				newBullet8->y = this->y - 1;
 			}
 			delayShoot.update();
@@ -119,6 +119,7 @@ void FlyingShell::onCollision(MGMBox *otherObject, int nx, int ny){
 			mgmbullet->y = this->y;
 			mgmbullet->setAction(FIRE);
 			isKill = true;
+			Megaman::getInstance()->score += 800;
 		}
 		else{
 			mgmbullet->setAction(NONE);

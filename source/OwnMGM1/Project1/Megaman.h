@@ -22,6 +22,7 @@ class Megaman :
 	
 public:
 	int healthPoint;
+	int score;
 	void setHealth(int health);
 	MGMDelayTime eyesTime;
 	MGMDelayTime delayAnimateStandShoot;

@@ -17,11 +17,8 @@ EnemyBullet::EnemyBullet()
 }
 void EnemyBullet::onCollision(MGMBox* otherObject, int nx, int ny){
 	if (otherObject->collisionCategory == CC_MEGAMAN){
-		isKill = true;
-		/*vy = objectDirection*vy;*/
-		/*if (ny == 1){
-			vy = -vy;
-		}*/
+		/*isKill = true;*/
+		isPreventMove = true;
 	}
 }
 EnemyBullet::~EnemyBullet()

@@ -8,6 +8,7 @@
 #include "CutmanBullet.h"
 #include"MGMItem.h"
 #include"HPBar.h"
+#include"ScoreBar.h"
 MGMGame::MGMGame()
 {
 }
@@ -84,6 +85,7 @@ void MGMGame::render()
 {
 	map->draw();
 	HPBar::getInstance()->render();
+	ScoreBar::getInstance()->render();
 	Megaman::getInstance()->render();
 
 	for (List<MegamanBullet*>::Node* p = MegamanBullet::getListBullet()->pHead; p; p = p->pNext)
@@ -122,6 +124,7 @@ void MGMGame::update(DWORD timesleep)
 	if (map->isUpdate)
 	{
 		HPBar::getInstance()->update();
+		ScoreBar::getInstance()->update();
 		Megaman::getInstance()->update(); // Cap nhat van toc cua MGM
 		map->update();
 		//Cap nhat vi tri item

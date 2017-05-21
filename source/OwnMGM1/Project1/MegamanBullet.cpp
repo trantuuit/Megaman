@@ -9,6 +9,8 @@
 #include "Yashichi.h"
 #include <stdlib.h>
 #include <time.h>
+#include "MGMEnemy.h"
+#include"Megaman.h"
 List<MegamanBullet*>* MegamanBullet::bullets = 0;
 List<MegamanBullet*>* MegamanBullet::getListBullet()
 {
@@ -41,11 +43,9 @@ void MegamanBullet::update(){
 			/*curFrame = 0;*/
 		}
 		else{
-
 			isKill = true;
 			srand(time(NULL));
 			int result = rand() % 8;
-
 			if (result == 0){
 			LifeEnergyBig* lifeEnergyBig = new LifeEnergyBig();
 			lifeEnergyBig->x = this->x;
@@ -95,13 +95,9 @@ void MegamanBullet::update(){
 }
 void MegamanBullet::onCollision(MGMBox* otherObject, int nx, int ny){
 	if (otherObject->collisionCategory == CC_ENEMY){
+		
 		dx = 0;
 		dy = 0;
-		/*action = FIRE;*/
-		/*isKill = true;*/
-		/*action = NONE;*/
-		
-
 	}
 }
 void MegamanBullet::setAction(MEGAMANBULLET_ACTION action){

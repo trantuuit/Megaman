@@ -1,5 +1,6 @@
 #include "MGMItem.h"
 #include "Megaman.h"
+#include"MGMSpriteManager.h"
 List<MGMItem*>* MGMItem::listItem = 0;
 
 List<MGMItem*>* MGMItem::getListItem(){
@@ -34,13 +35,16 @@ void MGMItem::update(){
 	CountDownDie();
 }
 void MGMItem::CountDownDie(){
-	if (timeDie.isReady()){
-		timeDie.start();
+	if (id != SPR_ITEM_LIFE_ENERGY_BIG){
+		if (timeDie.isReady()){
+			timeDie.start();
+		}
+		if (!timeDie.isSchedule()){
+			isKill = true;
+		}
+		timeDie.update();
 	}
-	if (!timeDie.isSchedule()){
-		isKill = true;
-	}
-	timeDie.update();
+
 }
 MGMItem::~MGMItem()
 {

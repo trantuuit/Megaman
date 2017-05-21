@@ -185,6 +185,9 @@
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreBar.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -340,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="EnemyBullet.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBar.h">
+      <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

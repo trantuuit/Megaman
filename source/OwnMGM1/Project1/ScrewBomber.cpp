@@ -178,6 +178,7 @@ void  ScrewBomber::onCollision(MGMBox * otherObject, int nx, int ny){
 			mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
+			Megaman::getInstance()->score += 500;
 		}
 		else{
 			mgmbullet->setAction(NONE);

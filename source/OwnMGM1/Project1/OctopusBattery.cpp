@@ -93,6 +93,7 @@ void OctopusBattery::onCollision(MGMBox * otherObject, int nx, int ny){
 			mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
+			Megaman::getInstance()->score += 300;
 		}
 		else{
 			mgmbullet->setAction(NONE);
@@ -103,7 +104,6 @@ void OctopusBattery::onCollision(MGMBox * otherObject, int nx, int ny){
 OctopusBattery::OctopusBattery()
 {
 	pauseAnimation = false;
-	this->width = this->height = 16;
 	delayRunCloseActivity.init(150);
 	delayCloseActivity.init(1300);
 	curAction = 0;

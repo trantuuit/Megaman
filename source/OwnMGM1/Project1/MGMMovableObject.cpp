@@ -11,7 +11,7 @@ MGMMovableObject::MGMMovableObject()
 void MGMMovableObject::deltaUpdate()
 {
 	vx = vx + ax*GAMETIME;
-	dx = int(vx*GAMETIME);
+	dx = /*int*/(vx*GAMETIME);
 
 	vy = vy + ay*GAMETIME;
 	dy = (vy*GAMETIME);

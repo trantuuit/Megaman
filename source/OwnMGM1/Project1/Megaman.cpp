@@ -391,6 +391,8 @@ Megaman::Megaman()
 {
 
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_MEGAMAN];
+	score = 0;
+	healthPoint = 28;
 	width = 20;
 	height = 23;
 	ax = 0;
@@ -400,7 +402,7 @@ Megaman::Megaman()
 	pauseAnimation = false;
 	collisionCategory = CC_MEGAMAN;
 	IntersectDoor = -1;
-	healthPoint = 28;
+
 	//@TranTu-khoi tao thoi gian nham mo mat 5 giay, nham mat 2 giay
 	eyesTime.init(2000);
 	/*eyesTime2.init(4000);*/

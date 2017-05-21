@@ -104,6 +104,7 @@ void Beak::onCollision(MGMBox * otherObject, int nx, int ny)
 			mgmbullet->y = this->y;
 			mgmbullet->setAction(FIRE);
 			isKill = true;
+			Megaman::getInstance()->score += 200;
 		}
 		else{
 			mgmbullet->setAction(NONE);

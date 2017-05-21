@@ -113,6 +113,7 @@
     <ClCompile Include="MGMTileMap.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="ScoreBar.cpp" />
     <ClCompile Include="ScrewBomber.cpp" />
     <ClCompile Include="stairs.cpp" />
     <ClCompile Include="SuperCutter.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="MGMTileMap.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="ScoreBar.h" />
     <ClInclude Include="ScrewBomber.h" />
     <ClInclude Include="stairs.h" />
     <ClInclude Include="SuperCutter.h" />
