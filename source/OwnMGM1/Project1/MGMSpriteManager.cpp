@@ -106,7 +106,8 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_SCORE] = new MGMSprite("Data\\Animation\\Score\\score.txt", "Data\\Animation\\Score\\score.png");
 	//@hp
 	sprites[SPR_HP] = new MGMSprite("Data\\Animation\\HP\\hp.txt", "Data\\Animation\\HP\\hp.png");
-	
+	//@board
+	sprites[SPR_BOARD] = new MGMSprite("Data\\Animation\\Board\\board.txt", "Data\\Animation\\Board\\board.png");
 	//your code
 }
 

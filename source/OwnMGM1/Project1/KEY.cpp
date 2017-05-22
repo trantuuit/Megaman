@@ -36,7 +36,8 @@ void KEY::update()
 	isAttackPress = isAttackDown && !isPreviousAttackDown;
 	isPreviousAttackDown = isAttackDown;
 
-
+	isPauseBoardDown = CKeyboard::getInstance()->IsKeyDown(DIK_P);
+	isResumeBoardDown = CKeyboard::getInstance()->IsKeyDown(DIK_O);
 }
 
 KEY::KEY()
@@ -45,6 +46,7 @@ KEY::KEY()
 	isPreviousRightDown = false;
 	isPreviousJumpDown = false;
 	isPreviousMoveDown = false;
+
 }
 KEY::~KEY()
 {

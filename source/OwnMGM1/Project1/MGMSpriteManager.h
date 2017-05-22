@@ -4,7 +4,8 @@
 enum SPRITE_LIST
 {
 	//add
-	SPR_SCORE=-17,
+	SPR_BOARD = -18,
+	SPR_SCORE = -17,
 	SPR_HP = -15,
 	SPR_ITEM_YASHICHI = -14,
 	SPR_ITEM_UP = -13,
@@ -30,7 +31,7 @@ enum SPRITE_LIST
 	SPR_FLEA = 7,
 	SPR_SCREWBOMBER = 8,
 	SPR_CUTMAN = 9,
-	
+
 	SPR_COUNT
 };
 

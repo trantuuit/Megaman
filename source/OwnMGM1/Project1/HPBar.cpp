@@ -1,6 +1,7 @@
 #include "HPBar.h"
 #include"MGMSpriteManager.h"
 #include"Megaman.h"
+#include"BoardBar.h"
 HPBar* HPBar::hp = 0;
 HPBar* HPBar::getInstance(){
 	if (hp == 0){
@@ -24,10 +25,9 @@ void HPBar::update(){
 	else{
 		curFrame = 0;
 	}
-	
 }
 void HPBar::render(){
-	this->sprite->Render(x, y, curAction, curFrame);
+		this->sprite->Render(x, y, curAction, curFrame);
 }
 
 HPBar::~HPBar()

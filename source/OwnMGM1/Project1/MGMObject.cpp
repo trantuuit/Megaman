@@ -1,12 +1,12 @@
 ﻿#include "MGMObject.h"
 #include"Collision.h"
 #include"MGMCamera.h"
+#include "BoardBar.h"
 MGMObject::MGMObject()
 {
 	curAction = 0;
 	curFrame = 0;
 	timeFrame.tickPerFrame = 100;
-
 	//ay = -0.005;
 	//vy = -0.4;
 	dx = 0;
@@ -52,7 +52,7 @@ void MGMObject::updateFrameAnimation() // this
 		int lastFrame = curFrame;
 
 		//if(isUpdateFrameAnimation)
-			this->sprite->Update(curAction, curFrame);
+		this->sprite->Update(curAction, curFrame);
 
 		if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 			onLastFrameAnimation(curAction);
@@ -95,6 +95,7 @@ void MGMObject::render()
 	}
 
 	this->sprite->Render(xDraw, yDraw, curAction, curFrame);
+
 
 	if (objectDirection != sprite->pImage->imageDirection)
 	{

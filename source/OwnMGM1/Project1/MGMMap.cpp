@@ -17,6 +17,7 @@
 #include"CutmanBullet.h"
 #include "MGMItem.h"
 #include "LifeEnergyBig.h"
+#include"BoardBar.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -260,7 +261,7 @@ void MGMMap::update()
 		}
 		for (int i = 0; i < itemObjects.size(); i++){
 			MGMObject* item = itemObjects.at(i);
-			Collision::checkCollision(item, groundObjects[iGround]);	
+			Collision::checkCollision(item, groundObjects[iGround]);
 		}
 	}
 	for (int i = 0; i < itemObjects.size(); i++){
@@ -277,7 +278,7 @@ void MGMMap::update()
 	}
 
 	/*int nEnemy = enemyObjects.size();*/
-	
+
 
 	for (int iEnemy = 0; iEnemy < enemyObjects.size(); iEnemy++)
 	{
@@ -289,11 +290,11 @@ void MGMMap::update()
 		//	iEnemy--;
 		//}
 		//else{
-			Collision::checkCollision(Megaman::getInstance(), enemy);
-			for (int iGround = 0; iGround < nGround; iGround++)
-			{
-				Collision::checkCollision(enemy, groundObjects[iGround]);
-			}
+		Collision::checkCollision(Megaman::getInstance(), enemy);
+		for (int iGround = 0; iGround < nGround; iGround++)
+		{
+			Collision::checkCollision(enemy, groundObjects[iGround]);
+		}
 		/*}*/
 	}
 
@@ -315,17 +316,20 @@ void MGMMap::update()
 
 void MGMMap::draw()
 {
-	MGMTileMap::draw();
 
-	for (int i = 0; i < 2; i++)
-	{
-		doors[i]->render();
+	MGMTileMap::draw();
+	if (!BoardBar::getInstance()->isPause){
+		for (int i = 0; i < 2; i++)
+		{
+			doors[i]->render();
+		}
+		int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
+		for (int i = 0; i < nObjectsCam; i++)
+		{
+			MGMCamera::getInstance()->objects.allObjects[i]->render();
+		}
 	}
-	int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
-	for (int i = 0; i < nObjectsCam; i++)
-	{
-		MGMCamera::getInstance()->objects.allObjects[i]->render();
-	}
+
 }
 
 MGMMap::MGMMap(char * objectsPath, char * tileSheetPath, char * quadTreePath, char * matrixPath, char* stagePath) :

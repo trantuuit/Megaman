@@ -18,9 +18,10 @@ enum MEGAMAN_ACTION
 class Megaman :
 	public MGMMovableObject
 {
-	int life;
+private:
 	
 public:
+	int life;
 	int healthPoint;
 	int score;
 	void setHealth(int health);

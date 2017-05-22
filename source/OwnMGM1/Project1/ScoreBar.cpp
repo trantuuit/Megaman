@@ -1,6 +1,7 @@
 #include "ScoreBar.h"
 #include"MGMSpriteManager.h"
 #include"Megaman.h"
+#include "BoardBar.h"
 ScoreBar* ScoreBar::score = 0;
 ScoreBar* ScoreBar::getInstance(){
 	if (score == 0){
@@ -17,19 +18,14 @@ ScoreBar::ScoreBar()
 }
 
 void ScoreBar::update(){
-	//if (Megaman::getInstance()->healthPoint >= 0){
-	//	curFrame = Megaman::getInstance()->healthPoint;
-	//}
-	//else{
-	//	curFrame = 0;
-	//}
+
 	int score = Megaman::getInstance()->score;
 	point1 = score / 1000000;
 	point2 = (score % 1000000) / 100000;
 	point3 = (score % 100000) / 10000;
 	point4 = (score % 10000) / 1000;
 	point5 = (score % 1000) / 100;
-	point6 = (score % 100)/10;
+	point6 = (score % 100) / 10;
 	point7 = score % 10;
 
 }
@@ -41,6 +37,8 @@ void ScoreBar::render(){
 	this->sprite->Render(140, 10, curAction, point5);
 	this->sprite->Render(150, 10, curAction, point6);
 	this->sprite->Render(160, 10, curAction, point7);
+
+
 }
 
 ScoreBar::~ScoreBar()

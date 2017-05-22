@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "EnemyBullet.h"
+#include "BoardBar.h"
 #define DX 1
 
 Megaman * Megaman::instance = 0;
@@ -25,13 +26,15 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
+	bool isKeyLeftDown, isKeyRightDown, isKeyMoveDown, isKeyJumpPress, isKeyMovePress, isAttackPress;
+	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress = false;
 	//Nhận các sự kiện từ bàn phím
-	bool isKeyLeftDown = KEY::getInstance()->isLeftDown;
-	bool isKeyRightDown = KEY::getInstance()->isRightDown;
-	bool isKeyMoveDown = KEY::getInstance()->isMoveDown;
-	bool isKeyJumpPress = KEY::getInstance()->isJumpPress;
-	bool isKeyMovePress = KEY::getInstance()->isMovePress;
-	bool isAttackPress = KEY::getInstance()->isAttackPress;
+	isKeyLeftDown = KEY::getInstance()->isLeftDown;
+	isKeyRightDown = KEY::getInstance()->isRightDown;
+	isKeyMoveDown = KEY::getInstance()->isMoveDown;
+	isKeyJumpPress = KEY::getInstance()->isJumpPress;
+	isKeyMovePress = KEY::getInstance()->isMovePress;
+	isAttackPress = KEY::getInstance()->isAttackPress;
 	if (isKeyLeftDown)
 	{
 		objectDirection = LEFT;
@@ -45,7 +48,8 @@ void Megaman::update()
 	if (isOnStairs)
 	{
 		isKeyMoveDown = false;
-		if (isKeyJumpPress) { //đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
+		//đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
+		if (isKeyJumpPress) { 
 			isOnStairs = false;
 			pauseAnimation = false;
 
@@ -211,9 +215,9 @@ void Megaman::deltaUpdate(){
 	vy = vy + ay * GAMETIME;
 	dy = vy * GAMETIME;
 }
+
 void Megaman::render()
 {
-
 	if (sprite == 0)
 		return;
 	float xDraw, yDraw;
@@ -233,11 +237,7 @@ void Megaman::render()
 			0, 0, 1, 0,
 			2 * (xDraw + widthSprite / 2), 0, 0, 1)));
 	}
-
-
-
 	this->sprite->Render(xDraw, yDraw, curAction, curFrame);
-
 	if (objectDirection != sprite->pImage->imageDirection)
 	{
 		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
@@ -276,7 +276,9 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			int result = rand() % 3 + 2;
 			healthPoint += result;
 		}
-
+		if (item->categoryItem == CI_UP){
+			life++;
+		}
 	}
 	if (healthPoint > 28){
 		healthPoint = 28;
@@ -311,9 +313,6 @@ void Megaman::updateFrameAnimation()
 				}
 				eyesTime.update();
 			}
-			//else if (curAction == MGM_STAND_STAIR_ATTACK){
-			//	this->sprite->Update(curAction, curFrame=0);
-			//}
 			else{
 				this->sprite->Update(curAction, curFrame);
 				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
@@ -344,7 +343,7 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 	MGMMovableObject::onCollision(otherObject, nx, ny);
 	if (otherObject->collisionCategory == CC_ENEMY){
 		MGMEnemy* enemy = (MGMEnemy*)otherObject;
-		if (enemy->categoryEnemy ==CREP_BLADER ){
+		if (enemy->categoryEnemy == CREP_BLADER){
 			healthPoint -= 3;
 		}
 		if (enemy->categoryEnemy == CREP_BEAK){
@@ -362,10 +361,10 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 		if (enemy->categoryEnemy == CREP_FLEA){
 			healthPoint -= 2;
 		}
-		if (enemy->categoryEnemy==CREP_SCREW_BOMBER){
+		if (enemy->categoryEnemy == CREP_SCREW_BOMBER){
 			healthPoint -= 1;
 		}
-		if (enemy->categoryEnemy==CREP_SUPER_CUTTER){
+		if (enemy->categoryEnemy == CREP_SUPER_CUTTER){
 			healthPoint -= 4;
 		}
 
@@ -392,6 +391,7 @@ Megaman::Megaman()
 
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_MEGAMAN];
 	score = 0;
+	life = 2;
 	healthPoint = 28;
 	width = 20;
 	height = 23;

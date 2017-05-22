@@ -3,6 +3,8 @@
 #include"MGMSprite.h"
 class MGMObject : public MGMBox
 {
+private:
+	
 public:
 	Direction objectDirection;
 	int id;

@@ -23,7 +23,11 @@ public:
 			isPreviousAttackDown,
 			isAttackPress,
 
-			isMovePress;
+			isMovePress,
+
+			
+			isPauseBoardDown,
+			isResumeBoardDown;
 
 
 	static KEY* instance;
