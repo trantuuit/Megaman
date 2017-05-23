@@ -10,6 +10,7 @@ enum CATEGORY_ENEMY{
 	CREP_PICKET_MAN,
 	CREP_SCREW_BOMBER,
 	CREP_SUPER_CUTTER,
+	CREP_MET,
 };
 class MGMEnemy :
 	public MGMMovableObject

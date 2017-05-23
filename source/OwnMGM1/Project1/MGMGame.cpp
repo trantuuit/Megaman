@@ -27,9 +27,9 @@ MGMGame::~MGMGame()
 void MGMGame::init()
 {
 	// Mặc định map Cutman:
-	Megaman::getInstance()->x = 22;
+	/*Megaman::getInstance()->x = 22;
 	Megaman::getInstance()->y = 111;
-	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	//Megaman::getInstance()->x = 950;
 	//Megaman::getInstance()->y = 1100;
@@ -75,12 +75,14 @@ void MGMGame::init()
 	/*Megaman::getInstance()->x = 3120;
 	Megaman::getInstance()->y = 1432;
 	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-
+	isStart = true;
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
-	map = new MGMMap("Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
+	mapCut = new MGMMap("Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
 		"Data\\TileMap\\stage.txt");
+	mapGut = new MGMMap("Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
+		"Data\\MapGut\\stage.txt");
 }
 void MGMGame::render()
 {

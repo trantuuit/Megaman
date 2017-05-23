@@ -27,6 +27,10 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_FLEA]->initInfo("Data\\Animation\\Flea.txt");
 	sprites[SPR_FLEA]->pImage = sprites[SPR_PICKETMAN]->pImage;
 
+	sprites[SPR_MET] = new MGMSprite();
+	sprites[SPR_MET]->initInfo("Data\\Animation\\Met.txt");
+	sprites[SPR_MET]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
 	sprites[SPR_SCREWBOMBER] = new MGMSprite();
 	sprites[SPR_SCREWBOMBER]->initInfo("Data\\Animation\\ScrewBomber.txt");
 	sprites[SPR_SCREWBOMBER]->pImage = sprites[SPR_PICKETMAN]->pImage;

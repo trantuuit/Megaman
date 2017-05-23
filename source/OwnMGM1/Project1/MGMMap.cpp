@@ -17,6 +17,7 @@
 #include"CutmanBullet.h"
 #include "MGMItem.h"
 #include "LifeEnergyBig.h"
+#include "Met.h"
 #include"BoardBar.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
@@ -62,6 +63,9 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_FLEA:
 			obj = new Flea();
+			break;
+		case SPR_MET:
+			obj = new Met();
 			break;
 			//@Tu-Add
 		case SPR_FLYING_SHELL:
@@ -116,8 +120,8 @@ void MGMMap::readStage(char * stagePath)
 	{
 		stages[i] = new MGMStage(fs);
 		stages[i]->index = i;
-		if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
-			MGMStage::curStage = stages[i];
+		/*if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
+			MGMStage::curStage = stages[i];*/
 	}
 	//MGMStage::curStage = stages[0];
 

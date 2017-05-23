@@ -191,6 +191,15 @@
     <ClCompile Include="BoardBar.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="SelectionScreen.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionRectangle.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Met.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -352,6 +361,15 @@
     </ClInclude>
     <ClInclude Include="BoardBar.h">
       <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionScreen.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionRectangle.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Met.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -85,6 +85,7 @@
     <ClCompile Include="LifeEnergyBig.cpp" />
     <ClCompile Include="LifeEnergySmall.cpp" />
     <ClCompile Include="MegamanBullet.cpp" />
+    <ClCompile Include="Met.cpp" />
     <ClCompile Include="MGMDelayTime.cpp" />
     <ClCompile Include="MGMItem.cpp" />
     <ClCompile Include="OctopusBattery.cpp" />
@@ -116,6 +117,8 @@
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="ScoreBar.cpp" />
     <ClCompile Include="ScrewBomber.cpp" />
+    <ClCompile Include="SelectionRectangle.cpp" />
+    <ClCompile Include="SelectionScreen.cpp" />
     <ClCompile Include="stairs.cpp" />
     <ClCompile Include="SuperCutter.cpp" />
     <ClCompile Include="Up.cpp" />
@@ -142,6 +145,7 @@
     <ClInclude Include="LifeEnergyBig.h" />
     <ClInclude Include="LifeEnergySmall.h" />
     <ClInclude Include="MegamanBullet.h" />
+    <ClInclude Include="Met.h" />
     <ClInclude Include="MGMDelayTime.h" />
     <ClInclude Include="MGMItem.h" />
     <ClInclude Include="OctopusBattery.h" />
@@ -173,6 +177,8 @@
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="ScoreBar.h" />
     <ClInclude Include="ScrewBomber.h" />
+    <ClInclude Include="SelectionRectangle.h" />
+    <ClInclude Include="SelectionScreen.h" />
     <ClInclude Include="stairs.h" />
     <ClInclude Include="SuperCutter.h" />
     <ClInclude Include="Up.h" />

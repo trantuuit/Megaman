@@ -9,6 +9,7 @@ public:
 			isRightDown,
 			isJumpDown,
 			isMoveDown,
+			isEnterDown,
 
 			isPreviousLeftDown,
 			isPreviousRightDown,

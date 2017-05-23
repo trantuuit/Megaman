@@ -208,6 +208,8 @@ void Megaman::deltaUpdate(){
 	dx = vx * GAMETIME;
 
 	vy = vy + ay * GAMETIME;
+	if (vy <= -0.9f) 
+		vy =-0.9f ;
 	dy = vy * GAMETIME;
 }
 

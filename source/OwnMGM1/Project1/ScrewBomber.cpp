@@ -47,8 +47,6 @@ void ScrewBomber::update()
 	}
 	timeAttack.isFinish();
 
-	
-	
 	timeAttack.update();
 	timeSleep.update();
 	updateFrameAnimation();

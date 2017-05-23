@@ -6,6 +6,7 @@ enum CATEGORY_BULLET{
 	FOR_BEAK,
 	FOR_FLYING_SHELL,
 	FOR_SCREW_BOMBER,
+	FOR_MET
 };
 class EnemyBullet :
 	public MGMEnemy
