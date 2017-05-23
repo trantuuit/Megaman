@@ -10,13 +10,9 @@
 #include <time.h>
 #include "EnemyBullet.h"
 #include "BoardBar.h"
-#define DX 1
 
 Megaman * Megaman::instance = 0;
-void Megaman::setHealth(int health)
-{
 
-}
 Megaman * Megaman::getInstance()
 {
 	if (instance == 0)
@@ -49,15 +45,14 @@ void Megaman::update()
 	{
 		isKeyMoveDown = false;
 		//đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
-		if (isKeyJumpPress) { 
+		if (isKeyJumpPress) {
 			isOnStairs = false;
 			pauseAnimation = false;
-
 		}
 		if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
 			MegamanBullet* bullet = new MegamanBullet();
 			bullet->dx = 4 * objectDirection;
-			if (objectDirection == 1){
+			if (objectDirection == RIGHT){
 				bullet->x = x + 17;
 			}
 			else{
@@ -85,55 +80,81 @@ void Megaman::update()
 			delayAnimateStandStairShoot.update();
 		}
 	}
-	//@Tu-Đang đứng trên gạch và nhận sự kiện nhảy từ bán phím thì gán vận tốc vy = MEGAMAN_VY_JUMP
-	if (isOnGround && isKeyJumpPress)
-	{
-		vy = MEGAMAN_VY_JUMP;
-	}
-	if (isKeyMoveDown) //@Tu_Nếu đang di chuyển thì thực hiện xét action chạy cho megaman đồng thời set vx cho nó
-	{
-		if (lastStatusRunAttack){
-			if (delayAnimateRunShoot.isReady())
-			{
-				delayAnimateRunShoot.start();
-			}
+	else if (isOnGround){
+		if (isKeyJumpPress){
+			vy = MEGAMAN_VY_JUMP;
+		}
+		if (isKeyMoveDown){
+			if (lastStatusRunAttack){
+				if (delayAnimateRunShoot.isReady())
+				{
+					delayAnimateRunShoot.start();
+				}
 
-			if (delayAnimateRunShoot.isFinish()){
-				setCurAction(MGM_RUN);
-				lastStatusRunAttack = false;
+				if (delayAnimateRunShoot.isFinish()){
+					setCurAction(MGM_RUN);
+					lastStatusRunAttack = false;
+				}
+				delayAnimateRunShoot.update();
 			}
-			delayAnimateRunShoot.update();
+			else{
+				setCurAction(MGM_PRE_RUN);
+			}
+			vx = objectDirection*MEGAMAN_VX_GO;
+			lastStatusStandAttack = false;
+
+			if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
+				MegamanBullet* bullet = new MegamanBullet();
+				bullet->dx = 4 * objectDirection;
+				if (objectDirection == 1){
+					bullet->x = x + 19;
+				}
+				else{
+					bullet->x = x - 7;
+				}
+
+				bullet->y = y - 7;
+				delayShoot.start();
+				setCurAction(MGM_RUN_ATTACK);
+				lastStatusRunAttack = true;
+			}
 		}
 		else{
-			setCurAction(MGM_PRE_RUN);
-		}
-		vx = objectDirection*MEGAMAN_VX_GO;
-		lastStatusStandAttack = false;
-	}
-	else //@Tu-Ngược lại set vx=0 đồng thời set action đứng cho megaman
-	{
-		/*dx=0;*/
-		vx = 0;
-		if (!isOnStairs) {
-			//if (lastStatusStandAttack){
-			//	if (delayAnimateStandShoot.isReady())
-			//	{
-			//		delayAnimateStandShoot.start();
-			//	}
-			//	if (delayAnimateStandShoot.isFinish()){
-			//		setCurAction(MGM_STAND);
-			//		lastStatusStandAttack = false;
-			//	}
-			//	delayAnimateStandShoot.update();
-			//}
-			//else{
-			//	setCurAction(MGM_STAND);
-			//}
-			setCurAction(MGM_STAND);
-		}
-	}
+			vx = 0;
+			if (lastStatusStandAttack){
+				if (delayAnimateStandShoot.isReady()){
+					delayAnimateStandShoot.start();
+				}
+				if (delayAnimateStandShoot.isFinish()){
+					setCurAction(MGM_STAND);
+					lastStatusStandAttack = false;
+				}
+				if (delayAnimateStandShoot.isSchedule()){
+					setCurAction(MGM_STAND_ATTACK);
+				}
+				delayAnimateStandShoot.update();
+			}
+			else{
+				setCurAction(MGM_STAND);
+			}
+			if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3)
+			{
+				MegamanBullet* bullet = new MegamanBullet();
+				bullet->dx = 4 * objectDirection;
+				if (objectDirection == 1){
+					bullet->x = x + 19;
+				}
+				else{
+					bullet->x = x - 7;
+				}
 
-	//@Tu-Nếu không va chạm với gạch và không đứng trên cầu thanh thì chuyển hành động nhảy
+				bullet->y = y - 8;
+				delayShoot.start();
+				setCurAction(MGM_STAND_ATTACK);
+				lastStatusStandAttack = true;
+			}
+		}
+	}
 	if (!isOnGround && !isOnStairs){
 		if (lastStatusJumpAttack){
 			if (delayAnimateJumpShoot.isReady())
@@ -152,59 +173,33 @@ void Megaman::update()
 		else{
 			setCurAction(MGM_JUMP);
 		}
+		if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
+			MegamanBullet* bullet = new MegamanBullet();
+			bullet->dx = 4 * objectDirection;
+			if (objectDirection == 1){
+				bullet->x = x + 17;
+			}
+			else{
+				bullet->x = x - 7;
+			}
+			bullet->y = y - 8;
+			delayShoot.start();
+			setCurAction(MGM_JUMP_ATTACK);
+			lastStatusJumpAttack = true;
+		}
+		if (isKeyMoveDown){
+			vx = objectDirection*MEGAMAN_VX_GO;
+		}
 	}
-
-	if (!delayShoot.isSchedule() && isKeyMoveDown && isOnGround && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
-		MegamanBullet* bullet = new MegamanBullet();
-		bullet->dx = 4 * objectDirection;
-		if (objectDirection == 1){
-			bullet->x = x + 19;
-		}
-		else{
-			bullet->x = x - 7;
-		}
-
-		bullet->y = y - 7;
-		delayShoot.start();
-		setCurAction(MGM_RUN_ATTACK);
-		lastStatusRunAttack = true;
-	}
-
-	if (!delayShoot.isSchedule() && isOnGround && isAttackPress && MegamanBullet::getListBullet()->Count < 3)
-	{
-
-		MegamanBullet* bullet = new MegamanBullet();
-		bullet->dx = 4 * objectDirection;
-		if (objectDirection == 1){
-			bullet->x = x + 19;
-		}
-		else{
-			bullet->x = x - 7;
-		}
-
-		bullet->y = y - 8;
-		delayShoot.start();
-		setCurAction(MGM_STAND_ATTACK);
-		lastStatusStandAttack = true;
-	}
-
-	if (!delayShoot.isSchedule() && !isOnGround && !isOnStairs && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
-		MegamanBullet* bullet = new MegamanBullet();
-		bullet->dx = 4 * objectDirection;
-		if (objectDirection == 1){
-			bullet->x = x + 17;
-		}
-		else{
-			bullet->x = x - 7;
-		}
-
-		bullet->y = y - 8;
-		delayShoot.start();
-		setCurAction(MGM_JUMP_ATTACK);
-		lastStatusJumpAttack = true;
-	}
+	//if (beingAttacked){
+	//	setCurAction(9);
+	//	curFrame = 0;
+	//	vx = -0.5;
+	//	beingAttacked = false;
+	//}
+	pauseAnimation = false;
 	delayShoot.update();
-	this->deltaUpdate();
+	deltaUpdate();
 	updateFrameAnimation();
 	isOnGround = false;
 }
@@ -318,6 +313,7 @@ void Megaman::updateFrameAnimation()
 				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 					onLastFrameAnimation(curAction);
 			}
+			/*this->sprite->Update(curAction, curFrame);*/
 		}
 	}
 }
@@ -332,7 +328,6 @@ void Megaman::setWidth(int width)
 	this->width = width;
 }
 
-
 void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 {
 	if (ny == 1)
@@ -342,6 +337,7 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 	}
 	MGMMovableObject::onCollision(otherObject, nx, ny);
 	if (otherObject->collisionCategory == CC_ENEMY){
+		beingAttacked = true;
 		MGMEnemy* enemy = (MGMEnemy*)otherObject;
 		if (enemy->categoryEnemy == CREP_BLADER){
 			healthPoint -= 3;
@@ -370,6 +366,7 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 
 	}
 	if (otherObject->collisionCategory == CC_ENEMY_BULLET){
+		beingAttacked = true;
 		EnemyBullet* bullet = (EnemyBullet*)otherObject;
 		if (bullet->categoryBullet == FOR_BEAK){
 			healthPoint -= 1;
@@ -390,6 +387,7 @@ Megaman::Megaman()
 {
 
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_MEGAMAN];
+	beingAttacked = false;
 	score = 0;
 	life = 2;
 	healthPoint = 28;

@@ -13,6 +13,7 @@ enum MEGAMAN_ACTION
 	MGM_RUN_ATTACK,
 	MGM_JUMP_ATTACK,
 	MGM_STAND_STAIR_ATTACK,
+	MGM_BE_ATTACKED,
 };
 
 class Megaman :
@@ -21,10 +22,10 @@ class Megaman :
 private:
 	
 public:
+	boolean beingAttacked;
 	int life;
 	int healthPoint;
 	int score;
-	void setHealth(int health);
 	MGMDelayTime eyesTime;
 	MGMDelayTime delayAnimateStandShoot;
 	MGMDelayTime delayAnimateRunShoot;

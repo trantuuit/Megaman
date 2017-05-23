@@ -114,8 +114,15 @@ Index		Name
 9			Animation10
 
 			FramesCount
-			1
+			6
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
+			551				62				8				26
+			561				62				6				26
+			570				62				7				26
+			578				62				24				26
 			71				230				26				28
+			185				236				26				28
+	
+			
