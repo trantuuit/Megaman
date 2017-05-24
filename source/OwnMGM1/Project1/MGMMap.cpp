@@ -19,6 +19,10 @@
 #include "LifeEnergyBig.h"
 #include "Met.h"
 #include"BoardBar.h"
+#include "Room.h"
+#include "BossGutsman.h"
+#include "BigRock.h"
+#include "GreenBar.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -60,6 +64,18 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_BEAK: //@Dung - Add
 			obj = new Beak();
+			break;
+		case SPR_ROOM:
+			obj = new Room();
+			break;
+		case SPR_BOSS_GUTSMAN:
+			obj = new BossGutsman();
+			break;
+		case SPR_BIGROCK:
+			obj = new BigRock();
+			break;
+		case SPR_GREENBAR:
+			obj = new GreenBar();
 			break;
 		case SPR_FLEA:
 			obj = new Flea();
@@ -253,6 +269,7 @@ void MGMMap::update()
 	List<MGMObject*>& groundObjects = MGMCamera::getInstance()->objects.groundObjects;
 	List<MGMObject*>& stairObjects = MGMCamera::getInstance()->objects.stairObjects;
 	List<MGMObject*>& itemObjects = MGMCamera::getInstance()->objects.itemObjects;
+	List<MGMObject*>& bigRockObjects = MGMCamera::getInstance()->objects.bigRockObjects; //Dung
 
 	int nGround = groundObjects.size();
 
@@ -272,6 +289,15 @@ void MGMMap::update()
 		MGMObject* item = itemObjects.at(i);
 		Collision::checkCollision(Megaman::getInstance(), item);
 	}
+
+	// Dung: Xét va chạm với viên gạch loại lớn:
+	int nBigRock = bigRockObjects.size();
+
+	for (int iBigRock = 0; iBigRock < nBigRock; iBigRock++)
+	{
+		Collision::checkCollision(Megaman::getInstance(), bigRockObjects[iBigRock]);
+	}
+	//------
 	int nStair = stairObjects.size();
 	stairs* s;
 	for (int i = 0; i < nStair; i++)
@@ -299,6 +325,13 @@ void MGMMap::update()
 		{
 			Collision::checkCollision(enemy, groundObjects[iGround]);
 		}
+
+		// Dung: Check giữa enemy và các viên gạch lớn:
+		for (int iBigRock = 0; iBigRock < nBigRock; iBigRock++)
+		{
+			Collision::checkCollision(enemy, bigRockObjects[iBigRock]);
+		}
+
 		/*}*/
 	}
 

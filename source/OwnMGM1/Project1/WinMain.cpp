@@ -52,9 +52,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					}
 					if (map == MGMGame::getInstance()->mapGut)
 					{
-						Megaman::getInstance()->x = 22;
+						/*Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 1100;
-						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 					}
 					for (int i = 0; i < map->nStage; i++)
 					{

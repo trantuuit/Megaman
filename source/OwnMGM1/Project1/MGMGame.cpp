@@ -10,6 +10,7 @@
 #include"HPBar.h"
 #include"ScoreBar.h"
 #include"BoardBar.h"
+#include "SmallRock.h"
 MGMGame::MGMGame()
 {
 }
@@ -75,6 +76,17 @@ void MGMGame::init()
 	/*Megaman::getInstance()->x = 3120;
 	Megaman::getInstance()->y = 1432;
 	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+	// Vị trí trước thanh trượt màu xanh map Gutsman:
+	Megaman::getInstance()->x = 400;
+	Megaman::getInstance()->y = 1170;
+	MGMCamera::getInstance()->init(350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+
+	// Vị trí cuối map GutsMan
+	/*Megaman::getInstance()->x = 3600;
+	Megaman::getInstance()->y = 140;
+	MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
 	isStart = true;
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
@@ -110,6 +122,13 @@ void MGMGame::render()
 		for (int i = 0; i < SuperCutter::getSuperCutters()->Count; i++)
 		{
 			SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
+			s->render();
+		}
+
+		// Render SmallRocks:
+		for (int i = 0; i < SmallRock::getSmallRocks()->Count; i++)
+		{
+			SmallRock *s = SmallRock::getSmallRocks()->at(i);
 			s->render();
 		}
 
@@ -278,6 +297,26 @@ void MGMGame::update(DWORD timesleep)
 			}
 		}
 
+
+		//---------------------------------------SMALL ROCK---------------------------------------------------------------------------
+		// Update tọa độ các small rocks:
+		for (List<SmallRock*>::Node *p = SmallRock::getSmallRocks()->pHead; p; p = p->pNext)
+		{
+			SmallRock *_smallRock = p->m_value;
+			_smallRock->coordinateUpdate();
+		}
+
+		// Ra khỏi Camera thì xóa:
+		for (int i = 0; i < SmallRock::getSmallRocks()->Count; i++)
+		{
+			SmallRock* smallRock = SmallRock::getSmallRocks()->at(i);
+			if (!Collision::AABBCheck(smallRock, MGMCamera::getInstance()))
+			{
+				SmallRock::getSmallRocks()->_Remove(smallRock);
+				delete smallRock;
+				i--;
+			}
+		}
 		//Cutman bullet
 		if (CutmanBullet::bullet != NULL){
 			CutmanBullet::getBullet()->update();

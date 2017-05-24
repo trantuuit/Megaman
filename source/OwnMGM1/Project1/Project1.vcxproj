@@ -70,7 +70,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Beak.cpp" />
+    <ClCompile Include="BigRock.cpp" />
     <ClCompile Include="BoardBar.cpp" />
+    <ClCompile Include="BossGutsman.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="BigEye.cpp" />
     <ClCompile Include="Blader.cpp" />
@@ -81,6 +83,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Flea.cpp" />
     <ClCompile Include="FlyingShell.cpp" />
+    <ClCompile Include="GreenBar.cpp" />
     <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="LifeEnergyBig.cpp" />
     <ClCompile Include="LifeEnergySmall.cpp" />
@@ -115,10 +118,12 @@
     <ClCompile Include="MGMTileMap.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="ScoreBar.cpp" />
     <ClCompile Include="ScrewBomber.cpp" />
     <ClCompile Include="SelectionRectangle.cpp" />
     <ClCompile Include="SelectionScreen.cpp" />
+    <ClCompile Include="SmallRock.cpp" />
     <ClCompile Include="stairs.cpp" />
     <ClCompile Include="SuperCutter.cpp" />
     <ClCompile Include="Up.cpp" />
@@ -129,7 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Beak.h" />
+    <ClInclude Include="BigRock.h" />
     <ClInclude Include="BoardBar.h" />
+    <ClInclude Include="BossGutsman.h" />
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="BigEye.h" />
     <ClInclude Include="Blader.h" />
@@ -141,6 +148,7 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Flea.h" />
     <ClInclude Include="FlyingShell.h" />
+    <ClInclude Include="GreenBar.h" />
     <ClInclude Include="HPBar.h" />
     <ClInclude Include="LifeEnergyBig.h" />
     <ClInclude Include="LifeEnergySmall.h" />
@@ -175,10 +183,12 @@
     <ClInclude Include="MGMTileMap.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="ScoreBar.h" />
     <ClInclude Include="ScrewBomber.h" />
     <ClInclude Include="SelectionRectangle.h" />
     <ClInclude Include="SelectionScreen.h" />
+    <ClInclude Include="SmallRock.h" />
     <ClInclude Include="stairs.h" />
     <ClInclude Include="SuperCutter.h" />
     <ClInclude Include="Up.h" />

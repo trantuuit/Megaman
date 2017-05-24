@@ -200,6 +200,21 @@
     <ClCompile Include="Met.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="BigRock.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BossGutsman.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenBar.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallRock.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -369,6 +384,21 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="Met.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BigRock.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BossGutsman.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenBar.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallRock.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

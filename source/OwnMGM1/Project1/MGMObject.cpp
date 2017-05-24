@@ -82,6 +82,8 @@ void MGMObject::render()
 		return;
 	float xDraw, yDraw;
 	MGMCamera::getInstance()->Transform(x, y, xDraw, yDraw);
+	xDraw = (int)xDraw;
+	yDraw = (int)yDraw;
 	//Nếu hướng object khác hướng hình vẽ( hướng hình vẽ = left(-1))
 	if (objectDirection != sprite->pImage->imageDirection)
 	{
@@ -104,6 +106,75 @@ void MGMObject::render()
 			0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1)));
+	}
+}
+
+void MGMObject::vibrateRender()
+{
+	if (sprite == 0)
+		return;
+	float xDraw, yDraw;
+	MGMCamera::getInstance()->Transform(x, y, xDraw, yDraw);
+
+	switch (drawLocation)
+	{
+	case DRAW_LOCATION_1:
+		this->sprite->Render(xDraw - 6, yDraw + 6, curAction, curFrame);
+		drawPerLocation++;
+		if (drawPerLocation >= drawCount)
+		{
+			drawLocation = DRAW_LOCATION_2;
+			drawPerLocation = 0;
+		}
+		break;
+	case DRAW_LOCATION_2:
+		this->sprite->Render(xDraw + 4, yDraw - 4, curAction, curFrame);
+		drawPerLocation++;
+		if (drawPerLocation >= drawCount)
+		{
+			drawLocation = DRAW_LOCATION_3;
+			drawPerLocation = 0;
+		}
+
+		break;
+	case DRAW_LOCATION_3:
+		MGMCamera::getInstance()->Transform(x + 8, y - 8, xDraw, yDraw);
+		drawPerLocation++;
+		if (drawPerLocation >= drawCount)
+		{
+			drawLocation = DRAW_LOCATION_4;
+			drawPerLocation = 0;
+		}
+		break;
+	case DRAW_LOCATION_4:
+		MGMCamera::getInstance()->Transform(x - 4, y + 4, xDraw, yDraw);
+		drawPerLocation++;
+		if (drawPerLocation >= drawCount)
+		{
+			drawLocation = DRAW_LOCATION_5;
+			drawPerLocation = 0;
+		}
+		break;
+	case DRAW_LOCATION_5:
+		MGMCamera::getInstance()->Transform(x - 8, y + 8, xDraw, yDraw);
+		drawPerLocation++;
+		if (drawPerLocation >= drawCount)
+		{
+			drawLocation = DRAW_LOCATION_6;
+			drawPerLocation = 0;
+		}
+		break;
+	case DRAW_LOCATION_6:
+		MGMCamera::getInstance()->Transform(x, y - 10, xDraw, yDraw);
+		drawPerLocation++;
+		if (drawPerLocation >= drawCount)
+		{
+			drawLocation = DRAW_LOCATION_1;
+			drawPerLocation = 0;
+		}
+		break;
+	default:
+		break;
 	}
 }
 

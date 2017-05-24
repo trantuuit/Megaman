@@ -1,4 +1,4 @@
-#include "MGMCamera.h"
+﻿#include "MGMCamera.h"
 #include"Megaman.h"
 #include"MGMStage.h"
 
@@ -39,8 +39,8 @@ void MGMCamera::Transform(float x, float y, float& xRender, float& yRender)
 void MGMCamera::update()
 {
 	dx = 0;
-	int mgmX = Megaman::getInstance()->x;
-	int mgmDx = Megaman::getInstance()->dx;
+	float mgmX = Megaman::getInstance()->x; // Dung: chuyển sang float (cần thiết khi Megaman ở trên GreenBar)
+	float mgmDx = Megaman::getInstance()->dx;
 	
 	if( (mgmDx<0 && Megaman::getInstance()->getXCenter() + mgmDx< getXCenter())
 		||

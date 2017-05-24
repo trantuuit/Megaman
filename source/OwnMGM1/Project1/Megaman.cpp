@@ -120,7 +120,9 @@ void Megaman::update()
 			}
 		}
 		else{
-			vx = 0;
+
+			if (!isOnGreenBar) // @Dung - Nếu đứng trên GreenBar thì không reset vx
+				vx = 0;
 			if (lastStatusStandAttack){
 				if (delayAnimateStandShoot.isReady()){
 					delayAnimateStandShoot.start();
@@ -261,6 +263,7 @@ void Megaman::setCurAction(int action)
 
 void Megaman::onIntersectRect(MGMBox * otherObject)
 {
+	// Code mới
 	if (otherObject->collisionCategory == CC_ITEM){
 		MGMItem* item = (MGMItem*)otherObject;
 		srand(time(NULL));
@@ -280,6 +283,12 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	if (healthPoint > 28){
 		healthPoint = 28;
 	}
+
+	// Code cũ:
+	/*if (otherObject->collisionCategory == CC_GROUND
+		&& this->getRight() > otherObject->getLeft()
+		&& this->getLeft()<otherObject->getLeft())
+		this->x = otherObject->getLeft() - this->width - 1;*/
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -337,7 +346,38 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 		isOnGround = true;
 		isOnStairs = false;
 	}
-	MGMMovableObject::onCollision(otherObject, nx, ny);
+	MGMMovableObject::onCollision(otherObject, nx, ny); // @Dung comment
+
+	// Dung add:
+	// Tùy chỉnh để đứng trên thanh GreenBar: (cách cũ gọi MGMMovableObject::onCollision(otherObject, nx, ny);)
+	//if (ny != 0 && (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK || otherObject->collisionCategory == CC_ENEMY))
+	//{
+	//	vy = -0.25;
+	//	MGMObject *m = (MGMObject*)otherObject; // Set vx để Megaman đi theo GreenBar
+	//	if (m->id == 28)
+	//	{
+	//		dx = otherObject->dx;
+	//		isOnGreenBar = true;
+	//	}
+	//	else
+	//	{
+	//		dx = 0;
+	//		isOnGreenBar = false;
+	//	}
+
+	//}
+	//if (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK || otherObject->collisionCategory == CC_ENEMY)
+	//{
+	//	MGMObject *m = (MGMObject*)otherObject;
+	//	if (m->id == 28 && m->curFrame != 0) // Khi GreenBar đang gập xuống:
+	//	{
+	//		// Không preventMove
+	//	}
+	//	else
+	//	Collision::preventMove(this, otherObject, nx, ny);
+	//}
+	// --------------------Hết đoạn Dung add----------------------------
+
 	if (otherObject->collisionCategory == CC_ENEMY){
 		beingAttacked = true;
 		MGMEnemy* enemy = (MGMEnemy*)otherObject;

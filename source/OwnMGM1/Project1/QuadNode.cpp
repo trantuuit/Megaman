@@ -1,4 +1,4 @@
-#include "QuadNode.h"
+﻿#include "QuadNode.h"
 #include"MGMCamera.h"
 #include"Collision.h"
 #include "MGMMovableObject.h"
@@ -47,7 +47,15 @@ void QuadNode::fillObjectToCamera()
 	if (nObjects != 0)
 	{
 		for (int i = 0; i < nObjects; i++)
-		{
+		{ 
+			MGMMovableObject* m = (MGMMovableObject*)objects[i]; // Nếu là Room thì không đưa vào Camera
+			//if (m->id == 24)
+			//	continue;
+			//Dung add: xét với spaceMove để GreenBar xuất hiện
+			if(m->id == 28 && Collision::AABBCheck(&m->spaceMove, MGMCamera::getInstance()))
+				MGMCamera::getInstance()->objects.addObject(objects[i]);
+			// ------------- Hết đoạn Dung add-----------------
+			else
 			if (Collision::AABBCheck(objects[i], MGMCamera::getInstance()))
 			{
 				if (!objects[i]->isKill)

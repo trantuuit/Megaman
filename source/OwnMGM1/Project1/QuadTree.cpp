@@ -1,4 +1,4 @@
-#include "QuadTree.h"
+﻿#include "QuadTree.h"
 #include<string>
 #include "MGMSpriteManager.h"
 #include"MGMMovableObject.h"
@@ -19,7 +19,7 @@ void QuadTree::restoreObjects(List<MGMObject*>* listObject){
 		if (obj->id > 0)
 		{
 			MGMMovableObject* mov = (MGMMovableObject*)obj;
-			if (!Collision::AABBCheck(MGMCamera::getInstance(), &mov->oldRect) && (!Collision::AABBCheck(MGMCamera::getInstance(), mov)))
+			if (!Collision::AABBCheck(MGMCamera::getInstance(), &mov->oldRect) && (!Collision::AABBCheck(MGMCamera::getInstance(), mov)) && (mov->id != 28)) // Dung: thêm điều kiện id != 28 để GreenBar không bị restore
 			{
 				obj->restoreObject();
 				isRestore = true;

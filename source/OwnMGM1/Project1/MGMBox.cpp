@@ -30,6 +30,7 @@ void MGMBox::coordinateUpdate()
 	}
 	x += dx;
 	y += dy;
+
 }
 
 MGMBox::~MGMBox()

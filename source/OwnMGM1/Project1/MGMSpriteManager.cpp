@@ -112,6 +112,28 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_HP] = new MGMSprite("Data\\Animation\\HP\\hp.txt", "Data\\Animation\\HP\\hp.png");
 	//@board
 	sprites[SPR_BOARD] = new MGMSprite("Data\\Animation\\Board\\board.txt", "Data\\Animation\\Board\\board.png");
+
+	// Room
+	sprites[SPR_ROOM] = new MGMSprite();
+	sprites[SPR_ROOM]->initInfo("Data\\Animation\\Room.txt");
+	sprites[SPR_ROOM]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	// Boss Gutsman
+	sprites[SPR_BOSS_GUTSMAN] = new MGMSprite();
+	sprites[SPR_BOSS_GUTSMAN]->initInfo("Data\\Animation\\BossGutsman.txt");
+	sprites[SPR_BOSS_GUTSMAN]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	// BigRock
+	sprites[SPR_BIGROCK] = new MGMSprite();
+	sprites[SPR_BIGROCK]->initInfo("Data\\Animation\\BigRock.txt");
+	sprites[SPR_BIGROCK]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	sprites[SPR_SMALLROCK] = new MGMSprite("Data\\Animation\\Enemy Bullet\\small-rock-info.txt", "Data\\Animation\\Enemy Bullet\\Small Rock.png");
+
+	// GreenBar
+	sprites[SPR_GREENBAR] = new MGMSprite();
+	sprites[SPR_GREENBAR]->initInfo("Data\\Animation\\GreenBar.txt");
+	sprites[SPR_GREENBAR]->pImage = sprites[SPR_PICKETMAN]->pImage;
 	//your code
 }
 

@@ -33,6 +33,7 @@ public:
 	MGMDelayTime delayAnimateStandStairShoot;
 	MGMDelayTime delayShoot;
 	bool isOnStairs;
+	bool isOnGreenBar; // Dung: kiểm tra lúc đứng trên GreenBar
 	int IntersectDoor;
 	static Megaman* instance;
 	static Megaman* getInstance();
