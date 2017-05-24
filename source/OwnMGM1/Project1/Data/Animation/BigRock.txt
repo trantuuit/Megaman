@@ -8,11 +8,9 @@ Index		Name
 0			Animation1
 
 			FramesCount
-			3
+			1
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			168				291				32				16
-			212				288				24				22
-			258				285				12				28
+			507				527				32				32
 
