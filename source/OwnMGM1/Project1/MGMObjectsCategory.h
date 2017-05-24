@@ -10,6 +10,7 @@ public:
 	List<MGMObject*> itemObjects;
 	List<MGMObject*> stairObjects;
 	List<MGMObject*> isKilledObject;
+	List<MGMObject*> bigRockObjects;
 
 	void addObject(MGMObject* obj);
 	void removeObject(MGMObject* obj);

@@ -12,6 +12,9 @@ void MGMObjectsCategory::addObject(MGMObject * obj)
 	case CC_GROUND:			  
 		groundObjects._Add(obj);
 		break;
+	case CC_BIGROCK:
+		bigRockObjects._Add(obj);
+		break;
 	case CC_ITEM:	
 		itemObjects._Add(obj);
 		break;
@@ -34,6 +37,9 @@ void MGMObjectsCategory::removeObject(MGMObject * obj)
 		break;
 	case CC_GROUND:
 		groundObjects._Remove(obj);
+		break;
+	case CC_BIGROCK:
+		bigRockObjects._Remove(obj);
 		break;
 	case CC_ITEM:
 		itemObjects._Remove(obj);
