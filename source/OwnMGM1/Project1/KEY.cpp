@@ -17,7 +17,8 @@ void KEY::update()
 	isDownHold = CKeyboard::getInstance()->IsKeyDown(DIK_DOWN) || CKeyboard::getInstance()->IsKeyDown(DIK_S);
 	isLeftDown = CKeyboard::getInstance()->IsKeyDown(DIK_LEFT) || CKeyboard::getInstance()->IsKeyDown(DIK_A);
 	isRightDown = CKeyboard::getInstance()->IsKeyDown(DIK_RIGHT) || CKeyboard::getInstance()->IsKeyDown(DIK_D);
-	isEnterDown = CKeyboard::getInstance()->IsKeyDown(DIK_RETURN) || CKeyboard::getInstance()->IsKeyDown(DIK_NUMPADENTER);
+	
+	
 	isMoveDown = isLeftDown || isRightDown;
 
 	isLeftPress = isLeftDown && !isPreviousLeftDown;
@@ -27,7 +28,9 @@ void KEY::update()
 	isPreviousLeftDown = isLeftDown;
 	isPreviousRightDown = isRightDown;
 
-
+	isEnterDown = CKeyboard::getInstance()->IsKeyDown(DIK_RETURN) || CKeyboard::getInstance()->IsKeyDown(DIK_NUMPADENTER);
+	isEnterPress = isEnterDown && !isPreviousEnter;
+	isPreviousEnter = isEnterDown;
 
 	isJumpDown = CKeyboard::getInstance()->IsKeyDown(DIK_SPACE);
 	isJumpPress = isJumpDown && !isPreviousJumpDown;
@@ -47,6 +50,7 @@ KEY::KEY()
 	isPreviousRightDown = false;
 	isPreviousJumpDown = false;
 	isPreviousMoveDown = false;
+	isPreviousEnter = false;
 
 }
 KEY::~KEY()

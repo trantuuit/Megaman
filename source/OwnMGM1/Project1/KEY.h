@@ -15,10 +15,12 @@ public:
 			isPreviousRightDown,
 			isPreviousJumpDown,
 			isPreviousMoveDown,
+			isPreviousEnter,
 
 			isLeftPress,
 			isRightPress,
 			isJumpPress,
+			isEnterPress,
 
 			isAttackDown,
 			isPreviousAttackDown,

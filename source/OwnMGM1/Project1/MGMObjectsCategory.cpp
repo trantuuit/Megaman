@@ -44,6 +44,9 @@ void MGMObjectsCategory::removeObject(MGMObject * obj)
 	case CC_ITEM:
 		itemObjects._Remove(obj);
 		break;
+	case CC_STAIRS:
+		stairObjects._Remove(obj);
+		break;
 	default:
 		break;
 	}

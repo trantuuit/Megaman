@@ -7,12 +7,19 @@
 #include"MGMBox.h"
 #include"Door.h"
 using namespace std;
+
+enum BossMap
+{
+	CutMap,
+	GutsMap
+};
 class MGMMap :
 	public MGMTileMap
 {
 public:
 	int nObject;
 	bool isUpdate;
+	BossMap bossMap;
 	QuadTree* quadTree;
 	int nStage;
 	MGMObject** allObjects;
@@ -27,7 +34,7 @@ public:
 	void update();
 	void draw();
 
-	MGMMap(char* objectsPath,char* tileSheetPath,char* quadTreePath,char* matrixPath,char* stagePath);
+	MGMMap(BossMap bm,char* objectsPath,char* tileSheetPath,char* quadTreePath,char* matrixPath,char* stagePath);
 	~MGMMap();
 };
 

@@ -10,6 +10,7 @@
 #include"HPBar.h"
 #include"ScoreBar.h"
 #include"BoardBar.h"
+#include"PKMWeapon.h"
 #include "SmallRock.h"
 #include"DieEffect.h"
 #include"EffectCreateItem.h"
@@ -93,9 +94,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
-	mapCut = new MGMMap("Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
+	mapCut = new MGMMap(CutMap,"Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
 		"Data\\TileMap\\stage.txt");
-	mapGut = new MGMMap("Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
+	mapGut = new MGMMap(GutsMap,"Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
 		"Data\\MapGut\\stage.txt");
 }
 void MGMGame::render()
@@ -114,6 +115,13 @@ void MGMGame::render()
 			MegamanBullet* bullet = p->m_value;
 			bullet->render();
 		}
+		
+		for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
+		{
+			PKMWeapon* hammer = p->m_value;
+			hammer->render();
+		}
+
 		//Render affect
 		for (List<DieAffect*>::Node *p = DieAffect::getList()->pHead; p; p = p->pNext)
 		{
@@ -134,7 +142,7 @@ void MGMGame::render()
 			SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
 			s->render();
 		}
-
+		
 		// Render SmallRocks:
 		for (int i = 0; i < SmallRock::getSmallRocks()->Count; i++)
 		{
@@ -351,6 +359,27 @@ void MGMGame::update(DWORD timesleep)
 		if (CutmanBullet::bullet != NULL){
 			CutmanBullet::getBullet()->update();
 			CutmanBullet::getBullet()->coordinateUpdate();
+		}
+
+		//Pitketman hammer
+		for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
+		{
+			PKMWeapon* bullet = p->m_value;
+			//Collision::checkCollision(bullet, Megaman::getInstance());
+			bullet->deltaUpdate();
+			bullet->updateFrameAnimation();
+			bullet->coordinateUpdate();
+		}
+		//Xoa vien dan cua megaman
+		for (int i = 0; i < PKMWeapon::getListHammer()->Count; i++)
+		{
+			PKMWeapon*bullet = PKMWeapon::getListHammer()->at(i);
+			if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()) || bullet->isKill)
+			{
+				PKMWeapon::getListHammer()->_Remove(bullet);
+				delete bullet;
+				i--;
+			}
 		}
 	}
 }

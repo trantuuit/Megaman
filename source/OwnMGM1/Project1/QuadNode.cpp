@@ -65,6 +65,8 @@ void QuadNode::fillObjectToCamera()
 					return;
 				}
 			}
+			else MGMCamera::getInstance()->objects.isKilledObject._Add(objects[i]);
+
 		}
 		return;
 	}

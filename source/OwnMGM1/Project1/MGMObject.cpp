@@ -14,7 +14,6 @@ MGMObject::MGMObject()
 	ax = 0;
 	ay = GRAVITY;
 	objectDirection = RIGHT;
-
 }
 
 void MGMObject::init(float x, float y, float width, float height)

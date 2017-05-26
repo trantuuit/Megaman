@@ -15,6 +15,9 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites = new MGMSprite*[SPR_COUNT];
 
 	sprites[SPR_PICKETMAN] = new MGMSprite("Data\\Animation\\PicketMan.txt", "Data\\Animation\\Enemies.png");
+	sprites[SPR_PKM_WEAPON] = new MGMSprite();
+	sprites[SPR_PKM_WEAPON]->initInfo("Data\\Animation\\PKMweapon.txt");
+	sprites[SPR_PKM_WEAPON]->pImage = sprites[SPR_PICKETMAN]->pImage;
 	//@Tu-Add
 	sprites[SPR_OCTOPUSBATTERY] = new MGMSprite();
 	sprites[SPR_OCTOPUSBATTERY]->initInfo("Data\\Animation\\OctopusBattery.txt");

@@ -119,6 +119,7 @@
     <ClCompile Include="MGMStage.cpp" />
     <ClCompile Include="MGMTexture.cpp" />
     <ClCompile Include="MGMTileMap.cpp" />
+    <ClCompile Include="PKMWeapon.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="MGMStage.h" />
     <ClInclude Include="MGMTexture.h" />
     <ClInclude Include="MGMTileMap.h" />
+    <ClInclude Include="PKMWeapon.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Room.h" />

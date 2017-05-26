@@ -44,6 +44,7 @@ void QuadTree::removeObjectFromCamera()
 	MGMCamera::getInstance()->objects.clear();
 }
 
+
 void QuadTree::fillObjectFromQNodeToCamera()
 {
 	root->fillObjectToCamera();

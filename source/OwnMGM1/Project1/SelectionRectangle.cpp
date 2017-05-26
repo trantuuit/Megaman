@@ -19,7 +19,7 @@ void SelectionRectangle::update()
 
 	}
 	this->updateFrameAnimation();
-	if (KEY::getInstance()->isEnterDown)
+	if (KEY::getInstance()->isEnterPress)
 	{
 		MGMGame::getInstance()->isStart = false;
 		if (boss == CutMan)

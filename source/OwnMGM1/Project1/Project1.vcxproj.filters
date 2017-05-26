@@ -206,6 +206,9 @@
     <ClCompile Include="BigRock.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="PKMWeapon.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
     <ClCompile Include="BossGutsman.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="EffectCreateItem.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="PKMWeapon.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

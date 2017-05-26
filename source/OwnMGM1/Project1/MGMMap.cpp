@@ -130,6 +130,13 @@ void MGMMap::readObjects(char* objectsPath)
 	doors[0]->id = -3;
 	doors[1] = new Door(3072, 1344, 32, 64);
 	doors[1]->id = -3;
+	if (bossMap == GutsMap)
+	{
+		doors[0]->x = 2784;
+		doors[0]->y = 144;
+		doors[1]->x = 3567;
+		doors[1]->y = 144;
+	}
 }
 
 void MGMMap::readStage(char * stagePath)
@@ -151,6 +158,7 @@ void MGMMap::readStage(char * stagePath)
 
 void MGMMap::updateStage()
 {
+
 
 	Megaman * mgm = Megaman::getInstance();
 	MGMStage * curstage = MGMStage::curStage;
@@ -375,13 +383,15 @@ void MGMMap::draw()
 
 }
 
-MGMMap::MGMMap(char * objectsPath, char * tileSheetPath, char * quadTreePath, char * matrixPath, char* stagePath) :
+MGMMap::MGMMap(BossMap bm,char * objectsPath, char * tileSheetPath, char * quadTreePath, char * matrixPath, char* stagePath) :
 MGMTileMap(matrixPath, tileSheetPath) //Doc tile map
 {
+	bossMap = bm;
 	readObjects(objectsPath);
 	quadTree = new QuadTree(quadTreePath, allObjects, nRow * 16);
 	readStage(stagePath);
 	isUpdate = true;
+	
 }
 
 MGMMap::~MGMMap()

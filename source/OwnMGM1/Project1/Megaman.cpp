@@ -158,7 +158,7 @@ void Megaman::update()
 				}
 				delayAnimateStandStairShoot.update();
 			}
-			pauseAnimation = false;
+			//pauseAnimation = false;
 		}
 		else if (isOnGround){
 			if (isKeyJumpPress){
@@ -288,7 +288,7 @@ void Megaman::update()
 			}
 		}
 	}
-	pauseAnimation = false;
+	//pauseAnimation = false;
 	delayShoot.update();
 	deltaUpdate();
 	updateFrameAnimation();

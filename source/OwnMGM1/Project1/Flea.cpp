@@ -42,6 +42,7 @@ void Flea::restoreObject()
 	x = oldRect.x;
 	y = oldRect.y;
 	vy = 0;
+	isKill = false;
 }
 void Flea::SetVy()
 {
