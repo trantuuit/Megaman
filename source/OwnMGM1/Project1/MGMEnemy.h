@@ -15,6 +15,9 @@ enum CATEGORY_ENEMY{
 	GREEN_BAR,
 	BOSS_GUTMAN,
 	ROOM,
+	BIG_ROCK,
+	SMALL_ROCK,
+
 };
 class MGMEnemy :
 	public MGMMovableObject

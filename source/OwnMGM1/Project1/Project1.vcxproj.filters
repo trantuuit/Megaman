@@ -212,9 +212,6 @@
     <ClCompile Include="GreenBar.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="SmallRock.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -228,7 +225,10 @@
       <Filter>Menu</Filter>
     </ClCompile>
     <ClCompile Include="EffectCreateItem.cpp">
-      <Filter>Map</Filter>
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -426,7 +426,7 @@
       <Filter>Menu</Filter>
     </ClInclude>
     <ClInclude Include="EffectCreateItem.h">
-      <Filter>Map</Filter>
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

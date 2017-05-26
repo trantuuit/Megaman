@@ -14,6 +14,7 @@ SmallRock::SmallRock()
 {
 	ay = 0;
 	vy = 0;
+	categoryEnemy = SMALL_ROCK;
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_SMALLROCK];
 	getSmallRocks()->_Add(this);
 }

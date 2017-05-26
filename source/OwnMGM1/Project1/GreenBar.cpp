@@ -53,9 +53,6 @@ void GreenBar::update()
 		MGMMovableObject::updateFrameAnimation();
 	else
 		curFrame = 0;
-
-	//MGMMovableObject::deltaUpdate();
-	
 }
 
 

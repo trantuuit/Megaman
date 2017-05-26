@@ -71,6 +71,7 @@ void BossGutsman::update()
 	if (bossAction == THROW_ROCK && isThrow == false)
 	{
 		bigRock = new BigRock();
+		bigRock->objectDirection = objectDirection;
 		bigRock->vy = -0.1;
 		bigRock->ay = GRAVITY;
 		bigRock->init(this->x - (10 * objectDirection), 220, 32, 32);
@@ -114,11 +115,13 @@ void BossGutsman::update()
 			// 1 và 4 sẽ bay theo phương ngang còn 2 và 3 sẽ bay hướng lên
 			// type 1
 			SmallRock *sr = new SmallRock();
+			sr->objectDirection = objectDirection;
 			sr->init(bigRock->x, bigRock->y - 30, 16, 16);
 			sr->dx = 2.4 * bigRock->objectDirection;
 
 			// type 2
 			sr = new SmallRock();
+			sr->objectDirection = objectDirection;
 			sr->init(bigRock->x + 16, bigRock->y - 40, 16, 16);
 			sr->init(bigRock->x + 16, bigRock->y, 16, 16);
 			sr->dx = 2.6 * bigRock->objectDirection;
@@ -126,12 +129,14 @@ void BossGutsman::update()
 
 			// type 3
 			sr = new SmallRock();
+			sr->objectDirection = objectDirection;
 			sr->init(bigRock->x, bigRock->y - 24, 16, 16);
 			sr->dx = 2.7 * bigRock->objectDirection;
 			sr->dy = 0.9;
 
 			// type 4
 			sr = new SmallRock();
+			sr->objectDirection = objectDirection;
 			sr->init(bigRock->x + 16, bigRock->y - 40, 16, 16);
 			sr->dx = 2.6 * bigRock->objectDirection;
 

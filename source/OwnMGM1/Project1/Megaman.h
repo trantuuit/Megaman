@@ -26,6 +26,7 @@ enum MEGAMAN_ACTION
 	MGM_EFFECT_BE_ATTACKED1,
 	MGM_EFFECT_BE_ATTACKED2,
 	MGM_EFFECT_BE_ATTACKED3,
+	MGM_EFFECT_BE_ATTACKED4,
 };
 
 class Megaman :
@@ -49,6 +50,7 @@ public:
 	MGMDelayTime delayAnimateJumpShoot;
 	MGMDelayTime delayAnimateStandStairShoot;
 	MGMDelayTime delayShoot;
+	float dxGreenBar;
 	bool isOnStairs;
 	bool isOnGreenBar; // Dung: kiểm tra lúc đứng trên GreenBar
 	int IntersectDoor;

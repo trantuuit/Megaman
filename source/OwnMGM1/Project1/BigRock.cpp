@@ -14,6 +14,7 @@ BigRock::BigRock()
 	isDelay = false;
 	isBreak = false;
 	isVibrate = false;
+	categoryEnemy = BIG_ROCK;
 }
 
 void BigRock::update()

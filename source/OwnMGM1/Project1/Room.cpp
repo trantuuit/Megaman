@@ -2,6 +2,13 @@
 
 
 bool Room::isVibrate = false;
+Room* Room::room = 0;
+Room* Room::getInstance(){
+	if (room == 0){
+		room = new Room();
+	}
+	return room;
+}
 Room::Room()
 {
 	ax = 0;

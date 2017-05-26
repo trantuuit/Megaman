@@ -12,7 +12,7 @@
 #include "BoardBar.h"
 #include "DieEffect.h"
 #include"GameOverMenu.h"
-
+#include"Room.h"
 Megaman * Megaman::instance = 0;
 
 Megaman * Megaman::getInstance()
@@ -33,6 +33,16 @@ void Megaman::update()
 	isKeyJumpPress = KEY::getInstance()->isJumpPress;
 	isKeyMovePress = KEY::getInstance()->isMovePress;
 	isAttackPress = KEY::getInstance()->isAttackPress;
+	if (Room::getInstance()->isVibrate && isOnGround){
+		vx = 0;
+		setCurAction(MGM_EFFECT_BE_ATTACKED4);
+		pauseAnimation = false;
+		delayShoot.update();
+		deltaUpdate();
+		updateFrameAnimation();
+		isOnGround = false;
+		return;
+	}
 	if (beingAttacked){
 		if (collisionDirection == LEFT){
 			objectDirection = RIGHT;
@@ -87,7 +97,7 @@ void Megaman::update()
 	else{
 		if (actionBeingAttacked == STEP4){
 			if (step4.isReady()){
-				step4.start(5000);
+				step4.start(3000);
 			}
 			if (step4.isSchedule()){
 				status = MEGAMAN_BE_ATTACKED;
@@ -189,10 +199,24 @@ void Megaman::update()
 					lastStatusRunAttack = true;
 				}
 			}
+			else if (isOnGreenBar){
+				if (isKeyJumpPress){
+					vy = MEGAMAN_VY_JUMP;
+					isOnGreenBar = false;
+					pauseAnimation = false;
+				}
+				vx = 0;
+				/*dx = dxGreenBar;*/
+				//if (isKeyMoveDown){
+				//	dx = objectDirection*2;
+				//}
+				//else{
+				//	dx = dxGreenBar;
+				//}
+			}
 			else{
 
-				if (!isOnGreenBar) // @Dung - Nếu đứng trên GreenBar thì không reset vx
-					vx = 0;
+				vx = 0;
 				if (lastStatusStandAttack){
 					if (delayAnimateStandShoot.isReady()){
 						delayAnimateStandShoot.start();
@@ -209,7 +233,7 @@ void Megaman::update()
 				else{
 					setCurAction(MGM_STAND);
 				}
-				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3)
+				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3 && !Room::getInstance()->isVibrate)
 				{
 					MegamanBullet* bullet = new MegamanBullet();
 					bullet->dx = 4 * objectDirection;
@@ -227,7 +251,7 @@ void Megaman::update()
 				}
 			}
 		}
-		if (!isOnGround && !isOnStairs){
+		if (!isOnGround && !isOnStairs && !isOnGreenBar&&!Room::getInstance()->isVibrate){
 			if (lastStatusJumpAttack){
 				if (delayAnimateJumpShoot.isReady())
 				{
@@ -351,7 +375,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	if (otherObject->collisionCategory == CC_ENEMY){
 		MGMEnemy* enemy = (MGMEnemy*)otherObject;
 		if (actionBeingAttacked == ATTACKED_NONE){
-			if (enemy->categoryEnemy != ROOM){
+			if (enemy->categoryEnemy != ROOM && enemy->categoryEnemy != GREEN_BAR){
 				beingAttacked = true;
 				actionBeingAttacked = STEP1;
 				collisionDirection = enemy->objectDirection;
@@ -384,6 +408,12 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 				healthPoint -= 28;
 			}
 			if (enemy->categoryEnemy == BOSS_GUTMAN){
+				healthPoint -= 4;
+			}
+			if (enemy->categoryEnemy == BIG_ROCK){
+				healthPoint -= 4;
+			}
+			if (enemy->categoryEnemy == SMALL_ROCK){
 				healthPoint -= 4;
 			}
 		}
@@ -541,6 +571,8 @@ void Megaman::updateFrameAnimation()
 						curFrame = 0;
 					else if (curAction == MGM_STAND_STAIR_ATTACK&& curFrame == 1)
 						curFrame = 0;
+					else if (curAction == MGM_EFFECT_BE_ATTACKED4&&curFrame == 1)
+						curFrame = 0;
 
 					if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 						onLastFrameAnimation(curAction);
@@ -567,7 +599,6 @@ void Megaman::setWidth(int width)
 	{
 		x += this->width - width;
 	}
-
 	this->width = width;
 }
 
@@ -580,24 +611,25 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 	}
 	MGMMovableObject::onCollision(otherObject, nx, ny); // @Dung comment
 
+
 	// Dung add:
 	// Tùy chỉnh để đứng trên thanh GreenBar: (cách cũ gọi MGMMovableObject::onCollision(otherObject, nx, ny);)
-	//if (ny != 0 && (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK || otherObject->collisionCategory == CC_ENEMY))
-	//{
-	//	vy = -0.25;
-	//	MGMObject *m = (MGMObject*)otherObject; // Set vx để Megaman đi theo GreenBar
-	//	if (m->id == 28)
-	//	{
-	//		dx = otherObject->dx;
-	//		isOnGreenBar = true;
-	//	}
-	//	else
-	//	{
-	//		dx = 0;
-	//		isOnGreenBar = false;
-	//	}
-
-	//}
+	if (ny != 0 && (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK ||
+		otherObject->collisionCategory == CC_ENEMY))
+	{
+		/*vy = -0.25;*/
+		MGMEnemy *m = (MGMEnemy*)otherObject; // Set vx để Megaman đi theo GreenBar
+		if (m->categoryEnemy == GREEN_BAR)
+		{
+			dxGreenBar = otherObject->dx;
+			isOnGreenBar = true;
+		}
+		if (m->categoryEnemy == GREEN_BAR){
+			if (m->curFrame == 0){
+				Collision::preventMove(this, otherObject, nx, ny);
+			}
+		}
+	}
 	//if (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK || otherObject->collisionCategory == CC_ENEMY)
 	//{
 	//	MGMObject *m = (MGMObject*)otherObject;
@@ -606,7 +638,7 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 	//		// Không preventMove
 	//	}
 	//	else
-	//	Collision::preventMove(this, otherObject, nx, ny);
+	//		Collision::preventMove(this, otherObject, nx, ny);
 	//}
 	// --------------------Hết đoạn Dung add----------------------------
 
@@ -627,6 +659,7 @@ Megaman::Megaman()
 	ax = 0;
 	vx = 0;
 	delayShoot.init(150);
+	isOnGreenBar = false;
 	isOnGround = false;
 	isOnStairs = false;
 	pauseAnimation = false;

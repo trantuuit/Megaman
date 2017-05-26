@@ -24,6 +24,7 @@
 #include "BigRock.h"
 #include "GreenBar.h"
 #include"StoneDead.h"
+#include"Room.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -70,7 +71,8 @@ void MGMMap::readObjects(char* objectsPath)
 			obj = new Beak();
 			break;
 		case SPR_ROOM:
-			obj = new Room();
+			/*obj = new Room();*/
+			obj = Room::getInstance();
 			break;
 		case SPR_BOSS_GUTSMAN:
 			obj = new BossGutsman();
