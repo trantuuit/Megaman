@@ -23,6 +23,7 @@
 #include "BossGutsman.h"
 #include "BigRock.h"
 #include "GreenBar.h"
+#include"StoneDead.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -42,6 +43,9 @@ void MGMMap::readObjects(char* objectsPath)
 		y = nRow * 16 - y; // Chuyển tọa độ y hướng lên (tọa độ trong map)
 		switch (id % 100)
 		{
+		case SPR_STONE_DIE:
+			obj = new StoneDead();
+			break;
 		case SPR_GROUND:
 			obj = new MGMObject();
 			break;

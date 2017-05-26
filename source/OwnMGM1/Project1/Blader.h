@@ -21,6 +21,7 @@ public:
 	void deltaUpdate();
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	boolean checkNearMegaman();
+	void onIntersectRect(MGMBox* otherObject);
 	void attackMegaman();
 	void stopAttack();
 	Blader();

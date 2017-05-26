@@ -29,6 +29,9 @@
     <Filter Include="Menu">
       <UniqueIdentifier>{0ef54002-ea63-4b54-9ab0-1ffc93023341}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{a724fbd0-98a3-4c84-8f77-d8b6fcc7f267}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp">
@@ -215,6 +218,18 @@
     <ClCompile Include="SmallRock.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="StoneDead.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="DieEffect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectCreateItem.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -400,6 +415,18 @@
     </ClInclude>
     <ClInclude Include="SmallRock.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneDead.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DieEffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectCreateItem.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

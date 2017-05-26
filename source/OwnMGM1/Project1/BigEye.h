@@ -15,6 +15,7 @@ class BigEye :
 public:
 	BigEye();
 	void onCollision(MGMBox *otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 	void update();
 	void render();
 	int ramdomVy();

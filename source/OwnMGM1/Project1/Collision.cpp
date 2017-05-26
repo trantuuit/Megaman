@@ -53,6 +53,7 @@ void Collision::checkCollision(MGMBox*M, MGMBox*S)
 		broadPhaseBox = NULL;
 		if (AABBCheck(S, M))
 		{
+			
 			M->dx = oldDx;
 			M->dy = oldDy;
 			S->onIntersectRect(M);

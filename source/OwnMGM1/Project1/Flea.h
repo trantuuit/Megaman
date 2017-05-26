@@ -13,6 +13,7 @@ public:
 	Flea();
 	int prvHeight;
 	void onCollision(MGMBox * otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 	void setCurAction(int action);
 	void update();
 	void restoreObject();

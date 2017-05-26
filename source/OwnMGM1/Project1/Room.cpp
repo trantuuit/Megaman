@@ -11,6 +11,7 @@ Room::Room()
 	objectDirection = LEFT;
 	ActionCount = 0;
 	vibrateCount = 0;
+	categoryEnemy = ROOM;
 }
 
 

@@ -1,6 +1,6 @@
 ﻿#include "Beak.h"
 #include "MegamanBullet.h"
-
+#include"EffectCreateItem.h"
 
 void Beak::update()
 {
@@ -40,6 +40,7 @@ void Beak::update()
 				delayShoot.start();
 				EnemyBullet *newBullet = new EnemyBullet();
 				newBullet->categoryBullet = FOR_BEAK;
+				newBullet->objectDirection = objectDirection;
 				switch (bulletType)
 				{
 				case BULLET_1:
@@ -91,12 +92,8 @@ void Beak::render()
 
 void Beak::onCollision(MGMBox * otherObject, int nx, int ny)
 {
-	MGMEnemy::onCollision(otherObject, nx, ny);
-	if (otherObject->collisionCategory == CC_GROUND)
-	{
-		if (nx != 0)
-			vx = (abs)(vx)* nx;
-	}
+}
+void Beak::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (beakActivity == BEAK_CLOSE){
@@ -105,14 +102,15 @@ void Beak::onCollision(MGMBox * otherObject, int nx, int ny)
 			mgmbullet->setAction(FIRE);
 			isKill = true;
 			Megaman::getInstance()->score += 200;
+			EffectCreateItem::getInstance()->enemy = this;
+			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
 			mgmbullet->setAction(NONE);
 		}
-			
+
 	}
 }
-
 //Override lại hàm:
 void Beak::onLastFrameAnimation(int action)
 {

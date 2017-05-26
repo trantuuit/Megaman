@@ -21,6 +21,7 @@ public:
 	void update();
 	void setAction(MEGAMANBULLET_ACTION);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 	~MegamanBullet();
 };
 

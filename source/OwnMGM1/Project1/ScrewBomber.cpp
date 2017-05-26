@@ -3,6 +3,7 @@
 #include"EnemyBullet.h"
 #include"MGMCamera.h"
 #include "MegamanBullet.h"
+#include"EffectCreateItem.h"
 ScrewBomber::ScrewBomber()
 {
 	vx = 0;
@@ -92,6 +93,7 @@ void ScrewBomber::CreateBullet()
 	if (id != 100 + SPR_SCREWBOMBER)
 	{
 		EnemyBullet *newBullet1 = new EnemyBullet();
+		newBullet1->objectDirection = RIGHT;
 		newBullet1->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet1->dx = 0;
 		newBullet1->dy = 3;
@@ -99,6 +101,7 @@ void ScrewBomber::CreateBullet()
 		newBullet1->y = this->y + 1;
 
 		EnemyBullet *newBullet2 = new EnemyBullet();
+		newBullet2->objectDirection = LEFT;
 		newBullet2->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet2->dx = -3;
 		newBullet2->dy = 0;
@@ -106,6 +109,7 @@ void ScrewBomber::CreateBullet()
 		newBullet2->y = this->y - 1;
 
 		EnemyBullet *newBullet3 = new EnemyBullet();
+		newBullet3->objectDirection = RIGHT;
 		newBullet3->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet3->dx = 3;
 		newBullet3->dy = 0;
@@ -113,6 +117,7 @@ void ScrewBomber::CreateBullet()
 		newBullet3->y = this->y - 1;
 
 		EnemyBullet *newBullet4 = new EnemyBullet();
+		newBullet4->objectDirection = LEFT;
 		newBullet4->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet4->dx = -3;
 		newBullet4->dy = 3;
@@ -120,6 +125,7 @@ void ScrewBomber::CreateBullet()
 		newBullet4->y = this->y + 1;
 
 		EnemyBullet *newBullet5 = new EnemyBullet();
+		newBullet5->objectDirection = RIGHT;
 		newBullet5->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet5->dx = 3;
 		newBullet5->dy = 3;
@@ -129,6 +135,7 @@ void ScrewBomber::CreateBullet()
 	else
 	{
 		EnemyBullet *newBullet1 = new EnemyBullet();
+		newBullet1->objectDirection = RIGHT;
 		newBullet1->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet1->dx = 0;
 		newBullet1->dy = -3;
@@ -136,6 +143,7 @@ void ScrewBomber::CreateBullet()
 		newBullet1->y = this->y - 9;
 
 		EnemyBullet *newBullet2 = new EnemyBullet();
+		newBullet2->objectDirection = LEFT;
 		newBullet2->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet2->dx = -3;
 		newBullet2->dy = 0;
@@ -143,6 +151,7 @@ void ScrewBomber::CreateBullet()
 		newBullet2->y = this->y - 9;
 
 		EnemyBullet *newBullet3 = new EnemyBullet();
+		newBullet3->objectDirection = RIGHT;
 		newBullet3->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet3->dx = 3;
 		newBullet3->dy = 0;
@@ -150,6 +159,7 @@ void ScrewBomber::CreateBullet()
 		newBullet3->y = this->y - 9;
 
 		EnemyBullet *newBullet4 = new EnemyBullet();
+		newBullet4->objectDirection = LEFT;
 		newBullet4->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet4->dx = -3;
 		newBullet4->dy = -3;
@@ -157,6 +167,7 @@ void ScrewBomber::CreateBullet()
 		newBullet4->y = this->y - 9;
 
 		EnemyBullet *newBullet5 = new EnemyBullet();
+		newBullet5->objectDirection = RIGHT;
 		newBullet5->categoryBullet = FOR_SCREW_BOMBER;
 		newBullet5->dx = 3;
 		newBullet5->dy = -3;
@@ -166,6 +177,9 @@ void ScrewBomber::CreateBullet()
 }
 
 void  ScrewBomber::onCollision(MGMBox * otherObject, int nx, int ny){
+	
+}
+void ScrewBomber::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		count++;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
@@ -177,6 +191,8 @@ void  ScrewBomber::onCollision(MGMBox * otherObject, int nx, int ny){
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 500;
+			EffectCreateItem::getInstance()->enemy = this;
+			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
 			mgmbullet->setAction(NONE);

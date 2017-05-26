@@ -1,20 +1,21 @@
 R		G		B
 0		102		102
 Count
-10
+12
 Sprite Info
 
 Index		Name
 0			Animation1
 
 			FramesCount
-			2
+			3
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
 			3				18				21				24
 			28				18				21				24
-
+			686				14				21				24
+			
 
 Index		Name
 1			Animation2
@@ -32,97 +33,124 @@ Index		Name
 2			Animation3
 
 			FramesCount
-			3
+			4
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
 			81				18				24				24
 			111				18				16				24
 			135				18				21				24
-
+			677				16				29				22
+				
 
 Index		Name
 3			Animation4
-
-			FramesCount
-			1
-
-			Animation Info
-			LocationX		LocationY		FrameWidth		FrameHeight
-			189				10				32				30
-
-
-Index		Name
-4			Animation5
 
 			FramesCount
 			2
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			340				55				16				29
-			363				55				16				29
-	
-	
-Index		Name
-5			Animation6
-
-			FramesCount
-			1
-
-			Animation Info
-			LocationX		LocationY		FrameWidth		FrameHeight
-			292				18				31				24
+			189				10				32				30
+			716				8				26				30
 
 
 Index		Name
-6			Animation7
+4			Animation5
 
 			FramesCount
 			3
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
+			340				55				16				29
+			363				55				16				29
+			683				13				29				30
+	
+	
+Index		Name
+5			Animation6
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			292				18				31				24
+			682				14				31				24
+
+
+Index		Name
+6			Animation7
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
 			325				20				29				22	
 			358				18				26				24
 			391				20				30				22
+			686				15				29				22
 			
 
 Index		Name
 7			Animation8
 
 			FramesCount
-			1
+			2
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
 			424				10				29				30
+			683				13				29				30
 			
 			
 Index		Name
 8			Animation9
 
 			FramesCount
-			1
+			2
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
 			453				55				32				29
+			683				13				29				30
 
 
 Index		Name
 9			Animation10
 
 			FramesCount
-			6
+			3
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			551				62				8				26
-			561				62				6				26
-			570				62				7				26
+			658				89				23				8
+			688				89				23				8
+			733				87				25				8
+	
+			
+Index		Name
+10			Animation11
+
+			FramesCount
+			1
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
 			578				62				24				26
+			
+			
+Index		Name
+11			Animation12
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
 			71				230				26				28
 			185				236				26				28
-	
+			
 			

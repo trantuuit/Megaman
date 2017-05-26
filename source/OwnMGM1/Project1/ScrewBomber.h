@@ -22,5 +22,6 @@ public:
 	void render();
 	void CreateBullet();
 	void onCollision(MGMBox * otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 };
 

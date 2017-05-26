@@ -35,11 +35,13 @@ class BossGutsman :
 	BigRock *bigRock;
 
 public:
+	int healthPoint;
 	BossGutsman();
 	void update();
 	void render();
 	void onLastFrameAnimation(int action);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 	JUMP_TYPE randomJumpType();
 	~BossGutsman();
 };

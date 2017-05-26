@@ -34,6 +34,7 @@ public:
 	void update();
 	void render();
 	void onCollision(MGMBox *otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 	void onLastFrameAnimation(int action);
 	Beak();
 	~Beak();

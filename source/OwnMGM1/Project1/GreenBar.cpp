@@ -10,6 +10,7 @@ GreenBar::GreenBar()
 	pauseAnimation = true;
 	objectDirection = LEFT;
 	dx = -greenBarDx;
+	categoryEnemy = GREEN_BAR;
 }
 
 void GreenBar::update()

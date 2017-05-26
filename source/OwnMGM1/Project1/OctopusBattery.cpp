@@ -1,7 +1,7 @@
 #include "OctopusBattery.h"
 #include "Megaman.h"
 #include "MegamanBullet.h"
-
+#include"EffectCreateItem.h"
 void OctopusBattery::update()
 {
 
@@ -61,7 +61,6 @@ void OctopusBattery::onCollision(MGMBox * otherObject, int nx, int ny){
 	if (otherObject->collisionCategory == CC_GROUND)
 	{
 		if (nx != 0){
-			/*this->curFrame = 2;*/
 			vx = (abs)(vx)* nx;
 			OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
 			return;
@@ -70,19 +69,12 @@ void OctopusBattery::onCollision(MGMBox * otherObject, int nx, int ny){
 			if (ny != 0){
 				vy = (abs)(vy)*ny;
 				OctActivity = OCTOPUSBATTERY_RUN_CLOSE;
-				/*this->curFrame = 2;*/
 				return;
 			}
 		}
-
-		//if (ny == 1){
-		//	dy = 1;
-		//}
-		//if (ny == -1){
-		//	vy = abs(vy)*ny;
-		//}
-
 	}
+}
+void OctopusBattery::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		count++;
@@ -94,13 +86,14 @@ void OctopusBattery::onCollision(MGMBox * otherObject, int nx, int ny){
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 300;
+			EffectCreateItem::getInstance()->enemy = this;
+			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
 			mgmbullet->setAction(NONE);
 		}
 	}
 }
-
 OctopusBattery::OctopusBattery()
 {
 	pauseAnimation = false;

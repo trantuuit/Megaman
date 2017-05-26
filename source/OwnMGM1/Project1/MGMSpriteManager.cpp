@@ -23,6 +23,10 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_MEGAMAN] = new MGMSprite("Data\\Animation\\Rockman\\info.txt", "Data\\Animation\\Rockman\\image.png");
 	sprites[SPR_BULLET] = new MGMSprite("Data\\Animation\\Rockman\\bullet-info.txt", "Data\\Animation\\Rockman\\bullet.png");
 
+	sprites[SPR_ITEM_EFFECT] = new MGMSprite();
+	sprites[SPR_ITEM_EFFECT]->initInfo("Data\\Animation\\Effect\\itemEffect.txt");
+	sprites[SPR_ITEM_EFFECT]->pImage = sprites[SPR_BULLET]->pImage;
+
 	sprites[SPR_FLEA] = new MGMSprite();
 	sprites[SPR_FLEA]->initInfo("Data\\Animation\\Flea.txt");
 	sprites[SPR_FLEA]->pImage = sprites[SPR_PICKETMAN]->pImage;
@@ -112,6 +116,10 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_HP] = new MGMSprite("Data\\Animation\\HP\\hp.txt", "Data\\Animation\\HP\\hp.png");
 	//@board
 	sprites[SPR_BOARD] = new MGMSprite("Data\\Animation\\Board\\board.txt", "Data\\Animation\\Board\\board.png");
+	//@game over menu
+	sprites[SPR_ARROW] = new MGMSprite("Data\\Animation\\Gameover\\arrow.txt", "Data\\Animation\\Gameover\\arrow.png");
+	//@effect megaman die
+	sprites[SPR_DIE_AFFECT] = new MGMSprite("Data\\Animation\\Effect\\dieAffect.txt", "Data\\Animation\\Effect\\dieAffect.png");
 
 	// Room
 	sprites[SPR_ROOM] = new MGMSprite();

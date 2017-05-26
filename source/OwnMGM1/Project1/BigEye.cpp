@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "MegamanBullet.h"
-
+#include"EffectCreateItem.h"
 
 BigEye::BigEye()
 {
@@ -14,6 +14,7 @@ BigEye::BigEye()
 	delayBeforeJump.init(500);
 	delayBeforeJump.start(500);
 	categoryEnemy = CREP_BIG_EYE;
+	count = 0;
 }
 
 void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
@@ -24,25 +25,27 @@ void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
 		delayBeforeJump.start();
 	}
 	MGMMovableObject::onCollision(otherObject, nx, ny);
+}
+void BigEye::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		count++;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		if (count == 20){
-			
-			mgmbullet->x = this->x+this->width/2;
-			mgmbullet->y = this->y-this->height/2;
+		if (count == 2){
+
+			mgmbullet->x = this->x+width/6;
+			mgmbullet->y = this->y-height/6;
 			mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 9000;
+			EffectCreateItem::getInstance()->enemy = this;
+			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
 			mgmbullet->setAction(NONE);
 		}
-		
 	}
 }
-
 void BigEye::update()
 {
 	switch (activity)

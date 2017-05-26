@@ -5,11 +5,12 @@
 #include"MGMDirectXTool.h"
 #include"SelectionScreen.h"
 #include"SelectionRectangle.h"
+#include"GameOverMenu.h"
 #include"KEY.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	MGMForm::getInstance()->initHandleWindows(hInstance, nCmdShow); //Tạo cửa sổ
-	DWORD timeSleep = 1000.0 / 1000;
+	DWORD timeSleep = 1000.0 / FPS;
 	SelectionScreen *ss = new SelectionScreen();
 	SelectionRectangle *sr = new SelectionRectangle();
 	//Khoi tao thoi gian giua 2 frame = timeSleep
@@ -43,18 +44,37 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					MGMMap*map = MGMGame::getInstance()->map;
 					if (map == MGMGame::getInstance()->mapCut)
 					{
-						Megaman::getInstance()->x = 22;
+						/*Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 111;
-						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
 						/*Megaman::getInstance()->x = 1880;
 						Megaman::getInstance()->y = 1400;
 						MGMCamera::getInstance()->init(1780, 1460, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+					/*	Megaman::getInstance()->x = 830;
+						Megaman::getInstance()->y = 1100;
+						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+					/*	Megaman::getInstance()->x = 1322;
+						Megaman::getInstance()->y = 1975;
+						MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+						Megaman::getInstance()->x = 1900;
+						Megaman::getInstance()->y = 1335;
+						MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 					}
 					if (map == MGMGame::getInstance()->mapGut)
 					{
 						/*Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
+						Megaman::getInstance()->x = 400;
+						Megaman::getInstance()->y = 1170;
+						MGMCamera::getInstance()->init(350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+
+						/*Megaman::getInstance()->x = 3600;
+						Megaman::getInstance()->y = 140;
+						MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 					}
 					for (int i = 0; i < map->nStage; i++)
 					{
@@ -65,11 +85,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 			if (!MGMGame::getInstance()->isStart)
 			{
-				MGMGame::getInstance()->update(timeSleep);//update
-				MGMDirectXTool::getInstance()->BeginGraphics();//bat dau ve len backbuffer
-				MGMGame::getInstance()->render();
-				MGMDirectXTool::getInstance()->EndGraphics();// ket thuc ve len backbuffer
-				MGMDirectXTool::getInstance()->PresentBackBuffer();// swap backbuffer va man hinh
+				GameOverMenu::getInstance()->update();
+
+				if (GameOverMenu::getInstance()->isOpen){
+					MGMDirectXTool::getInstance()->BeginGraphics();//bat dau ve len backbuffer
+					GameOverMenu::getInstance()->render();
+					MGMDirectXTool::getInstance()->EndGraphics();// ket thuc ve len backbuffer
+					MGMDirectXTool::getInstance()->PresentBackBuffer();// swap backbuffer va man hinh
+
+				}
+				else{
+					MGMGame::getInstance()->update(timeSleep);//update
+					MGMDirectXTool::getInstance()->BeginGraphics();//bat dau ve len backbuffer
+					MGMGame::getInstance()->render();
+					MGMDirectXTool::getInstance()->EndGraphics();// ket thuc ve len backbuffer
+					MGMDirectXTool::getInstance()->PresentBackBuffer();// swap backbuffer va man hinh
+				}
 			}
 
 		}

@@ -2,6 +2,7 @@
 #include "Megaman.h"
 #include "MGMCamera.h"
 #include "MegamanBullet.h"
+#include"EffectCreateItem.h"
 Blader::Blader()
 {
 	curAction = 0;
@@ -164,6 +165,9 @@ void Blader::render(){
 	MGMEnemy::render();
 }
 void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
+	
+}
+void Blader::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		mgmbullet->x = this->x;
@@ -171,6 +175,8 @@ void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
 		mgmbullet->setAction(FIRE);
 		isKill = true;
 		Megaman::getInstance()->score += 500;
+		EffectCreateItem::getInstance()->enemy = this;
+		EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 	}
 }
 

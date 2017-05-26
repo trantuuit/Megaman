@@ -1,7 +1,17 @@
 ﻿#pragma once
 #include "MGMMovableObject.h"
 #include "MGMDelayTime.h"
-
+enum MEGAMAN_STATUS{
+	MEGAMAN_NORMAL,
+	MEGAMAN_BE_ATTACKED,
+};
+enum MEGAMAN_BEING_ATTACKED{
+	ATTACKED_NONE,
+	STEP1,
+	STEP2,
+	STEP3,
+	STEP4,
+};
 enum MEGAMAN_ACTION
 {
 	MGM_STAND,
@@ -13,7 +23,9 @@ enum MEGAMAN_ACTION
 	MGM_RUN_ATTACK,
 	MGM_JUMP_ATTACK,
 	MGM_STAND_STAIR_ATTACK,
-	MGM_BE_ATTACKED,
+	MGM_EFFECT_BE_ATTACKED1,
+	MGM_EFFECT_BE_ATTACKED2,
+	MGM_EFFECT_BE_ATTACKED3,
 };
 
 class Megaman :
@@ -22,11 +34,16 @@ class Megaman :
 private:
 	
 public:
+	Direction collisionDirection;
+	MEGAMAN_STATUS status;
 	boolean beingAttacked;
+	MEGAMAN_BEING_ATTACKED actionBeingAttacked;
+	MGMDelayTime step1, step2, step3, step4;
 	int life;
 	int healthPoint;
 	int score;
-	MGMDelayTime eyesTime;
+	MGMGameTime timeFrame1, timeFrame2;
+	MGMDelayTime eyesTime1, eyesTime2;
 	MGMDelayTime delayAnimateStandShoot;
 	MGMDelayTime delayAnimateRunShoot;
 	MGMDelayTime delayAnimateJumpShoot;

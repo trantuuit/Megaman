@@ -1,6 +1,7 @@
 #include "FlyingShell.h"
 #include "MegamanBullet.h"
 #include"Megaman.h"
+#include"EffectCreateItem.h"
 FlyingShell::FlyingShell()
 {
 	curAction = 0;
@@ -112,6 +113,9 @@ void FlyingShell::render(){
 	MGMEnemy::render();
 }
 void FlyingShell::onCollision(MGMBox *otherObject, int nx, int ny){
+	
+}
+void FlyingShell::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (flyingShellActivity == FLYINGSHELL_OPEN){
@@ -120,6 +124,8 @@ void FlyingShell::onCollision(MGMBox *otherObject, int nx, int ny){
 			mgmbullet->setAction(FIRE);
 			isKill = true;
 			Megaman::getInstance()->score += 800;
+			EffectCreateItem::getInstance()->enemy = this;
+			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
 			mgmbullet->setAction(NONE);

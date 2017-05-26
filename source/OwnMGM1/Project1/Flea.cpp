@@ -2,6 +2,7 @@
 #include"Megaman.h"
 #include<ctime>
 #include "MegamanBullet.h"
+#include"EffectCreateItem.h"
 
 Flea::Flea()
 {
@@ -69,6 +70,13 @@ void Flea::deltaUpdate()
 
 void Flea::onCollision(MGMBox * otherObject, int nx, int ny)
 {
+	if (ny == 1)
+	{
+		isOnGround = true;
+	}
+	MGMMovableObject::onCollision(otherObject, nx, ny);
+}
+void Flea::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		mgmbullet->x = this->x;
@@ -76,12 +84,9 @@ void Flea::onCollision(MGMBox * otherObject, int nx, int ny)
 		mgmbullet->setAction(FIRE);
 		isKill = true;
 		Megaman::getInstance()->score += 300;
+		EffectCreateItem::getInstance()->enemy = this;
+		EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 	}
-	if (ny == 1)
-	{
-		isOnGround = true;
-	}
-	MGMMovableObject::onCollision(otherObject, nx, ny);
 }
 void Flea::setCurAction(int action)
 {

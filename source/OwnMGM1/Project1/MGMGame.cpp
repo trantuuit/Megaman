@@ -11,6 +11,8 @@
 #include"ScoreBar.h"
 #include"BoardBar.h"
 #include "SmallRock.h"
+#include"DieEffect.h"
+#include"EffectCreateItem.h"
 MGMGame::MGMGame()
 {
 }
@@ -58,9 +60,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->init(2350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	// Test SuperCutter vị trí 1
-	/*Megaman::getInstance()->x = 830;
-	Megaman::getInstance()->y = 1100;
-	MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	//Megaman::getInstance()->x = 830;
+	//Megaman::getInstance()->y = 1100;
+	//MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	// Test SuperCutter vị trí 2
 	/*Megaman::getInstance()->x = 1322;
@@ -78,14 +80,14 @@ void MGMGame::init()
 	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	// Vị trí trước thanh trượt màu xanh map Gutsman:
-	Megaman::getInstance()->x = 400;
-	Megaman::getInstance()->y = 1170;
-	MGMCamera::getInstance()->init(350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	//Megaman::getInstance()->x = 400;
+	//Megaman::getInstance()->y = 1170;
+	//MGMCamera::getInstance()->init(350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
-	// Vị trí cuối map GutsMan
-	/*Megaman::getInstance()->x = 3600;
-	Megaman::getInstance()->y = 140;
-	MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	//// Vị trí cuối map GutsMan
+	//Megaman::getInstance()->x = 3600;
+	//Megaman::getInstance()->y = 140;
+	//MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	isStart = true;
 	MGMCamera::getInstance()->dx = 0;
@@ -103,14 +105,22 @@ void MGMGame::render()
 		HPBar::getInstance()->render();
 		ScoreBar::getInstance()->render();
 		
-		Megaman::getInstance()->render();
+		if (!Megaman::getInstance()->isKill){
+			Megaman::getInstance()->render();
+		}
 
 		for (List<MegamanBullet*>::Node* p = MegamanBullet::getListBullet()->pHead; p; p = p->pNext)
 		{
 			MegamanBullet* bullet = p->m_value;
 			bullet->render();
 		}
-
+		//Render affect
+		for (List<DieAffect*>::Node *p = DieAffect::getList()->pHead; p; p = p->pNext)
+		{
+			DieAffect * effect = p->m_value;
+			effect->render();
+		}
+		EffectCreateItem::getInstance()->render();
 		// Render EnemyBullet:
 		for (List<EnemyBullet*>::Node *p = EnemyBullet::getListBullet()->pHead; p; p = p->pNext)
 		{
@@ -155,8 +165,10 @@ void MGMGame::update(DWORD timesleep)
 		{
 			HPBar::getInstance()->update();
 			ScoreBar::getInstance()->update();
-			
-			Megaman::getInstance()->update(); // Cap nhat van toc cua MGM
+			//Megaman ko chet thi update
+			if (!Megaman::getInstance()->isKill){
+				Megaman::getInstance()->update();
+			}
 			map->update();
 			//Cap nhat vi tri item
 			//Xet va cham voi gach
@@ -174,15 +186,32 @@ void MGMGame::update(DWORD timesleep)
 		map->updateStage();
 
 		List<MGMObject*>& enemyObjects = MGMCamera::getInstance()->objects.enemyObjects;
-		int nEnemy = enemyObjects.size();
-
-
+		/*int nEnemy = enemyObjects.size();*/
+		//Cap nhat hieu ung
+		for (List<DieAffect*>::Node *p = DieAffect::getList()->pHead; p; p = p->pNext)
+		{
+			DieAffect * effect = p->m_value;
+			effect->updateFrameAnimation();
+			effect->coordinateUpdate();
+		}
+		//Xoa hieu ung ra khoi camera
+		for (int i = 0; i < DieAffect::getList()->Count; i++)
+		{
+			DieAffect* effect = DieAffect::getList()->at(i);
+			if (!Collision::AABBCheck(effect, MGMCamera::getInstance()))
+			{
+				DieAffect::getList()->_Remove(effect);
+				delete effect;
+				i--;
+			}
+		}
+		EffectCreateItem::getInstance()->update();
 		//Cap nhat vi tri cua vien dan megaman
 		for (List<MegamanBullet*>::Node* p = MegamanBullet::getListBullet()->pHead; p; p = p->pNext)
 		{
 			MegamanBullet* bullet = p->m_value;
 			bullet->update();
-			for (int iEnemy = 0; iEnemy < nEnemy; iEnemy++)
+			for (int iEnemy = 0; iEnemy < enemyObjects.size(); iEnemy++)
 			{
 				auto enemy = enemyObjects[iEnemy];
 				Collision::checkCollision(bullet, enemy);
