@@ -2,6 +2,7 @@
 #include"Megaman.h"
 #include"EnemyBullet.h"
 #include"MegamanBullet.h"
+#include"EffectCreateItem.h"
 
 Met::Met()
 {
@@ -59,6 +60,7 @@ void Met::update()
 void Met::CreateBullet()
 {
 	EnemyBullet *newBullet1 = new EnemyBullet();
+	newBullet1->objectDirection = objectDirection;
 	newBullet1->categoryBullet = FOR_MET;
 	newBullet1->dx = 2 * objectDirection;
 	newBullet1->dy = 0;
@@ -66,6 +68,7 @@ void Met::CreateBullet()
 	newBullet1->y = this->y -4;
 
 	EnemyBullet *newBullet2 = new EnemyBullet();
+	newBullet2->objectDirection = objectDirection;
 	newBullet2->categoryBullet = FOR_MET;
 	newBullet2->dx = 2 * objectDirection;
 	newBullet2->dy = 1;
@@ -73,6 +76,7 @@ void Met::CreateBullet()
 	newBullet2->y = this->y - 4;
 
 	EnemyBullet *newBullet3 = new EnemyBullet();
+	newBullet3->objectDirection = objectDirection;
 	newBullet3->categoryBullet = FOR_MET;
 	newBullet3->dx = 2 * objectDirection;
 	newBullet3->dy = -1;
@@ -80,11 +84,11 @@ void Met::CreateBullet()
 	newBullet3->y = this->y - 4;
 
 }
-void  Met::onCollision(MGMBox * otherObject, int nx, int ny) {
+void Met::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET) {
 		//count++;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		if (this->curAction==MET_ATTACK) {
+		if (this->curAction == MET_ATTACK) {
 			count++;
 			if (count == 1)
 			{
@@ -93,11 +97,16 @@ void  Met::onCollision(MGMBox * otherObject, int nx, int ny) {
 				mgmbullet->setAction(FIRE);
 				isKill = true;
 				count = 0;
+				EffectCreateItem::getInstance()->enemy = this;
+				EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 			}
 		}
-		if(count!=1)
+		if (count != 1)
 		{
 			mgmbullet->setAction(NONE);
 		}
 	}
+}
+void  Met::onCollision(MGMBox * otherObject, int nx, int ny) {
+
 }

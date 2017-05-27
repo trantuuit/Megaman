@@ -17,6 +17,7 @@ public:
 	~Met();
 	void update();
 	void CreateBullet();
+	void onIntersectRect(MGMBox* otherObject);
 	void onCollision(MGMBox * otherObject, int nx, int ny);
 };
 

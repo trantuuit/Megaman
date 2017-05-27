@@ -5,6 +5,7 @@ class StoneDead :
 {
 public:
 	StoneDead();
+	void onIntersectRect(MGMBox* otherObject);
 	~StoneDead();
 };
 

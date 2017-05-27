@@ -1,5 +1,5 @@
 #include "StoneDead.h"
-
+#include"EnemyBullet.h"
 
 StoneDead::StoneDead()
 {
@@ -11,7 +11,9 @@ StoneDead::StoneDead()
 	vx = 0;
 	vy = 0;
 }
-
+void StoneDead::onIntersectRect(MGMBox* otherObject){
+	
+}
 
 StoneDead::~StoneDead()
 {

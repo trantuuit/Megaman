@@ -20,6 +20,7 @@ public:
 	void render();
 
 	bool jump;
+	void onIntersectRect(MGMBox* otherObject);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	PicketMan();
 	~PicketMan();

@@ -345,7 +345,7 @@ void Megaman::setCurAction(int action)
 	if (action == MGM_CLIMB || action == MGM_JUMP || action == MGM_STAND_STAIR_ATTACK)
 		setWidth(16);
 	else
-		setWidth(20);
+		setWidth(16);
 
 	MGMMovableObject::setCurAction(action);
 }
@@ -433,6 +433,9 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			}
 			if (bullet->categoryBullet == FOR_SCREW_BOMBER){
 				healthPoint -= 2;
+			}
+			if (bullet->categoryBullet == FOR_PKM){
+				healthPoint -= 3;
 			}
 		}
 

@@ -17,6 +17,7 @@ enum CATEGORY_ENEMY{
 	ROOM,
 	BIG_ROCK,
 	SMALL_ROCK,
+	PKM_WEAPON,
 
 };
 class MGMEnemy :

@@ -14,6 +14,7 @@
 #include "SmallRock.h"
 #include"DieEffect.h"
 #include"EffectCreateItem.h"
+#include"PKMWeapon.h"
 MGMGame::MGMGame()
 {
 }
@@ -365,7 +366,7 @@ void MGMGame::update(DWORD timesleep)
 		for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
 		{
 			PKMWeapon* bullet = p->m_value;
-			//Collision::checkCollision(bullet, Megaman::getInstance());
+			Collision::checkCollision(bullet, Megaman::getInstance());
 			bullet->deltaUpdate();
 			bullet->updateFrameAnimation();
 			bullet->coordinateUpdate();

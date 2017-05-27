@@ -1,9 +1,11 @@
 #pragma once
 #include"MGMEnemy.h"
 #include"List.h"
-
+#include"EnemyBullet.h"
 class PKMWeapon: public MGMEnemy
 {
+private:
+	CATEGORY_BULLET categoryBullet;
 public:
 	static List<PKMWeapon*>* hammer;
 	static List<PKMWeapon*>* getListHammer();

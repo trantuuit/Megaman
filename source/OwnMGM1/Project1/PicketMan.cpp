@@ -3,7 +3,9 @@
 #include"Collision.h"
 #include"PKMWeapon.h"
 #include<ctime>
-
+#include"EffectCreateItem.h"
+#include"Megaman.h"
+#include"MegamanBullet.h"
 void PicketMan::update()
 {
 	srand(time(0));
@@ -65,6 +67,7 @@ void PicketMan::updateFrameAnimation()
 void PicketMan::AxeThrowing()
 {
 	PKMWeapon *PKMwp = new PKMWeapon();
+	PKMwp->objectDirection = this->objectDirection;
 	PKMwp->x = this->x;
 	PKMwp->y = this->y;
 
@@ -83,7 +86,28 @@ void PicketMan::render()
 {
 	MGMEnemy::render();
 }
-
+void PicketMan::onIntersectRect(MGMBox* otherObject){
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET) {
+		//count++;
+		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
+		if (this->curAction == PKM_ATTACK) {
+			count++;
+			if (count == 5)
+			{
+				mgmbullet->x = this->x;
+				mgmbullet->y = this->y;
+				mgmbullet->setAction(FIRE);
+				isKill = true;
+				count = 0;
+				EffectCreateItem::getInstance()->enemy = this;
+				EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
+			}
+		}
+		else{
+			mgmbullet->setAction(NONE);
+		}
+	}
+}
 
 void PicketMan::onCollision(MGMBox * otherObject, int nx, int ny)
 {

@@ -19,9 +19,10 @@ void PKMWeapon::deltaUpdate()
 
 PKMWeapon::PKMWeapon()
 {
-	this->collisionCategory = CC_PKM_WEAPON;
+	this->collisionCategory = CC_ENEMY_BULLET;
+	this->categoryEnemy = PKM_WEAPON;
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_PKM_WEAPON];
-	
+	categoryBullet = FOR_PKM;
 	getListHammer()->_Add(this);
 }
 
