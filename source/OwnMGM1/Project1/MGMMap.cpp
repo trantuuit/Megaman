@@ -134,7 +134,7 @@ void MGMMap::readObjects(char* objectsPath)
 	{
 		doors[0]->x = 2784;
 		doors[0]->y = 144;
-		doors[1]->x = 3567;
+		doors[1]->x = 3568;
 		doors[1]->y = 144;
 	}
 }
@@ -198,7 +198,7 @@ void MGMMap::updateStage()
 
 		if (Collision::AABBCheck(mgm, doors[i]))
 		{
-			if (mgm->objectDirection == RIGHT)
+			if (mgm->objectDirection == RIGHT&&mgm->getRight()<=doors[i]->x)
 			{
 				isUpdate = false;
 				Megaman::getInstance()->dx = 0;
@@ -224,6 +224,7 @@ void MGMMap::updateStage()
 			MGMCamera::getInstance()->dy = 4;
 
 		}
+
 		if (mgm->getYCenter() < MGMStage::curStage->getBottom())
 		{
 			mgm->y -= 0.5f;
@@ -352,6 +353,7 @@ void MGMMap::update()
 	int nDoor = 2;
 	for (int i = 0; i < nDoor; i++){
 		Collision::checkCollision(CutMan::getInstance(), this->doors[i]);
+
 	}
 	//test
 	//for (List<MGMItem*>::Node*p = MGMItem::getListItem()->pHead; p; p = p->pNext){
@@ -370,14 +372,15 @@ void MGMMap::draw()
 
 	MGMTileMap::draw();
 	if (!BoardBar::getInstance()->isPause){
-		for (int i = 0; i < 2; i++)
-		{
-			doors[i]->render();
-		}
+		
 		int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
 		for (int i = 0; i < nObjectsCam; i++)
 		{
 			MGMCamera::getInstance()->objects.allObjects[i]->render();
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			doors[i]->render();
 		}
 	}
 
