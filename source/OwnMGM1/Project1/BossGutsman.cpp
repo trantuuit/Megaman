@@ -224,6 +224,8 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 		moveDirect = (nx == -1) ? TO_LEFT : TO_RIGHT;
 		vx = 0;
 	}
+	if (x <= 3598)
+		moveDirect = TO_RIGHT;
 	MGMMovableObject::onCollision(otherObject, nx, ny); // PreventMove và Set lại vy như mọi đối tượng khác
 }
 void BossGutsman::onIntersectRect(MGMBox* otherObject){
