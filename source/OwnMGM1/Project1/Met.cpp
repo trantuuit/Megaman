@@ -25,7 +25,7 @@ void Met::update()
 	Megaman*mgm = Megaman::getInstance();
 	if (x > mgm->x) objectDirection = LEFT;
 	else if (x < mgm->x) objectDirection = RIGHT;
-	
+
 
 	if (abs(x - mgm->x) <= 85)
 	{
@@ -45,7 +45,7 @@ void Met::update()
 	if (timeAttack.isSchedule())
 	{
 		setCurAction(MET_ATTACK);
-		if(CountShot==0) CreateBullet();
+		if (CountShot == 0) CreateBullet();
 		CountShot++;
 	}
 	timeAttack.isFinish();
@@ -65,7 +65,7 @@ void Met::CreateBullet()
 	newBullet1->dx = 2 * objectDirection;
 	newBullet1->dy = 0;
 	newBullet1->x = this->x + 9;
-	newBullet1->y = this->y -4;
+	newBullet1->y = this->y - 4;
 
 	EnemyBullet *newBullet2 = new EnemyBullet();
 	newBullet2->objectDirection = objectDirection;
@@ -97,6 +97,7 @@ void Met::onIntersectRect(MGMBox* otherObject){
 				mgmbullet->setAction(FIRE);
 				isKill = true;
 				count = 0;
+				Megaman::getInstance()->score += 500;
 				EffectCreateItem::getInstance()->enemy = this;
 				EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 			}

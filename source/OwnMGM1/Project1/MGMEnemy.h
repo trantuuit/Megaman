@@ -24,6 +24,7 @@ class MGMEnemy :
 	public MGMMovableObject
 {
 public:
+
 	CATEGORY_ENEMY categoryEnemy;
 	int count;
 	MGMEnemy();

@@ -160,9 +160,103 @@ void Megaman::update()
 			}
 			//pauseAnimation = false;
 		}
-		else if (isOnGround){
+		else if (isOnGreenBar){
+
+			
+			isOnGround = false;
 			if (isKeyJumpPress){
 				vy = MEGAMAN_VY_JUMP;
+				vx = 0;
+				isOnGreenBar = false;
+			}
+
+			if (isKeyMoveDown){
+				if (lastStatusRunAttack){
+					if (delayAnimateRunShoot.isReady())
+					{
+						delayAnimateRunShoot.start();
+					}
+
+					if (delayAnimateRunShoot.isFinish()){
+						setCurAction(MGM_RUN);
+						lastStatusRunAttack = false;
+					}
+					delayAnimateRunShoot.update();
+				}
+				else{
+					setCurAction(MGM_PRE_RUN);
+				}
+
+				if (objectDirection == RIGHT && dxGreenBar > 0){
+					dx = objectDirection*abs(dxGreenBar + 1.5);
+				}
+				if (objectDirection == RIGHT && dxGreenBar < 0){
+					dx = objectDirection*abs(dxGreenBar);
+				}
+				if (objectDirection == LEFT && dxGreenBar < 0){
+					dx = objectDirection*abs(dxGreenBar - 1.5);
+				}
+				if (objectDirection == LEFT && dxGreenBar > 0){
+					dx = objectDirection*abs(dxGreenBar);
+				}
+				lastStatusStandAttack = false;
+
+				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
+					MegamanBullet* bullet = new MegamanBullet();
+					bullet->dx = 4 * objectDirection;
+					if (objectDirection == 1){
+						bullet->x = x + 19;
+					}
+					else{
+						bullet->x = x - 7;
+					}
+
+					bullet->y = y - 7;
+					delayShoot.start();
+					setCurAction(MGM_RUN_ATTACK);
+					lastStatusRunAttack = true;
+				}
+			}
+			else{
+				dx = dxGreenBar;
+				if (lastStatusStandAttack){
+					if (delayAnimateStandShoot.isReady()){
+						delayAnimateStandShoot.start();
+					}
+					if (delayAnimateStandShoot.isFinish()){
+						setCurAction(MGM_STAND);
+						lastStatusStandAttack = false;
+					}
+					if (delayAnimateStandShoot.isSchedule()){
+						setCurAction(MGM_STAND_ATTACK);
+					}
+					delayAnimateStandShoot.update();
+				}
+				else{
+					setCurAction(MGM_STAND);
+				}
+				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3 && !Room::getInstance()->isVibrate)
+				{
+					MegamanBullet* bullet = new MegamanBullet();
+					bullet->dx = 4 * objectDirection;
+					if (objectDirection == 1){
+						bullet->x = x + 19;
+					}
+					else{
+						bullet->x = x - 7;
+					}
+
+					bullet->y = y - 8;
+					delayShoot.start();
+					setCurAction(MGM_STAND_ATTACK);
+					lastStatusStandAttack = true;
+				}
+			}
+		}
+		else if (isOnGround){
+			if (isKeyJumpPress&&!isOnGreenBar){
+				vy = MEGAMAN_VY_JUMP;
+				isOnGround = false;
 			}
 			if (isKeyMoveDown){
 				if (lastStatusRunAttack){
@@ -199,21 +293,6 @@ void Megaman::update()
 					lastStatusRunAttack = true;
 				}
 			}
-			else if (isOnGreenBar){
-				if (isKeyJumpPress){
-					vy = MEGAMAN_VY_JUMP;
-					isOnGreenBar = false;
-					pauseAnimation = false;
-				}
-				vx = 0;
-				/*dx = dxGreenBar;*/
-				//if (isKeyMoveDown){
-				//	dx = objectDirection*2;
-				//}
-				//else{
-				//	dx = dxGreenBar;
-				//}
-			}
 			else{
 
 				vx = 0;
@@ -249,8 +328,10 @@ void Megaman::update()
 					setCurAction(MGM_STAND_ATTACK);
 					lastStatusStandAttack = true;
 				}
+
 			}
 		}
+
 		if (!isOnGround && !isOnStairs && !isOnGreenBar&&!Room::getInstance()->isVibrate){
 			if (lastStatusJumpAttack){
 				if (delayAnimateJumpShoot.isReady())
@@ -295,8 +376,11 @@ void Megaman::update()
 	isOnGround = false;
 }
 void Megaman::deltaUpdate(){
-	vx = vx + ax * GAMETIME;
-	dx = vx * GAMETIME;
+	if (!isOnGreenBar){
+		vx = vx + ax * GAMETIME;
+		dx = vx * GAMETIME;
+	}
+
 
 	vy = vy + ay * GAMETIME;
 	if (vy <= -0.9f)
@@ -342,11 +426,11 @@ void Megaman::setCurAction(int action)
 	if (this->action == MGM_RUN && action == MGM_PRE_RUN)
 		return;
 	this->action = action;
-	if (action == MGM_CLIMB || action == MGM_JUMP || action == MGM_STAND_STAIR_ATTACK)
-		setWidth(16);
-	else
-		setWidth(16);
-
+	//if (action == MGM_CLIMB || action == MGM_JUMP || action == MGM_STAND_STAIR_ATTACK)
+	//	setWidth(16);
+	//else
+	//	setWidth(16);
+	setWidth(16);
 	MGMMovableObject::setCurAction(action);
 }
 
@@ -416,6 +500,9 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			if (enemy->categoryEnemy == SMALL_ROCK){
 				healthPoint -= 4;
 			}
+			if (enemy->categoryEnemy == CREP_MET){
+				healthPoint -= 1;
+			}
 		}
 
 	}
@@ -436,6 +523,9 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			}
 			if (bullet->categoryBullet == FOR_PKM){
 				healthPoint -= 3;
+			}
+			if (bullet->categoryBullet == FOR_MET){
+				healthPoint -= 2;
 			}
 		}
 
@@ -607,31 +697,53 @@ void Megaman::setWidth(int width)
 
 void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 {
+	MGMMovableObject::onCollision(otherObject, nx, ny);
 	if (ny == 1)
 	{
 		isOnGround = true;
 		isOnStairs = false;
 	}
-	MGMMovableObject::onCollision(otherObject, nx, ny); // @Dung comment
+
 
 
 	// Dung add:
 	// Tùy chỉnh để đứng trên thanh GreenBar: (cách cũ gọi MGMMovableObject::onCollision(otherObject, nx, ny);)
-	if (ny != 0 && (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK ||
-		otherObject->collisionCategory == CC_ENEMY))
-	{
-		/*vy = -0.25;*/
-		MGMEnemy *m = (MGMEnemy*)otherObject; // Set vx để Megaman đi theo GreenBar
-		if (m->categoryEnemy == GREEN_BAR)
-		{
-			dxGreenBar = otherObject->dx;
-			isOnGreenBar = true;
-		}
-		if (m->categoryEnemy == GREEN_BAR){
+	//if (ny != 0 && (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK ||
+	//	otherObject->collisionCategory == CC_ENEMY))
+	//{
+	//	/*vy = -0.25;*/
+	//	MGMEnemy *m = (MGMEnemy*)otherObject; // Set vx để Megaman đi theo GreenBar
+	//	if (m->categoryEnemy == GREEN_BAR)
+	//	{
+	//		dxGreenBar = otherObject->dx;
+	//		isOnGreenBar = true;
+	//	}
+	//	if (m->categoryEnemy == GREEN_BAR){
+	//		if (m->curFrame == 0){
+	//			Collision::preventMove(this, otherObject, nx, ny);
+	//		}
+	//	}
+	//}
+
+	if (otherObject->collisionCategory == CC_ENEMY){
+		MGMEnemy *m = (MGMEnemy*)otherObject;
+		if (m->categoryEnemy == GREEN_BAR && ny==1){
 			if (m->curFrame == 0){
+				
+				isOnGreenBar = true;
+				
 				Collision::preventMove(this, otherObject, nx, ny);
 			}
+			else{
+				isOnGreenBar = false;
+			}
+
+			isOnGround = false;
+			dxGreenBar = otherObject->dx;
 		}
+	}
+	else{
+		isOnGreenBar = false;
 	}
 	//if (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK || otherObject->collisionCategory == CC_ENEMY)
 	//{

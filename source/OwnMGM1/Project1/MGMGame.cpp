@@ -95,9 +95,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
-	mapCut = new MGMMap(CutMap,"Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
+	mapCut = new MGMMap(CutMap, "Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
 		"Data\\TileMap\\stage.txt");
-	mapGut = new MGMMap(GutsMap,"Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
+	mapGut = new MGMMap(GutsMap, "Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
 		"Data\\MapGut\\stage.txt");
 }
 void MGMGame::render()
@@ -106,7 +106,7 @@ void MGMGame::render()
 		map->draw();
 		HPBar::getInstance()->render();
 		ScoreBar::getInstance()->render();
-		
+
 		if (!Megaman::getInstance()->isKill){
 			Megaman::getInstance()->render();
 		}
@@ -116,7 +116,7 @@ void MGMGame::render()
 			MegamanBullet* bullet = p->m_value;
 			bullet->render();
 		}
-		
+
 		for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
 		{
 			PKMWeapon* hammer = p->m_value;
@@ -143,7 +143,7 @@ void MGMGame::render()
 			SuperCutter *s = SuperCutter::getSuperCutters()->at(i);
 			s->render();
 		}
-		
+
 		// Render SmallRocks:
 		for (int i = 0; i < SmallRock::getSmallRocks()->Count; i++)
 		{
@@ -264,7 +264,7 @@ void MGMGame::update(DWORD timesleep)
 		//----------------------------------------------------SUPER CUTTER-------------------------------------------------------------
 
 		// Xét tọa độ của Megaman so với ngôi nhà (nhằm new SuperCuterr())
-		if (SuperCutter::isAppear())
+		if (SuperCutter::isAppear() && map == mapCut)
 		{
 			int distance;
 			if (SuperCutter::location == LOCATION_1)

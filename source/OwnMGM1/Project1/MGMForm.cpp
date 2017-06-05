@@ -46,7 +46,7 @@ void MGMForm::initHandleWindows(HINSTANCE hInstance, int nCmdShow)
 	wcex.lpszClassName = MGMFORM_CLASS_NAME;
 	RegisterClassEx(&wcex);
 	HWND hWnd = CreateWindow(MGMFORM_CLASS_NAME, TITLE_STR, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, FORM_WIDTH, FORM_HEIGHT, 0, 0, hInstance, NULL);
+		CW_USEDEFAULT, CW_USEDEFAULT, FORM_WIDTH, FORM_HEIGHT, 0, 0, hInstance, NULL);
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);

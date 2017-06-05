@@ -37,19 +37,14 @@ void MGMTexture::Init(const char* filepath, D3DCOLOR transColor)
 		return;
 }
 
-
 void MGMTexture::RenderTexture(int x, int y, RECT *r)
 {
 	MGMDirectXTool::getInstance()->GetSprite()->Draw(m_image,
 		r,
-		//&D3DXVECTOR3(anchorPoint.X, anchorPoint.Y, 0),
 		0,
 		&D3DXVECTOR3(x, y, 0),
 		D3DCOLOR_XRGB(255, 255, 255));
 }
-
-
-
 
 MGMTexture::~MGMTexture()
 {

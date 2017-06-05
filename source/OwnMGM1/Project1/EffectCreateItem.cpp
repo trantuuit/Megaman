@@ -32,7 +32,7 @@ void EffectCreateItem::update(){
 		{
 		case ACTION_EFFECT_ITEM_FIRE:
 			if (timedelay.isReady()&&timedelay.isFinish()){
-				timedelay.start(200);
+				timedelay.start(100);
 			}
 			if (timedelay.isSchedule()){
 				curAction = 0;
@@ -73,11 +73,11 @@ void EffectCreateItem::update(){
 					up->x = enemy->x;
 					up->y = enemy->y;
 				}
-				if (result == 6){
-					Yashichi* yashichi = new Yashichi();
-					yashichi->x = enemy->x;
-					yashichi->y = enemy->y;
-				}
+				//if (result == 6){
+				//	Yashichi* yashichi = new Yashichi();
+				//	yashichi->x = enemy->x;
+				//	yashichi->y = enemy->y;
+				//}
 				action = ACTION_EFFECT_ITEM_NONE;
 			}
 			timedelay.update();

@@ -1,7 +1,6 @@
 #pragma once
 #include<Windows.h>
 #include<d3dx9.h>
-#include"MGMPoint.h"
 #include"MGMDirectXTool.h"
 
 enum Direction
@@ -17,10 +16,7 @@ private:
 public:
 
 	int Width, Height;
-	MGMPoint anchorPoint;
-
 	Direction imageDirection;
-
 	MGMTexture(const char* filepath, D3DCOLOR transColor);
 	////tao texture
 	// filepath: duong dan file hinh anh

@@ -51,6 +51,7 @@ public:
 	MGMDelayTime delayAnimateStandStairShoot;
 	MGMDelayTime delayShoot;
 	float dxGreenBar;
+	Direction greenBarObjectDirection;
 	bool isOnStairs;
 	bool isOnGreenBar; // Dung: kiểm tra lúc đứng trên GreenBar
 	int IntersectDoor;

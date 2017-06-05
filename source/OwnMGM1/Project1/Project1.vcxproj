@@ -112,7 +112,6 @@
     <ClCompile Include="MGMMovableObject.cpp" />
     <ClCompile Include="MGMObject.cpp" />
     <ClCompile Include="MGMObjectsCategory.cpp" />
-    <ClCompile Include="MGMPoint.cpp" />
     <ClCompile Include="MGMRectangle.cpp" />
     <ClCompile Include="MGMSprite.cpp" />
     <ClCompile Include="MGMSpriteManager.cpp" />
@@ -182,7 +181,6 @@
     <ClInclude Include="MGMMovableObject.h" />
     <ClInclude Include="MGMObject.h" />
     <ClInclude Include="MGMObjectsCategory.h" />
-    <ClInclude Include="MGMPoint.h" />
     <ClInclude Include="MGMRectangle.h" />
     <ClInclude Include="MGMSprite.h" />
     <ClInclude Include="MGMSpriteManager.h" />
