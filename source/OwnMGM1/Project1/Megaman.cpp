@@ -418,7 +418,7 @@ void Megaman::render()
 			-1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
-			2 * (xDraw + widthSprite / 2), 0, 0, 1)));
+			2*(xDraw + widthSprite / 2), 0, 0, 1)));
 	}
 	this->sprite->Render(xDraw, yDraw, curAction, curFrame);
 	if (objectDirection != sprite->pImage->imageDirection)

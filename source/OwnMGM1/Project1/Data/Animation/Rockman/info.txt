@@ -14,7 +14,7 @@ Index		Name
 			LocationX		LocationY		FrameWidth		FrameHeight
 			3				18				21				24
 			28				18				21				24
-			686				14				21				24
+			701				49				21				24
 			
 
 Index		Name
@@ -40,7 +40,7 @@ Index		Name
 			81				18				24				24
 			111				18				16				24
 			135				18				21				24
-			677				16				29				22
+			701				49				29				22
 				
 
 Index		Name
@@ -51,8 +51,8 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			189				10				32				30
-			716				8				26				30
+			194				10				27				30
+			701				49				26				30
 
 
 Index		Name
@@ -65,7 +65,7 @@ Index		Name
 			LocationX		LocationY		FrameWidth		FrameHeight
 			340				55				16				29
 			363				55				16				29
-			683				13				29				30
+			701				49				29				30
 	
 	
 Index		Name
@@ -76,8 +76,8 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			292				18				31				24
-			682				14				31				24
+			702				13				41				24
+			701				49				31				24
 
 
 Index		Name
@@ -91,7 +91,7 @@ Index		Name
 			325				20				29				22	
 			358				18				26				24
 			391				20				30				22
-			686				15				29				22
+			701				49				29				22
 			
 
 Index		Name
@@ -103,7 +103,7 @@ Index		Name
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
 			424				10				29				30
-			683				13				29				30
+			701				49				29				30
 			
 			
 Index		Name
@@ -115,7 +115,7 @@ Index		Name
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
 			453				55				32				29
-			683				13				29				30
+			701				49				29				30
 
 
 Index		Name

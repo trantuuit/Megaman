@@ -11,7 +11,7 @@ public:
 	MGMTexture *pImage;
 	MGMAnimation* animations;
 	void Update(int curAction, int& curFrame);
-	void Render(int x, int y, int curAction, int curFrame);
+	void Render(float x, float y, int curAction, int curFrame);
 	MGMSprite(){}
 	MGMSprite(char* infor, char* imagepath);
 

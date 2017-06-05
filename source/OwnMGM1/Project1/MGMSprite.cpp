@@ -43,7 +43,7 @@ void MGMSprite::Update(int curAction, int& curFrame)
 {
 	 animations[curAction].next(curFrame);
 }
-void MGMSprite::Render(int x, int y, int curAction, int curFrame)
+void MGMSprite::Render(float x, float y, int curAction, int curFrame)
 {
 	MGMAnimation* ani = &animations[curAction];
 	pImage->RenderTexture(x, y, &ani->frames[curFrame].toRect());
