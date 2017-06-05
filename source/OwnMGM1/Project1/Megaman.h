@@ -58,6 +58,7 @@ public:
 	static Megaman* instance;
 	static Megaman* getInstance();
 	int action;
+	bool lastOnGreenBar;
 	bool lastStatusStandStairAttack;
 	bool lastStatusStandAttack;
 	bool lastStatusRunAttack;

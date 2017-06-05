@@ -162,14 +162,15 @@ void Megaman::update()
 		}
 		else if (isOnGreenBar){
 
-			
+			isOnGreenBar = true;
+			lastOnGreenBar = true;
 			isOnGround = false;
 			if (isKeyJumpPress){
 				vy = MEGAMAN_VY_JUMP;
 				vx = 0;
 				isOnGreenBar = false;
 			}
-
+			
 			if (isKeyMoveDown){
 				if (lastStatusRunAttack){
 					if (delayAnimateRunShoot.isReady())
@@ -216,6 +217,7 @@ void Megaman::update()
 					setCurAction(MGM_RUN_ATTACK);
 					lastStatusRunAttack = true;
 				}
+				
 			}
 			else{
 				dx = dxGreenBar;
@@ -348,8 +350,10 @@ void Megaman::update()
 				delayAnimateJumpShoot.update();
 			}
 			else{
+
 				setCurAction(MGM_JUMP);
 			}
+
 			if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
 				MegamanBullet* bullet = new MegamanBullet();
 				bullet->dx = 4 * objectDirection;
@@ -365,7 +369,13 @@ void Megaman::update()
 				lastStatusJumpAttack = true;
 			}
 			if (isKeyMoveDown){
-				vx = objectDirection*MEGAMAN_VX_GO;
+				if (lastOnGreenBar){
+					vx = objectDirection*0.5;
+					lastOnGreenBar = false;
+				}
+				else{
+					vx = objectDirection*MEGAMAN_VX_GO;
+				}
 			}
 		}
 	}
@@ -374,6 +384,7 @@ void Megaman::update()
 	deltaUpdate();
 	updateFrameAnimation();
 	isOnGround = false;
+	isOnGreenBar = false;
 }
 void Megaman::deltaUpdate(){
 	if (!isOnGreenBar){
@@ -703,65 +714,30 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 		isOnGround = true;
 		isOnStairs = false;
 	}
-
-
-
-	// Dung add:
-	// Tùy chỉnh để đứng trên thanh GreenBar: (cách cũ gọi MGMMovableObject::onCollision(otherObject, nx, ny);)
-	//if (ny != 0 && (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK ||
-	//	otherObject->collisionCategory == CC_ENEMY))
-	//{
-	//	/*vy = -0.25;*/
-	//	MGMEnemy *m = (MGMEnemy*)otherObject; // Set vx để Megaman đi theo GreenBar
-	//	if (m->categoryEnemy == GREEN_BAR)
-	//	{
-	//		dxGreenBar = otherObject->dx;
-	//		isOnGreenBar = true;
-	//	}
-	//	if (m->categoryEnemy == GREEN_BAR){
-	//		if (m->curFrame == 0){
-	//			Collision::preventMove(this, otherObject, nx, ny);
-	//		}
-	//	}
-	//}
-
 	if (otherObject->collisionCategory == CC_ENEMY){
 		MGMEnemy *m = (MGMEnemy*)otherObject;
 		if (m->categoryEnemy == GREEN_BAR && ny==1){
 			if (m->curFrame == 0){
 				
 				isOnGreenBar = true;
-				
 				Collision::preventMove(this, otherObject, nx, ny);
 			}
 			else{
 				isOnGreenBar = false;
 			}
-
 			isOnGround = false;
 			dxGreenBar = otherObject->dx;
 		}
 	}
 	else{
+		
 		isOnGreenBar = false;
 	}
-	//if (otherObject->collisionCategory == CC_GROUND || otherObject->collisionCategory == CC_BIGROCK || otherObject->collisionCategory == CC_ENEMY)
-	//{
-	//	MGMObject *m = (MGMObject*)otherObject;
-	//	if (m->id == 28 && m->curFrame != 0) // Khi GreenBar đang gập xuống:
-	//	{
-	//		// Không preventMove
-	//	}
-	//	else
-	//		Collision::preventMove(this, otherObject, nx, ny);
-	//}
-	// --------------------Hết đoạn Dung add----------------------------
-
-
 }
 
 Megaman::Megaman()
 {
+	lastOnGreenBar = false;
 	actionBeingAttacked = ATTACKED_NONE;
 	status = MEGAMAN_NORMAL;
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_MEGAMAN];
