@@ -51,7 +51,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>dinput8.lib;dxguid.lib;d3d9.lib;d3dx9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dinput8.lib;dxguid.lib;dsound.lib;dxerr.lib;winmm.lib;d3d9.lib;d3dx9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,6 +74,7 @@
     <ClCompile Include="BoardBar.cpp" />
     <ClCompile Include="BossGutsman.cpp" />
     <ClCompile Include="DieEffect.cpp" />
+    <ClCompile Include="dsutil.cpp" />
     <ClCompile Include="EffectCreateItem.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="BigEye.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="Flea.cpp" />
     <ClCompile Include="FlyingShell.cpp" />
     <ClCompile Include="GameOverMenu.cpp" />
+    <ClCompile Include="MGMAudioManager.cpp" />
     <ClCompile Include="GreenBar.cpp" />
     <ClCompile Include="HPBar.cpp" />
     <ClCompile Include="LifeEnergyBig.cpp" />
@@ -142,6 +144,8 @@
     <ClInclude Include="BoardBar.h" />
     <ClInclude Include="BossGutsman.h" />
     <ClInclude Include="DieEffect.h" />
+    <ClInclude Include="dsutil.h" />
+    <ClInclude Include="dxutil.h" />
     <ClInclude Include="EffectCreateItem.h" />
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="BigEye.h" />
@@ -155,6 +159,7 @@
     <ClInclude Include="Flea.h" />
     <ClInclude Include="FlyingShell.h" />
     <ClInclude Include="GameOverMenu.h" />
+    <ClInclude Include="MGMAudioManager.h" />
     <ClInclude Include="GreenBar.h" />
     <ClInclude Include="HPBar.h" />
     <ClInclude Include="LifeEnergyBig.h" />

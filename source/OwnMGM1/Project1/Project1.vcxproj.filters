@@ -32,6 +32,9 @@
     <Filter Include="Effect">
       <UniqueIdentifier>{a724fbd0-98a3-4c84-8f77-d8b6fcc7f267}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\sound">
+      <UniqueIdentifier>{fe650eb2-c5e9-40a8-8156-726ab1863b52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp">
@@ -230,6 +233,12 @@
     <ClCompile Include="BoardBar.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="dsutil.cpp">
+      <Filter>Framework\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMAudioManager.cpp">
+      <Filter>Framework\sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -427,6 +436,15 @@
     </ClInclude>
     <ClInclude Include="BoardBar.h">
       <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="dsutil.h">
+      <Filter>Framework\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="dxutil.h">
+      <Filter>Framework\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMAudioManager.h">
+      <Filter>Framework\sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

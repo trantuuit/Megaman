@@ -1,6 +1,7 @@
 #include "FlyingShell.h"
 #include "MegamanBullet.h"
 #include"Megaman.h"
+#include"MGMAudioManager.h"
 #include"EffectCreateItem.h"
 FlyingShell::FlyingShell()
 {
@@ -28,6 +29,7 @@ void FlyingShell::update(){
 				delayShoot.start(500);
 				//Ban 8 vien cung 1 luc
 				EnemyBullet *newBullet1 = new EnemyBullet();
+				
 				newBullet1->categoryBullet = FOR_FLYING_SHELL;
 				newBullet1->dx = 0;
 				newBullet1->dy = 3;
@@ -35,6 +37,7 @@ void FlyingShell::update(){
 				newBullet1->y = this->y + 1;
 
 				EnemyBullet *newBullet2 = new EnemyBullet();
+				newBullet2->objectDirection = LEFT;	
 				newBullet2->categoryBullet = FOR_FLYING_SHELL;
 				newBullet2->dy = 3;
 				newBullet2->dx = 3;
@@ -42,6 +45,7 @@ void FlyingShell::update(){
 				newBullet2->y = this->y - 1;
 
 				EnemyBullet *newBullet3 = new EnemyBullet();
+				newBullet3->objectDirection = LEFT;
 				newBullet3->categoryBullet = FOR_FLYING_SHELL;
 				newBullet3->dy = 0;
 				newBullet3->dx = 3;
@@ -49,6 +53,7 @@ void FlyingShell::update(){
 				newBullet3->y = this->y - 11;
 
 				EnemyBullet *newBullet4 = new EnemyBullet();
+				newBullet4->objectDirection = LEFT;
 				newBullet4->categoryBullet = FOR_FLYING_SHELL;
 				newBullet4->dy = -3;
 				newBullet4->dx = 3;
@@ -63,6 +68,7 @@ void FlyingShell::update(){
 				newBullet5->y = this->y - 21;
 
 				EnemyBullet *newBullet6 = new EnemyBullet();
+				newBullet6->objectDirection = RIGHT;
 				newBullet6->categoryBullet = FOR_FLYING_SHELL;
 				newBullet6->dy = -3;
 				newBullet6->dx = -3;
@@ -70,6 +76,7 @@ void FlyingShell::update(){
 				newBullet6->y = this->y - 18;
 
 				EnemyBullet *newBullet7 = new EnemyBullet();
+				newBullet7->objectDirection = RIGHT;
 				newBullet7->categoryBullet = FOR_FLYING_SHELL;
 				newBullet7->dy = 0;
 				newBullet7->dx = -3;
@@ -77,11 +84,13 @@ void FlyingShell::update(){
 				newBullet7->y = this->y - 11;
 
 				EnemyBullet *newBullet8 = new EnemyBullet();
+				newBullet8->objectDirection = RIGHT;
 				newBullet8->categoryBullet = FOR_FLYING_SHELL;
 				newBullet8->dy = 3;
 				newBullet8->dx = -3;
 				newBullet8->x = this->x + 4;
 				newBullet8->y = this->y - 1;
+				MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_SHOOT);
 			}
 			delayShoot.update();
 		}
@@ -128,6 +137,7 @@ void FlyingShell::onIntersectRect(MGMBox* otherObject){
 			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
+			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
 			mgmbullet->setAction(NONE);
 		}
 	}

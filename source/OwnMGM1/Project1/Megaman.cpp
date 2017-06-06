@@ -13,6 +13,7 @@
 #include "DieEffect.h"
 #include"GameOverMenu.h"
 #include"Room.h"
+#include"MGMAudioManager.h"
 Megaman * Megaman::instance = 0;
 
 Megaman * Megaman::getInstance()
@@ -142,6 +143,7 @@ void Megaman::update()
 				setCurAction(MGM_STAND_STAIR_ATTACK);
 				lastStatusStandStairAttack = true;
 				pauseAnimation = false;
+				MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 			}
 			if (lastStatusStandStairAttack){
 				if (delayAnimateStandStairShoot.isReady())
@@ -165,10 +167,15 @@ void Megaman::update()
 			isOnGreenBar = true;
 			lastOnGreenBar = true;
 			isOnGround = false;
+			if (lastIsJump){
+				lastIsJump = false;
+				MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_LAND);
+			}
 			if (isKeyJumpPress){
 				vy = MEGAMAN_VY_JUMP;
 				vx = 0;
 				isOnGreenBar = false;
+				lastIsJump = true;
 			}
 
 			if (isKeyMoveDown){
@@ -216,10 +223,12 @@ void Megaman::update()
 					delayShoot.start();
 					setCurAction(MGM_RUN_ATTACK);
 					lastStatusRunAttack = true;
+					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 				}
 
 			}
 			else{
+
 				dx = dxGreenBar;
 				if (lastStatusStandAttack){
 					if (delayAnimateStandShoot.isReady()){
@@ -252,13 +261,19 @@ void Megaman::update()
 					delayShoot.start();
 					setCurAction(MGM_STAND_ATTACK);
 					lastStatusStandAttack = true;
+					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 				}
 			}
 		}
 		else if (isOnGround){
+			if (lastIsJump){
+				lastIsJump = false;
+				MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_LAND);
+			}
 			if (isKeyJumpPress&&!isOnGreenBar){
 				vy = MEGAMAN_VY_JUMP;
 				isOnGround = false;
+				lastIsJump = true;
 			}
 			if (isKeyMoveDown){
 				if (lastStatusRunAttack){
@@ -293,6 +308,7 @@ void Megaman::update()
 					delayShoot.start();
 					setCurAction(MGM_RUN_ATTACK);
 					lastStatusRunAttack = true;
+					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 				}
 			}
 			else{
@@ -329,6 +345,7 @@ void Megaman::update()
 					delayShoot.start();
 					setCurAction(MGM_STAND_ATTACK);
 					lastStatusStandAttack = true;
+					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 				}
 
 			}
@@ -350,7 +367,6 @@ void Megaman::update()
 				delayAnimateJumpShoot.update();
 			}
 			else{
-
 				setCurAction(MGM_JUMP);
 			}
 
@@ -367,6 +383,7 @@ void Megaman::update()
 				delayShoot.start();
 				setCurAction(MGM_JUMP_ATTACK);
 				lastStatusJumpAttack = true;
+				MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 			}
 			if (isKeyMoveDown){
 				if (lastOnGreenBar){
@@ -451,7 +468,11 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			healthPoint += result;
 		}
 		if (item->categoryItem == CI_UP){
+			MGMAudioManager::getInstance()->Play(AUDIO_1UP);
 			life++;
+		}
+		if (item->categoryItem == CI_BONUS_BALL){
+			MGMAudioManager::getInstance()->Play(AUDIO_BONUS_BALL);
 		}
 	}
 	if (healthPoint > 28){
@@ -462,6 +483,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 		if (actionBeingAttacked == ATTACKED_NONE){
 			if (enemy->categoryEnemy != ROOM && enemy->categoryEnemy != GREEN_BAR){
 				beingAttacked = true;
+				MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DAMAGE);
 				actionBeingAttacked = STEP1;
 				collisionDirection = enemy->objectDirection;
 			}
@@ -489,6 +511,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	if (otherObject->collisionCategory == CC_ENEMY_BULLET){
 		EnemyBullet* bullet = (EnemyBullet*)otherObject;
 		if (actionBeingAttacked == ATTACKED_NONE){
+			MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DAMAGE);
 			beingAttacked = true;
 			actionBeingAttacked = STEP1;
 			collisionDirection = bullet->objectDirection;
@@ -608,6 +631,8 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 }
 void Megaman::die(){
 	if (!isKill){
+		MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DEFEATE);
+		
 		DieAffect* effect1 = new DieAffect(MEGAMAN_DIE);
 		effect1->x = this->x;
 		effect1->y = this->y;
@@ -689,6 +714,7 @@ void Megaman::die(){
 
 Megaman::Megaman()
 {
+	lastIsJump = true;
 	lastOnGreenBar = false;
 	actionBeingAttacked = ATTACKED_NONE;
 	status = MEGAMAN_NORMAL;

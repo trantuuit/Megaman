@@ -6,6 +6,7 @@
 #include"SelectionScreen.h"
 #include"SelectionRectangle.h"
 #include"GameOverMenu.h"
+#include"MGMAudioManager.h"
 #include"KEY.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -41,12 +42,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 				if (!MGMGame::getInstance()->isStart)
 				{
+					
 					MGMMap*map = MGMGame::getInstance()->map;
 					if (map == MGMGame::getInstance()->mapCut)
 					{
-						Megaman::getInstance()->x = 22;
+						MGMAudioManager::getInstance()->LoopSound(AUDIO_CUTMAN);
+				/*		Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 111;
-						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 						/*Megaman::getInstance()->x = 830;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
@@ -56,9 +59,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					/*	Megaman::getInstance()->x = 830;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-					/*	Megaman::getInstance()->x = 1322;
+						Megaman::getInstance()->x = 1322;
 						Megaman::getInstance()->y = 1975;
-						MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+						MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 						/*Megaman::getInstance()->x = 1322;
 						Megaman::getInstance()->y = 1975;
@@ -70,6 +73,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					}
 					if (map == MGMGame::getInstance()->mapGut)
 					{
+						MGMAudioManager::getInstance()->LoopSound(AUDIO_GUTMAN);
 						Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);

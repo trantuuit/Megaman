@@ -1,7 +1,7 @@
 ﻿#include "Beak.h"
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
-
+#include"MGMAudioManager.h"
 void Beak::update()
 {
 	//@Tu-Add
@@ -66,6 +66,7 @@ void Beak::update()
 				default:
 					break;
 				}
+				MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_SHOOT);
 				//@Tu-add
 				if (this->id == 106){
 					newBullet->x = this->x + 9;
@@ -106,6 +107,7 @@ void Beak::onIntersectRect(MGMBox* otherObject){
 			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
+			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
 			mgmbullet->setAction(NONE);
 		}
 

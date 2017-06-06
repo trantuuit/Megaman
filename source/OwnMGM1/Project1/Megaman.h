@@ -63,6 +63,7 @@ public:
 	bool lastStatusStandAttack;
 	bool lastStatusRunAttack;
 	bool lastStatusJumpAttack;
+	bool lastIsJump;
 	bool pauseAnimation;
 	/*Cập nhật*/
 	void update();

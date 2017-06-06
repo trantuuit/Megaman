@@ -2,6 +2,7 @@
 #include "Megaman.h"
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
+#include"MGMAudioManager.h"
 void OctopusBattery::update()
 {
 
@@ -90,6 +91,7 @@ void OctopusBattery::onIntersectRect(MGMBox* otherObject){
 			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
+			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
 			mgmbullet->setAction(NONE);
 		}
 	}

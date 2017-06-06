@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include"Megaman.h"
+#include"MGMAudioManager.h"
 EffectCreateItem* EffectCreateItem::effect = 0;
 EffectCreateItem* EffectCreateItem::getInstance(){
 	if (effect == 0){
@@ -85,6 +86,7 @@ void EffectCreateItem::update(){
 					bonusball->y = enemy->y;
 				}
 				action = ACTION_EFFECT_ITEM_NONE;
+				MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
 			}
 			timedelay.update();
 			

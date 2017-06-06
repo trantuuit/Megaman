@@ -3,6 +3,7 @@
 #include "MGMCamera.h"
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
+#include"MGMAudioManager.h"
 Blader::Blader()
 {
 	curAction = 0;
@@ -177,6 +178,7 @@ void Blader::onIntersectRect(MGMBox* otherObject){
 		Megaman::getInstance()->score += 500;
 		EffectCreateItem::getInstance()->enemy = this;
 		EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
+		
 	}
 }
 
