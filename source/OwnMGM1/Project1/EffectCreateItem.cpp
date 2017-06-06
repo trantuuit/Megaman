@@ -9,6 +9,7 @@
 #include "Yashichi.h"
 #include <stdlib.h>
 #include <time.h>
+#include"Megaman.h"
 EffectCreateItem* EffectCreateItem::effect = 0;
 EffectCreateItem* EffectCreateItem::getInstance(){
 	if (effect == 0){
@@ -42,42 +43,47 @@ void EffectCreateItem::update(){
 			}
 			if (timedelay.isFinish()) {
 				srand(time(NULL));
-				int result = rand() % 8;
+				float rate = (float)Megaman::getInstance()->healthPoint / 28;
+				int result;
+				if (rate > 0 && rate <= 0.3){
+					result = rand() % 2;
+				}
+				else if (rate > 0.3 && rate <= 0.75){
+					result = rand() % 3 + 2;
+				}
+				else{
+					result = rand() % 2 + 5;
+				}
 				if (result == 0){
 					LifeEnergyBig* lifeEnergyBig = new LifeEnergyBig();
 					lifeEnergyBig->x = enemy->x;
 					lifeEnergyBig->y = enemy->y;
 				}
 				if (result == 1){
-					BonusBall* bonusball = new BonusBall();
-					bonusball->x = enemy->x;
-					bonusball->y = enemy->y;
-				}
-				if (result == 2){
 					LifeEnergySmall* lifeEnergySmall = new LifeEnergySmall();
 					lifeEnergySmall->x = enemy->x;
 					lifeEnergySmall->y = enemy->y;
 				}
-				if (result == 3){
+				if (result == 2){
 					WeaponEnergyBig* weaponEnergyBig = new WeaponEnergyBig();
 					weaponEnergyBig->x = enemy->x;
 					weaponEnergyBig->y = enemy->y;
 				}
-				if (result == 4){
+				if (result == 3){
 					WeaponEnergySmall* weaponEnergySmall = new WeaponEnergySmall();
 					weaponEnergySmall->x = enemy->x;
 					weaponEnergySmall->y = enemy->y;
 				}
-				if (result == 5){
+				if (result == 4){
 					Up* up = new Up();
 					up->x = enemy->x;
 					up->y = enemy->y;
 				}
-				//if (result == 6){
-				//	Yashichi* yashichi = new Yashichi();
-				//	yashichi->x = enemy->x;
-				//	yashichi->y = enemy->y;
-				//}
+				if (result == 5){
+					BonusBall* bonusball = new BonusBall();
+					bonusball->x = enemy->x;
+					bonusball->y = enemy->y;
+				}
 				action = ACTION_EFFECT_ITEM_NONE;
 			}
 			timedelay.update();

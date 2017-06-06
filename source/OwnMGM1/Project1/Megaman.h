@@ -33,7 +33,7 @@ class Megaman :
 	public MGMMovableObject
 {
 private:
-	
+	static Megaman* instance;
 public:
 	Direction collisionDirection;
 	MEGAMAN_STATUS status;
@@ -55,7 +55,7 @@ public:
 	bool isOnStairs;
 	bool isOnGreenBar; // Dung: kiểm tra lúc đứng trên GreenBar
 	int IntersectDoor;
-	static Megaman* instance;
+	
 	static Megaman* getInstance();
 	int action;
 	bool lastOnGreenBar;
@@ -73,7 +73,7 @@ public:
 	void onLastFrameAnimation(int action);
 	void deltaUpdate();
 	void updateFrameAnimation();
-	void setWidth(int width);
+	void die();
 	Megaman();
 	~Megaman();
 };

@@ -170,7 +170,7 @@ void Megaman::update()
 				vx = 0;
 				isOnGreenBar = false;
 			}
-			
+
 			if (isKeyMoveDown){
 				if (lastStatusRunAttack){
 					if (delayAnimateRunShoot.isReady())
@@ -217,7 +217,7 @@ void Megaman::update()
 					setCurAction(MGM_RUN_ATTACK);
 					lastStatusRunAttack = true;
 				}
-				
+
 			}
 			else{
 				dx = dxGreenBar;
@@ -391,8 +391,6 @@ void Megaman::deltaUpdate(){
 		vx = vx + ax * GAMETIME;
 		dx = vx * GAMETIME;
 	}
-
-
 	vy = vy + ay * GAMETIME;
 	if (vy <= -0.9f)
 		vy = -0.9f;
@@ -408,8 +406,8 @@ void Megaman::render()
 	//Nếu hướng object khác hướng hình vẽ( hướng hình vẽ = left(-1))
 
 	int widthSprite = sprite->animations[curAction].frames[curFrame].width;
-	if (curAction != MGM_CLIMB)
-		xDraw -= (widthSprite - width) / 2;
+	/*if (curAction != MGM_CLIMB)*/
+	xDraw -= (widthSprite - width) / 2;
 
 	if (objectDirection != sprite->pImage->imageDirection)
 	{
@@ -418,7 +416,7 @@ void Megaman::render()
 			-1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
-			2*(xDraw + widthSprite / 2), 0, 0, 1)));
+			2 * (xDraw + widthSprite / 2), 0, 0, 1)));
 	}
 	this->sprite->Render(xDraw, yDraw, curAction, curFrame);
 	if (objectDirection != sprite->pImage->imageDirection)
@@ -433,25 +431,17 @@ void Megaman::render()
 
 void Megaman::setCurAction(int action)
 {
-
 	if (this->action == MGM_RUN && action == MGM_PRE_RUN)
 		return;
 	this->action = action;
-	//if (action == MGM_CLIMB || action == MGM_JUMP || action == MGM_STAND_STAIR_ATTACK)
-	//	setWidth(16);
-	//else
-	//	setWidth(16);
-	setWidth(16);
 	MGMMovableObject::setCurAction(action);
 }
 
 void Megaman::onIntersectRect(MGMBox * otherObject)
 {
-	// Code mới
+	
 	if (otherObject->collisionCategory == CC_ITEM){
 		MGMItem* item = (MGMItem*)otherObject;
-		srand(time(NULL));
-
 		if (item->categoryItem == CI_LIFE_ENERGY_BIG){
 			int result = rand() % 3 + 8;
 			healthPoint += result;
@@ -475,47 +465,26 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 				actionBeingAttacked = STEP1;
 				collisionDirection = enemy->objectDirection;
 			}
-			if (enemy->categoryEnemy == CREP_BLADER){
-				healthPoint -= 3;
-			}
-			if (enemy->categoryEnemy == CREP_BEAK){
-				healthPoint--;
-			}
-			if (enemy->categoryEnemy == CREP_OCTOPUS_BATTERY){
-				healthPoint -= 4;
-			}
-			if (enemy->categoryEnemy == CREP_BIG_EYE){
-				healthPoint -= 10;
-			}
-			if (enemy->categoryEnemy == CREP_FLYING_SHELL){
+
+			if ((enemy->categoryEnemy == CREP_BEAK) || (enemy->categoryEnemy == CREP_FLYING_SHELL) || (enemy->categoryEnemy == CREP_SCREW_BOMBER) || (enemy->categoryEnemy == CREP_MET)){
 				healthPoint -= 1;
 			}
 			if (enemy->categoryEnemy == CREP_FLEA){
 				healthPoint -= 2;
 			}
-			if (enemy->categoryEnemy == CREP_SCREW_BOMBER){
-				healthPoint -= 1;
+			if (enemy->categoryEnemy == CREP_BLADER){
+				healthPoint -= 3;
 			}
-			if (enemy->categoryEnemy == CREP_SUPER_CUTTER){
+			if ((enemy->categoryEnemy == CREP_OCTOPUS_BATTERY) || (enemy->categoryEnemy == CREP_SUPER_CUTTER) || (enemy->categoryEnemy == BOSS_GUTMAN) || (enemy->categoryEnemy == BIG_ROCK) || (enemy->categoryEnemy == SMALL_ROCK)){
 				healthPoint -= 4;
+			}
+			if (enemy->categoryEnemy == CREP_BIG_EYE){
+				healthPoint -= 10;
 			}
 			if (enemy->categoryEnemy == DEATH_LAND){
 				healthPoint -= 28;
 			}
-			if (enemy->categoryEnemy == BOSS_GUTMAN){
-				healthPoint -= 4;
-			}
-			if (enemy->categoryEnemy == BIG_ROCK){
-				healthPoint -= 4;
-			}
-			if (enemy->categoryEnemy == SMALL_ROCK){
-				healthPoint -= 4;
-			}
-			if (enemy->categoryEnemy == CREP_MET){
-				healthPoint -= 1;
-			}
 		}
-
 	}
 	if (otherObject->collisionCategory == CC_ENEMY_BULLET){
 		EnemyBullet* bullet = (EnemyBullet*)otherObject;
@@ -526,105 +495,18 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			if (bullet->categoryBullet == FOR_BEAK){
 				healthPoint -= 1;
 			}
-			if (bullet->categoryBullet == FOR_FLYING_SHELL){
-				healthPoint -= 2;
-			}
-			if (bullet->categoryBullet == FOR_SCREW_BOMBER){
+			if ((bullet->categoryBullet == FOR_FLYING_SHELL) || (bullet->categoryBullet == FOR_SCREW_BOMBER) || (bullet->categoryBullet == FOR_MET)){
 				healthPoint -= 2;
 			}
 			if (bullet->categoryBullet == FOR_PKM){
 				healthPoint -= 3;
 			}
-			if (bullet->categoryBullet == FOR_MET){
-				healthPoint -= 2;
-			}
 		}
-
 	}
-	if (healthPoint < 0){
+	if (healthPoint <= 0){
+		die();
 		healthPoint = 0;
 	}
-	if (healthPoint == 0){
-		if (!isKill){
-			DieAffect* effect1 = new DieAffect(MEGAMAN_DIE);
-			effect1->x = this->x;
-			effect1->y = this->y;
-			effect1->dx = 1;
-			effect1->dy = 0;
-
-			DieAffect* effect2 = new DieAffect(MEGAMAN_DIE);
-			effect2->x = this->x;
-			effect2->y = this->y;
-			effect2->dx = 0.7;
-			effect2->dy = 0;
-
-			DieAffect* effect3 = new DieAffect(MEGAMAN_DIE);
-			effect3->x = this->x;
-			effect3->y = this->y;
-			effect3->dx = -1;
-			effect3->dy = 0;
-
-			DieAffect* effect4 = new DieAffect(MEGAMAN_DIE);
-			effect4->x = this->x;
-			effect4->y = this->y;
-			effect4->dx = -0.7;
-			effect4->dy = 0;
-
-			DieAffect* effect5 = new DieAffect(MEGAMAN_DIE);
-			effect5->x = this->x;
-			effect5->y = this->y;
-			effect5->dx = 0;
-			effect5->dy = 1;
-
-			DieAffect* effect6 = new DieAffect(MEGAMAN_DIE);
-			effect6->x = this->x;
-			effect6->y = this->y;
-			effect6->dx = 0;
-			effect6->dy = 0.7;
-
-			DieAffect* effect7 = new DieAffect(MEGAMAN_DIE);
-			effect7->x = this->x;
-			effect7->y = this->y;
-			effect7->dx = 0;
-			effect7->dy = -1;
-
-			DieAffect* effect8 = new DieAffect(MEGAMAN_DIE);
-			effect8->x = this->x;
-			effect8->y = this->y;
-			effect8->dx = 0;
-			effect8->dy = -0.7;
-
-			DieAffect* effect9 = new DieAffect(MEGAMAN_DIE);
-			effect9->x = this->x;
-			effect9->y = this->y;
-			effect9->dx = 1;
-			effect9->dy = 1;
-
-			DieAffect* effect10 = new DieAffect(MEGAMAN_DIE);
-			effect10->x = this->x;
-			effect10->y = this->y;
-			effect10->dx = 1;
-			effect10->dy = -1;
-
-			DieAffect* effect11 = new DieAffect(MEGAMAN_DIE);
-			effect11->x = this->x;
-			effect11->y = this->y;
-			effect11->dx = -1;
-			effect11->dy = -1;
-
-			DieAffect* effect12 = new DieAffect(MEGAMAN_DIE);
-			effect12->x = this->x;
-			effect12->y = this->y;
-			effect12->dx = -1;
-			effect12->dy = 1;
-			isKill = true;
-			dx = 0;
-			dy = 0;
-			actionBeingAttacked == ATTACKED_NONE;
-			GameOverMenu::getInstance()->isStart = true;
-		}
-	}
-
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -639,7 +521,6 @@ void Megaman::onLastFrameAnimation(int action)
 void Megaman::updateFrameAnimation()
 {
 	if (!pauseAnimation){
-		/*MGMBox::update();*/
 		if (status == MEGAMAN_NORMAL){
 			if (curAction == MGM_STAND){
 				if (eyesTime1.isReady() && eyesTime2.isFinish()){
@@ -697,15 +578,6 @@ void Megaman::updateFrameAnimation()
 	}
 }
 
-void Megaman::setWidth(int width)
-{
-	if (objectDirection == RIGHT)
-	{
-		x += this->width - width;
-	}
-	this->width = width;
-}
-
 void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 {
 	MGMMovableObject::onCollision(otherObject, nx, ny);
@@ -716,9 +588,9 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 	}
 	if (otherObject->collisionCategory == CC_ENEMY){
 		MGMEnemy *m = (MGMEnemy*)otherObject;
-		if (m->categoryEnemy == GREEN_BAR && ny==1){
+		if (m->categoryEnemy == GREEN_BAR && ny == 1){
 			if (m->curFrame == 0){
-				
+
 				isOnGreenBar = true;
 				Collision::preventMove(this, otherObject, nx, ny);
 			}
@@ -730,8 +602,88 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 		}
 	}
 	else{
-		
+
 		isOnGreenBar = false;
+	}
+}
+void Megaman::die(){
+	if (!isKill){
+		DieAffect* effect1 = new DieAffect(MEGAMAN_DIE);
+		effect1->x = this->x;
+		effect1->y = this->y;
+		effect1->dx = 1;
+		effect1->dy = 0;
+
+		DieAffect* effect2 = new DieAffect(MEGAMAN_DIE);
+		effect2->x = this->x;
+		effect2->y = this->y;
+		effect2->dx = 0.7;
+		effect2->dy = 0;
+
+		DieAffect* effect3 = new DieAffect(MEGAMAN_DIE);
+		effect3->x = this->x;
+		effect3->y = this->y;
+		effect3->dx = -1;
+		effect3->dy = 0;
+
+		DieAffect* effect4 = new DieAffect(MEGAMAN_DIE);
+		effect4->x = this->x;
+		effect4->y = this->y;
+		effect4->dx = -0.7;
+		effect4->dy = 0;
+
+		DieAffect* effect5 = new DieAffect(MEGAMAN_DIE);
+		effect5->x = this->x;
+		effect5->y = this->y;
+		effect5->dx = 0;
+		effect5->dy = 1;
+
+		DieAffect* effect6 = new DieAffect(MEGAMAN_DIE);
+		effect6->x = this->x;
+		effect6->y = this->y;
+		effect6->dx = 0;
+		effect6->dy = 0.7;
+
+		DieAffect* effect7 = new DieAffect(MEGAMAN_DIE);
+		effect7->x = this->x;
+		effect7->y = this->y;
+		effect7->dx = 0;
+		effect7->dy = -1;
+
+		DieAffect* effect8 = new DieAffect(MEGAMAN_DIE);
+		effect8->x = this->x;
+		effect8->y = this->y;
+		effect8->dx = 0;
+		effect8->dy = -0.7;
+
+		DieAffect* effect9 = new DieAffect(MEGAMAN_DIE);
+		effect9->x = this->x;
+		effect9->y = this->y;
+		effect9->dx = 1;
+		effect9->dy = 1;
+
+		DieAffect* effect10 = new DieAffect(MEGAMAN_DIE);
+		effect10->x = this->x;
+		effect10->y = this->y;
+		effect10->dx = 1;
+		effect10->dy = -1;
+
+		DieAffect* effect11 = new DieAffect(MEGAMAN_DIE);
+		effect11->x = this->x;
+		effect11->y = this->y;
+		effect11->dx = -1;
+		effect11->dy = -1;
+
+		DieAffect* effect12 = new DieAffect(MEGAMAN_DIE);
+		effect12->x = this->x;
+		effect12->y = this->y;
+		effect12->dx = -1;
+		effect12->dy = 1;
+		isKill = true;
+		dx = 0;
+		dy = 0;
+		actionBeingAttacked == ATTACKED_NONE;
+		GameOverMenu::getInstance()->isStart = true;
 	}
 }
 
@@ -745,7 +697,7 @@ Megaman::Megaman()
 	score = 0;
 	life = 2;
 	healthPoint = 28;
-	width = 20;
+	width = 16;
 	height = 23;
 	ax = 0;
 	vx = 0;
@@ -766,7 +718,6 @@ Megaman::Megaman()
 	delayAnimateJumpShoot.init(200);
 	delayAnimateStandStairShoot.init(200);
 }
-
 
 Megaman::~Megaman()
 {
