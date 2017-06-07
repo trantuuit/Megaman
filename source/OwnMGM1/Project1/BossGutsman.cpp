@@ -228,7 +228,8 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 			b->isVibrate = true;
 		}
 	}
-
+	// Random hướng di chuyển:
+	moveDirect = randomMoveDirect();
 	// Khi chạm 2 bên tường thì đổi hướng di chuyển
 	if (otherObject->collisionCategory == CC_GROUND && nx != 0)
 	{
@@ -338,6 +339,13 @@ JUMP_TYPE BossGutsman::randomJumpType()
 	srand(time(NULL));
 	int result = rand() % 2;
 	return (result != 1) ? JUMP_VX : JUMP_NO_VX;
+}
+
+MOVE_DIRECT BossGutsman::randomMoveDirect()
+{
+	srand(time(NULL));
+	int result = rand() % 2;
+	return (result != 1) ? TO_LEFT : TO_RIGHT;
 }
 
 void BossGutsman::render()

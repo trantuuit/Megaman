@@ -26,6 +26,7 @@
 #include"StoneDead.h"
 #include"Room.h"
 #include"MGMAudioManager.h"
+#include "CutmanRoom.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
@@ -102,6 +103,9 @@ void MGMMap::readObjects(char* objectsPath)
 			break;
 		case SPR_CUTMAN:
 			obj = CutMan::getInstance();
+			break;
+		case SPR_CUTMAN_ROOM:
+			obj = new CutmanRoom();
 			break;
 		case SPR_ITEM_LIFE_ENERGY_BIG:
 			obj = new LifeEnergyBig(0);
@@ -347,7 +351,8 @@ void MGMMap::update()
 		{
 			Collision::checkCollision(enemy, bigRockObjects[iBigRock]);
 		}
-
+		// Dung: Check giữa CutManBullet và Cutman:
+		Collision::checkCollision(enemy, CutmanBullet::getBullet());
 		/*}*/
 	}
 

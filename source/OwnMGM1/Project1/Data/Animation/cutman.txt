@@ -1,7 +1,7 @@
 R		G		B
 109		167		131
 Count
-7
+9
 Sprite Info
 
 Index		Name
@@ -12,8 +12,8 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			717				418				24				32
-			743				418				23				32
+			654				403				24				32
+			683				403				23				32
 
 
 Index		Name
@@ -24,21 +24,20 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			768				419				24				31
+			723				404				24				31
 
 
 Index		Name
 2			Animation3
 
 			FramesCount
-			4
+			3
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			794				419				24				31
-			820				419				18				31
-			840				419				23				31
-			865				419				18				31
+			763				404				24				31
+			789				404				18				31
+			809				404				23				31
 
 
 Index		Name
@@ -49,42 +48,64 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			885				418				23				32
-			910				418				30				32
+			844				403				23				32
+			869				411				30				24
 
 
 Index		Name
 4			Animation5
 
 			FramesCount
-			2
+			1
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			717				460				23				32
-			743				460				23				32
+			921				404				18				31
 
 
 Index		Name
 5			Animation6
 
 			FramesCount
-			1
+			2
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			768				460				24				32
+			654				452				24				24
+			683				452				23				24
 
 
 Index		Name
 6			Animation7
 
 			FramesCount
-			4
+			1
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			794				460				24				32
-			820				460				18				32
-			841				460				22				32
-			865				460				18				32
+			723				453				24				23
+
+
+Index		Name
+7			Animation8
+
+			FramesCount
+			3
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			763				453				24				23
+			789				453				18				23
+			810				453				22				23
+
+
+Index		Name
+8			Animation9
+
+			FramesCount
+			1
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			921				453				18				23
+

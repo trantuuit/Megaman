@@ -79,19 +79,24 @@ void MGMGame::init()
 	MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	//stage dau voi cutman
-	/*Megaman::getInstance()->x = 3120;
+	Megaman::getInstance()->x = 3120;
 	Megaman::getInstance()->y = 1432;
-	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	// Vị trí trước thanh trượt màu xanh map Gutsman:
 	//Megaman::getInstance()->x = 400;
 	//Megaman::getInstance()->y = 1170;
 	//MGMCamera::getInstance()->init(350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
+	//// Vị trí BigEye map Gutsman
+	/*Megaman::getInstance()->x = 2372;
+	Megaman::getInstance()->y = 135;
+	MGMCamera::getInstance()->init(2304, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+
 	//// Vị trí cuối map GutsMan
-	//Megaman::getInstance()->x = 3600;
-	//Megaman::getInstance()->y = 140;
-	//MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	/*Megaman::getInstance()->x = 3600;
+	Megaman::getInstance()->y = 140;
+	MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	isStart = true;
 	MGMCamera::getInstance()->dx = 0;
@@ -101,6 +106,11 @@ void MGMGame::init()
 		"Data\\TileMap\\stage.txt");
 	mapGut = new MGMMap(GutsMap, "Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
 		"Data\\MapGut\\stage.txt");
+
+	//Dung test Boss Cutman
+	mapCut = new MGMMap(CutMap, "Data\\Tilemap_CutManRoom\\objects.txt", "Data\\Tilemap_CutManRoom\\tileSheet.png", "Data\\Tilemap_CutManRoom\\quadtree.txt", "Data\\Tilemap_CutManRoom\\matrix.txt",
+		"Data\\Tilemap_CutManRoom\\stage.txt");
+
 }
 void MGMGame::render()
 {

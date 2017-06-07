@@ -1,7 +1,7 @@
 R		G		B
 109		167		131
 Count
-1
+2
 Sprite Info
 
 Index		Name
@@ -12,6 +12,20 @@ Index		Name
 
 			Animation Info
 			LocationX		LocationY		FrameWidth		FrameHeight
-			885				478				14				14
-			902				478				10				14
+			722				509				14				10
+			738				509				14				10
+
+
+Index		Name
+1			Animation2
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			786				506				14				14
+			803				506				10				14
+			817				506				14				14
+			834				506				10				14
 

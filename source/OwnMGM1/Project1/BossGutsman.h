@@ -47,6 +47,7 @@ public:
 	void onIntersectRect(MGMBox* otherObject);
 	void Die();
 	JUMP_TYPE randomJumpType();
+	MOVE_DIRECT randomMoveDirect();
 	~BossGutsman();
 };
 

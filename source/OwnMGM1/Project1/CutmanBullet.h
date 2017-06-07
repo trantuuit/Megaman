@@ -2,24 +2,30 @@
 #include "MGMEnemy.h"
 #include"MGMSpriteManager.h"
 #include "MGMGameTime.h"
-enum CUTMANBULLET_DIRECTION{
-	CUTMANBULLET_LEFT,
-	CUTMANBULLET_RIGHT,
-	CUTMANBULLET_UP,
-	CUTMANBULLET_DOWN,
+#include <iostream>
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+enum DIRECTION_X
+{
+	C_LEFT = -1,
+	C_RIGHT = 1,
 };
-enum CUTMANBULLET_ACTION{
-	PRE_ATTACK,
-	PRE_BACK,
-	//ATTACK,
-	BACK
+enum DIRECTION_Y
+{
+	C_TOP = 1,
+	C_BOTTOM = -1
 };
 class CutmanBullet :
 	public MGMEnemy
 {
 private:
-	CUTMANBULLET_ACTION action;
-	CUTMANBULLET_DIRECTION direction;
+	fstream fileLog;
+	bool isThrow;
+	bool isBack;
+	DIRECTION_X directionX, backDirectionX;
+	DIRECTION_Y directionY, backDirectionY;
 	int xMegeman;
 	int yMegeman;
 	int xCutman;
@@ -30,8 +36,10 @@ private:
 public:
 	static CutmanBullet * bullet;
 	static CutmanBullet* getBullet();
-	void deltaUpdate();
+	void update();
+	void render();
 	void onCollision(MGMBox* otherObject, int nx, int ny);
+	void onIntersectRect(MGMBox* otherObject);
 	CutmanBullet();
 	~CutmanBullet();
 };

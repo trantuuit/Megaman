@@ -1,118 +1,120 @@
-#include "CutmanBullet.h"
+﻿#include "CutmanBullet.h"
 #include "CutMan.h"
 #include "Megaman.h"
+
 CutmanBullet* CutmanBullet::bullet = 0;
-CutmanBullet* CutmanBullet::getBullet(){
-	if (bullet == 0){
+
+CutmanBullet* CutmanBullet::getBullet()
+{
+	if (bullet == 0)
+	{
 		bullet = new CutmanBullet();
 	}
 	return bullet;
 }
 CutmanBullet::CutmanBullet()
 {
+	//fileLog.open("abcFileLox.txt", ios::out | ios::app);
 	dx = 0;
 	dy = 0;
-	action = PRE_ATTACK;
+	vx = 0;
+	vy = 0;
+	ax = 0;
+	ay = 0;
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_CUTMANBULLET];
-	updateTarget.tickPerFrame = 1000;
-	isUpdateTarget = true;
+	x = CutMan::getInstance()->x + 6;
+	y = CutMan::getInstance()->y;
+	init(x, y, 14, 10);
+	isThrow = false;
+	isBack = false;
 }
 
-void CutmanBullet::deltaUpdate(){
-	if (isUpdateTarget){
-		xMegeman = Megaman::getInstance()->x;
-		yMegeman = Megaman::getInstance()->y;
-		xCutman = CutMan::getInstance()->x;
-		yCutman = CutMan::getInstance()->y;
-		m = (xMegeman - xCutman) / (yMegeman - yCutman);
-		isUpdateTarget = false;
+void CutmanBullet::update()
+{
+	CUTMAN_ACTION cutmanCurAction = CutMan::getInstance()->action;
+	int cutmanCurFrame = CutMan::getInstance()->curFrame;
+	if (CutMan::getInstance()->isThrow == false) // Chưa ném
+	{
+		if (CutMan::getInstance()->objectDirection == LEFT)
+			x = CutMan::getInstance()->getXCenter();
+		else
+			x = CutMan::getInstance()->x;
+		y = CutMan::getInstance()->y;
+		dx = 0;
+		dy = 0;
 	}
-	switch (action){
-	case PRE_ATTACK:
-		if (Megaman::getInstance()->x < this->x){
-			objectDirection = LEFT;
-		}
-		else{
-			objectDirection = RIGHT;
-		}
-		/*m = (3120 - 3204) / (1303 - 1280);*/
-		dy = 4 / sqrt(m*m);
 
-		dx = dy * -1;
-		//dy = -1 * (y - yTarget) / (x-xTarget );
-		//dx = 1 * (x - xTarget) / (y - yTarget);
-		//if (this->x < 3088){
-		//	dx = 1;
-		//	dy = 0;
-		//}
-		//if (this->y >= 1432){
-		//	dx = 1;
-		//	dy = -dy;
-		//}
-		break;
-		//case ATTACK:
+	if (cutmanCurAction == CM_ATTACK && cutmanCurFrame == 1 && isThrow == false) // Frame[1] của attack
+	{
+		// Xác định hướng bay theo phương x và y:
+		directionX = (Megaman::getInstance()->x < x) ? C_LEFT : C_RIGHT;
+		directionY = (Megaman::getInstance()->y < y) ? C_BOTTOM : C_TOP;
+		// Đo khoảng cách giữa Megaman và Cutman
+		float distanceX = abs(Megaman::getInstance()->getXCenter() - CutMan::getInstance()->getXCenter());
+		float distanceY = abs(Megaman::getInstance()->y - y);
 
-		//	if (this->x <= 3088){
-		//		dx = -dx;
-		//		//dy = -dy;
-		//	}
-		//	dx = 0;
-		//	action = PRE_BACK;
-		//	break;
-	case PRE_BACK:
-		if (CutMan::getInstance()->x < this->x){
-			objectDirection = LEFT;
-		}
-		else{
-			objectDirection = RIGHT;
-		}
+		// Gán cho dx = 2
+		dx = 2 * directionX;
+		float a = abs(dx) / distanceX; // Tỷ số giữa dx và distanceX
+		dy = (a * distanceY) * directionY; // Từ tỷ số đó tính ra dy tương ứng
+										   // Fix lại nếu dy quá nhỏ hoặc quá lớn (do a quá lớn hoặc quá nhỏ)
+		if (dy < -3)
+			dy = -3;
+		if (dy > 3)
+			dy = 3;
+		//fileLog << dx << "\t" << a << "\t" << dy << endl;
 
-		break;
-	case BACK:
-		if (direction == CUTMANBULLET_RIGHT){
-			dx = 1;
-			dy = -1;
-		}
-		if (direction == CUTMANBULLET_LEFT){
-			dx = -1;
-			dy = 1;
-		}
-		if (direction == CUTMANBULLET_UP){
-			dx = 1;
-			dy = 1;
-		}
-		if (direction == CUTMANBULLET_DOWN){
-			dx = -1;
-			dy = -1;
-		}
-		break;
-	default:
-		break;
+		setCurAction(1); //Set action bay cho CutmanBullet
+		isThrow = true;
 	}
+	if (x <= 3095 || y >= 1425 || x >= 3335 || y <= 1225)
+	{
+		isBack = true; // Xác định việc quay trở lại
+	}
+	if (isBack)
+	{
+		// Tính quãng đường quay về tương tự như trên
+		backDirectionX = (x > CutMan::getInstance()->x) ? C_LEFT : C_RIGHT;
+		backDirectionY = (y > CutMan::getInstance()->y) ? C_BOTTOM : C_TOP;
+		float distanceX = abs(CutMan::getInstance()->getXCenter() - this->getXCenter());
+		float distanceY = abs(CutMan::getInstance()->y - y);
+		dx = 2 * backDirectionX;
+		float a = abs(dx) / distanceX;
+		dy = (a * distanceY) * backDirectionY;
+		if (dy < -3)
+			dy = -3;
+		if (dy > 3)
+			dy = 3;
+	}
+
+
+	MGMMovableObject::updateFrameAnimation();
 }
-void CutmanBullet::onCollision(MGMBox* otherObject, int nx, int ny){
-	MGMEnemy::onCollision(otherObject, nx, ny);
-	if (nx != 0){
-		if (nx == 1){
-			direction = CUTMANBULLET_RIGHT;
-		}
-		if (nx == -1){
-			direction = CUTMANBULLET_LEFT;
-		}
+void CutmanBullet::render()
+{
+	if (isThrow)
+		MGMEnemy::render();
+}
+void CutmanBullet::onCollision(MGMBox* otherObject, int nx, int ny)
+{
+	MGMMovableObject* m = (MGMMovableObject*)otherObject;
+	if (m->id == 9)
+	{
+		if (isBack) //Nếu đã quay trở lại và va chạm thì set isThrow của Cutman là false
+			CutMan::getInstance()->isThrow = false;
+		isThrow = false;
+		isBack = false;
+	}
 
-		action = BACK;
-	}
-	if (ny != 0){
-		if (ny == 1){
-			direction = CUTMANBULLET_UP;
-		}
-		if (ny == -1){
-			direction = CUTMANBULLET_DOWN;
-		}
-		action = BACK;
-	}
-	if (otherObject == CutMan::getInstance()){
-		Collision::preventMove(this, CutMan::getInstance(), nx, ny);
+}
+void CutmanBullet::onIntersectRect(MGMBox * otherObject)
+{
+	MGMMovableObject* m = (MGMMovableObject*)otherObject;
+	if (m->id == 9 && isBack)
+	{
+		isThrow = false;
+		isBack = false;
+		CutMan::getInstance()->isThrow = false;
 	}
 }
 CutmanBullet::~CutmanBullet()

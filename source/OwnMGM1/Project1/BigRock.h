@@ -17,6 +17,7 @@ public:
 	BigRock();
 	void update();
 	void render();
+	void onIntersectRect(MGMBox* otherObject);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	~BigRock();
 };

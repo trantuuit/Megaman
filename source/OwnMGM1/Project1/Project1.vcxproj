@@ -71,8 +71,10 @@
   <ItemGroup>
     <ClCompile Include="Beak.cpp" />
     <ClCompile Include="BigRock.cpp" />
+    <ClCompile Include="Blink.cpp" />
     <ClCompile Include="BoardBar.cpp" />
     <ClCompile Include="BossGutsman.cpp" />
+    <ClCompile Include="CutmanRoom.cpp" />
     <ClCompile Include="DieEffect.cpp" />
     <ClCompile Include="dsutil.cpp" />
     <ClCompile Include="EffectCreateItem.cpp" />
@@ -141,8 +143,10 @@
   <ItemGroup>
     <ClInclude Include="Beak.h" />
     <ClInclude Include="BigRock.h" />
+    <ClInclude Include="Blink.h" />
     <ClInclude Include="BoardBar.h" />
     <ClInclude Include="BossGutsman.h" />
+    <ClInclude Include="CutmanRoom.h" />
     <ClInclude Include="DieEffect.h" />
     <ClInclude Include="dsutil.h" />
     <ClInclude Include="dxutil.h" />

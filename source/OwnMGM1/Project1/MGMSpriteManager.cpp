@@ -72,7 +72,7 @@ MGMSpriteManager::MGMSpriteManager()
 
 	//@Tu-bullet cut man
 	sprites[SPR_CUTMANBULLET] = new MGMSprite();
-	sprites[SPR_CUTMANBULLET]->initInfo("Data\\Animation\\cutmanbullet.txt");
+	sprites[SPR_CUTMANBULLET]->initInfo("Data\\Animation\\CutmanBullet.txt");
 	sprites[SPR_CUTMANBULLET]->pImage = sprites[SPR_PICKETMAN]->pImage;
 
 	//@Tu-cut man
@@ -150,6 +150,16 @@ MGMSpriteManager::MGMSpriteManager()
 	sprites[SPR_GREENBAR] = new MGMSprite();
 	sprites[SPR_GREENBAR]->initInfo("Data\\Animation\\GreenBar.txt");
 	sprites[SPR_GREENBAR]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	// Blink
+	sprites[SPR_BLINK] = new MGMSprite();
+	sprites[SPR_BLINK]->initInfo("Data\\Animation\\Blink.txt");
+	sprites[SPR_BLINK]->pImage = sprites[SPR_PICKETMAN]->pImage;
+
+	// CutMan_Room
+	sprites[SPR_CUTMAN_ROOM] = new MGMSprite();
+	sprites[SPR_CUTMAN_ROOM]->initInfo("Data\\Animation\\CutmanRoom.txt");
+	sprites[SPR_CUTMAN_ROOM]->pImage = sprites[SPR_PICKETMAN]->pImage;
 	//your code
 }
 

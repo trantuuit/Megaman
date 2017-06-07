@@ -32,7 +32,7 @@ bool MGMDelayTime::isFinish()
 	if (finished)
 	{
 		ready = true;
-		finished = false;
+		//finished = false; //@Dung comment cho nay de Boss Cutman chay duoc
 		return true;
 	}
 	return false;

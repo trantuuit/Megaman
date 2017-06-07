@@ -239,6 +239,12 @@
     <ClCompile Include="MGMAudioManager.cpp">
       <Filter>Framework\sound</Filter>
     </ClCompile>
+    <ClCompile Include="CutmanRoom.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Blink.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -445,6 +451,12 @@
     </ClInclude>
     <ClInclude Include="MGMAudioManager.h">
       <Filter>Framework\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="CutmanRoom.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Blink.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

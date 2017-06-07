@@ -42,6 +42,17 @@ void BigRock::render()
 		MGMEnemy::render();
 }
 
+void BigRock::onIntersectRect(MGMBox * otherObject)
+{
+	if (otherObject->collisionCategory == CC_MEGAMAN)
+	{
+		if (isMoving == true) // Viên gạch này có thể ném được
+		{
+			isBreak = true;
+		}
+	}
+}
+
 void BigRock::onCollision(MGMBox * otherObject, int nx, int ny)
 {
 	// Bị chặn bởi Gutsman:
