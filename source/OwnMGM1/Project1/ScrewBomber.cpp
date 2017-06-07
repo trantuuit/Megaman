@@ -4,6 +4,7 @@
 #include"MGMCamera.h"
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
+#include"MGMAudioManager.h"
 ScrewBomber::ScrewBomber()
 {
 	vx = 0;
@@ -43,6 +44,7 @@ void ScrewBomber::update()
 		
 		if (delayShot.isFinish())
 		{
+			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_SHOOT);
 			CreateBullet();
 		}
 	}
@@ -195,6 +197,7 @@ void ScrewBomber::onIntersectRect(MGMBox* otherObject){
 			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 		}
 		else{
+			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
 			mgmbullet->setAction(NONE);
 		}
 	}

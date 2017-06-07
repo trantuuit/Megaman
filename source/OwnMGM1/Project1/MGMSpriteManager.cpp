@@ -116,7 +116,12 @@ MGMSpriteManager::MGMSpriteManager()
 	////@score
 	sprites[SPR_SCORE] = new MGMSprite("Data\\Animation\\Score\\score.txt", "Data\\Animation\\Score\\score.png");
 	//@hp
-	sprites[SPR_HP] = new MGMSprite("Data\\Animation\\HP\\hp.txt", "Data\\Animation\\HP\\hp.png");
+	sprites[SPR_HP_MEGAMAN] = new MGMSprite("Data\\Animation\\HP\\megaman.txt", "Data\\Animation\\HP\\hp.png");
+	
+	sprites[SPR_HP_BOSS] = new MGMSprite();
+	sprites[SPR_HP_BOSS]->initInfo("Data\\Animation\\HP\\boss.txt");
+	sprites[SPR_HP_BOSS]->pImage = sprites[SPR_HP_MEGAMAN]->pImage;
+
 	//@board
 	sprites[SPR_BOARD] = new MGMSprite("Data\\Animation\\Board\\board.txt", "Data\\Animation\\Board\\board.png");
 	//@game over menu

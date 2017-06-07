@@ -8,6 +8,15 @@
 #include"Megaman.h"
 #include"MegamanBullet.h"
 #include"DieEffect.h"
+#include"MGMAudioManager.h"
+
+BossGutsman* BossGutsman::instance = 0;
+BossGutsman* BossGutsman::getInstance(){
+	if (instance == 0){
+		instance = new BossGutsman();
+	}
+	return instance;
+}
 BossGutsman::BossGutsman()
 {
 	vx = 0;
@@ -228,6 +237,83 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 		moveDirect = TO_RIGHT;
 	MGMMovableObject::onCollision(otherObject, nx, ny); // PreventMove và Set lại vy như mọi đối tượng khác
 }
+void BossGutsman::Die(){
+	isKill = true;
+	count = 0;
+	Megaman::getInstance()->score += 9000;
+
+	DieAffect* effect1 = new DieAffect(GUTMAN_DIE);
+	effect1->x = this->x;
+	effect1->y = this->y;
+	effect1->dx = 1;
+	effect1->dy = 0;
+
+	DieAffect* effect2 = new DieAffect(GUTMAN_DIE);
+	effect2->x = this->x;
+	effect2->y = this->y;
+	effect2->dx = 0.7;
+	effect2->dy = 0;
+
+	DieAffect* effect3 = new DieAffect(GUTMAN_DIE);
+	effect3->x = this->x;
+	effect3->y = this->y;
+	effect3->dx = -1;
+	effect3->dy = 0;
+
+	DieAffect* effect4 = new DieAffect(GUTMAN_DIE);
+	effect4->x = this->x;
+	effect4->y = this->y;
+	effect4->dx = -0.7;
+	effect4->dy = 0;
+
+	DieAffect* effect5 = new DieAffect(GUTMAN_DIE);
+	effect5->x = this->x;
+	effect5->y = this->y;
+	effect5->dx = 0;
+	effect5->dy = 1;
+
+	DieAffect* effect6 = new DieAffect(GUTMAN_DIE);
+	effect6->x = this->x;
+	effect6->y = this->y;
+	effect6->dx = 0;
+	effect6->dy = 0.7;
+
+	DieAffect* effect7 = new DieAffect(GUTMAN_DIE);
+	effect7->x = this->x;
+	effect7->y = this->y;
+	effect7->dx = 0;
+	effect7->dy = -1;
+
+	DieAffect* effect8 = new DieAffect(GUTMAN_DIE);
+	effect8->x = this->x;
+	effect8->y = this->y;
+	effect8->dx = 0;
+	effect8->dy = -0.7;
+
+	DieAffect* effect9 = new DieAffect(GUTMAN_DIE);
+	effect9->x = this->x;
+	effect9->y = this->y;
+	effect9->dx = 1;
+	effect9->dy = 1;
+
+	DieAffect* effect10 = new DieAffect(GUTMAN_DIE);
+	effect10->x = this->x;
+	effect10->y = this->y;
+	effect10->dx = 1;
+	effect10->dy = -1;
+
+	DieAffect* effect11 = new DieAffect(GUTMAN_DIE);
+	effect11->x = this->x;
+	effect11->y = this->y;
+	effect11->dx = -1;
+	effect11->dy = -1;
+
+	DieAffect* effect12 = new DieAffect(GUTMAN_DIE);
+	effect12->x = this->x;
+	effect12->y = this->y;
+	effect12->dx = -1;
+	effect12->dy = 1;
+}
 void BossGutsman::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		healthPoint -= 2;
@@ -236,83 +322,11 @@ void BossGutsman::onIntersectRect(MGMBox* otherObject){
 			mgmbullet->x = this->x + this->width / 2;
 			mgmbullet->y = this->y - this->height / 2;
 			mgmbullet->setAction(FIRE);
-			isKill = true;
-			count = 0;
-			Megaman::getInstance()->score += 9000;
-
-			DieAffect* effect1 = new DieAffect(GUTMAN_DIE);
-			effect1->x = this->x;
-			effect1->y = this->y;
-			effect1->dx = 1;
-			effect1->dy = 0;
-
-			DieAffect* effect2 = new DieAffect(GUTMAN_DIE);
-			effect2->x = this->x;
-			effect2->y = this->y;
-			effect2->dx = 0.7;
-			effect2->dy = 0;
-
-			DieAffect* effect3 = new DieAffect(GUTMAN_DIE);
-			effect3->x = this->x;
-			effect3->y = this->y;
-			effect3->dx = -1;
-			effect3->dy = 0;
-
-			DieAffect* effect4 = new DieAffect(GUTMAN_DIE);
-			effect4->x = this->x;
-			effect4->y = this->y;
-			effect4->dx = -0.7;
-			effect4->dy = 0;
-
-			DieAffect* effect5 = new DieAffect(GUTMAN_DIE);
-			effect5->x = this->x;
-			effect5->y = this->y;
-			effect5->dx = 0;
-			effect5->dy = 1;
-
-			DieAffect* effect6 = new DieAffect(GUTMAN_DIE);
-			effect6->x = this->x;
-			effect6->y = this->y;
-			effect6->dx = 0;
-			effect6->dy = 0.7;
-
-			DieAffect* effect7 = new DieAffect(GUTMAN_DIE);
-			effect7->x = this->x;
-			effect7->y = this->y;
-			effect7->dx = 0;
-			effect7->dy = -1;
-
-			DieAffect* effect8 = new DieAffect(GUTMAN_DIE);
-			effect8->x = this->x;
-			effect8->y = this->y;
-			effect8->dx = 0;
-			effect8->dy = -0.7;
-
-			DieAffect* effect9 = new DieAffect(GUTMAN_DIE);
-			effect9->x = this->x;
-			effect9->y = this->y;
-			effect9->dx = 1;
-			effect9->dy = 1;
-
-			DieAffect* effect10 = new DieAffect(GUTMAN_DIE);
-			effect10->x = this->x;
-			effect10->y = this->y;
-			effect10->dx = 1;
-			effect10->dy = -1;
-
-			DieAffect* effect11 = new DieAffect(GUTMAN_DIE);
-			effect11->x = this->x;
-			effect11->y = this->y;
-			effect11->dx = -1;
-			effect11->dy = -1;
-
-			DieAffect* effect12 = new DieAffect(GUTMAN_DIE);
-			effect12->x = this->x;
-			effect12->y = this->y;
-			effect12->dx = -1;
-			effect12->dy = 1;
+			MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DEFEATE);
+			Die();
 		}
 		else{
+			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
 			mgmbullet->setAction(NONE);
 		}
 	}

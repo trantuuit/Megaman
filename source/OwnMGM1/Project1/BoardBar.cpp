@@ -2,6 +2,7 @@
 #include"MGMSpriteManager.h"
 #include"KEY.h"
 #include "Megaman.h"
+#include"MGMAudioManager.h"
 BoardBar* BoardBar::board = 0;
 BoardBar* BoardBar::getInstance(){
 	if (board == 0){
@@ -26,6 +27,7 @@ void BoardBar::update(){
 	up2 = life % 10;
 	if (KEY::getInstance()->isPauseBoardDown){
 		isPause = true;
+		MGMAudioManager::getInstance()->Play(AUDIO_PAUSE_MENU);
 	}
 	if (KEY::getInstance()->isResumeBoardDown){
 		isPause = false;

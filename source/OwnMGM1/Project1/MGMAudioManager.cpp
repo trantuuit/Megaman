@@ -18,6 +18,13 @@ MGMAudioManager::MGMAudioManager(){
 	sounds[AUDIO_MEGAMAN_DEFEATE] = LoadSound("Data\\Audio\\08 - MegamanDefeat.wav");
 	sounds[AUDIO_ENEMY_DAMAGE] = LoadSound("Data\\Audio\\09 - EnemyDamage.wav");
 	sounds[AUDIO_DINK] = LoadSound("Data\\Audio\\11 - Dink.wav");
+	sounds[AUDIO_BIG_EYE] = LoadSound("Data\\Audio\\12 - BigEye.wav");
+	sounds[AUDIO_BOSS_GATE] = LoadSound("Data\\Audio\\30 - BossGate.wav");
+	sounds[AUDIO_CONVEY_OR_LIFT] = LoadSound("Data\\Audio\\29 - ConveyorLift.wav");
+	sounds[AUDIO_GUTSQUAKE] = LoadSound("Data\\Audio\\15 - GutsQuake.wav");
+	sounds[AUDIO_SELECT_STAGE] = LoadSound("Data\\Audio\\Stage Select.wav");
+	sounds[AUDIO_MENU_SELECT] = LoadSound("Data\\Audio\\03 - MenuSelect.wav");
+	sounds[AUDIO_ENERGY_FILL] = LoadSound("Data\\Audio\\24 - EnergyFill.wav");
 }
 MGMAudioManager* MGMAudioManager::getInstance(){
 	if (_Instance == NULL){

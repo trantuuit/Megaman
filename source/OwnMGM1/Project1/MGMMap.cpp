@@ -75,7 +75,7 @@ void MGMMap::readObjects(char* objectsPath)
 			obj = Room::getInstance();
 			break;
 		case SPR_BOSS_GUTSMAN:
-			obj = new BossGutsman();
+			obj = BossGutsman::getInstance();
 			break;
 		case SPR_BIGROCK:
 			obj = new BigRock();

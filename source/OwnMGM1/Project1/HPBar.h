@@ -3,10 +3,12 @@
 class HPBar
 {
 private:
-	MGMSprite* sprite;
+	MGMSprite* sprite_MGM;
+	MGMSprite* sprite_BOSS;
 	int x, y;
 	int curAction;
-	int curFrame;
+	int curFrame_MG;
+	int curFrame_Boss;
 	static HPBar* hp;
 	HPBar();
 public:

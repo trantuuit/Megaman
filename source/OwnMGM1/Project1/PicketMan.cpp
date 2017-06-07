@@ -6,6 +6,7 @@
 #include"EffectCreateItem.h"
 #include"Megaman.h"
 #include"MegamanBullet.h"
+#include"MGMAudioManager.h"
 void PicketMan::update()
 {
 	srand(time(0));
@@ -79,6 +80,7 @@ void PicketMan::onLastFrameAnimation(int action)
 {
 	if (action == PKM_ATTACK)
 	{
+	
 		AxeThrowing();
 	}
 }
@@ -102,8 +104,10 @@ void PicketMan::onIntersectRect(MGMBox* otherObject){
 				EffectCreateItem::getInstance()->enemy = this;
 				EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
 			}
+			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
 		}
 		else{
+			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
 			mgmbullet->setAction(NONE);
 		}
 	}
@@ -116,15 +120,6 @@ void PicketMan::onCollision(MGMBox * otherObject, int nx, int ny)
 		isOnGround = true;
 	}
 	MGMEnemy::onCollision(otherObject, nx, ny);
-	/*if (otherObject->collisionCategory == CC_GROUND)
-	{
-		if(nx!=0)
-			vx = abs(vx)*nx;
-	}
-	if (otherObject == Megaman::getInstance())
-	{
-		Collision::preventMove(Megaman::getInstance(), this, nx,ny);
-	}*/
 }
 
 PicketMan::PicketMan()

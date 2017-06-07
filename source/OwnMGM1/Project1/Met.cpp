@@ -3,7 +3,7 @@
 #include"EnemyBullet.h"
 #include"MegamanBullet.h"
 #include"EffectCreateItem.h"
-
+#include"MGMAudioManager.h"
 Met::Met()
 {
 	vx = 0;
@@ -59,6 +59,7 @@ void Met::update()
 
 void Met::CreateBullet()
 {
+	MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_SHOOT);
 	EnemyBullet *newBullet1 = new EnemyBullet();
 	newBullet1->objectDirection = objectDirection;
 	newBullet1->categoryBullet = FOR_MET;
@@ -104,6 +105,7 @@ void Met::onIntersectRect(MGMBox* otherObject){
 		}
 		if (count != 1)
 		{
+			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
 			mgmbullet->setAction(NONE);
 		}
 	}

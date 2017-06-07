@@ -33,15 +33,18 @@ class BossGutsman :
 	JUMP_TYPE jumpType;
 	MOVE_DIRECT moveDirect;
 	BigRock *bigRock;
-
-public:
-	int healthPoint;
 	BossGutsman();
+	static BossGutsman* instance;
+public:
+	static BossGutsman* getInstance();
+	int healthPoint;
+	
 	void update();
 	void render();
 	void onLastFrameAnimation(int action);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void onIntersectRect(MGMBox* otherObject);
+	void Die();
 	JUMP_TYPE randomJumpType();
 	~BossGutsman();
 };

@@ -2,7 +2,7 @@
 #include "MGMSpriteManager.h"
 #include"Megaman.h"
 #include"MGMCamera.h"
-
+#include"MGMAudioManager.h"
 
 Door::Door()
 {
@@ -14,6 +14,7 @@ Door::Door()
 void Door::Open()
 {
 	updateFrameAnimation();
+
 }
 
 void Door::Close()
@@ -31,6 +32,7 @@ void Door::updateFrameAnimation()
 	{
 		if (!pauseAnimation)
 		{
+			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_GATE);
 			this->sprite->Update(curAction, curFrame);
 		}
 	}
@@ -41,6 +43,7 @@ void Door::onLastFrameAnimation(int curAction)
 {
 	if (curAction == 0)
 	{
+		
 		Megaman::getInstance()->x += Megaman::getInstance()->objectDirection * 1;
 		//Megaman::getInstance()->setCurAction(MGM_RUN);
 		if (Megaman::getInstance()->curAction == MGM_PRE_RUN) Megaman::getInstance()->setCurAction(MGM_RUN);

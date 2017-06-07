@@ -4,7 +4,7 @@
 #include <time.h>
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
-
+#include"MGMAudioManager.h"
 BigEye::BigEye()
 {
 	vx = -0.3;
@@ -23,6 +23,7 @@ void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
 	{
 		activity = BIGEYE_STAND;
 		delayBeforeJump.start();
+		MGMAudioManager::getInstance()->Play(AUDIO_BIG_EYE);
 	}
 	MGMMovableObject::onCollision(otherObject, nx, ny);
 }
@@ -63,17 +64,18 @@ void BigEye::update()
 			vy = ramdomVy() == 0 ? 0.67 : 0.95;
 			ay = GRAVITY;
 			activity = BIGEYE_JUMP;
+			
 		}
+		
 		break;
 	case BIGEYE_JUMP:
+		
 		break;
 	default:
 		break;
 	}
 	delayBeforeJump.update();
-
 	MGMMovableObject::deltaUpdate();
-	//MGMBox::update();
 }
 
 void BigEye::render()

@@ -1,5 +1,5 @@
 ﻿#include "Room.h"
-
+#include"MGMAudioManager.h"
 
 bool Room::isVibrate = false;
 Room* Room::room = 0;
@@ -40,6 +40,7 @@ void Room::render()
 		{
 			MGMObject::vibrateRender();
 			vibrateCount++;
+			MGMAudioManager::getInstance()->Play(AUDIO_GUTSQUAKE);
 		}
 		else // Đã rung đủ số lần
 		{

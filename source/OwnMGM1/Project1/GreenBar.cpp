@@ -1,6 +1,6 @@
 ﻿#include "GreenBar.h"
-
-
+#include"MGMAudioManager.h"
+#include"Megaman.h"
 
 GreenBar::GreenBar()
 {
@@ -15,7 +15,13 @@ GreenBar::GreenBar()
 
 void GreenBar::update()
 {
-
+	
+	if (Megaman::getInstance()->isKill){
+		MGMAudioManager::getInstance()->StopSound(AUDIO_CONVEY_OR_LIFT);
+	}
+	else{
+		MGMAudioManager::getInstance()->Play(AUDIO_CONVEY_OR_LIFT);
+	}
 	// Giới hạn 2 bên:
 	if (y == 1124) // Thanh GreenBar thứ nhất
 	{
