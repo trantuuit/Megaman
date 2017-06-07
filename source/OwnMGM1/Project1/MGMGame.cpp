@@ -15,6 +15,8 @@
 #include"DieEffect.h"
 #include"EffectCreateItem.h"
 #include"PKMWeapon.h"
+#include"MGMAudioManager.h"
+#include"BossGutsman.h"
 MGMGame::MGMGame()
 {
 }
@@ -168,6 +170,25 @@ void MGMGame::render()
 }
 void MGMGame::update(DWORD timesleep)
 {
+	if (map == mapCut){
+		MGMAudioManager::getInstance()->Play(AUDIO_CUTMAN);
+		if (Megaman::getInstance()->isKill){
+			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
+		}
+	}
+	else{
+		MGMAudioManager::getInstance()->Play(AUDIO_GUTMAN);
+		if (Megaman::getInstance()->isKill){
+			MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
+		}
+		if (BossGutsman::getInstance()->appearMusic){
+			MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
+			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_BATTLE);
+		}
+		if (BossGutsman::getInstance()->isKill){
+			MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
+		}
+	}
 	BoardBar::getInstance()->update();
 	if (!BoardBar::getInstance()->isPause){
 		if (map->isUpdate)

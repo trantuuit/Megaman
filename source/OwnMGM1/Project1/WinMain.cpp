@@ -47,15 +47,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					if (map == MGMGame::getInstance()->mapCut)
 					{
 						
-						if (Megaman::getInstance()->isKill){
-							MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
-						}
-						else{
-							MGMAudioManager::getInstance()->Play(AUDIO_CUTMAN);
-						}
-				/*		Megaman::getInstance()->x = 22;
+						Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 111;
-						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 						/*Megaman::getInstance()->x = 830;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
@@ -73,22 +67,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						Megaman::getInstance()->y = 1975;
 						MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
-						Megaman::getInstance()->x = 1900;
+					/*	Megaman::getInstance()->x = 1900;
 						Megaman::getInstance()->y = 1335;
-						MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 					}
 					if (map == MGMGame::getInstance()->mapGut)
 					{
 						
-						if (Megaman::getInstance()->isKill){
-							MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
-						}
-						else{
-							MGMAudioManager::getInstance()->Play(AUDIO_GUTMAN);
-						}
-						/*Megaman::getInstance()->x = 22;
+						Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 1100;
-						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 					/*	Megaman::getInstance()->x = 400;
 						Megaman::getInstance()->y = 1170;
@@ -98,9 +86,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						Megaman::getInstance()->y = 1170;
 						MGMCamera::getInstance()->init(1150, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
-						Megaman::getInstance()->x = 3600;
-						Megaman::getInstance()->y = 140;
-						MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						//Megaman::getInstance()->x = 3600;
+						//Megaman::getInstance()->y = 140;
+						//MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 						
 					}

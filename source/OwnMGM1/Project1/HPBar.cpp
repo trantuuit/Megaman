@@ -28,7 +28,7 @@ void HPBar::update(){
 	else{
 		curFrame_MG = 0;
 	}
-	if (BossGutsman::getInstance()){
+	if (BossGutsman::getInstance()->appearHP){
 		if (curFrame_Boss = BossGutsman::getInstance()->healthPoint >= 0){
 			curFrame_Boss = BossGutsman::getInstance()->healthPoint;
 		}
@@ -39,7 +39,7 @@ void HPBar::update(){
 }
 void HPBar::render(){
 	this->sprite_MGM->Render(x, y, curAction, curFrame_MG);
-	if (BossGutsman::getInstance()){
+	if (BossGutsman::getInstance()->appearHP){
 		this->sprite_BOSS->Render(x + 10, y, curAction, curFrame_Boss);
 	}
 	

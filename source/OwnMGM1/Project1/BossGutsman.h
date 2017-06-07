@@ -38,7 +38,8 @@ class BossGutsman :
 public:
 	static BossGutsman* getInstance();
 	int healthPoint;
-	
+	bool appearHP;
+	bool appearMusic;
 	void update();
 	void render();
 	void onLastFrameAnimation(int action);

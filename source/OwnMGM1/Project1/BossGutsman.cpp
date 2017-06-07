@@ -31,6 +31,8 @@ BossGutsman::BossGutsman()
 	categoryEnemy = BOSS_GUTMAN;
 	count = 0;
 	healthPoint = 28;
+	appearHP = false;
+	appearMusic = false;
 }
 
 void BossGutsman::update()

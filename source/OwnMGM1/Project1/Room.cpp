@@ -1,6 +1,6 @@
 ﻿#include "Room.h"
 #include"MGMAudioManager.h"
-
+#include"BossGutsman.h"
 bool Room::isVibrate = false;
 Room* Room::room = 0;
 Room* Room::getInstance(){
@@ -26,11 +26,15 @@ void Room::update()
 {
 	if (ActionCount <= 80) // Update Frame đủ 80 lần
 	{
+		BossGutsman::getInstance()->appearMusic = true;
 		MGMMovableObject::update();
 		ActionCount++;
 	}
-	else
+	else{
 		curFrame = 1;
+		BossGutsman::getInstance()->appearHP = true;
+	}
+		
 }
 
 void Room::render()

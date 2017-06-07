@@ -25,6 +25,7 @@
 #include "GreenBar.h"
 #include"StoneDead.h"
 #include"Room.h"
+#include"MGMAudioManager.h"
 extern void ignoreLineIfstream(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
