@@ -380,7 +380,7 @@ void MGMGame::update(DWORD timesleep)
 		for (List<SmallRock*>::Node *p = SmallRock::getSmallRocks()->pHead; p; p = p->pNext)
 		{
 			SmallRock *_smallRock = p->m_value;
-			Collision::checkCollision(_smallRock, Megaman::getInstance());
+			Collision::checkCollision(Megaman::getInstance(), _smallRock);
 			_smallRock->coordinateUpdate();
 		}
 

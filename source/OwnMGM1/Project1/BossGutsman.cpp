@@ -9,10 +9,11 @@
 #include"MegamanBullet.h"
 #include"DieEffect.h"
 #include"MGMAudioManager.h"
+#include "Blink.h"
 
 BossGutsman* BossGutsman::instance = 0;
-BossGutsman* BossGutsman::getInstance(){
-	if (instance == 0){
+BossGutsman* BossGutsman::getInstance() {
+	if (instance == 0) {
 		instance = new BossGutsman();
 	}
 	return instance;
@@ -33,11 +34,25 @@ BossGutsman::BossGutsman()
 	healthPoint = 28;
 	appearHP = false;
 	appearMusic = false;
+
+	blinkTime.init(800);
+	isBlink = false;
 }
 
 void BossGutsman::update()
 {
 	objectDirection = (Megaman::getInstance()->getXCenter() < this->getXCenter()) ? LEFT : RIGHT;
+	if (blinkTime.isFinish())
+	{
+		if (isDamaged)
+		{
+			isBlink = true;
+			blinkTime.start();
+		}
+		else
+			isBlink = false;
+		isDamaged = false;
+	}
 	switch (bossAction)
 	{
 	case STAND:
@@ -72,6 +87,7 @@ void BossGutsman::update()
 		break;
 	}
 
+	blinkTime.update();
 	delayTime.update();
 	deltaUpdate();
 	if (!pauseAnimation)
@@ -220,7 +236,7 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 		pauseAnimation = true; // Trong khi đang delay thì dừng updateFrameAnimation
 
 		Room::isVibrate = true; // Làm đối tượng Room bị rung chuyển
-		// Làm 2 viên gạch lớn bị rung chuyển:
+								// Làm 2 viên gạch lớn bị rung chuyển:
 		List<MGMObject*>& bigRocks = MGMCamera::getInstance()->objects.bigRockObjects;
 		for (int i = 0; i < bigRocks.size(); i++)
 		{
@@ -238,9 +254,10 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 	}
 	if (x <= 3598)
 		moveDirect = TO_RIGHT;
+
 	MGMMovableObject::onCollision(otherObject, nx, ny); // PreventMove và Set lại vy như mọi đối tượng khác
 }
-void BossGutsman::Die(){
+void BossGutsman::Die() {
 	isKill = true;
 	count = 0;
 	Megaman::getInstance()->score += 9000;
@@ -317,18 +334,20 @@ void BossGutsman::Die(){
 	effect12->dx = -1;
 	effect12->dy = 1;
 }
-void BossGutsman::onIntersectRect(MGMBox* otherObject){
-	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+void BossGutsman::onIntersectRect(MGMBox* otherObject) {
+	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET) {
+		if (!isDamaged)
+			isDamaged = true;
 		healthPoint -= 2;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		if (healthPoint == 0){
+		if (healthPoint == 0) {
 			mgmbullet->x = this->x + this->width / 2;
 			mgmbullet->y = this->y - this->height / 2;
 			mgmbullet->setAction(FIRE);
 			MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DEFEATE);
 			Die();
 		}
-		else{
+		else {
 			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
 			mgmbullet->setAction(NONE);
 		}
@@ -350,7 +369,20 @@ MOVE_DIRECT BossGutsman::randomMoveDirect()
 
 void BossGutsman::render()
 {
-	MGMEnemy::render();
+	if (isBlink)
+	{
+		if (Blink::getInstance()->curAction != 1)
+			Blink::getInstance()->curAction = 1;
+
+		Blink::getInstance()->x = x;
+		Blink::getInstance()->y = y;
+		Blink::getInstance()->render();
+		if (!Blink::getInstance()->isRender)
+			MGMEnemy::render();
+
+	}
+	else
+		MGMEnemy::render();
 	if (bigRock != NULL)
 		bigRock->render();
 }

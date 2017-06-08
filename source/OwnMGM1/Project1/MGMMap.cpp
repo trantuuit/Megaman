@@ -298,7 +298,7 @@ void MGMMap::update()
 		if (MGMStage::checkObjectInStage(groundObjects[iGround], MGMStage::curStage))
 			Collision::checkCollision(Megaman::getInstance(), groundObjects[iGround]);
 		if (CutmanBullet::bullet != NULL){
-			Collision::checkCollision(CutmanBullet::getBullet(), groundObjects[iGround]);
+			Collision::checkCollision(groundObjects[iGround], CutmanBullet::getBullet());
 		}
 		for (int i = 0; i < itemObjects.size(); i++){
 			MGMObject* item = itemObjects.at(i);

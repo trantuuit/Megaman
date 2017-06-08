@@ -95,13 +95,17 @@ void CutmanBullet::render()
 	if (isThrow)
 		MGMEnemy::render();
 }
+
 void CutmanBullet::onCollision(MGMBox* otherObject, int nx, int ny)
 {
 	MGMMovableObject* m = (MGMMovableObject*)otherObject;
 	if (m->id == 9)
 	{
 		if (isBack) //Nếu đã quay trở lại và va chạm thì set isThrow của Cutman là false
+		{
 			CutMan::getInstance()->isThrow = false;
+			CutMan::getInstance()->setCutmanAction(CutMan::getInstance()->action); //Set lại action do isThrow thay đổi
+		}
 		isThrow = false;
 		isBack = false;
 	}
@@ -115,6 +119,7 @@ void CutmanBullet::onIntersectRect(MGMBox * otherObject)
 		isThrow = false;
 		isBack = false;
 		CutMan::getInstance()->isThrow = false;
+		CutMan::getInstance()->setCutmanAction(CutMan::getInstance()->action); //Set lại action do isThrow thay đổi
 	}
 }
 CutmanBullet::~CutmanBullet()

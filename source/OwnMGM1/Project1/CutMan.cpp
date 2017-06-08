@@ -50,6 +50,9 @@ void CutMan::update()
 	objectDirection = (distance < 0) ? LEFT : RIGHT;
 	if (damagedDelayTime.isFinish()) // Nếu hết thời gian delay do bị trúng đạn:
 	{
+		if (timePerAction.isFinish()) // phải set lại action do biến isThrow bị thay đổi trong onCollision của CutmanBullet
+			setCutmanAction(action);
+
 		if (action == CM_IS_DAMAGED)
 		{
 			vx = 0;
@@ -208,9 +211,9 @@ CUTMAN_ACTION CutMan::randomAllAction()
 {
 	srand(time(NULL));
 	int result = rand() % 100;
-	if (result >= 0 && result <= 50)
+	if (result >= 0 && result <= 20)
 		return CM_RUN;
-	if (result > 50 && result <= 90)
+	if (result > 20 && result <= 80)
 		return CM_JUMP;
 	else
 		return CM_CLAP;
@@ -228,7 +231,7 @@ bool CutMan::randomAttack()
 {
 	srand(time(NULL));
 	int result = rand() % 3;
-	return (result != 0) ? false : true;
+	return (result == 0) ? false : true;
 }
 
 void CutMan::onIntersectRect(MGMBox * otherObject)

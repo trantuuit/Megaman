@@ -26,6 +26,9 @@ class BossGutsman :
 {
 	BOSS_GUTSMAN_ACT bossAction;
 	MGMDelayTime delayTime;
+	MGMDelayTime blinkTime;
+	bool isBlink;
+	bool isDamaged;
 	bool pauseAnimation;
 	bool isJumping; // Đã nhảy và rơi chạm đất
 	bool isThrow; // Đã ném
