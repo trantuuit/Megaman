@@ -34,6 +34,9 @@ private:
 public:
 	bool isBlink;
 	bool isThrow;
+	bool appearHP;
+	bool appearMusic;
+	int healthPoint;
 	CUTMAN_ACTION action; // action hiện tại
 	CUTMAN_ACTION previousAction; // action trước đó
 	static CutMan* getInstance();
@@ -47,6 +50,7 @@ public:
 	void resetHeightWhenChangeAnimation();
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void onIntersectRect(MGMBox* otherObject);
+	void die();
 	CutMan();
 	~CutMan();
 };

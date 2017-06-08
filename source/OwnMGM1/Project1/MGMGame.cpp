@@ -17,6 +17,7 @@
 #include"PKMWeapon.h"
 #include"MGMAudioManager.h"
 #include"BossGutsman.h"
+#include"CutMan.h"
 MGMGame::MGMGame()
 {
 }
@@ -79,9 +80,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 
 	//stage dau voi cutman
-	Megaman::getInstance()->x = 3120;
-	Megaman::getInstance()->y = 1432;
-	MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	//Megaman::getInstance()->x = 3120;
+	//Megaman::getInstance()->y = 1432;
+	//MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 	// Vị trí trước thanh trượt màu xanh map Gutsman:
 	//Megaman::getInstance()->x = 400;
@@ -102,14 +103,14 @@ void MGMGame::init()
 	MGMCamera::getInstance()->dx = 0;
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
-	mapCut = new MGMMap(CutMap, "Data\\TileMap\\objects.txt", "Data\\TileMap\\tileSheet.png", "Data\\TileMap\\quadtree.txt", "Data\\TileMap\\matrix.txt",
-		"Data\\TileMap\\stage.txt");
+	mapCut = new MGMMap(CutMap, "Data\\MapCut\\objects.txt", "Data\\MapCut\\tileSheet.png", "Data\\MapCut\\quadtree.txt", "Data\\MapCut\\matrix.txt",
+		"Data\\MapCut\\stage.txt");
 	mapGut = new MGMMap(GutsMap, "Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
 		"Data\\MapGut\\stage.txt");
 
 	//Dung test Boss Cutman
-	mapCut = new MGMMap(CutMap, "Data\\Tilemap_CutManRoom\\objects.txt", "Data\\Tilemap_CutManRoom\\tileSheet.png", "Data\\Tilemap_CutManRoom\\quadtree.txt", "Data\\Tilemap_CutManRoom\\matrix.txt",
-		"Data\\Tilemap_CutManRoom\\stage.txt");
+	//mapCut = new MGMMap(CutMap, "Data\\Tilemap_CutManRoom\\objects.txt", "Data\\Tilemap_CutManRoom\\tileSheet.png", "Data\\Tilemap_CutManRoom\\quadtree.txt", "Data\\Tilemap_CutManRoom\\matrix.txt",
+	//	"Data\\Tilemap_CutManRoom\\stage.txt");
 
 }
 void MGMGame::render()
@@ -185,6 +186,13 @@ void MGMGame::update(DWORD timesleep)
 		if (Megaman::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
 		}
+		if (CutMan::getInstance()->appearMusic){
+			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
+			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_BATTLE);
+		}
+		if (CutMan::getInstance()->isKill){
+			MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
+		}
 	}
 	else{
 		MGMAudioManager::getInstance()->Play(AUDIO_GUTMAN);
@@ -196,7 +204,7 @@ void MGMGame::update(DWORD timesleep)
 			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_BATTLE);
 		}
 		if (BossGutsman::getInstance()->isKill){
-			MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
+			MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
 		}
 	}
 	BoardBar::getInstance()->update();

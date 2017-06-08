@@ -3,6 +3,8 @@
 #include"Megaman.h"
 #include"BoardBar.h"
 #include"BossGutsman.h"
+#include"MGMAudioManager.h"
+#include"CutMan.h"
 HPBar* HPBar::hp = 0;
 HPBar* HPBar::getInstance(){
 	if (hp == 0){
@@ -23,14 +25,45 @@ HPBar::HPBar()
 
 void HPBar::update(){
 	if (Megaman::getInstance()->healthPoint >= 0){
-		curFrame_MG = Megaman::getInstance()->healthPoint;
+		int healthPoint = Megaman::getInstance()->healthPoint;
+		if (healthPoint > curFrame_MG){
+			curFrame_MG++;
+			MGMAudioManager::getInstance()->Play(AUDIO_ENERGY_FILL);
+		}
+		else{
+			curFrame_MG = healthPoint;
+		}
 	}
 	else{
 		curFrame_MG = 0;
 	}
 	if (BossGutsman::getInstance()->appearHP){
-		if (curFrame_Boss = BossGutsman::getInstance()->healthPoint >= 0){
-			curFrame_Boss = BossGutsman::getInstance()->healthPoint;
+		if (BossGutsman::getInstance()->healthPoint >= 0){
+			int healthPoint = BossGutsman::getInstance()->healthPoint;
+			if (healthPoint > curFrame_Boss){
+				curFrame_Boss++;
+				MGMAudioManager::getInstance()->Play(AUDIO_ENERGY_FILL);
+			}
+			else{
+				curFrame_Boss = healthPoint;
+			}
+
+		}
+		else{
+			curFrame_Boss = 0;
+		}
+	}
+	if (CutMan::getInstance()->appearHP){
+		if (CutMan::getInstance()->healthPoint >= 0){
+			int healthPoint = CutMan::getInstance()->healthPoint;
+			if (healthPoint > curFrame_Boss){
+				curFrame_Boss++;
+				MGMAudioManager::getInstance()->Play(AUDIO_ENERGY_FILL);
+			}
+			else{
+				curFrame_Boss = healthPoint;
+			}
+
 		}
 		else{
 			curFrame_Boss = 0;
@@ -39,10 +72,10 @@ void HPBar::update(){
 }
 void HPBar::render(){
 	this->sprite_MGM->Render(x, y, curAction, curFrame_MG);
-	if (BossGutsman::getInstance()->appearHP){
+	if (BossGutsman::getInstance()->appearHP || CutMan::getInstance()->appearHP){
 		this->sprite_BOSS->Render(x + 10, y, curAction, curFrame_Boss);
 	}
-	
+
 }
 
 HPBar::~HPBar()
