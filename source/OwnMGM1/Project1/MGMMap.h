@@ -6,6 +6,7 @@
 #include<fstream>
 #include"MGMBox.h"
 #include"Door.h"
+#include"KEY.h"
 using namespace std;
 
 enum BossMap
@@ -21,6 +22,8 @@ public:
 	bool isUpdate;
 	BossMap bossMap;
 	QuadTree* quadTree;
+	D3DXVECTOR2 * positionMegaman; 
+	D3DXVECTOR2* positionCamera;
 	int nStage;
 	MGMObject** allObjects;
 	MGMStage** stages;
@@ -30,11 +33,13 @@ public:
 	void readObjects(char* objectsPath);
 
 	void readStage(char* stagePath);
+	void readStageSaved(char * stageSavedPath);
 	void updateStage();
+	void updateStageSaved();
 	void update();
 	void draw();
 
-	MGMMap(BossMap bm,char* objectsPath,char* tileSheetPath,char* quadTreePath,char* matrixPath,char* stagePath);
+	MGMMap(BossMap bm,char* objectsPath,char* tileSheetPath,char* quadTreePath,char* matrixPath,char* stagePath, char* stageSavedPath);
 	~MGMMap();
 };
 

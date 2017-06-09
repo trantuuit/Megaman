@@ -67,6 +67,7 @@ void stairs::climbStairs()
 
 		if (mgm->isOnStairs)
 		{
+			mgm->dx = 0;
 			mgm->dy = 0;
 			mgm->ay = 0;
 			mgm->vy = -0.3f;

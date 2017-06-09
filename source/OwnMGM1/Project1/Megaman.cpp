@@ -590,6 +590,9 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	}
 	if (otherObject->collisionCategory == CC_ENEMY){
 		MGMEnemy* enemy = (MGMEnemy*)otherObject;
+		if (enemy->categoryEnemy == DEATH_LAND) {
+			healthPoint -= 28;
+		}
 		if (actionBeingAttacked == ATTACKED_NONE){
 			if (enemy->categoryEnemy != ROOM && enemy->categoryEnemy != GREEN_BAR){
 				beingAttacked = true;
@@ -613,9 +616,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			if (enemy->categoryEnemy == CREP_BIG_EYE){
 				healthPoint -= 10;
 			}
-			if (enemy->categoryEnemy == DEATH_LAND){
-				healthPoint -= 28;
-			}
+			
 		}
 	}
 	if (otherObject->collisionCategory == CC_ENEMY_BULLET){
@@ -656,6 +657,11 @@ void Megaman::onLastFrameAnimation(int action)
 
 void Megaman::updateFrameAnimation()
 {
+	/*if ((curAction == MGM_CLIMB || curAction == MGM_SKIN_CLIMB) && status == MEGAMAN_BE_ATTACKED)
+	{
+		if (timeFrame.atTime())
+			this->sprite->Update(curAction, curFrame);
+	}*/
 	if (!pauseAnimation){
 		if (status == MEGAMAN_NORMAL){
 			if (curAction == MGM_STAND || curAction == MGM_SKIN_STAND){

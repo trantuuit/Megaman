@@ -14,6 +14,7 @@ private:
 	DIDEVICEOBJECTDATA m_keyEvents[1024];
 
 	BYTE  m_keyStates[256];	
+	bool  m_keyBuffer[256];
 	CKeyboard(HINSTANCE hInstance, HWND hWnd);
 	static CKeyboard* instance;
 public:
@@ -23,6 +24,7 @@ public:
 	void UpdateKeyboard();
 	void PollKeyboard();
 	bool IsKeyDown(BYTE keyCode);
+	bool IsKeyPress(BYTE keyCode);
 	bool IsKeyUp(BYTE keyCode);
 	/*void OnKeyDown(int KeyCode);
 	void OnKeyUp(int KeyCode);*/

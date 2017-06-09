@@ -25,6 +25,7 @@ CKeyboard::CKeyboard(HINSTANCE hInstance, HWND hWnd)
 	for (int i = 0; i < 256; i++)
 	{
 		m_keyStates[i] = 0x00;
+		m_keyBuffer[i] = false;
 	}
 }
 
@@ -78,6 +79,19 @@ void CKeyboard::UpdateKeyboard()
 	{
 		int KeyCode = m_keyEvents[i].dwOfs;
 		int KeyState = m_keyEvents[i].dwData;
+		for (int j = 0; j < 256; j++)
+		{
+			m_keyBuffer[j] = false;
+			if (KeyCode == j)
+			{
+				if ((KeyState & 0x80) > 0)
+				{
+				
+					m_keyBuffer[j] = true;
+				}
+				else m_keyBuffer[j] = false;
+			}
+		}
 		/*if ((KeyState & 0x80) > 0)
 			OnKeyDown(KeyCode);
 		else
@@ -102,7 +116,10 @@ bool CKeyboard::IsKeyDown(BYTE keyCode)
 {
 	return (m_keyStates[keyCode] & 0x80) > 0;
 }
-
+bool CKeyboard::IsKeyPress(BYTE keyCode)
+{
+	return m_keyBuffer[keyCode];
+}
 bool CKeyboard::IsKeyUp(BYTE keyCode)
 {
 	return !((m_keyStates[keyCode] & 0x80) > 0);

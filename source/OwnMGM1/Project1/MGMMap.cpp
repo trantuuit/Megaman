@@ -133,13 +133,13 @@ void MGMMap::readObjects(char* objectsPath)
 	doors = new Door*[2];
 	doors[0] = new Door(2272, 1344, 32, 64);
 	doors[0]->id = -3;
-	doors[1] = new Door(3072, 1344, 32, 64);
+	doors[1] = new Door(3071, 1344, 32, 64);
 	doors[1]->id = -3;
 	if (bossMap == GutsMap)
 	{
 		doors[0]->x = 2784;
 		doors[0]->y = 144;
-		doors[1]->x = 3568;
+		doors[1]->x = 3569;
 		doors[1]->y = 144;
 	}
 }
@@ -159,6 +159,22 @@ void MGMMap::readStage(char * stagePath)
 	}
 	//MGMStage::curStage = stages[0];
 
+}
+void MGMMap::readStageSaved(char * stageSavedPath)
+{
+	int nStageSaved;
+	ifstream fs(stageSavedPath);
+	fs >> nStageSaved;
+	positionMegaman = new D3DXVECTOR2[nStageSaved];
+	positionCamera = new D3DXVECTOR2[nStageSaved];
+
+	for (int i = 0; i < nStageSaved; i++)
+	{
+		fs >> positionMegaman[i].x >> positionMegaman[i].y >> positionCamera[i].x >> positionCamera[i].y;
+		/*if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
+		MGMStage::curStage = stages[i];*/
+	}
+	fs.close();
 }
 
 void MGMMap::updateStage()
@@ -189,21 +205,12 @@ void MGMMap::updateStage()
 		}
 	}
 
-	/*if (Collision::AABBCheck(mgm, doors[0]))
-	{
-	isUpdate = false;
-	if (mgm->IntersectDoor != 0)
-	{
-	mgm->IntersectDoor = 0;
-	MGMStage::curStage = stages[MGMStage::curStage->index + mgm->objectDirection];
-	}
-	}*/
 	for (int i = 0; i < 2; i++)
 	{
 
 		if (Collision::AABBCheck(mgm, doors[i]))
 		{
-			if (mgm->objectDirection == RIGHT&&mgm->getRight()<=doors[i]->x)
+			if (mgm->objectDirection == RIGHT&&mgm->getRight() <= doors[i]->x)
 			{
 				isUpdate = false;
 				Megaman::getInstance()->dx = 0;
@@ -221,6 +228,7 @@ void MGMMap::updateStage()
 	}
 	if (!isUpdate)
 	{
+
 		if (mgm->isOnStairs &&mgm->getYCenter() > MGMStage::curStage->getTop())
 		{
 			mgm->y += 0.5f;
@@ -238,6 +246,7 @@ void MGMMap::updateStage()
 			MGMCamera::getInstance()->dy = -4;
 
 		}
+
 		if (mgm->IntersectDoor >= 0)
 		{
 			if (!doors[mgm->IntersectDoor]->isOpened)
@@ -270,6 +279,93 @@ void MGMMap::updateStage()
 		isUpdate = true;
 	}
 
+	updateStageSaved();
+
+}
+
+void MGMMap::updateStageSaved()
+{
+	bool keyNumberPress = false;
+	if (KEY::getInstance()->isOnePress)
+	{
+		MGMCamera::getInstance()->x = positionCamera[0].x;
+		MGMCamera::getInstance()->y = positionCamera[0].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[0].x;
+		Megaman::getInstance()->y = positionMegaman[0].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+
+	if (KEY::getInstance()->isTwoPress)
+	{
+		MGMCamera::getInstance()->x = positionCamera[1].x;
+		MGMCamera::getInstance()->y = positionCamera[1].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[1].x;
+		Megaman::getInstance()->y = positionMegaman[1].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+	if (KEY::getInstance()->isThreePress)
+	{
+		MGMCamera::getInstance()->x = positionCamera[2].x;
+		MGMCamera::getInstance()->y = positionCamera[2].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[2].x;
+		Megaman::getInstance()->y = positionMegaman[2].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+	if (KEY::getInstance()->isFourPress)
+	{
+		MGMCamera::getInstance()->x = positionCamera[3].x;
+		MGMCamera::getInstance()->y = positionCamera[3].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[3].x;
+		Megaman::getInstance()->y = positionMegaman[3].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+	if (KEY::getInstance()->isFivePress)
+	{
+		MGMCamera::getInstance()->x = positionCamera[4].x;
+		MGMCamera::getInstance()->y = positionCamera[4].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[4].x;
+		Megaman::getInstance()->y = positionMegaman[4].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+	if (KEY::getInstance()->isSixPress)
+	{
+		MGMCamera::getInstance()->x = positionCamera[5].x;
+		MGMCamera::getInstance()->y = positionCamera[5].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[5].x;
+		Megaman::getInstance()->y = positionMegaman[5].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+	if (KEY::getInstance()->isSevenPress)
+	{
+
+		MGMCamera::getInstance()->x = positionCamera[6].x;
+		MGMCamera::getInstance()->y = positionCamera[6].y;
+		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+		Megaman::getInstance()->x = positionMegaman[6].x;
+		Megaman::getInstance()->y = positionMegaman[6].y;
+		Megaman::getInstance()->isKill = false;
+		keyNumberPress = true;
+	}
+	if (keyNumberPress)
+	{
+		for (int i = 0; i < nStage; i++)
+		{
+			if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
+				MGMStage::curStage = stages[i];
+		}
+	}
 }
 
 void MGMMap::update()
@@ -297,15 +393,15 @@ void MGMMap::update()
 	{
 		if (MGMStage::checkObjectInStage(groundObjects[iGround], MGMStage::curStage))
 			Collision::checkCollision(Megaman::getInstance(), groundObjects[iGround]);
-		if (CutmanBullet::bullet != NULL){
+		if (CutmanBullet::bullet != NULL) {
 			Collision::checkCollision(groundObjects[iGround], CutmanBullet::getBullet());
 		}
-		for (int i = 0; i < itemObjects.size(); i++){
+		for (int i = 0; i < itemObjects.size(); i++) {
 			MGMObject* item = itemObjects.at(i);
 			Collision::checkCollision(item, groundObjects[iGround]);
 		}
 	}
-	for (int i = 0; i < itemObjects.size(); i++){
+	for (int i = 0; i < itemObjects.size(); i++) {
 		MGMObject* item = itemObjects.at(i);
 		Collision::checkCollision(Megaman::getInstance(), item);
 	}
@@ -357,7 +453,7 @@ void MGMMap::update()
 	}
 
 	int nDoor = 2;
-	for (int i = 0; i < nDoor; i++){
+	for (int i = 0; i < nDoor; i++) {
 		Collision::checkCollision(CutMan::getInstance(), this->doors[i]);
 
 	}
@@ -377,8 +473,8 @@ void MGMMap::draw()
 {
 
 	MGMTileMap::draw();
-	if (!BoardBar::getInstance()->isPause){
-		
+	if (!BoardBar::getInstance()->isPause) {
+
 		int nObjectsCam = MGMCamera::getInstance()->objects.allObjects.size();
 		for (int i = 0; i < nObjectsCam; i++)
 		{
@@ -392,15 +488,16 @@ void MGMMap::draw()
 
 }
 
-MGMMap::MGMMap(BossMap bm,char * objectsPath, char * tileSheetPath, char * quadTreePath, char * matrixPath, char* stagePath) :
-MGMTileMap(matrixPath, tileSheetPath) //Doc tile map
+MGMMap::MGMMap(BossMap bm, char * objectsPath, char * tileSheetPath, char * quadTreePath, char * matrixPath, char* stagePath, char* stageSavedPath) :
+	MGMTileMap(matrixPath, tileSheetPath) //Doc tile map
 {
 	bossMap = bm;
 	readObjects(objectsPath);
 	quadTree = new QuadTree(quadTreePath, allObjects, nRow * 16);
 	readStage(stagePath);
+	readStageSaved(stageSavedPath);
 	isUpdate = true;
-	
+
 }
 
 MGMMap::~MGMMap()

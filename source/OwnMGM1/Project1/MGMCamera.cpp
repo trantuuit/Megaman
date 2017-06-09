@@ -41,12 +41,13 @@ void MGMCamera::update()
 	dx = 0;
 	float mgmX = Megaman::getInstance()->x; // Dung: chuyển sang float (cần thiết khi Megaman ở trên GreenBar)
 	float mgmDx = Megaman::getInstance()->dx;
-	
+	//if (!Collision::AABBCheck(Megaman::getInstance(), this)) Megaman::getInstance()->isKill = true;
 	if( (mgmDx<0 && Megaman::getInstance()->getXCenter() + mgmDx< getXCenter())
 		||
 		(mgmDx>0 && Megaman::getInstance()->getXCenter() + mgmDx> getXCenter())
 		)
 	dx = Megaman::getInstance()->dx;
+
 
 	if (x>= MGMStage::curStage->getLeft()&& x + dx < MGMStage::curStage->getLeft())
 	{

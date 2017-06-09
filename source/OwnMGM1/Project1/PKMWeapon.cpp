@@ -24,9 +24,13 @@ PKMWeapon::PKMWeapon()
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_PKM_WEAPON];
 	categoryBullet = FOR_PKM;
 	getListHammer()->_Add(this);
+	this->width = this->height = 12;
 }
 
-
+void PKMWeapon::onIntersectRect(MGMBox* otherObject)
+{
+	
+}
 PKMWeapon::~PKMWeapon()
 {
 }

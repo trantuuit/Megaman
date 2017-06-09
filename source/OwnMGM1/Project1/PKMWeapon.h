@@ -12,6 +12,7 @@ public:
 	void deltaUpdate();
 	//void onCollision(MGMBox* otherObject, int nx, int ny);
 	PKMWeapon();
+	void onIntersectRect(MGMBox* otherObject);
 	~PKMWeapon();
 };
 

@@ -104,9 +104,9 @@ void MGMGame::init()
 	MGMCamera::getInstance()->dy = 0;
 	//Khoi tao map
 	mapCut = new MGMMap(CutMap, "Data\\MapCut\\objects.txt", "Data\\MapCut\\tileSheet.png", "Data\\MapCut\\quadtree.txt", "Data\\MapCut\\matrix.txt",
-		"Data\\MapCut\\stage.txt");
+		"Data\\MapCut\\stage.txt","Data\\MapCut\\stageSaved.txt");
 	mapGut = new MGMMap(GutsMap, "Data\\MapGut\\objects.txt", "Data\\MapGut\\tileSheet.png", "Data\\MapGut\\quadtree.txt", "Data\\MapGut\\matrix.txt",
-		"Data\\MapGut\\stage.txt");
+		"Data\\MapGut\\stage.txt","Data\\MapGut\\stageSaved.txt");
 
 	//Dung test Boss Cutman
 	//mapCut = new MGMMap(CutMap, "Data\\Tilemap_CutManRoom\\objects.txt", "Data\\Tilemap_CutManRoom\\tileSheet.png", "Data\\Tilemap_CutManRoom\\quadtree.txt", "Data\\Tilemap_CutManRoom\\matrix.txt",
@@ -406,8 +406,13 @@ void MGMGame::update(DWORD timesleep)
 		for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
 		{
 			PKMWeapon* bullet = p->m_value;
-			Collision::checkCollision(bullet, Megaman::getInstance());
+			
 			bullet->deltaUpdate();
+			if (Collision::AABBCheck(bullet, Megaman::getInstance()))
+			{
+				//bullet->onIntersectRect(Megaman::getInstance());
+				Megaman::getInstance()->onIntersectRect(bullet);
+			}
 			bullet->updateFrameAnimation();
 			bullet->coordinateUpdate();
 		}
