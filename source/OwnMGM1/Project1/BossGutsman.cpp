@@ -252,10 +252,16 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 		moveDirect = (nx == -1) ? TO_LEFT : TO_RIGHT;
 		vx = 0;
 	}
-	if (x <= 3598)
+	if (x <= 3600)
 		moveDirect = TO_RIGHT;
 
 	MGMMovableObject::onCollision(otherObject, nx, ny); // PreventMove và Set lại vy như mọi đối tượng khác
+}
+void BossGutsman::reset(){
+	isKill = false;
+	healthPoint = 28;
+	appearMusic = false;
+	appearHP = false;
 }
 void BossGutsman::Die() {
 	isKill = true;
@@ -338,8 +344,17 @@ void BossGutsman::onIntersectRect(MGMBox* otherObject) {
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET) {
 		if (!isDamaged)
 			isDamaged = true;
-		healthPoint -= 2;
+		
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
+		if (mgmbullet->category_bullet == OF_CUTMAN){
+			if (!mgmbullet->isThrow){
+				healthPoint -= 4;
+				mgmbullet->isThrow = true;
+			}
+		}
+		else{
+			healthPoint -= 2;
+		}
 		if (healthPoint == 0) {
 			//mgmbullet->x = this->x + this->width / 2;
 			//mgmbullet->y = this->y - this->height / 2;

@@ -399,7 +399,7 @@ void MGMGame::update(DWORD timesleep)
 		//Cutman bullet
 		if (CutmanBullet::bullet != NULL){
 			CutmanBullet::getBullet()->update();
-			Collision::checkCollision(CutmanBullet::bullet, Megaman::getInstance());
+			Collision::checkCollision(Megaman::getInstance(),CutmanBullet::bullet);
 			CutmanBullet::getBullet()->coordinateUpdate();
 		}
 

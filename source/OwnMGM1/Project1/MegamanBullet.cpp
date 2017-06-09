@@ -57,6 +57,7 @@ MegamanBullet::MegamanBullet(CATEGORY_BULLET_FOR_MEGAMAN category){
 		getListBullet()->_Add(this);
 	}
 	else if (category == OF_CUTMAN){
+		isThrow = false;
 		dx = 0;
 		dy = 0;
 		vx = 0;
@@ -153,6 +154,7 @@ void MegamanBullet::onIntersectRect(MGMBox* otherObject){
 		isThrowLeft = false;
 		isThrowRight = false;
 		t = 0;
+		isThrow = false;
 	}
 }
 //void MegamanBullet::setAction(MEGAMANBULLET_ACTION action){

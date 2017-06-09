@@ -29,13 +29,20 @@ void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
 }
 void BigEye::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
-		count++;
+		
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		if (count == 2){
-
-			//mgmbullet->x = this->x+width/6;
-			//mgmbullet->y = this->y-height/6;
-			//mgmbullet->setAction(FIRE);
+		if (mgmbullet->category_bullet == OF_CUTMAN){
+			if (!mgmbullet->isThrow){
+				count += 4;
+				mgmbullet->isThrow = true;
+				MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
+			}
+		}
+		else{
+			count++;
+			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
+		}
+		if (count == 20){
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 9000;

@@ -55,6 +55,7 @@ public:
 	int life;
 	int healthPoint;
 	int score;
+	boolean isSuperMan;
 	MGMGameTime timeFrame1, timeFrame2;
 	MGMDelayTime eyesTime1, eyesTime2;
 	MGMDelayTime delayAnimateStandShoot;

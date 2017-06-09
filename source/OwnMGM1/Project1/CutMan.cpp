@@ -151,6 +151,8 @@ void CutMan::update()
 		if (isDamaged)
 		{
 			vx = 0.17 * (-objectDirection); // Cho vx = 0
+			if (vx <= 3104)
+				vx = 0;
 			vy = 0;
 			action = CM_IS_DAMAGED; //Chuyển qua Animation trúng đạn
 									//(isThrow) ? setCurAction(8) : setCurAction(4); // Chuyển Animation
@@ -246,8 +248,16 @@ void CutMan::onIntersectRect(MGMBox * otherObject)
 		//mgmbullet->setAction(NONE);
 	}
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
-		healthPoint -= 2;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
+		if (mgmbullet->category_bullet == OF_CUTMAN){
+			if (!mgmbullet->isThrow){
+				healthPoint -= 4;
+				mgmbullet->isThrow = true;
+			}
+		}
+		else{
+			healthPoint -= 2;
+		}
 		if (healthPoint == 0){
 			//mgmbullet->x = this->x + this->width / 2;
 			//mgmbullet->y = this->y - this->height / 2;
@@ -261,7 +271,13 @@ void CutMan::onIntersectRect(MGMBox * otherObject)
 		}
 	}
 }
-
+void CutMan::reset(){
+	isKill = false;
+	healthPoint = 28;
+	appearHP = false;
+	appearMusic = false;
+	MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
+}
 void CutMan::die(){
 	isKill = true;
 	count = 0;
@@ -338,6 +354,9 @@ void CutMan::die(){
 	effect12->y = this->y;
 	effect12->dx = -1;
 	effect12->dy = 1;
+
+	delete CutmanBullet::bullet;
+	CutmanBullet::bullet = NULL;
 }
 void CutMan::onCollision(MGMBox* otherObject, int nx, int ny)
 {

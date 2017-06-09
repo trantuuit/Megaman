@@ -293,7 +293,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[0].x;
 		Megaman::getInstance()->y = positionMegaman[0].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 
@@ -304,7 +306,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[1].x;
 		Megaman::getInstance()->y = positionMegaman[1].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 	if (KEY::getInstance()->isThreePress)
@@ -314,7 +318,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[2].x;
 		Megaman::getInstance()->y = positionMegaman[2].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 	if (KEY::getInstance()->isFourPress)
@@ -324,7 +330,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[3].x;
 		Megaman::getInstance()->y = positionMegaman[3].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 	if (KEY::getInstance()->isFivePress)
@@ -334,7 +342,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[4].x;
 		Megaman::getInstance()->y = positionMegaman[4].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 	if (KEY::getInstance()->isSixPress)
@@ -344,7 +354,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[5].x;
 		Megaman::getInstance()->y = positionMegaman[5].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 	if (KEY::getInstance()->isSevenPress)
@@ -355,7 +367,9 @@ void MGMMap::updateStageSaved()
 		MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
 		Megaman::getInstance()->x = positionMegaman[6].x;
 		Megaman::getInstance()->y = positionMegaman[6].y;
-		Megaman::getInstance()->isKill = false;
+		Megaman::getInstance()->reset();
+		CutMan::getInstance()->reset();
+		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
 	if (keyNumberPress)

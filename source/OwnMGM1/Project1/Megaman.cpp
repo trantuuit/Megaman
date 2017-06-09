@@ -25,8 +25,8 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
-	bool isKeyLeftDown, isKeyRightDown, isKeyMoveDown, isKeyJumpPress, isKeyMovePress, isAttackPress;
-	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress = false;
+	bool isKeyLeftDown, isKeyRightDown, isKeyMoveDown, isKeyJumpPress, isKeyMovePress, isAttackPress, isSuperMan;
+	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress=isSuperMan = false;
 	//Nhận các sự kiện từ bàn phím
 	isKeyLeftDown = KEY::getInstance()->isLeftDown;
 	isKeyRightDown = KEY::getInstance()->isRightDown;
@@ -34,6 +34,15 @@ void Megaman::update()
 	isKeyJumpPress = KEY::getInstance()->isJumpPress;
 	isKeyMovePress = KEY::getInstance()->isMovePress;
 	isAttackPress = KEY::getInstance()->isAttackPress;
+	isSuperMan = KEY::getInstance()->isNinePress;
+	if (isSuperMan){
+		if (this->isSuperMan){
+			this->isSuperMan = false;
+		}
+		else{
+			this->isSuperMan = true;
+		}
+	}
 	if (Room::getInstance()->isVibrate && isOnGround){
 		vx = 0;
 		if (isChangeCutMan){
@@ -42,7 +51,7 @@ void Megaman::update()
 		else{
 			setCurAction(MGM_EFFECT_BE_ATTACKED4);
 		}
-		
+
 		pauseAnimation = false;
 		deltaUpdate();
 		updateFrameAnimation();
@@ -109,7 +118,7 @@ void Megaman::update()
 	else{
 		if (actionBeingAttacked == STEP4){
 			if (step4.isReady()){
-				step4.start(3000);
+				step4.start(2000);
 			}
 			if (step4.isSchedule()){
 				status = MEGAMAN_BE_ATTACKED;
@@ -131,6 +140,11 @@ void Megaman::update()
 		}
 
 		//Xử lý tình huống trên cầu thang
+		if (beingAttacked){
+			if (isOnStairs){
+				isOnStairs = false;
+			}
+		}
 		if (isOnStairs)
 		{
 			isKeyMoveDown = false;
@@ -258,16 +272,11 @@ void Megaman::update()
 						}
 
 					}
-
 					delayShoot.start();
-
 					lastStatusRunAttack = true;
-
 				}
-
 			}
 			else{
-
 				dx = dxGreenBar;
 				if (lastStatusStandAttack){
 					if (delayAnimateStandShoot.isReady()){
@@ -380,7 +389,7 @@ void Megaman::update()
 					if (isChangeCutMan){
 						vx = 0;
 					}
-					
+
 				}
 				delayShoot.update();
 			}
@@ -444,7 +453,7 @@ void Megaman::update()
 			}
 		}
 
-		if (!isOnGround && !isOnStairs && !isOnGreenBar&&!Room::getInstance()->isVibrate){
+		if (!isOnGround && !isOnStairs && !isOnGreenBar){
 			if (lastStatusJumpAttack){
 				if (delayAnimateJumpShoot.isReady())
 				{
@@ -513,6 +522,11 @@ void Megaman::update()
 	delayShoot.update();
 	deltaUpdate();
 	updateFrameAnimation();
+	if (isOnStairs && actionBeingAttacked==STEP1) {
+		isOnStairs = false;
+		pauseAnimation = false;
+		vx = 0;
+	}
 	isOnGround = false;
 	isOnGreenBar = false;
 }
@@ -571,7 +585,61 @@ void Megaman::setCurAction(int action)
 
 void Megaman::onIntersectRect(MGMBox * otherObject)
 {
+	if (!isSuperMan){
+		if (otherObject->collisionCategory == CC_ENEMY){
+			MGMEnemy* enemy = (MGMEnemy*)otherObject;
+			if (enemy->categoryEnemy == DEATH_LAND) {
+				healthPoint -= 28;
+			}
+			if (actionBeingAttacked == ATTACKED_NONE){
+				if (enemy->categoryEnemy != ROOM && enemy->categoryEnemy != GREEN_BAR){
+					beingAttacked = true;
+					MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DAMAGE);
+					actionBeingAttacked = STEP1;
+					collisionDirection = enemy->objectDirection;
+				}
 
+				if ((enemy->categoryEnemy == CREP_BEAK) || (enemy->categoryEnemy == CREP_FLYING_SHELL) || (enemy->categoryEnemy == CREP_SCREW_BOMBER) || (enemy->categoryEnemy == CREP_MET)){
+					healthPoint -= 1;
+				}
+				if (enemy->categoryEnemy == CREP_FLEA){
+					healthPoint -= 2;
+				}
+				if (enemy->categoryEnemy == CREP_BLADER){
+					healthPoint -= 3;
+				}
+				if ((enemy->categoryEnemy == CREP_OCTOPUS_BATTERY) || (enemy->categoryEnemy == CREP_SUPER_CUTTER) || (enemy->categoryEnemy == BOSS_GUTMAN) || (enemy->categoryEnemy == BIG_ROCK) || (enemy->categoryEnemy == SMALL_ROCK) || (enemy->categoryEnemy == BOSS_CUTMAN) || (enemy->categoryEnemy == CUTMAN_WEAPON)){
+					healthPoint -= 4;
+				}
+				if (enemy->categoryEnemy == CREP_BIG_EYE){
+					healthPoint -= 10;
+				}
+
+			}
+		}
+		if (otherObject->collisionCategory == CC_ENEMY_BULLET){
+			EnemyBullet* bullet = (EnemyBullet*)otherObject;
+			if (actionBeingAttacked == ATTACKED_NONE){
+				MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DAMAGE);
+				beingAttacked = true;
+				actionBeingAttacked = STEP1;
+				collisionDirection = bullet->objectDirection;
+				if (bullet->categoryBullet == FOR_BEAK){
+					healthPoint -= 1;
+				}
+				if ((bullet->categoryBullet == FOR_FLYING_SHELL) || (bullet->categoryBullet == FOR_SCREW_BOMBER) || (bullet->categoryBullet == FOR_MET)){
+					healthPoint -= 2;
+				}
+				if (bullet->categoryBullet == FOR_PKM){
+					healthPoint -= 3;
+				}
+			}
+		}
+		if (healthPoint <= 0){
+			die();
+			healthPoint = 0;
+		}
+	}
 	if (otherObject->collisionCategory == CC_ITEM){
 		MGMItem* item = (MGMItem*)otherObject;
 		if (item->categoryItem == CI_LIFE_ENERGY_BIG){
@@ -593,59 +661,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	if (healthPoint > 28){
 		healthPoint = 28;
 	}
-	if (otherObject->collisionCategory == CC_ENEMY){
-		MGMEnemy* enemy = (MGMEnemy*)otherObject;
-		if (enemy->categoryEnemy == DEATH_LAND) {
-			healthPoint -= 28;
-		}
-		if (actionBeingAttacked == ATTACKED_NONE){
-			if (enemy->categoryEnemy != ROOM && enemy->categoryEnemy != GREEN_BAR){
-				beingAttacked = true;
-				MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DAMAGE);
-				actionBeingAttacked = STEP1;
-				collisionDirection = enemy->objectDirection;
-			}
 
-			if ((enemy->categoryEnemy == CREP_BEAK) || (enemy->categoryEnemy == CREP_FLYING_SHELL) || (enemy->categoryEnemy == CREP_SCREW_BOMBER) || (enemy->categoryEnemy == CREP_MET)){
-				healthPoint -= 1;
-			}
-			if (enemy->categoryEnemy == CREP_FLEA){
-				healthPoint -= 2;
-			}
-			if (enemy->categoryEnemy == CREP_BLADER){
-				healthPoint -= 3;
-			}
-			if ((enemy->categoryEnemy == CREP_OCTOPUS_BATTERY) || (enemy->categoryEnemy == CREP_SUPER_CUTTER) || (enemy->categoryEnemy == BOSS_GUTMAN) || (enemy->categoryEnemy == BIG_ROCK) || (enemy->categoryEnemy == SMALL_ROCK) || (enemy->categoryEnemy == BOSS_CUTMAN) || (enemy->categoryEnemy == CUTMAN_WEAPON)){
-				healthPoint -= 4;
-			}
-			if (enemy->categoryEnemy == CREP_BIG_EYE){
-				healthPoint -= 10;
-			}
-			
-		}
-	}
-	if (otherObject->collisionCategory == CC_ENEMY_BULLET){
-		EnemyBullet* bullet = (EnemyBullet*)otherObject;
-		if (actionBeingAttacked == ATTACKED_NONE){
-			MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DAMAGE);
-			beingAttacked = true;
-			actionBeingAttacked = STEP1;
-			collisionDirection = bullet->objectDirection;
-			if (bullet->categoryBullet == FOR_BEAK){
-				healthPoint -= 1;
-			}
-			if ((bullet->categoryBullet == FOR_FLYING_SHELL) || (bullet->categoryBullet == FOR_SCREW_BOMBER) || (bullet->categoryBullet == FOR_MET)){
-				healthPoint -= 2;
-			}
-			if (bullet->categoryBullet == FOR_PKM){
-				healthPoint -= 3;
-			}
-		}
-	}
-	if (healthPoint <= 0){
-		die();
-		healthPoint = 0;
-	}
 }
 
 void Megaman::onLastFrameAnimation(int action)
@@ -664,8 +680,8 @@ void Megaman::updateFrameAnimation()
 {
 	/*if ((curAction == MGM_CLIMB || curAction == MGM_SKIN_CLIMB) && status == MEGAMAN_BE_ATTACKED)
 	{
-		if (timeFrame.atTime())
-			this->sprite->Update(curAction, curFrame);
+	if (timeFrame.atTime())
+	this->sprite->Update(curAction, curFrame);
 	}*/
 	if (!pauseAnimation){
 		if (status == MEGAMAN_NORMAL){
@@ -858,7 +874,8 @@ void Megaman::reset(){
 
 Megaman::Megaman()
 {
-	isChangeCutMan = true;
+	isSuperMan = false;
+	isChangeCutMan = false;
 	lastIsJump = true;
 	lastOnGreenBar = false;
 	actionBeingAttacked = ATTACKED_NONE;

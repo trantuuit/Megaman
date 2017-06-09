@@ -49,6 +49,7 @@ public:
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void onIntersectRect(MGMBox* otherObject);
 	void Die();
+	void reset();
 	JUMP_TYPE randomJumpType();
 	MOVE_DIRECT randomMoveDirect();
 	~BossGutsman();

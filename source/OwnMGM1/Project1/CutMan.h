@@ -52,6 +52,7 @@ public:
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void onIntersectRect(MGMBox* otherObject);
 	void die();
+	void reset();
 	CutMan();
 	~CutMan();
 };
