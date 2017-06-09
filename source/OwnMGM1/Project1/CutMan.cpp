@@ -19,7 +19,7 @@ CutMan* CutMan::getInstance()
 }
 CutMan::CutMan()
 {
-	
+	categoryEnemy = BOSS_CUTMAN;
 	healthPoint = 28;
 	appearHP = false;
 	appearMusic = false;
@@ -242,22 +242,22 @@ void CutMan::onIntersectRect(MGMBox * otherObject)
 	{
 		if (!isDamaged)
 			isDamaged = true;
-		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		mgmbullet->setAction(NONE);
+		//MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
+		//mgmbullet->setAction(NONE);
 	}
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		healthPoint -= 2;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (healthPoint == 0){
-			mgmbullet->x = this->x + this->width / 2;
-			mgmbullet->y = this->y - this->height / 2;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x + this->width / 2;
+			//mgmbullet->y = this->y - this->height / 2;
+			//mgmbullet->setAction(FIRE);
 			MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DEFEATE);
 			die();
 		}
 		else{
 			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }
@@ -374,7 +374,7 @@ void CutMan::onCollision(MGMBox* otherObject, int nx, int ny)
 			isDamaged = true;
 		}
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		mgmbullet->setAction(NONE);
+		/*mgmbullet->setAction(NONE);*/
 	}
 }
 

@@ -341,15 +341,15 @@ void BossGutsman::onIntersectRect(MGMBox* otherObject) {
 		healthPoint -= 2;
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (healthPoint == 0) {
-			mgmbullet->x = this->x + this->width / 2;
-			mgmbullet->y = this->y - this->height / 2;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x + this->width / 2;
+			//mgmbullet->y = this->y - this->height / 2;
+			//mgmbullet->setAction(FIRE);
 			MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DEFEATE);
 			Die();
 		}
 		else {
 			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }

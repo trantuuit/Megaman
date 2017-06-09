@@ -15,6 +15,7 @@ CutmanBullet* CutmanBullet::getBullet()
 CutmanBullet::CutmanBullet()
 {
 	//fileLog.open("abcFileLox.txt", ios::out | ios::app);
+	categoryEnemy = CUTMAN_WEAPON;
 	dx = 0;
 	dy = 0;
 	vx = 0;
