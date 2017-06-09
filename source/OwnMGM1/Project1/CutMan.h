@@ -32,6 +32,7 @@ private:
 	MGMDelayTime blinkTime;
 	FRAME_TYPE lastFrameType;
 public:
+	
 	bool isBlink;
 	bool isThrow;
 	bool appearHP;

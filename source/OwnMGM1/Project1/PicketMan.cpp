@@ -96,9 +96,9 @@ void PicketMan::onIntersectRect(MGMBox* otherObject){
 			count++;
 			if (count == 5)
 			{
-				mgmbullet->x = this->x;
-				mgmbullet->y = this->y;
-				mgmbullet->setAction(FIRE);
+				//mgmbullet->x = this->x;
+				//mgmbullet->y = this->y;
+				//mgmbullet->setAction(FIRE);
 				isKill = true;
 				count = 0;
 				EffectCreateItem::getInstance()->enemy = this;
@@ -108,7 +108,7 @@ void PicketMan::onIntersectRect(MGMBox* otherObject){
 		}
 		else{
 			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }

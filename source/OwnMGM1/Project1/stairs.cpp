@@ -92,7 +92,13 @@ void stairs::climbStairs()
 	{
 		if (mgm->dy != 0)
 		{
-			Megaman::getInstance()->setCurAction(MGM_CLIMB);
+			if (Megaman::getInstance()->isChangeCutMan){
+				Megaman::getInstance()->setCurAction(MGM_SKIN_CLIMB);
+			}
+			else{
+				Megaman::getInstance()->setCurAction(MGM_CLIMB);
+			}
+			
 			mgm->pauseAnimation = false;
 		}
 		else mgm->pauseAnimation = true;
@@ -103,7 +109,13 @@ void stairs::climbStairs()
 	{
 		if (KEY::getInstance()->isAttackDown)
 		{
-			mgm->setCurAction(MGM_STAND_STAIR_ATTACK);
+			if (Megaman::getInstance()->isChangeCutMan){
+				Megaman::getInstance()->setCurAction(MGM_SKIN_STAND_STAIR_ATTACK);
+			}
+			else{
+				mgm->setCurAction(MGM_STAND_STAIR_ATTACK);
+			}
+			
 		}
 	}
 }

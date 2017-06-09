@@ -98,9 +98,9 @@ void Beak::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (beakActivity == BEAK_CLOSE){
-			mgmbullet->x = this->x;
-			mgmbullet->y = this->y;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x;
+			//mgmbullet->y = this->y;
+			//mgmbullet->setAction(FIRE);
 			isKill = true;
 			Megaman::getInstance()->score += 200;
 			EffectCreateItem::getInstance()->enemy = this;
@@ -108,7 +108,7 @@ void Beak::onIntersectRect(MGMBox* otherObject){
 		}
 		else{
 			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 
 	}

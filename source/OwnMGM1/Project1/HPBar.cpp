@@ -47,7 +47,6 @@ void HPBar::update(){
 			else{
 				curFrame_Boss = healthPoint;
 			}
-
 		}
 		else{
 			curFrame_Boss = 0;

@@ -27,6 +27,17 @@ enum MEGAMAN_ACTION
 	MGM_EFFECT_BE_ATTACKED2,
 	MGM_EFFECT_BE_ATTACKED3,
 	MGM_EFFECT_BE_ATTACKED4,
+	MGM_SKIN_STAND,
+	MGM_SKIN_PRE_RUN,
+	MGM_SKIN_RUN,
+	MGM_SKIN_JUMP,
+	MGM_SKIN_CLIMB,
+	MGM_SKIN_STAND_ATTACK,
+	MGM_SKIN_JUMP_ATTACK,
+	MGM_SKIN_STAND_STAIR_ATTACK,
+	MGM_SKIN_BE_ATTACKED,
+	MGM_SKIN_RUN_ATTACK,
+	
 };
 
 class Megaman :
@@ -55,7 +66,7 @@ public:
 	bool isOnStairs;
 	bool isOnGreenBar; // Dung: kiểm tra lúc đứng trên GreenBar
 	int IntersectDoor;
-	
+	bool isChangeCutMan;
 	static Megaman* getInstance();
 	int action;
 	bool lastOnGreenBar;
@@ -75,6 +86,7 @@ public:
 	void deltaUpdate();
 	void updateFrameAnimation();
 	void die();
+	void reset();
 	Megaman();
 	~Megaman();
 };

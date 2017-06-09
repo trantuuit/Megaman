@@ -19,6 +19,7 @@ CutMan* CutMan::getInstance()
 }
 CutMan::CutMan()
 {
+	
 	healthPoint = 28;
 	appearHP = false;
 	appearMusic = false;

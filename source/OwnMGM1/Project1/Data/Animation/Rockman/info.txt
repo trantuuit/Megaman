@@ -1,7 +1,7 @@
 R		G		B
 0		102		102
 Count
-13
+22
 Sprite Info
 
 Index		Name
@@ -28,7 +28,7 @@ Index		Name
 			54				18				20				24
 			54				18				20				24
 
-
+			
 Index		Name
 2			Animation3
 
@@ -166,3 +166,115 @@ Index		Name
 			185				236				26				28
 			
 				
+Index		Name
+13			Animation1
+
+			FramesCount
+			3
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			9				274				21				24
+			34				274				21				24
+			701				49				21				24
+
+		
+Index		Name
+14			Animation1
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			60				274				20				24
+			60				274				20				24
+			
+				
+Index		Name
+15			Animation1
+
+			FramesCount
+			4
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			87				274				24				24
+			117				274				16				24
+			141				274				21				24
+			701				49				29				22
+				
+			
+Index		Name
+16			Animation1
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			176				273				26				30
+			701				49				29				22
+			
+			
+Index		Name
+17			Animation1
+
+			FramesCount
+			3
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			118				307				16				29
+			141				307				16				29
+			701				49				29				22
+					
+
+Index		Name
+18			Animation1
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			4				309				33				24
+			701				49				29				22
+					
+
+Index		Name
+19			Animation1
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			44				307				28				30
+			701				49				29				22
+					
+
+Index		Name
+20			Animation1
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			77				307				32				29
+			701				49				29				22
+					
+			
+Index		Name
+21			Animation21
+
+			FramesCount
+			2
+
+			Animation Info
+			LocationX		LocationY		FrameWidth		FrameHeight
+			174				311				28				22
+			185				236				26				28
+			
+					

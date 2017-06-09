@@ -170,10 +170,11 @@ void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
 }
 void Blader::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+		
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		mgmbullet->x = this->x;
-		mgmbullet->y = this->y;
-		mgmbullet->setAction(FIRE);
+		//mgmbullet->x = this->x;
+		//mgmbullet->y = this->y;
+		/*mgmbullet->setAction(FIRE);*/
 		isKill = true;
 		Megaman::getInstance()->score += 500;
 		EffectCreateItem::getInstance()->enemy = this;

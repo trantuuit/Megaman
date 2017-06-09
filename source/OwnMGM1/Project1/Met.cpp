@@ -93,9 +93,9 @@ void Met::onIntersectRect(MGMBox* otherObject){
 			count++;
 			if (count == 1)
 			{
-				mgmbullet->x = this->x;
-				mgmbullet->y = this->y;
-				mgmbullet->setAction(FIRE);
+				//mgmbullet->x = this->x;
+				//mgmbullet->y = this->y;
+				//mgmbullet->setAction(FIRE);
 				isKill = true;
 				count = 0;
 				Megaman::getInstance()->score += 500;
@@ -106,7 +106,7 @@ void Met::onIntersectRect(MGMBox* otherObject){
 		if (count != 1)
 		{
 			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }

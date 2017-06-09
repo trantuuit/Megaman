@@ -128,9 +128,9 @@ void FlyingShell::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (flyingShellActivity == FLYINGSHELL_OPEN){
-			mgmbullet->x = this->x;
-			mgmbullet->y = this->y;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x;
+			//mgmbullet->y = this->y;
+			//mgmbullet->setAction(FIRE);
 			isKill = true;
 			Megaman::getInstance()->score += 800;
 			EffectCreateItem::getInstance()->enemy = this;
@@ -138,7 +138,7 @@ void FlyingShell::onIntersectRect(MGMBox* otherObject){
 		}
 		else{
 			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }

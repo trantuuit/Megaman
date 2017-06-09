@@ -24,7 +24,7 @@ GameOverMenu::GameOverMenu()
 }
 
 void GameOverMenu::update(){
-	if (Megaman::getInstance()->isKill){
+	if (Megaman::getInstance()->isKill ){
 		if (delayAppearMenu.isReady()&&delayAppearMenu.isFinish()){
 			delayAppearMenu.start(5000);
 		}
@@ -53,9 +53,8 @@ void GameOverMenu::update(){
 				
 			}
 			isOpen = false;
-			Megaman::getInstance()->isKill = false;
-			Megaman::getInstance()->healthPoint = 28;
-			Megaman::getInstance()->beingAttacked = false;
+			Megaman::getInstance()->reset();
+		/*	Megaman::getInstance()->beingAttacked = false;*/
 		}
 		int score = Megaman::getInstance()->score;
 		point1 = score / 1000000;

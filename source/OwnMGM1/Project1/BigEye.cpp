@@ -33,17 +33,14 @@ void BigEye::onIntersectRect(MGMBox* otherObject){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (count == 2){
 
-			mgmbullet->x = this->x+width/6;
-			mgmbullet->y = this->y-height/6;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x+width/6;
+			//mgmbullet->y = this->y-height/6;
+			//mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 9000;
 			EffectCreateItem::getInstance()->enemy = this;
 			EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
-		}
-		else{
-			mgmbullet->setAction(NONE);
 		}
 	}
 }

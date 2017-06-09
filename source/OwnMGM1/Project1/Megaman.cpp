@@ -83,7 +83,13 @@ void Megaman::update()
 				step3.start(150);
 			}
 			if (step3.isSchedule()){
-				setCurAction(MGM_EFFECT_BE_ATTACKED3);
+				if (isChangeCutMan){
+					setCurAction(MGM_SKIN_BE_ATTACKED);
+				}
+				else{
+					setCurAction(MGM_EFFECT_BE_ATTACKED3);
+				}
+
 			}
 			if (step3.isFinish()){
 				actionBeingAttacked = STEP4;
@@ -129,21 +135,35 @@ void Megaman::update()
 				pauseAnimation = false;
 				vx = 0;
 			}
-			if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
-				MegamanBullet* bullet = new MegamanBullet();
-				bullet->dx = 4 * objectDirection;
-				if (objectDirection == RIGHT){
-					bullet->x = x + 17;
+			if (!delayShoot.isSchedule() && isAttackPress){
+				if (isChangeCutMan){
+					if (MegamanBullet::getListBullet()->Count < 1){
+						MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
+						setCurAction(MGM_SKIN_STAND_STAIR_ATTACK);
+						MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+					}
 				}
 				else{
-					bullet->x = x - 7;
+					if (MegamanBullet::getListBullet()->Count < 3){
+						MegamanBullet* bullet = new MegamanBullet();
+						bullet->dx = 4 * objectDirection;
+						if (objectDirection == RIGHT){
+							bullet->x = x + 17;
+						}
+						else{
+							bullet->x = x - 7;
+						}
+						bullet->y = y - 8;
+						setCurAction(MGM_STAND_STAIR_ATTACK);
+						MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+					}
 				}
-				bullet->y = y - 8;
+			
 				delayShoot.start();
-				setCurAction(MGM_STAND_STAIR_ATTACK);
+
 				lastStatusStandStairAttack = true;
 				pauseAnimation = false;
-				MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+				
 			}
 			if (lastStatusStandStairAttack){
 				if (delayAnimateStandStairShoot.isReady())
@@ -152,10 +172,21 @@ void Megaman::update()
 				}
 				if (delayAnimateStandStairShoot.isSchedule()){
 					pauseAnimation = false;
-					setCurAction(MGM_STAND_STAIR_ATTACK);
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_STAND_STAIR_ATTACK);
+					}
+					else{
+						setCurAction(MGM_STAND_STAIR_ATTACK);
+					}
+
 				}
 				if (delayAnimateStandStairShoot.isFinish()){
-					setCurAction(MGM_CLIMB);
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_CLIMB);
+					}
+					else{
+						setCurAction(MGM_CLIMB);
+					}
 					lastStatusStandStairAttack = false;
 				}
 				delayAnimateStandStairShoot.update();
@@ -186,13 +217,23 @@ void Megaman::update()
 					}
 
 					if (delayAnimateRunShoot.isFinish()){
-						setCurAction(MGM_RUN);
+						if (isChangeCutMan){
+							setCurAction(MGM_SKIN_RUN);
+						}
+						else{
+							setCurAction(MGM_RUN);
+						}
 						lastStatusRunAttack = false;
 					}
 					delayAnimateRunShoot.update();
 				}
 				else{
-					setCurAction(MGM_PRE_RUN);
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_PRE_RUN);
+					}
+					else{
+						setCurAction(MGM_PRE_RUN);
+					}
 				}
 
 				if (objectDirection == RIGHT && dxGreenBar > 0){
@@ -209,21 +250,34 @@ void Megaman::update()
 				}
 				lastStatusStandAttack = false;
 
-				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
-					MegamanBullet* bullet = new MegamanBullet();
-					bullet->dx = 4 * objectDirection;
-					if (objectDirection == 1){
-						bullet->x = x + 19;
+				if (!delayShoot.isSchedule() && isAttackPress ){
+					if (isChangeCutMan){
+						if (MegamanBullet::getListBullet()->Count<1){
+							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+						}
 					}
 					else{
-						bullet->x = x - 7;
+						if (MegamanBullet::getListBullet()->Count < 3){
+							MegamanBullet* bullet = new MegamanBullet();
+							bullet->dx = 4 * objectDirection;
+							if (objectDirection == 1){
+								bullet->x = x + 19;
+							}
+							else{
+								bullet->x = x - 7;
+							}
+							setCurAction(MGM_RUN_ATTACK);
+							bullet->y = y - 7;
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+						}
+						
 					}
 
-					bullet->y = y - 7;
 					delayShoot.start();
-					setCurAction(MGM_RUN_ATTACK);
+					
 					lastStatusRunAttack = true;
-					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+					
 				}
 
 			}
@@ -235,33 +289,60 @@ void Megaman::update()
 						delayAnimateStandShoot.start();
 					}
 					if (delayAnimateStandShoot.isFinish()){
-						setCurAction(MGM_STAND);
+						if (isChangeCutMan){
+							setCurAction(MGM_SKIN_STAND);
+						}
+						else{
+							setCurAction(MGM_STAND);
+						}
 						lastStatusStandAttack = false;
 					}
 					if (delayAnimateStandShoot.isSchedule()){
-						setCurAction(MGM_STAND_ATTACK);
+						if (isChangeCutMan){
+							setCurAction(MGM_SKIN_STAND_ATTACK);
+						}
+						else{
+							setCurAction(MGM_STAND_ATTACK);
+						}
 					}
 					delayAnimateStandShoot.update();
 				}
 				else{
-					setCurAction(MGM_STAND);
-				}
-				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3 && !Room::getInstance()->isVibrate)
-				{
-					MegamanBullet* bullet = new MegamanBullet();
-					bullet->dx = 4 * objectDirection;
-					if (objectDirection == 1){
-						bullet->x = x + 19;
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_STAND);
 					}
 					else{
-						bullet->x = x - 7;
+						setCurAction(MGM_STAND);
 					}
 
-					bullet->y = y - 8;
+				}
+				if (!delayShoot.isSchedule() && isAttackPress  )
+				{
+					if (isChangeCutMan){
+						if (MegamanBullet::getListBullet()->Count < 1){
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+							setCurAction(MGM_SKIN_STAND_ATTACK);
+							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
+						}
+					}
+					else{
+						if (MegamanBullet::getListBullet()->Count < 3){
+							MegamanBullet* bullet = new MegamanBullet();
+							bullet->dx = 4 * objectDirection;
+							if (objectDirection == 1){
+								bullet->x = x + 19;
+							}
+							else{
+								bullet->x = x - 7;
+							}
+
+							bullet->y = y - 8;
+							setCurAction(MGM_STAND_ATTACK);
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+						}
+					}
 					delayShoot.start();
-					setCurAction(MGM_STAND_ATTACK);
-					lastStatusStandAttack = true;
-					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+					lastStatusStandAttack = true;				
 				}
 			}
 		}
@@ -283,32 +364,61 @@ void Megaman::update()
 					}
 
 					if (delayAnimateRunShoot.isFinish()){
-						setCurAction(MGM_RUN);
+						if (isChangeCutMan){
+							setCurAction(MGM_SKIN_RUN);
+						}
+						else{
+							setCurAction(MGM_RUN);
+						}
 						lastStatusRunAttack = false;
 					}
 					delayAnimateRunShoot.update();
 				}
 				else{
-					setCurAction(MGM_PRE_RUN);
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_PRE_RUN);
+					}
+					else{
+						setCurAction(MGM_PRE_RUN);
+					}
+
 				}
 				vx = objectDirection*MEGAMAN_VX_GO;
 				lastStatusStandAttack = false;
 
-				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
-					MegamanBullet* bullet = new MegamanBullet();
-					bullet->dx = 4 * objectDirection;
-					if (objectDirection == 1){
-						bullet->x = x + 19;
+				if (!delayShoot.isSchedule() && isAttackPress){
+					if (isChangeCutMan){
+						if (MegamanBullet::getListBullet()->Count < 1){
+							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+							setCurAction(MGM_SKIN_STAND_ATTACK);
+						}
 					}
 					else{
-						bullet->x = x - 7;
+						if (MegamanBullet::getListBullet()->Count < 3){
+							MegamanBullet* bullet = new MegamanBullet();
+							bullet->dx = 4 * objectDirection;
+							if (objectDirection == 1){
+								bullet->x = x + 19;
+							}
+							else{
+								bullet->x = x - 7;
+							}
+
+							bullet->y = y - 7;
+							setCurAction(MGM_RUN_ATTACK);
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+						}
+
 					}
 
-					bullet->y = y - 7;
 					delayShoot.start();
-					setCurAction(MGM_RUN_ATTACK);
+					//if (isChangeCutMan){
+					//	setCurAction(MGM_SKIN_PRE_RUN);
+					//}
+
 					lastStatusRunAttack = true;
-					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+
 				}
 			}
 			else{
@@ -319,33 +429,70 @@ void Megaman::update()
 						delayAnimateStandShoot.start();
 					}
 					if (delayAnimateStandShoot.isFinish()){
-						setCurAction(MGM_STAND);
+						if (isChangeCutMan){
+							setCurAction(MGM_SKIN_STAND);
+						}
+						else{
+							setCurAction(MGM_STAND);
+						}
+
 						lastStatusStandAttack = false;
 					}
 					if (delayAnimateStandShoot.isSchedule()){
-						setCurAction(MGM_STAND_ATTACK);
+						if (isChangeCutMan){
+							setCurAction(MGM_SKIN_STAND_ATTACK);
+						}
+						else{
+							setCurAction(MGM_STAND_ATTACK);
+						}
+
 					}
 					delayAnimateStandShoot.update();
 				}
 				else{
-					setCurAction(MGM_STAND);
-				}
-				if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3 && !Room::getInstance()->isVibrate)
-				{
-					MegamanBullet* bullet = new MegamanBullet();
-					bullet->dx = 4 * objectDirection;
-					if (objectDirection == 1){
-						bullet->x = x + 19;
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_STAND);
 					}
 					else{
-						bullet->x = x - 7;
+						setCurAction(MGM_STAND);
 					}
 
-					bullet->y = y - 8;
+				}
+				if (!delayShoot.isSchedule() && isAttackPress && !Room::getInstance()->isVibrate)
+				{
+					if (isChangeCutMan){
+						if (MegamanBullet::getListBullet()->Count < 1){
+							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
+	/*						if (objectDirection == 1){
+								bullet->x = x + 20;
+							}
+							else{
+								bullet->x = x - 20;
+							}
+							bullet->y = y - 20;*/
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+							setCurAction(MGM_SKIN_STAND_ATTACK);
+						}
+					}
+					else{
+						if (MegamanBullet::getListBullet()->Count < 3){
+							MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
+							bullet->dx = 4 * objectDirection;
+							if (objectDirection == 1){
+								bullet->x = x + 19;
+							}
+							else{
+								bullet->x = x - 7;
+							}
+							bullet->y = y - 8;
+							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+							setCurAction(MGM_STAND_ATTACK);
+						}
+					}
+
 					delayShoot.start();
-					setCurAction(MGM_STAND_ATTACK);
 					lastStatusStandAttack = true;
-					MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+
 				}
 
 			}
@@ -358,32 +505,61 @@ void Megaman::update()
 					delayAnimateJumpShoot.start();
 				}
 				if (delayAnimateJumpShoot.isSchedule()){
-					setCurAction(MGM_JUMP_ATTACK);
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_JUMP_ATTACK);
+					}
+					else{
+						setCurAction(MGM_JUMP_ATTACK);
+					}
+
 				}
 				if (delayAnimateJumpShoot.isFinish()){
-					setCurAction(MGM_JUMP);
+					if (isChangeCutMan){
+						setCurAction(MGM_SKIN_JUMP);
+					}
+					else{
+						setCurAction(MGM_JUMP);
+					}
 					lastStatusJumpAttack = false;
 				}
 				delayAnimateJumpShoot.update();
 			}
 			else{
-				setCurAction(MGM_JUMP);
-			}
-
-			if (!delayShoot.isSchedule() && isAttackPress && MegamanBullet::getListBullet()->Count < 3){
-				MegamanBullet* bullet = new MegamanBullet();
-				bullet->dx = 4 * objectDirection;
-				if (objectDirection == 1){
-					bullet->x = x + 17;
+				if (isChangeCutMan){
+					setCurAction(MGM_SKIN_JUMP);
 				}
 				else{
-					bullet->x = x - 7;
+					setCurAction(MGM_JUMP);
 				}
-				bullet->y = y - 8;
+
+			}
+
+			if (!delayShoot.isSchedule() && isAttackPress){
+				if (isChangeCutMan){
+					if (MegamanBullet::getListBullet()->Count < 1){
+						setCurAction(MGM_SKIN_JUMP_ATTACK);
+						MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
+					}
+				}
+				else{
+					if (MegamanBullet::getListBullet()->Count < 3){
+						MegamanBullet* bullet = new MegamanBullet();
+						bullet->dx = 4 * objectDirection;
+						if (objectDirection == 1){
+							bullet->x = x + 17;
+						}
+						else{
+							bullet->x = x - 7;
+						}
+						bullet->y = y - 8;
+						setCurAction(MGM_JUMP_ATTACK);
+						MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+					}
+				}
+
 				delayShoot.start();
-				setCurAction(MGM_JUMP_ATTACK);
 				lastStatusJumpAttack = true;
-				MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+
 			}
 			if (isKeyMoveDown){
 				if (lastOnGreenBar){
@@ -450,13 +626,15 @@ void Megaman::setCurAction(int action)
 {
 	if (this->action == MGM_RUN && action == MGM_PRE_RUN)
 		return;
+	if (this->action == MGM_SKIN_RUN && action == MGM_SKIN_PRE_RUN)
+		return;
 	this->action = action;
 	MGMMovableObject::setCurAction(action);
 }
 
 void Megaman::onIntersectRect(MGMBox * otherObject)
 {
-	
+
 	if (otherObject->collisionCategory == CC_ITEM){
 		MGMItem* item = (MGMItem*)otherObject;
 		if (item->categoryItem == CI_LIFE_ENERGY_BIG){
@@ -539,13 +717,16 @@ void Megaman::onLastFrameAnimation(int action)
 	{
 		setCurAction(MGM_RUN);
 	}
+	if (action == MGM_SKIN_PRE_RUN && isKeyMoveDown){
+		setCurAction(MGM_SKIN_RUN);
+	}
 }
 
 void Megaman::updateFrameAnimation()
 {
 	if (!pauseAnimation){
 		if (status == MEGAMAN_NORMAL){
-			if (curAction == MGM_STAND){
+			if (curAction == MGM_STAND || curAction == MGM_SKIN_STAND){
 				if (eyesTime1.isReady() && eyesTime2.isFinish()){
 					eyesTime1.start(1500);
 				}
@@ -581,7 +762,18 @@ void Megaman::updateFrameAnimation()
 						curFrame = 0;
 					else if (curAction == MGM_EFFECT_BE_ATTACKED4&&curFrame == 1)
 						curFrame = 0;
-
+					else if (curAction == MGM_SKIN_JUMP_ATTACK && curFrame == 1)
+						curFrame = 0;
+					else if (curAction == MGM_SKIN_JUMP && curFrame == 1)
+						curFrame = 0;
+					else if (curAction == MGM_SKIN_STAND_ATTACK && curFrame == 1)
+						curFrame = 0;
+					else if (curAction == MGM_SKIN_RUN && curFrame == 2)
+						curFrame = 0;
+					else if (curAction == MGM_SKIN_CLIMB && curFrame == 2)
+						curFrame = 0;
+					else if (curAction == MGM_SKIN_STAND_STAIR_ATTACK && curFrame == 1)
+						curFrame = 0;
 					if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 						onLastFrameAnimation(curAction);
 				}
@@ -592,6 +784,9 @@ void Megaman::updateFrameAnimation()
 				int lastFrame = curFrame;
 				this->sprite->Update(curAction, curFrame);
 				if (curAction == MGM_STAND &&  curFrame == 1){
+					curFrame = 2;
+				}
+				if (curAction == MGM_SKIN_STAND && curFrame == 1){
 					curFrame = 2;
 				}
 				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
@@ -632,7 +827,7 @@ void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 void Megaman::die(){
 	if (!isKill){
 		MGMAudioManager::getInstance()->Play(AUDIO_MEGAMAN_DEFEATE);
-		
+
 		DieAffect* effect1 = new DieAffect(MEGAMAN_DIE);
 		effect1->x = this->x;
 		effect1->y = this->y;
@@ -712,8 +907,15 @@ void Megaman::die(){
 	}
 }
 
+void Megaman::reset(){
+	isKill = false;
+	healthPoint = 28;
+	life = 2;
+}
+
 Megaman::Megaman()
 {
+	isChangeCutMan = true;
 	lastIsJump = true;
 	lastOnGreenBar = false;
 	actionBeingAttacked = ATTACKED_NONE;

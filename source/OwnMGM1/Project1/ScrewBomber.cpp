@@ -187,9 +187,9 @@ void ScrewBomber::onIntersectRect(MGMBox* otherObject){
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		if (count == 3){
 
-			mgmbullet->x = this->x;
-			mgmbullet->y = this->y;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x;
+			//mgmbullet->y = this->y;
+			//mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 500;
@@ -198,7 +198,7 @@ void ScrewBomber::onIntersectRect(MGMBox* otherObject){
 		}
 		else{
 			MGMAudioManager::getInstance()->Play(AUDIO_DINK);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }

@@ -81,9 +81,9 @@ void OctopusBattery::onIntersectRect(MGMBox* otherObject){
 		count++;
 		if (count == 5){
 
-			mgmbullet->x = this->x;
-			mgmbullet->y = this->y;
-			mgmbullet->setAction(FIRE);
+			//mgmbullet->x = this->x;
+			//mgmbullet->y = this->y;
+			//mgmbullet->setAction(FIRE);
 			isKill = true;
 			count = 0;
 			Megaman::getInstance()->score += 300;
@@ -92,7 +92,7 @@ void OctopusBattery::onIntersectRect(MGMBox* otherObject){
 		}
 		else{
 			MGMAudioManager::getInstance()->Play(AUDIO_ENEMY_DAMAGE);
-			mgmbullet->setAction(NONE);
+			/*mgmbullet->setAction(NONE);*/
 		}
 	}
 }

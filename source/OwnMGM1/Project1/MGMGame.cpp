@@ -263,8 +263,9 @@ void MGMGame::update(DWORD timesleep)
 			{
 				auto enemy = enemyObjects[iEnemy];
 				Collision::checkCollision(bullet, enemy);
+				
 			}
-
+			Collision::checkCollision(bullet, Megaman::getInstance());
 			bullet->coordinateUpdate();
 		}
 		//Xoa vien dan cua megaman
@@ -410,7 +411,7 @@ void MGMGame::update(DWORD timesleep)
 			bullet->updateFrameAnimation();
 			bullet->coordinateUpdate();
 		}
-		//Xoa vien dan cua megaman
+		//Xoa vien dan cua pkm
 		for (int i = 0; i < PKMWeapon::getListHammer()->Count; i++)
 		{
 			PKMWeapon*bullet = PKMWeapon::getListHammer()->at(i);
