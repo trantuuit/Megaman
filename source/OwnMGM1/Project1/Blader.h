@@ -15,15 +15,15 @@ private:
 	MGMGameTime updateTarget;
 	BLADER_ACTIVITY bladerActivity;
 public:
-	bool detectMegaman;
+	float t;
+	float x0mg, y0mg, xenemy, yenemy, x2, y2,x3,y3;
+	boolean isCheck;
+	boolean isLeft;
+	boolean isRight;
 	void update();
 	void render();
-	void deltaUpdate();
 	void onCollision(MGMBox* otherObject, int nx, int ny);
-	boolean checkNearMegaman();
 	void onIntersectRect(MGMBox* otherObject);
-	void attackMegaman();
-	void stopAttack();
 	Blader();
 	~Blader();
 };

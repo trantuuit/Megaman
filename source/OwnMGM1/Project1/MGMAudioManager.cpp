@@ -27,6 +27,7 @@ MGMAudioManager::MGMAudioManager(){
 	sounds[AUDIO_ENERGY_FILL] = LoadSound("Data\\Audio\\24 - EnergyFill.wav");
 	sounds[AUDIO_BOSS_BATTLE] = LoadSound("Data\\Audio\\Boss Battle.wav");
 	sounds[AUDIO_GAME_OVER] = LoadSound("Data\\Audio\\Game Over.wav");
+	sounds[AUDIO_ROLLING_CUTTER] = LoadSound("Data\\Audio\\18 - RollingCutter.wav");
 }
 MGMAudioManager* MGMAudioManager::getInstance(){
 	if (_Instance == NULL){

@@ -7,7 +7,10 @@ private:
 	MGMSprite* sprite2;
 	int curAction;
 	int curFrame;
+	int curActionForCut, curFrameForcut;
+	int curActionFoMegaman, curFrameForMegaman;
 	int x, y;
+	boolean isChooseCut, isChooseMega;
 	static BoardBar* board;
 	MGMGameTime timeFrame;
 	int up1, up2;

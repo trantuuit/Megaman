@@ -140,30 +140,20 @@ void Megaman::update()
 					if (MegamanBullet::getListBullet()->Count < 1){
 						MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
 						setCurAction(MGM_SKIN_STAND_STAIR_ATTACK);
-						MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 					}
 				}
 				else{
 					if (MegamanBullet::getListBullet()->Count < 3){
-						MegamanBullet* bullet = new MegamanBullet();
-						bullet->dx = 4 * objectDirection;
-						if (objectDirection == RIGHT){
-							bullet->x = x + 17;
-						}
-						else{
-							bullet->x = x - 7;
-						}
-						bullet->y = y - 8;
+						MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
 						setCurAction(MGM_STAND_STAIR_ATTACK);
-						MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 					}
 				}
-			
+
 				delayShoot.start();
 
 				lastStatusStandStairAttack = true;
 				pauseAnimation = false;
-				
+
 			}
 			if (lastStatusStandStairAttack){
 				if (delayAnimateStandStairShoot.isReady())
@@ -250,34 +240,24 @@ void Megaman::update()
 				}
 				lastStatusStandAttack = false;
 
-				if (!delayShoot.isSchedule() && isAttackPress ){
+				if (!delayShoot.isSchedule() && isAttackPress){
 					if (isChangeCutMan){
-						if (MegamanBullet::getListBullet()->Count<1){
+						if (MegamanBullet::getListBullet()->Count < 1){
 							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 						}
 					}
 					else{
 						if (MegamanBullet::getListBullet()->Count < 3){
-							MegamanBullet* bullet = new MegamanBullet();
-							bullet->dx = 4 * objectDirection;
-							if (objectDirection == 1){
-								bullet->x = x + 19;
-							}
-							else{
-								bullet->x = x - 7;
-							}
+							MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
 							setCurAction(MGM_RUN_ATTACK);
-							bullet->y = y - 7;
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 						}
-						
+
 					}
 
 					delayShoot.start();
-					
+
 					lastStatusRunAttack = true;
-					
+
 				}
 
 			}
@@ -316,33 +296,22 @@ void Megaman::update()
 					}
 
 				}
-				if (!delayShoot.isSchedule() && isAttackPress  )
+				if (!delayShoot.isSchedule() && isAttackPress)
 				{
 					if (isChangeCutMan){
 						if (MegamanBullet::getListBullet()->Count < 1){
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 							setCurAction(MGM_SKIN_STAND_ATTACK);
 							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
 						}
 					}
 					else{
 						if (MegamanBullet::getListBullet()->Count < 3){
-							MegamanBullet* bullet = new MegamanBullet();
-							bullet->dx = 4 * objectDirection;
-							if (objectDirection == 1){
-								bullet->x = x + 19;
-							}
-							else{
-								bullet->x = x - 7;
-							}
-
-							bullet->y = y - 8;
+							MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
 							setCurAction(MGM_STAND_ATTACK);
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 						}
 					}
 					delayShoot.start();
-					lastStatusStandAttack = true;				
+					lastStatusStandAttack = true;
 				}
 			}
 		}
@@ -381,7 +350,6 @@ void Megaman::update()
 					else{
 						setCurAction(MGM_PRE_RUN);
 					}
-
 				}
 				vx = objectDirection*MEGAMAN_VX_GO;
 				lastStatusStandAttack = false;
@@ -390,36 +358,26 @@ void Megaman::update()
 					if (isChangeCutMan){
 						if (MegamanBullet::getListBullet()->Count < 1){
 							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 							setCurAction(MGM_SKIN_STAND_ATTACK);
+							delayShoot.start(300);
 						}
 					}
 					else{
 						if (MegamanBullet::getListBullet()->Count < 3){
-							MegamanBullet* bullet = new MegamanBullet();
-							bullet->dx = 4 * objectDirection;
-							if (objectDirection == 1){
-								bullet->x = x + 19;
-							}
-							else{
-								bullet->x = x - 7;
-							}
-
-							bullet->y = y - 7;
+							MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
 							setCurAction(MGM_RUN_ATTACK);
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
+							delayShoot.start();
 						}
-
 					}
-
-					delayShoot.start();
-					//if (isChangeCutMan){
-					//	setCurAction(MGM_SKIN_PRE_RUN);
-					//}
-
 					lastStatusRunAttack = true;
-
 				}
+				if (delayShoot.isSchedule()){
+					if (isChangeCutMan){
+						vx = 0;
+					}
+					
+				}
+				delayShoot.update();
 			}
 			else{
 
@@ -463,29 +421,12 @@ void Megaman::update()
 					if (isChangeCutMan){
 						if (MegamanBullet::getListBullet()->Count < 1){
 							MegamanBullet* bullet = new MegamanBullet(OF_CUTMAN);
-	/*						if (objectDirection == 1){
-								bullet->x = x + 20;
-							}
-							else{
-								bullet->x = x - 20;
-							}
-							bullet->y = y - 20;*/
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 							setCurAction(MGM_SKIN_STAND_ATTACK);
 						}
 					}
 					else{
 						if (MegamanBullet::getListBullet()->Count < 3){
 							MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
-							bullet->dx = 4 * objectDirection;
-							if (objectDirection == 1){
-								bullet->x = x + 19;
-							}
-							else{
-								bullet->x = x - 7;
-							}
-							bullet->y = y - 8;
-							MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 							setCurAction(MGM_STAND_ATTACK);
 						}
 					}
@@ -543,17 +484,8 @@ void Megaman::update()
 				}
 				else{
 					if (MegamanBullet::getListBullet()->Count < 3){
-						MegamanBullet* bullet = new MegamanBullet();
-						bullet->dx = 4 * objectDirection;
-						if (objectDirection == 1){
-							bullet->x = x + 17;
-						}
-						else{
-							bullet->x = x - 7;
-						}
-						bullet->y = y - 8;
+						MegamanBullet* bullet = new MegamanBullet(OF_MEGAMAN);
 						setCurAction(MGM_JUMP_ATTACK);
-						MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 					}
 				}
 
@@ -768,7 +700,7 @@ void Megaman::updateFrameAnimation()
 						curFrame = 0;
 					else if (curAction == MGM_SKIN_STAND_ATTACK && curFrame == 1)
 						curFrame = 0;
-					else if (curAction == MGM_SKIN_RUN && curFrame == 2)
+					else if (curAction == MGM_SKIN_RUN && curFrame == 3)
 						curFrame = 0;
 					else if (curAction == MGM_SKIN_CLIMB && curFrame == 2)
 						curFrame = 0;

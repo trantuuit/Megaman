@@ -12,6 +12,7 @@
 #include "MGMEnemy.h"
 #include"Megaman.h"
 #include <math.h>
+#include"MGMAudioManager.h"
 List<MegamanBullet*>* MegamanBullet::bullets = 0;
 List<MegamanBullet*>* MegamanBullet::getListBullet()
 {
@@ -39,6 +40,15 @@ MegamanBullet::MegamanBullet(CATEGORY_BULLET_FOR_MEGAMAN category){
 		this->height = 6;
 		collisionCategory = CC_MEGAMAN_BULLET;
 		sprite = MGMSpriteManager::getInstance()->sprites[SPR_BULLET];
+		dx = 4*Megaman::getInstance()->objectDirection;
+		if (Megaman::getInstance()->objectDirection == RIGHT){
+			x = Megaman::getInstance()->x + 19;
+		}
+		else{
+			x = Megaman::getInstance()->x - 10;
+		}
+		y = Megaman::getInstance()->y - 7;
+		MGMAudioManager::getInstance()->Play(AUDIO_MEGA_BUSTER);
 		curAction = 0;
 		curFrame = 0;
 		timedelay.init(100);
@@ -63,6 +73,7 @@ MegamanBullet::MegamanBullet(CATEGORY_BULLET_FOR_MEGAMAN category){
 		action = IS_THROW;
 		x = 0;
 		y = 0;
+		MGMAudioManager::getInstance()->Play(AUDIO_ROLLING_CUTTER);
 		collisionCategory = CC_MEGAMAN_BULLET;
 		isThrowLeft = false;
 		isThrowRight = false;

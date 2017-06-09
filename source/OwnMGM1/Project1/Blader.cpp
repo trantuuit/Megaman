@@ -10,167 +10,94 @@ Blader::Blader()
 	curFrame = 0;
 	vx = 0;
 	vy = 0;
-	ay = 0.007;
-	detectMegaman = false;
-	attack.init(500);
-	updateTarget.tickPerFrame=500;
-	bladerActivity = BLADER_STEP1;
+	ay = 0;
+	ax = 0;
 	objectDirection = Direction::LEFT;
 	isKill = false;
 	categoryEnemy = CREP_BLADER;
-}
-boolean Blader::checkNearMegaman(){
-	float xM, yM, xB, yB;
-	xM = Megaman::getInstance()->x;
-	yM = Megaman::getInstance()->y;
-	xB = x;
-	yB = y;
-	float distance;
-	distance = sqrt((xM - xB)*(xM - xB) + (yM - yB)*(yM - yB));
-	if (abs(xM-xB) <= 50){
-		if (updateTarget.atTime()){
-			xTarget = xM;
-			yTarget = yM;
-		}
-		detectMegaman = true;
-		return true;
-	}
-	else{
-		return false;
-	}
+	t = 0;
+	isCheck = false;
+	isLeft = false;
+	isRight = true;
 }
 
-void Blader::attackMegaman(){
-	boolean left, right;
-	if (attack.isReady()){
-		attack.start();
-	}
-
-	if(attack.isSchedule()){
-		vy = -0.93;
-		ay = 0.007;
-		if (vx > 0){
-			vx = 0.4f;
-		}
-		else{
-			vx = -0.4f;
-		}
-		if ((y - yTarget) >= 0 ) {
-			//if (abs(y - oldRect.y) <= 2){
-			//	dy = -3;
-			//}
-			dy = -3;
-		}
-		if ((y - yTarget) < 0 ){
-			dy = 3;
-		}
-		if (abs(y - yTarget) <= 3){
-
-		}
-		dx = (int)(vx*GAMETIME);
-
-	}
-	if (attack.isFinish()){
-		if (vx > 0){
-			vx = 0.2f;
-
-		}
-		else{
-			vx = -0.2f;
-		}
-		dx = (int)(vx*GAMETIME);
-	}
-	attack.update();
-}
-
-void Blader::stopAttack(){
-	dx = (int)(vx*GAMETIME);
-}
-void Blader::deltaUpdate(){
-	
-	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >50)){
-		vx = 0.2f;
-		objectDirection = Direction::RIGHT;
-	}
-	if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) > 50)){
-		vx = -0.2f;
-		objectDirection = Direction::LEFT;
-	}
-	if (checkNearMegaman()){
-		switch (bladerActivity)
-		{
-		case BLADER_STEP1:
-			if (!attack.isSchedule()){
-				attack.start();
-				if (vx > 0){
-					vx = 0.4f;
-					dx = 3;
-				}
-				else{
-					vx = -0.4f;
-					dx = -3;
-				}
-				if ((y - yTarget) >= 0) {
-					dy = -3;
-				}
-				if ((y - yTarget) < 0){
-					dy = 3;
-				}
-				if (abs(y - yTarget) <= 3){
-					bladerActivity = BLADER_STEP2;
-				}
-				dx = (int)(vx*GAMETIME);
-			}
-			attack.update();
-			break;
-		case BLADER_STEP2:
-			if (!attack.isSchedule()){
-				attack.start();
-				if (vx > 0){
-					vx = 0.4f;
-					dx = 3;
-				}
-				else{
-					vx = -0.4f;
-					dx = -3;
-				}
-				if ((y - oldRect.y) < 0){
-					dy = 3;
-				}
-				if ((y - oldRect.y) > 0){
-					dy = -3;
-				}
-				if (abs(y - oldRect.y) <= 3){
-					bladerActivity = BLADER_STEP1;
-				}
-				dx = (int)(vx*GAMETIME);
-			}
-			attack.update();
-			break;
-		default:
-			break;
-		}
-	}
-	else{
-		stopAttack();
-	}
-}
 
 void Blader::update()
 {
+	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >60)){
+		isRight = false;
+		isLeft = true;
+		isCheck = false;
+		objectDirection = Direction::RIGHT;
+		t = 0;
+	}
+	if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) > 60)){
+		/*vx = -0.2f;*/
+		isLeft = false;
+		isRight = true;
+		objectDirection = Direction::LEFT;
+		isCheck = false;
+		t = 0;
+	}
+	
+	if (isRight){
+		x0mg = Megaman::getInstance()->x;
+		y0mg = Megaman::getInstance()->y-30;
+		xenemy = x;
+		yenemy = y;
+		//if (Megaman::getInstance()->x < x2){
+		//	x2 = 2 * Megaman::getInstance()->x - xenemy;
+		//	y2 = yenemy;
+		//}
+		if (t==0){
+			x2 = 2 * x0mg - xenemy;
+			y2 = yenemy;
+			isCheck = true;
+			x3 = x;
+			y3 = y;
+		}
+		t += 0.02;
+		//x = (float)pow(1 - t, 4)*x3 + 4 * pow(1 - t, 3)*t*x0mg + 6 * pow(1 - t, 2)*t*t*x2 + 4 * (1 - t)*pow(t, 3)*x0mg + pow(t, 4)*x3;
+		//y = (float)pow(1 - t, 4)*y3 + 4 * pow(1 - t, 3)*t*y0mg + 6 * pow(1 - t, 2)*t*t*y2 + 4 * (1 - t)*pow(t, 3)*y0mg + pow(t, 4)*y3;
+		x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
+		y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
+	}
+	if (isLeft){
+		x0mg = Megaman::getInstance()->x;
+		y0mg = Megaman::getInstance()->y-30;
+		xenemy = x;
+		yenemy = y;
+	/*	if (Megaman::getInstance()->x > x2){
+			x2 = 2 * Megaman::getInstance()->x - xenemy;
+			y2 = yenemy;
+		}*/
+		if (t==0){
+			x2 = 2 * x0mg - xenemy;
+			y2 = yenemy;
+			isCheck = true;
+			x3 = x;
+			y3 = y;
+		}
+		t += 0.02;
+		//x = (float)pow(1 - t, 4)*x3 + 4 * pow(1 - t, 3)*t*x0mg + 6 * pow(1 - t, 2)*t*t*x2 + 4 * (1 - t)*pow(t, 3)*x0mg + pow(t, 4)*x3;
+		//y = (float)pow(1 - t, 4)*y3 + 4 * pow(1 - t, 3)*t*y0mg + 6 * pow(1 - t, 2)*t*t*y2 + 4 * (1 - t)*pow(t, 3)*y0mg + pow(t, 4)*y3;
+		x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
+		y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
+	}
+
 	MGMEnemy::updateFrameAnimation();
-	deltaUpdate();
+	MGMEnemy::deltaUpdate();
 }
 
 void Blader::render(){
 	MGMEnemy::render();
 }
 void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
-	
+
 }
 void Blader::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
-		
+
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
 		//mgmbullet->x = this->x;
 		//mgmbullet->y = this->y;
@@ -179,7 +106,7 @@ void Blader::onIntersectRect(MGMBox* otherObject){
 		Megaman::getInstance()->score += 500;
 		EffectCreateItem::getInstance()->enemy = this;
 		EffectCreateItem::getInstance()->action = ACTION_EFFECT_ITEM_FIRE;
-		
+
 	}
 }
 
