@@ -12,6 +12,7 @@ public:
 	void Open();
 	void Close();
 	void updateFrameAnimation();
+	void reset();
 	void onLastFrameAnimation(int curAction);
 	Door(int x, int y, int w, int h);
 	~Door();

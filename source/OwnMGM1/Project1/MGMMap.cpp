@@ -177,6 +177,7 @@ void MGMMap::readStageSaved(char * stageSavedPath)
 	fs.close();
 }
 
+
 void MGMMap::updateStage()
 {
 
@@ -345,6 +346,8 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->reset();
 		CutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
+		doors[0]->reset();
+		doors[1]->reset();
 		keyNumberPress = true;
 	}
 	if (KEY::getInstance()->isSixPress)

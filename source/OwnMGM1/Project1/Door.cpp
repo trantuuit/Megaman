@@ -39,6 +39,14 @@ void Door::updateFrameAnimation()
 	if (curFrame == this->sprite->animations[curAction].framesCount - 1)
 		onLastFrameAnimation(curAction);
 }
+void Door::reset()
+{
+	isOpened = false;
+	isClosed = false;
+	curFrame = 0;
+	curAction = 0;
+	pauseAnimation = false;
+}
 void Door::onLastFrameAnimation(int curAction)
 {
 	if (curAction == 0)
