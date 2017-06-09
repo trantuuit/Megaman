@@ -32,7 +32,7 @@ public:
 	MegamanBullet();
 	MegamanBullet(CATEGORY_BULLET_FOR_MEGAMAN);
 	void update();
-	void setAction(MEGAMANBULLET_ACTION);
+	//void setAction(MEGAMANBULLET_ACTION);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void onIntersectRect(MGMBox* otherObject);
 	~MegamanBullet();

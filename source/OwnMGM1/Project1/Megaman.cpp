@@ -36,9 +36,14 @@ void Megaman::update()
 	isAttackPress = KEY::getInstance()->isAttackPress;
 	if (Room::getInstance()->isVibrate && isOnGround){
 		vx = 0;
-		setCurAction(MGM_EFFECT_BE_ATTACKED4);
+		if (isChangeCutMan){
+			setCurAction(MGM_SKIN_BE_ATTACKED2);
+		}
+		else{
+			setCurAction(MGM_EFFECT_BE_ATTACKED4);
+		}
+		
 		pauseAnimation = false;
-		delayShoot.update();
 		deltaUpdate();
 		updateFrameAnimation();
 		isOnGround = false;
@@ -84,7 +89,7 @@ void Megaman::update()
 			}
 			if (step3.isSchedule()){
 				if (isChangeCutMan){
-					setCurAction(MGM_SKIN_BE_ATTACKED);
+					setCurAction(MGM_SKIN_BE_ATTACKED1);
 				}
 				else{
 					setCurAction(MGM_EFFECT_BE_ATTACKED3);
@@ -610,7 +615,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 			if (enemy->categoryEnemy == CREP_BLADER){
 				healthPoint -= 3;
 			}
-			if ((enemy->categoryEnemy == CREP_OCTOPUS_BATTERY) || (enemy->categoryEnemy == CREP_SUPER_CUTTER) || (enemy->categoryEnemy == BOSS_GUTMAN) || (enemy->categoryEnemy == BIG_ROCK) || (enemy->categoryEnemy == SMALL_ROCK)){
+			if ((enemy->categoryEnemy == CREP_OCTOPUS_BATTERY) || (enemy->categoryEnemy == CREP_SUPER_CUTTER) || (enemy->categoryEnemy == BOSS_GUTMAN) || (enemy->categoryEnemy == BIG_ROCK) || (enemy->categoryEnemy == SMALL_ROCK) || (enemy->categoryEnemy == BOSS_CUTMAN) || (enemy->categoryEnemy == CUTMAN_WEAPON)){
 				healthPoint -= 4;
 			}
 			if (enemy->categoryEnemy == CREP_BIG_EYE){

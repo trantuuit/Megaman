@@ -134,7 +134,6 @@ void MegamanBullet::update(){
 		setCurAction(1); //Set action bay cho CutmanBullet
 	}
 	updateFrameAnimation();
-	/*MGMMovableObject::coordinateUpdate();*/
 
 }
 void MegamanBullet::onCollision(MGMBox* otherObject, int nx, int ny){
@@ -156,9 +155,9 @@ void MegamanBullet::onIntersectRect(MGMBox* otherObject){
 		t = 0;
 	}
 }
-void MegamanBullet::setAction(MEGAMANBULLET_ACTION action){
-	this->action = action;
-}
+//void MegamanBullet::setAction(MEGAMANBULLET_ACTION action){
+//	this->action = action;
+//}
 MegamanBullet::~MegamanBullet()
 {
 }

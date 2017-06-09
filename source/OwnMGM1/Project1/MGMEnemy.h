@@ -18,7 +18,8 @@ enum CATEGORY_ENEMY{
 	BIG_ROCK,
 	SMALL_ROCK,
 	PKM_WEAPON,
-
+	BOSS_CUTMAN,
+	CUTMAN_WEAPON,
 };
 class MGMEnemy :
 	public MGMMovableObject

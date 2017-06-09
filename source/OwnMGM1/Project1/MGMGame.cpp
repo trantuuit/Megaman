@@ -263,7 +263,7 @@ void MGMGame::update(DWORD timesleep)
 			{
 				auto enemy = enemyObjects[iEnemy];
 				Collision::checkCollision(bullet, enemy);
-				
+
 			}
 			Collision::checkCollision(bullet, Megaman::getInstance());
 			bullet->coordinateUpdate();
@@ -399,33 +399,37 @@ void MGMGame::update(DWORD timesleep)
 		//Cutman bullet
 		if (CutmanBullet::bullet != NULL){
 			CutmanBullet::getBullet()->update();
+			Collision::checkCollision(CutmanBullet::bullet, Megaman::getInstance());
 			CutmanBullet::getBullet()->coordinateUpdate();
 		}
 
-		//Pitketman hammer
-		for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
+	}
+
+	//Pitketman hammer
+	for (List<PKMWeapon*>::Node* p = PKMWeapon::getListHammer()->pHead; p; p = p->pNext)
+	{
+		PKMWeapon* bullet = p->m_value;
+
+		bullet->deltaUpdate();
+		if (Collision::AABBCheck(bullet, Megaman::getInstance()))
 		{
-			PKMWeapon* bullet = p->m_value;
-			
-			bullet->deltaUpdate();
-			if (Collision::AABBCheck(bullet, Megaman::getInstance()))
-			{
-				//bullet->onIntersectRect(Megaman::getInstance());
-				Megaman::getInstance()->onIntersectRect(bullet);
-			}
-			bullet->updateFrameAnimation();
-			bullet->coordinateUpdate();
+			//bullet->onIntersectRect(Megaman::getInstance());
+			Megaman::getInstance()->onIntersectRect(bullet);
 		}
-		//Xoa vien dan cua pkm
-		for (int i = 0; i < PKMWeapon::getListHammer()->Count; i++)
+		bullet->updateFrameAnimation();
+		bullet->coordinateUpdate();
+	}
+	//Xoa vien dan cua pkm
+	for (int i = 0; i < PKMWeapon::getListHammer()->Count; i++)
+	{
+		PKMWeapon*bullet = PKMWeapon::getListHammer()->at(i);
+		if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()) || bullet->isKill)
 		{
-			PKMWeapon*bullet = PKMWeapon::getListHammer()->at(i);
-			if (!Collision::AABBCheck(bullet, MGMCamera::getInstance()) || bullet->isKill)
-			{
-				PKMWeapon::getListHammer()->_Remove(bullet);
-				delete bullet;
-				i--;
-			}
+			PKMWeapon::getListHammer()->_Remove(bullet);
+			delete bullet;
+			i--;
+
 		}
 	}
 }
+
