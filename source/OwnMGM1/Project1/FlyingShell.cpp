@@ -37,7 +37,7 @@ void FlyingShell::update(){
 				newBullet1->y = this->y + 1;
 
 				EnemyBullet *newBullet2 = new EnemyBullet();
-				newBullet2->objectDirection = LEFT;	
+				newBullet2->objectDirection = RIGHT;	
 				newBullet2->categoryBullet = FOR_FLYING_SHELL;
 				newBullet2->dy = 3;
 				newBullet2->dx = 3;
@@ -45,7 +45,7 @@ void FlyingShell::update(){
 				newBullet2->y = this->y - 1;
 
 				EnemyBullet *newBullet3 = new EnemyBullet();
-				newBullet3->objectDirection = LEFT;
+				newBullet3->objectDirection = RIGHT;
 				newBullet3->categoryBullet = FOR_FLYING_SHELL;
 				newBullet3->dy = 0;
 				newBullet3->dx = 3;
@@ -53,7 +53,7 @@ void FlyingShell::update(){
 				newBullet3->y = this->y - 11;
 
 				EnemyBullet *newBullet4 = new EnemyBullet();
-				newBullet4->objectDirection = LEFT;
+				newBullet4->objectDirection = RIGHT;
 				newBullet4->categoryBullet = FOR_FLYING_SHELL;
 				newBullet4->dy = -3;
 				newBullet4->dx = 3;
@@ -68,7 +68,7 @@ void FlyingShell::update(){
 				newBullet5->y = this->y - 21;
 
 				EnemyBullet *newBullet6 = new EnemyBullet();
-				newBullet6->objectDirection = RIGHT;
+				newBullet6->objectDirection = LEFT;
 				newBullet6->categoryBullet = FOR_FLYING_SHELL;
 				newBullet6->dy = -3;
 				newBullet6->dx = -3;
@@ -76,7 +76,7 @@ void FlyingShell::update(){
 				newBullet6->y = this->y - 18;
 
 				EnemyBullet *newBullet7 = new EnemyBullet();
-				newBullet7->objectDirection = RIGHT;
+				newBullet7->objectDirection = LEFT;
 				newBullet7->categoryBullet = FOR_FLYING_SHELL;
 				newBullet7->dy = 0;
 				newBullet7->dx = -3;
@@ -84,7 +84,7 @@ void FlyingShell::update(){
 				newBullet7->y = this->y - 11;
 
 				EnemyBullet *newBullet8 = new EnemyBullet();
-				newBullet8->objectDirection = RIGHT;
+				newBullet8->objectDirection = LEFT;
 				newBullet8->categoryBullet = FOR_FLYING_SHELL;
 				newBullet8->dy = 3;
 				newBullet8->dx = -3;

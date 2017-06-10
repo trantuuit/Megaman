@@ -46,9 +46,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					MGMMap*map = MGMGame::getInstance()->map;
 					if (map == MGMGame::getInstance()->mapCut)
 					{
-						/*Megaman::getInstance()->x = 22;
+						Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 111;
-						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
+						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 						/*Megaman::getInstance()->x = 830;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
@@ -70,9 +70,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						Megaman::getInstance()->y = 1335;
 						MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 						//dau voi cutman
-						Megaman::getInstance()->x = 3120;
+					/*	Megaman::getInstance()->x = 3120;
 						Megaman::getInstance()->y = 1432;
-						MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 					}
 					if (map == MGMGame::getInstance()->mapGut)
 					{

@@ -139,22 +139,13 @@ void Megaman::update()
 			objectDirection = RIGHT;
 		}
 
-		//Xử lý tình huống trên cầu thang
-		if (beingAttacked){
-			if (isOnStairs){
-				isOnStairs = false;
-			}
-		}
 		if (isOnStairs)
 		{
-			isKeyMoveDown = false;
-			//đang đứng trên cầu thang nhấn space sẽ rơi tự do xuống
 			if (isKeyJumpPress) {
 				isOnStairs = false;
 				pauseAnimation = false;
 				vx = 0;
 			}
-
 			if (!delayShoot.isSchedule() && isAttackPress) {
 				if (isChangeCutMan) {
 					if (MegamanBullet::getListBullet()->Count < 1) {
@@ -168,9 +159,7 @@ void Megaman::update()
 						setCurAction(MGM_STAND_STAIR_ATTACK);
 					}
 				}
-
 				delayShoot.start();
-
 				lastStatusStandStairAttack = true;
 				pauseAnimation = false;
 
@@ -199,13 +188,13 @@ void Megaman::update()
 					}
 					lastStatusStandStairAttack = false;
 				}
-				delayAnimateStandStairShoot.update();
+
 			}
 			//pauseAnimation = false;
 		}
 		else if (isOnGreenBar) {
 
-			isOnGreenBar = true;
+			/*isOnGreenBar = true;*/
 			lastOnGreenBar = true;
 			isOnGround = false;
 			if (lastIsJump) {
@@ -247,18 +236,17 @@ void Megaman::update()
 				}
 
 				if (objectDirection == RIGHT && dxGreenBar > 0) {
-					dx = objectDirection*abs(dxGreenBar + 1.5);
+					dx = objectDirection*abs(dxGreenBar + 1);
 				}
 				if (objectDirection == RIGHT && dxGreenBar < 0) {
 					dx = objectDirection*abs(dxGreenBar);
 				}
 				if (objectDirection == LEFT && dxGreenBar < 0) {
-					dx = objectDirection*abs(dxGreenBar - 1.5);
+					dx = objectDirection*abs(dxGreenBar - 1);
 				}
 				if (objectDirection == LEFT && dxGreenBar > 0) {
 					dx = objectDirection*abs(dxGreenBar);
 				}
-				lastStatusStandAttack = false;
 
 				if (!delayShoot.isSchedule() && isAttackPress) {
 					if (isChangeCutMan) {
@@ -356,7 +344,7 @@ void Megaman::update()
 						}
 						lastStatusRunAttack = false;
 					}
-					delayAnimateRunShoot.update();
+					
 				}
 				else {
 					if (isChangeCutMan) {
@@ -392,7 +380,6 @@ void Megaman::update()
 					}
 
 				}
-				delayShoot.update();
 			}
 			else {
 
@@ -419,8 +406,7 @@ void Megaman::update()
 							setCurAction(MGM_STAND_ATTACK);
 						}
 
-					}
-					delayAnimateStandShoot.update();
+					}	
 				}
 				else {
 					if (isChangeCutMan) {
@@ -448,12 +434,9 @@ void Megaman::update()
 
 					delayShoot.start();
 					lastStatusStandAttack = true;
-
 				}
-
 			}
 		}
-
 		if (!isOnGround && !isOnStairs && !isOnGreenBar){
 			if (lastStatusJumpAttack){
 				if (delayAnimateJumpShoot.isReady())
@@ -487,9 +470,7 @@ void Megaman::update()
 				else {
 					setCurAction(MGM_JUMP);
 				}
-
 			}
-
 			if (!delayShoot.isSchedule() && isAttackPress) {
 				if (isChangeCutMan) {
 					if (MegamanBullet::getListBullet()->Count < 1) {
@@ -519,7 +500,9 @@ void Megaman::update()
 			}
 		}
 	}
-	//pauseAnimation = false;
+	delayAnimateStandStairShoot.update();
+	delayAnimateStandShoot.update();
+	delayAnimateRunShoot.update();
 	delayShoot.update();
 	deltaUpdate();
 	updateFrameAnimation();
@@ -551,7 +534,6 @@ void Megaman::render()
 	//Nếu hướng object khác hướng hình vẽ( hướng hình vẽ = left(-1))
 
 	int widthSprite = sprite->animations[curAction].frames[curFrame].width;
-	/*if (curAction != MGM_CLIMB)*/
 	xDraw -= (widthSprite - width) / 2;
 
 	if (objectDirection != sprite->pImage->imageDirection)
@@ -679,11 +661,6 @@ void Megaman::onLastFrameAnimation(int action)
 
 void Megaman::updateFrameAnimation()
 {
-	/*if ((curAction == MGM_CLIMB || curAction == MGM_SKIN_CLIMB) && status == MEGAMAN_BE_ATTACKED)
-	{
-	if (timeFrame.atTime())
-	this->sprite->Update(curAction, curFrame);
-	}*/
 	if (!pauseAnimation) {
 		if (status == MEGAMAN_NORMAL) {
 			if (curAction == MGM_STAND || curAction == MGM_SKIN_STAND) {

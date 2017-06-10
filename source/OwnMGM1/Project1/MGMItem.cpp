@@ -26,9 +26,9 @@ void MGMItem::onCollision(MGMBox* otherObject, int nx, int ny){
 		Collision::preventMove(this, otherObject,nx, ny);
 		vx = 0;
 	}
-	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
-		vy = 1;
-	}
+	//if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
+	//	vy = 1;
+	//}
 }
 void MGMItem::update(){
 	MGMMovableObject::update();

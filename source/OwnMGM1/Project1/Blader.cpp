@@ -31,6 +31,7 @@ void Blader::update()
 		objectDirection = Direction::RIGHT;
 		t = 0;
 	}
+
 	if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) > 60)){
 		/*vx = -0.2f;*/
 		isLeft = false;
@@ -56,6 +57,11 @@ void Blader::update()
 			x3 = x;
 			y3 = y;
 		}
+		//if (Megaman::getInstance()->x < x2){
+		//	x3 = x3 - abs(x0mg - x3);
+		//	x2 = 2 * x0mg - x3;
+		//	y2 = y3;
+		//}
 		t += 0.02;
 		//x = (float)pow(1 - t, 4)*x3 + 4 * pow(1 - t, 3)*t*x0mg + 6 * pow(1 - t, 2)*t*t*x2 + 4 * (1 - t)*pow(t, 3)*x0mg + pow(t, 4)*x3;
 		//y = (float)pow(1 - t, 4)*y3 + 4 * pow(1 - t, 3)*t*y0mg + 6 * pow(1 - t, 2)*t*t*y2 + 4 * (1 - t)*pow(t, 3)*y0mg + pow(t, 4)*y3;
@@ -67,17 +73,19 @@ void Blader::update()
 		y0mg = Megaman::getInstance()->y-30;
 		xenemy = x;
 		yenemy = y;
-	/*	if (Megaman::getInstance()->x > x2){
-			x2 = 2 * Megaman::getInstance()->x - xenemy;
-			y2 = yenemy;
-		}*/
+
 		if (t==0){
-			x2 = 2 * x0mg - xenemy;
-			y2 = yenemy;
+			x2 = 2 * x0mg - x;
+			y2 = y;
 			isCheck = true;
 			x3 = x;
 			y3 = y;
 		}
+		//if (Megaman::getInstance()->x > x2){
+		//	x3 = x3 + abs(x0mg - x3);
+		//	x2 = 2 * x0mg- x3;
+		//	y2 = y3;
+		//}
 		t += 0.02;
 		//x = (float)pow(1 - t, 4)*x3 + 4 * pow(1 - t, 3)*t*x0mg + 6 * pow(1 - t, 2)*t*t*x2 + 4 * (1 - t)*pow(t, 3)*x0mg + pow(t, 4)*x3;
 		//y = (float)pow(1 - t, 4)*y3 + 4 * pow(1 - t, 3)*t*y0mg + 6 * pow(1 - t, 2)*t*t*y2 + 4 * (1 - t)*pow(t, 3)*y0mg + pow(t, 4)*y3;
