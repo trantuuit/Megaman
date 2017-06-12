@@ -13,7 +13,7 @@
 #include "FlyingShell.h"
 #include"ScrewBomber.h"
 #include"SuperCutter.h"
-#include"CutMan.h"
+#include"BossCutMan.h"
 #include"CutmanBullet.h"
 #include "MGMItem.h"
 #include "LifeEnergyBig.h"
@@ -102,7 +102,7 @@ void MGMMap::readObjects(char* objectsPath)
 			obj = new SuperCutter();
 			break;
 		case SPR_CUTMAN:
-			obj = CutMan::getInstance();
+			obj = BossCutMan::getInstance();
 			break;
 		case SPR_CUTMAN_ROOM:
 			obj = new CutmanRoom();
@@ -295,7 +295,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[0].x;
 		Megaman::getInstance()->y = positionMegaman[0].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
@@ -308,7 +308,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[1].x;
 		Megaman::getInstance()->y = positionMegaman[1].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
@@ -320,7 +320,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[2].x;
 		Megaman::getInstance()->y = positionMegaman[2].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
@@ -332,7 +332,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[3].x;
 		Megaman::getInstance()->y = positionMegaman[3].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
@@ -344,7 +344,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[4].x;
 		Megaman::getInstance()->y = positionMegaman[4].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		doors[0]->reset();
 		doors[1]->reset();
@@ -358,7 +358,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[5].x;
 		Megaman::getInstance()->y = positionMegaman[5].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
@@ -371,7 +371,7 @@ void MGMMap::updateStageSaved()
 		Megaman::getInstance()->x = positionMegaman[6].x;
 		Megaman::getInstance()->y = positionMegaman[6].y;
 		Megaman::getInstance()->reset();
-		CutMan::getInstance()->reset();
+		BossCutMan::getInstance()->reset();
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
@@ -465,13 +465,13 @@ void MGMMap::update()
 			Collision::checkCollision(enemy, bigRockObjects[iBigRock]);
 		}
 		// Dung: Check giữa CutManBullet và Cutman:
-		Collision::checkCollision(enemy, CutmanBullet::getBullet());
-		/*}*/
+		if (CutmanBullet::bullet != NULL)
+			Collision::checkCollision(enemy, CutmanBullet::getBullet());
 	}
 
 	int nDoor = 2;
 	for (int i = 0; i < nDoor; i++) {
-		Collision::checkCollision(CutMan::getInstance(), this->doors[i]);
+		Collision::checkCollision(BossCutMan::getInstance(), this->doors[i]);
 
 	}
 	//test

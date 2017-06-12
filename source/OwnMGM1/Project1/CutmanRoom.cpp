@@ -1,5 +1,5 @@
 ﻿#include "CutmanRoom.h"
-#include"CutMan.h"
+#include"BossCutMan.h"
 
 
 CutmanRoom::CutmanRoom()
@@ -16,13 +16,13 @@ void CutmanRoom::update()
 {
 	if (ActionCount <= 80) // Update Frame đủ 80 lần
 	{
-		CutMan::getInstance()->appearMusic = true;
+		BossCutMan::getInstance()->appearMusic = true;
 		MGMMovableObject::update();
 		ActionCount++;
 	}
 	else{
 		curFrame = 1;
-		CutMan::getInstance()->appearHP = true;
+		BossCutMan::getInstance()->appearHP = true;
 	}
 		
 }

@@ -1,5 +1,5 @@
 ﻿#include "CutmanBullet.h"
-#include "CutMan.h"
+#include "BossCutMan.h"
 #include "Megaman.h"
 
 CutmanBullet* CutmanBullet::bullet = 0;
@@ -14,7 +14,7 @@ CutmanBullet* CutmanBullet::getBullet()
 }
 CutmanBullet::CutmanBullet()
 {
-	//fileLog.open("abcFileLox.txt", ios::out | ios::app);
+	fileLog.open("abcFileLox.txt", ios::out | ios::app);
 	categoryEnemy = CUTMAN_WEAPON;
 	dx = 0;
 	dy = 0;
@@ -23,47 +23,52 @@ CutmanBullet::CutmanBullet()
 	ax = 0;
 	ay = 0;
 	sprite = MGMSpriteManager::getInstance()->sprites[SPR_CUTMANBULLET];
-	x = CutMan::getInstance()->x + 6;
-	y = CutMan::getInstance()->y;
+	//x = CutMan::getInstance()->x + 6;
+	//y = CutMan::getInstance()->y;
 	init(x, y, 14, 10);
 	isThrow = false;
 	isBack = false;
+
+	if (BossCutMan::getInstance()->objectDirection == LEFT)
+		x = BossCutMan::getInstance()->getXCenter();
+	else
+		x = BossCutMan::getInstance()->x;
+	y = BossCutMan::getInstance()->y;
+
+	bullet = this;
 }
 
 void CutmanBullet::update()
 {
-	CUTMAN_ACTION cutmanCurAction = CutMan::getInstance()->action;
-	int cutmanCurFrame = CutMan::getInstance()->curFrame;
-	if (CutMan::getInstance()->isThrow == false) // Chưa ném
-	{
-		if (CutMan::getInstance()->objectDirection == LEFT)
-			x = CutMan::getInstance()->getXCenter();
-		else
-			x = CutMan::getInstance()->x;
-		y = CutMan::getInstance()->y;
-		dx = 0;
-		dy = 0;
-	}
+	CUTMAN_ACTION cutmanCurAction = BossCutMan::getInstance()->action;
+	int cutmanCurFrame = BossCutMan::getInstance()->curFrame;
 
-	if (cutmanCurAction == CM_ATTACK && cutmanCurFrame == 1 && isThrow == false) // Frame[1] của attack
+	if (BossCutMan::getInstance()->isThrow == true && this->isThrow == false)
 	{
 		// Xác định hướng bay theo phương x và y:
 		directionX = (Megaman::getInstance()->x < x) ? C_LEFT : C_RIGHT;
 		directionY = (Megaman::getInstance()->y < y) ? C_BOTTOM : C_TOP;
 		// Đo khoảng cách giữa Megaman và Cutman
-		float distanceX = abs(Megaman::getInstance()->getXCenter() - CutMan::getInstance()->getXCenter());
+		float distanceX = abs(Megaman::getInstance()->getXCenter() - BossCutMan::getInstance()->getXCenter());
 		float distanceY = abs(Megaman::getInstance()->y - y);
 
-		// Gán cho dx = 2
-		dx = 2 * directionX;
-		float a = abs(dx) / distanceX; // Tỷ số giữa dx và distanceX
-		dy = (a * distanceY) * directionY; // Từ tỷ số đó tính ra dy tương ứng
-										   // Fix lại nếu dy quá nhỏ hoặc quá lớn (do a quá lớn hoặc quá nhỏ)
-		if (dy < -3)
-			dy = -3;
-		if (dy > 3)
-			dy = 3;
-		//fileLog << dx << "\t" << a << "\t" << dy << endl;
+		if (distanceX <= 10)
+		{
+			dx = 0.5 * directionX;
+			dy = 3 * directionY;
+		}
+		else
+		{
+			// Gán cho dx = 2
+			dx = 2 * directionX;
+			float a = abs(dx) / distanceX; // Tỷ số giữa dx và distanceX
+			dy = (a * distanceY) * directionY; // Từ tỷ số đó tính ra dy tương ứng
+											   // Fix lại nếu dy quá nhỏ hoặc quá lớn (do a quá lớn hoặc quá nhỏ)
+			if (dy < -3)
+				dy = -3;
+			if (dy > 3)
+				dy = 3;
+		}
 
 		setCurAction(1); //Set action bay cho CutmanBullet
 		isThrow = true;
@@ -75,10 +80,10 @@ void CutmanBullet::update()
 	if (isBack)
 	{
 		// Tính quãng đường quay về tương tự như trên
-		backDirectionX = (x > CutMan::getInstance()->x) ? C_LEFT : C_RIGHT;
-		backDirectionY = (y > CutMan::getInstance()->y) ? C_BOTTOM : C_TOP;
-		float distanceX = abs(CutMan::getInstance()->getXCenter() - this->getXCenter());
-		float distanceY = abs(CutMan::getInstance()->y - y);
+		backDirectionX = (x > BossCutMan::getInstance()->x) ? C_LEFT : C_RIGHT;
+		backDirectionY = (y > BossCutMan::getInstance()->y) ? C_BOTTOM : C_TOP;
+		float distanceX = abs(BossCutMan::getInstance()->getXCenter() - this->getXCenter());
+		float distanceY = abs(BossCutMan::getInstance()->y - y);
 		dx = 2 * backDirectionX;
 		float a = abs(dx) / distanceX;
 		dy = (a * distanceY) * backDirectionY;
@@ -89,11 +94,12 @@ void CutmanBullet::update()
 	}
 
 
+	//fileLog << dx << "\t" << dy << "\t" << cutmanCurAction << "\t" << cutmanCurFrame << endl;
 	MGMMovableObject::updateFrameAnimation();
 }
 void CutmanBullet::render()
 {
-	if (isThrow)
+	if (bullet != NULL)
 		MGMEnemy::render();
 }
 
@@ -104,11 +110,14 @@ void CutmanBullet::onCollision(MGMBox* otherObject, int nx, int ny)
 	{
 		if (isBack) //Nếu đã quay trở lại và va chạm thì set isThrow của Cutman là false
 		{
-			CutMan::getInstance()->isThrow = false;
-			CutMan::getInstance()->setCutmanAction(CutMan::getInstance()->action); //Set lại action do isThrow thay đổi
+			isThrow = false;
+			isBack = false;
+			BossCutMan::getInstance()->isThrow = false;
+			BossCutMan::getInstance()->setCutmanAction(BossCutMan::getInstance()->action); //Set lại action do isThrow thay đổi
+
+			delete bullet;
+			bullet = NULL;
 		}
-		isThrow = false;
-		isBack = false;
 	}
 
 }
@@ -119,8 +128,11 @@ void CutmanBullet::onIntersectRect(MGMBox * otherObject)
 	{
 		isThrow = false;
 		isBack = false;
-		CutMan::getInstance()->isThrow = false;
-		CutMan::getInstance()->setCutmanAction(CutMan::getInstance()->action); //Set lại action do isThrow thay đổi
+		BossCutMan::getInstance()->isThrow = false;
+		BossCutMan::getInstance()->setCutmanAction(BossCutMan::getInstance()->action); //Set lại action do isThrow thay đổi
+
+		delete bullet;
+		bullet = NULL;
 	}
 }
 CutmanBullet::~CutmanBullet()

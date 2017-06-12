@@ -4,7 +4,7 @@
 #include"BoardBar.h"
 #include"BossGutsman.h"
 #include"MGMAudioManager.h"
-#include"CutMan.h"
+#include"BossCutMan.h"
 HPBar* HPBar::hp = 0;
 HPBar* HPBar::getInstance(){
 	if (hp == 0){
@@ -52,9 +52,9 @@ void HPBar::update(){
 			curFrame_Boss = 0;
 		}
 	}
-	if (CutMan::getInstance()->appearHP){
-		if (CutMan::getInstance()->healthPoint >= 0){
-			int healthPoint = CutMan::getInstance()->healthPoint;
+	if (BossCutMan::getInstance()->appearHP){
+		if (BossCutMan::getInstance()->healthPoint >= 0){
+			int healthPoint = BossCutMan::getInstance()->healthPoint;
 			if (healthPoint > curFrame_Boss){
 				curFrame_Boss++;
 				MGMAudioManager::getInstance()->Play(AUDIO_ENERGY_FILL);
@@ -71,7 +71,7 @@ void HPBar::update(){
 }
 void HPBar::render(){
 	this->sprite_MGM->Render(x, y, curAction, curFrame_MG);
-	if (BossGutsman::getInstance()->appearHP || CutMan::getInstance()->appearHP){
+	if (BossGutsman::getInstance()->appearHP || BossCutMan::getInstance()->appearHP){
 		this->sprite_BOSS->Render(x + 10, y, curAction, curFrame_Boss);
 	}
 

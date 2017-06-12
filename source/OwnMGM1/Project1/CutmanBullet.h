@@ -2,7 +2,6 @@
 #include "MGMEnemy.h"
 #include"MGMSpriteManager.h"
 #include "MGMGameTime.h"
-#include <iostream>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -30,9 +29,6 @@ private:
 	int yMegeman;
 	int xCutman;
 	int yCutman;
-	float m;
-	boolean isUpdateTarget;
-	MGMGameTime updateTarget;
 public:
 	static CutmanBullet * bullet;
 	static CutmanBullet* getBullet();

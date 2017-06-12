@@ -17,7 +17,7 @@
 #include"PKMWeapon.h"
 #include"MGMAudioManager.h"
 #include"BossGutsman.h"
-#include"CutMan.h"
+#include"BossCutMan.h"
 MGMGame::MGMGame()
 {
 }
@@ -186,11 +186,11 @@ void MGMGame::update(DWORD timesleep)
 		if (Megaman::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
 		}
-		if (CutMan::getInstance()->appearMusic){
+		if (BossCutMan::getInstance()->appearMusic){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
 			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_BATTLE);
 		}
-		if (CutMan::getInstance()->isKill){
+		if (BossCutMan::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
 		}
 	}
@@ -325,7 +325,7 @@ void MGMGame::update(DWORD timesleep)
 					supperCutter->y = 2000;
 				}
 				SuperCutter::timeDelay.start(300);
-				supperCutter->vx = (float)distance / 232;  // Xác định 1 hằng số để tính ra vận tốc phù hợp
+				supperCutter->vx = (float)distance / 232;  // Xác định 1 hằng số để tính ra vận tốc phù hợp (232 = distance / vx)
 				supperCutter->objectDirection = (supperCutter->vx < 0) ? LEFT : RIGHT;
 
 			}
@@ -399,7 +399,7 @@ void MGMGame::update(DWORD timesleep)
 		//Cutman bullet
 		if (CutmanBullet::bullet != NULL){
 			CutmanBullet::getBullet()->update();
-			Collision::checkCollision(Megaman::getInstance(),CutmanBullet::bullet);
+			Collision::checkCollision(Megaman::getInstance(), CutmanBullet::bullet);
 			CutmanBullet::getBullet()->coordinateUpdate();
 		}
 

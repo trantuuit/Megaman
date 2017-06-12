@@ -152,9 +152,6 @@
     <ClCompile Include="CutmanBullet.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="CutMan.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="MGMItem.cpp">
       <Filter>Framework\BaseObject</Filter>
     </ClCompile>
@@ -243,6 +240,9 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Blink.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BossCutMan.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,9 +362,6 @@
     <ClInclude Include="CutmanBullet.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="CutMan.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="MGMItem.h">
       <Filter>Framework\BaseObject</Filter>
     </ClInclude>
@@ -456,6 +453,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Blink.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BossCutMan.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
