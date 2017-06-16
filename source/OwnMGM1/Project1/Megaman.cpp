@@ -26,7 +26,7 @@ Megaman * Megaman::getInstance()
 void Megaman::update()
 {
 	bool isKeyLeftDown, isKeyRightDown, isKeyMoveDown, isKeyJumpPress, isKeyMovePress, isAttackPress, isSuperMan;
-	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress=isSuperMan = false;
+	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress = isSuperMan = false;
 	//Nhận các sự kiện từ bàn phím
 	isKeyLeftDown = KEY::getInstance()->isLeftDown;
 	isKeyRightDown = KEY::getInstance()->isRightDown;
@@ -38,8 +38,10 @@ void Megaman::update()
 	if (isSuperMan){
 		if (this->isSuperMan){
 			this->isSuperMan = false;
+			status = MEGAMAN_NORMAL;
 		}
 		else{
+			status = MEGAMAN_BE_ATTACKED;
 			this->isSuperMan = true;
 		}
 	}
@@ -344,7 +346,7 @@ void Megaman::update()
 						}
 						lastStatusRunAttack = false;
 					}
-					
+
 				}
 				else {
 					if (isChangeCutMan) {
@@ -406,7 +408,7 @@ void Megaman::update()
 							setCurAction(MGM_STAND_ATTACK);
 						}
 
-					}	
+					}
 				}
 				else {
 					if (isChangeCutMan) {
@@ -506,7 +508,7 @@ void Megaman::update()
 	delayShoot.update();
 	deltaUpdate();
 	updateFrameAnimation();
-	if (isOnStairs && actionBeingAttacked==STEP1) {
+	if (isOnStairs && actionBeingAttacked == STEP1) {
 		isOnStairs = false;
 		pauseAnimation = false;
 		vx = 0;
@@ -682,35 +684,44 @@ void Megaman::updateFrameAnimation()
 			else {
 				if (timeFrame.atTime()) {
 					int lastFrame = curFrame;
-					this->sprite->Update(curAction, curFrame);
-					if (curAction == MGM_RUN && curFrame == 3)
-						curFrame = 0;
-					else if (curAction == MGM_JUMP && curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_JUMP_ATTACK && curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_STAND_ATTACK && curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_CLIMB && curFrame == 2)
-						curFrame = 0;
-					else if (curAction == MGM_RUN_ATTACK && curFrame == 3)
-						curFrame = 0;
-					else if (curAction == MGM_STAND_STAIR_ATTACK&& curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_EFFECT_BE_ATTACKED4&&curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_SKIN_JUMP_ATTACK && curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_SKIN_JUMP && curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_SKIN_STAND_ATTACK && curFrame == 1)
-						curFrame = 0;
-					else if (curAction == MGM_SKIN_RUN && curFrame == 3)
-						curFrame = 0;
-					else if (curAction == MGM_SKIN_CLIMB && curFrame == 2)
-						curFrame = 0;
-					else if (curAction == MGM_SKIN_STAND_STAIR_ATTACK && curFrame == 1)
-						curFrame = 0;
+					if (isOnStairs){
+						if ( KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold)
+							this->sprite->Update(curAction, curFrame);
+						if ( curFrame == 2)
+							curFrame = 0;
+					}
+					else{
+						this->sprite->Update(curAction, curFrame);
+						if (curAction == MGM_RUN && curFrame == 3)
+							curFrame = 0;
+						else if (curAction == MGM_JUMP && curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_JUMP_ATTACK && curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_STAND_ATTACK && curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_RUN_ATTACK && curFrame == 3)
+							curFrame = 0;
+						else if (curAction == MGM_STAND_STAIR_ATTACK&& curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_EFFECT_BE_ATTACKED4&&curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_SKIN_JUMP_ATTACK && curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_SKIN_JUMP && curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_SKIN_STAND_ATTACK && curFrame == 1)
+							curFrame = 0;
+						else if (curAction == MGM_SKIN_RUN && curFrame == 3)
+							curFrame = 0;
+						else if (curAction == MGM_SKIN_CLIMB && curFrame == 2)
+							curFrame = 0;
+						else if (curAction == MGM_SKIN_STAND_STAIR_ATTACK && curFrame == 1)
+							curFrame = 0;
+					}
+
+
+
 					if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 						onLastFrameAnimation(curAction);
 				}
@@ -719,22 +730,35 @@ void Megaman::updateFrameAnimation()
 		else if (status == MEGAMAN_BE_ATTACKED) {
 			if (timeFrame1.atTime()) {
 				int lastFrame = curFrame;
-				this->sprite->Update(curAction, curFrame);
-				if (curAction == MGM_STAND &&  curFrame == 1) {
-					curFrame = 2;
+
+				if (isOnStairs){	
+					 if (KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold){
+						this->sprite->Update(curAction, curFrame);
+					 }
+					 else{
+						 if (lastFrame == 2)
+							 curFrame = 0;
+						 else if (lastFrame == 1)
+							 curFrame = 2;
+						 else if (lastFrame == 0)
+							 curFrame = 2;
+					 }
 				}
-				if (curAction == MGM_SKIN_STAND && curFrame == 1) {
-					curFrame = 2;
+				else{
+					this->sprite->Update(curAction, curFrame);
+					if (curAction == MGM_STAND &&  curFrame == 1) {
+						curFrame = 2;
+					}
+					if (curAction == MGM_SKIN_STAND && curFrame == 1) {
+						curFrame = 2;
+					}
 				}
+
 				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
 					onLastFrameAnimation(curAction);
 			}
 		}
 	}
-	/*else
-	{
-		if ((curAction == MGM_CLIMB || curAction == MGM_SKIN_CLIMB) && curFrame == 2&& actionBeingAttacked == ATTACKED_NONE) curFrame = 0;
-	}*/
 }
 
 void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)

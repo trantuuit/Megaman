@@ -102,7 +102,7 @@ void stairs::climbStairs()
 			
 			mgm->pauseAnimation = false;
 		}
-		else mgm->pauseAnimation = true;
+		/*else mgm->pauseAnimation = true;*/
 	}
 
 
