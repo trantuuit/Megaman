@@ -732,7 +732,7 @@ void Megaman::updateFrameAnimation()
 				int lastFrame = curFrame;
 
 				if (isOnStairs){	
-					 if (KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold){
+					if (KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold || KEY::getInstance()->isAttackPress){
 						this->sprite->Update(curAction, curFrame);
 					 }
 					 else{
