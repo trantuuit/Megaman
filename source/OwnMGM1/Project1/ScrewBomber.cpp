@@ -177,7 +177,13 @@ void ScrewBomber::CreateBullet()
 		newBullet5->y = this->y - 9;
 	}
 }
-
+void ScrewBomber::restoreObject()
+{
+	x = oldRect.x;
+	y = oldRect.y;
+	isKill = false;
+	curAction = SLEEP;
+}
 void  ScrewBomber::onCollision(MGMBox * otherObject, int nx, int ny){
 	
 }
