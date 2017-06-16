@@ -229,11 +229,12 @@ void MGMMap::updateStage()
 	}
 	if (!isUpdate)
 	{
-
+		mgm->isUpdateStage = false;
 		if (mgm->isOnStairs &&mgm->getYCenter() > MGMStage::curStage->getTop())
 		{
 			mgm->y += 0.5f;
 			mgm->pauseAnimation = false;
+			mgm->isUpdateStage = true;
 			mgm->updateFrameAnimation();
 			MGMCamera::getInstance()->dy = 4;
 
@@ -243,6 +244,7 @@ void MGMMap::updateStage()
 		{
 			mgm->y -= 0.5f;
 			mgm->pauseAnimation = false;
+			mgm->isUpdateStage = true;
 			mgm->updateFrameAnimation();
 			MGMCamera::getInstance()->dy = -4;
 
@@ -274,6 +276,7 @@ void MGMMap::updateStage()
 			}
 		}
 	}
+
 	if (mgm->IntersectDoor < 0 && MGMStage::curStage->getBottom() <= MGMCamera::getInstance()->getBottom() && MGMCamera::getInstance()->y <= MGMStage::curStage->getTop())
 	{
 		if (isChangeStage) MGMCamera::getInstance()->dy = 0;

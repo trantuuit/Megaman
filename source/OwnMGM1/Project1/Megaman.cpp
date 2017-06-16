@@ -685,10 +685,18 @@ void Megaman::updateFrameAnimation()
 				if (timeFrame.atTime()) {
 					int lastFrame = curFrame;
 					if (isOnStairs){
-						if ( KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold)
+
+						if (isUpdateStage){
 							this->sprite->Update(curAction, curFrame);
-						if ( curFrame == 2)
+							if (curFrame == 2)
+								curFrame = 0;
+						}
+						else{
+							if (KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold)
+								this->sprite->Update(curAction, curFrame);
+							if ( curFrame == 2)
 							curFrame = 0;
+						}
 					}
 					else{
 						this->sprite->Update(curAction, curFrame);
@@ -895,6 +903,7 @@ Megaman::Megaman()
 	height = 23;
 	ax = 0;
 	vx = 0;
+	isUpdateStage = false;
 	delayShoot.init(150);
 	isOnGreenBar = false;
 	isOnGround = false;

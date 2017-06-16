@@ -71,6 +71,7 @@ public:
 	bool isChangeCutMan;
 	static Megaman* getInstance();
 	int action;
+	bool isUpdateStage;
 	bool lastOnGreenBar;
 	bool lastStatusStandStairAttack;
 	bool lastStatusStandAttack;
