@@ -4,6 +4,7 @@
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
 #include"MGMAudioManager.h"
+#include"KEY.h"
 Blader::Blader()
 {
 	curAction = 0;
@@ -24,77 +25,145 @@ Blader::Blader()
 
 void Blader::update()
 {
-	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >60)){
+	bool flat1, flat2, flat3, isAboveMG;
+	flat1 = flat2 = flat3 = isAboveMG = false;
+	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >55)){
+		x += 1;
+		MGMEnemy::updateFrameAnimation();
+		return;
+	}
+	if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) > 55)){
+		x -= 1;
+		MGMEnemy::updateFrameAnimation();
+		return;
+	}
+
+	if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) >50)){
 		isRight = false;
 		isLeft = true;
 		isCheck = false;
 		objectDirection = Direction::RIGHT;
 		t = 0;
+		if (y > Megaman::getInstance()->y){
+			isAboveMG = true;
+		}
+		else{
+			isAboveMG = false;
+		}
+		if (abs(y - Megaman::getInstance()->y) < 30){
+			flat1 = true;
+			flat2 = false;
+			flat3 = false;
+		}
+		else if (abs(y - Megaman::getInstance()->y) > 30 && abs(y - Megaman::getInstance()->y) < 60){
+			flat1 = false;
+			flat2 = true;
+			flat3 = false;
+		}
+		else{
+			flat1 = false;
+			flat2 = false;
+			flat3 = true;
+		}
 	}
 
-	if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) > 60)){
-		/*vx = -0.2f;*/
+	if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) > 50)){
 		isLeft = false;
 		isRight = true;
 		objectDirection = Direction::LEFT;
 		isCheck = false;
 		t = 0;
-	}
-	
-	if (isRight){
-		x0mg = Megaman::getInstance()->x;
-		y0mg = Megaman::getInstance()->y-30;
-		xenemy = x;
-		yenemy = y;
-		//if (Megaman::getInstance()->x < x2){
-		//	x2 = 2 * Megaman::getInstance()->x - xenemy;
-		//	y2 = yenemy;
-		//}
-		if (t==0){
-			x2 = 2 * x0mg - xenemy;
-			y2 = yenemy;
-			isCheck = true;
-			x3 = x;
-			y3 = y;
+		if (y > Megaman::getInstance()->y){
+			isAboveMG = true;
 		}
-		//if (Megaman::getInstance()->x < x2){
-		//	x3 = x3 - abs(x0mg - x3);
-		//	x2 = 2 * x0mg - x3;
-		//	y2 = y3;
-		//}
-		t += 0.02;
-		//x = (float)pow(1 - t, 4)*x3 + 4 * pow(1 - t, 3)*t*x0mg + 6 * pow(1 - t, 2)*t*t*x2 + 4 * (1 - t)*pow(t, 3)*x0mg + pow(t, 4)*x3;
-		//y = (float)pow(1 - t, 4)*y3 + 4 * pow(1 - t, 3)*t*y0mg + 6 * pow(1 - t, 2)*t*t*y2 + 4 * (1 - t)*pow(t, 3)*y0mg + pow(t, 4)*y3;
-		x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
-		y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
+		else{
+			isAboveMG = false;
+		}
+		if (abs(y - Megaman::getInstance()->y) < 30){
+			flat1 = true;
+			flat2 = false;
+			flat3 = false;
+		}
+		else if (abs(y - Megaman::getInstance()->y) > 30 && abs(y - Megaman::getInstance()->y) < 60){
+			flat1 = false;
+			flat2 = true;
+			flat3 = false;
+		}
+		else{
+			flat1 = false;
+			flat2 = false;
+			flat3 = true;
+		}
 	}
-	if (isLeft){
-		x0mg = Megaman::getInstance()->x;
-		y0mg = Megaman::getInstance()->y-30;
-		xenemy = x;
-		yenemy = y;
 
-		if (t==0){
+	if (isRight || isLeft){
+		if (isLeft){
+			if ((x > Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) < 55)){
+				if (abs(y2 - y) <3){
+					x += 3;
+				}
+				else{
+					t += 0.0115;
+					x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
+					y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
+				}	
+				MGMEnemy::updateFrameAnimation();
+				return;
+			}
+		}
+		if (isRight){
+			if ((x < Megaman::getInstance()->x) && (abs(x - Megaman::getInstance()->x) < 55)){
+				if (abs(y2 - y) <3){
+					x -= 3;
+				}
+				else{
+					t += 0.0115;
+					y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
+					x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
+				}	
+				MGMEnemy::updateFrameAnimation();
+				return;
+			}
+		}
+		x0mg = Megaman::getInstance()->x;
+		if (flat1){
+			if (isAboveMG){
+				y0mg = Megaman::getInstance()->y - 10;
+			}
+			else{
+				y0mg = Megaman::getInstance()->y + 10;
+			}
+
+		}
+		if (flat2){
+			if (isAboveMG){
+				y0mg = Megaman::getInstance()->y - 50;
+			}
+			else{
+				y0mg = Megaman::getInstance()->y + 50;
+			}
+		}
+		if (flat3){
+			if (isAboveMG){
+				y0mg = Megaman::getInstance()->y - 90;
+			}
+			else{
+				y0mg = Megaman::getInstance()->y + 90;
+			}
+		}
+
+		if (t == 0){
 			x2 = 2 * x0mg - x;
 			y2 = y;
-			isCheck = true;
 			x3 = x;
 			y3 = y;
 		}
-		//if (Megaman::getInstance()->x > x2){
-		//	x3 = x3 + abs(x0mg - x3);
-		//	x2 = 2 * x0mg- x3;
-		//	y2 = y3;
-		//}
-		t += 0.02;
-		//x = (float)pow(1 - t, 4)*x3 + 4 * pow(1 - t, 3)*t*x0mg + 6 * pow(1 - t, 2)*t*t*x2 + 4 * (1 - t)*pow(t, 3)*x0mg + pow(t, 4)*x3;
-		//y = (float)pow(1 - t, 4)*y3 + 4 * pow(1 - t, 3)*t*y0mg + 6 * pow(1 - t, 2)*t*t*y2 + 4 * (1 - t)*pow(t, 3)*y0mg + pow(t, 4)*y3;
+
+		t += 0.0115;
 		x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
 		y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
 	}
-
 	MGMEnemy::updateFrameAnimation();
-	MGMEnemy::deltaUpdate();
 }
 
 void Blader::render(){
