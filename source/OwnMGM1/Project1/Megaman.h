@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "MGMMovableObject.h"
 #include "MGMDelayTime.h"
+#include"MGMStage.h"
 enum MEGAMAN_STATUS{
 	MEGAMAN_NORMAL,
 	MEGAMAN_BE_ATTACKED,
@@ -46,7 +47,11 @@ class Megaman :
 {
 private:
 	static Megaman* instance;
+
 public:
+	D3DXVECTOR2 * positionMegaman;
+	D3DXVECTOR2* positionCamera;
+	MGMStage* curStage;
 	Direction collisionDirection;
 	MEGAMAN_STATUS status;
 	boolean beingAttacked;
@@ -90,6 +95,7 @@ public:
 	void updateFrameAnimation();
 	void die();
 	void reset();
+	void continueStage();
 	Megaman();
 	~Megaman();
 };

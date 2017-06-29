@@ -11,6 +11,8 @@
 #include <time.h>
 #include"Megaman.h"
 #include"MGMAudioManager.h"
+#include "BossCutMan.h"
+#include"Medal.h"
 EffectCreateItem* EffectCreateItem::effect = 0;
 EffectCreateItem* EffectCreateItem::getInstance(){
 	if (effect == 0){

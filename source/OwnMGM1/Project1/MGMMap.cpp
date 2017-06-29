@@ -167,14 +167,21 @@ void MGMMap::readStageSaved(char * stageSavedPath)
 	fs >> nStageSaved;
 	positionMegaman = new D3DXVECTOR2[nStageSaved];
 	positionCamera = new D3DXVECTOR2[nStageSaved];
-
+	Megaman::getInstance()->positionCamera = new D3DXVECTOR2[nStageSaved];
+	Megaman::getInstance()->positionMegaman = new D3DXVECTOR2[nStageSaved];
 	for (int i = 0; i < nStageSaved; i++)
 	{
 		fs >> positionMegaman[i].x >> positionMegaman[i].y >> positionCamera[i].x >> positionCamera[i].y;
+		Megaman::getInstance()->positionMegaman[i].x = positionMegaman[i].x;
+		Megaman::getInstance()->positionMegaman[i].y = positionMegaman[i].y;
+		Megaman::getInstance()->positionCamera[i].x = positionCamera[i].x;
+		Megaman::getInstance()->positionCamera[i].y = positionCamera[i].y;
 		/*if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
 		MGMStage::curStage = stages[i];*/
 	}
+
 	fs.close();
+
 }
 
 
@@ -201,8 +208,10 @@ void MGMMap::updateStage()
 			if (MGMStage::checkMegamanInStage(Megaman::getInstance(), stages[i]))
 			{
 				MGMStage::curStage = stages[i];
+				/*Megaman::getInstance()->curStage = stages[i];*/
 				isChangeStage = true;
 			}
+			
 		}
 	}
 

@@ -8,6 +8,7 @@
 #include "Blink.h"
 #include"MGMAudioManager.h"
 #include"DieEffect.h"
+#include"Medal.h"
 BossCutMan* BossCutMan::cutman = 0;
 BossCutMan* BossCutMan::getInstance()
 {
@@ -290,6 +291,9 @@ void BossCutMan::reset() {
 	MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
 }
 void BossCutMan::die() {
+	Medal* item = new Medal();
+	item->x = 3220;
+	item->y = 1400;
 	isKill = true;
 	count = 0;
 	Megaman::getInstance()->score += 9000;

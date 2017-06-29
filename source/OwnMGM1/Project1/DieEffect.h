@@ -2,6 +2,7 @@
 #include "MGMMovableObject.h"
 #include "MGMSprite.h"
 #include"List.h"
+#include"MGMDelayTime.h"
 enum AFFECT_CATEGORY{
 	MEGAMAN_DIE,
 	CUTMAN_DIE,

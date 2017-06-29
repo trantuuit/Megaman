@@ -3,6 +3,7 @@
 #include"Megaman.h"
 #include "KEY.h"
 #include"MGMGame.h"
+#include"Megaman.h"
 GameOverMenu* GameOverMenu::menu = 0;
 GameOverMenu* GameOverMenu::getInstance(){
 	if (menu == 0){
@@ -25,13 +26,18 @@ GameOverMenu::GameOverMenu()
 
 void GameOverMenu::update(){
 	if (Megaman::getInstance()->isKill ){
-		if (delayAppearMenu.isReady()&&delayAppearMenu.isFinish()){
+		if (delayAppearMenu.isReady()){
 			delayAppearMenu.start(5000);
 		}
+		if (delayAppearMenu.isSchedule()) {
+			isOpen = false;
+		}
 		if (delayAppearMenu.isFinish()){
-
+			isStart = false;
 			isOpen = true;
-		}	
+			Megaman::getInstance()->isKill = false;
+		}
+		delayAppearMenu.update();
 	}
 	if (isOpen){
 		if (KEY::getInstance()->isDownHold){
@@ -47,14 +53,15 @@ void GameOverMenu::update(){
 				y = 117;
 			}
 		}
-		if (KEY::getInstance()->isJumpDown){
+		if (KEY::getInstance()->isEnterPress){
 			if (x == 54 && y == 141){
 				MGMGame::getInstance()->isStart = true;
-				
+				isOpen = false;
 			}
-			isOpen = false;
-			Megaman::getInstance()->reset();
-		/*	Megaman::getInstance()->beingAttacked = false;*/
+			if (x == 54 && y == 117) {
+				Megaman::getInstance()->continueStage();
+				isOpen = false;
+			}
 		}
 		int score = Megaman::getInstance()->score;
 		point1 = score / 1000000;
@@ -65,7 +72,7 @@ void GameOverMenu::update(){
 		point6 = (score % 100) / 10;
 		point7 = score % 10;
 	}
-	delayAppearMenu.update();
+
 }
 void GameOverMenu::render(){
 	if (isOpen){

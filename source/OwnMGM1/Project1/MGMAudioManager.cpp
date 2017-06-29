@@ -49,6 +49,7 @@ int MGMAudioManager::Init_DirectSound(HWND hwnd)
 		
 		MessageBox(hwnd, "[FAILED] Can not init directx sound", "Loi", MB_ICONERROR);
 		return 0;
+		//return 1;
 	}
 
     //set the primary buffer format
@@ -58,6 +59,7 @@ int MGMAudioManager::Init_DirectSound(HWND hwnd)
 		
 		MessageBox(hwnd, "[FAILED] Can not set the primary buffer", "Loi", MB_ICONERROR);
 		 return 0;
+		//return 1;
 	}
     //return success
 	//GLTrace("Directx Sound has been success init");

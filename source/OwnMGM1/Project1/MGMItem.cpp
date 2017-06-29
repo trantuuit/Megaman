@@ -1,6 +1,8 @@
 #include "MGMItem.h"
 #include "Megaman.h"
 #include"MGMSpriteManager.h"
+#include"BossCutMan.h"
+#include"BossGutsman.h"
 List<MGMItem*>* MGMItem::listItem = 0;
 
 List<MGMItem*>* MGMItem::getListItem(){
@@ -26,9 +28,6 @@ void MGMItem::onCollision(MGMBox* otherObject, int nx, int ny){
 		Collision::preventMove(this, otherObject,nx, ny);
 		vx = 0;
 	}
-	//if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
-	//	vy = 1;
-	//}
 }
 void MGMItem::update(){
 	MGMMovableObject::update();
@@ -36,6 +35,8 @@ void MGMItem::update(){
 }
 void MGMItem::CountDownDie(){
 	if (id != SPR_ITEM_LIFE_ENERGY_BIG){
+		if (categoryItem == CI_MEDAL)
+			return;
 		if (timeDie.isReady()){
 			timeDie.start();
 		}
@@ -44,7 +45,6 @@ void MGMItem::CountDownDie(){
 		}
 		timeDie.update();
 	}
-
 }
 MGMItem::~MGMItem()
 {

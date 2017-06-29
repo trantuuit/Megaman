@@ -10,6 +10,7 @@ enum CATEGORY_ITEM{
 	CI_WEAPON_ENERGY_BIG,
 	CI_WEAPON_ENERGY_SMALL,
 	CI_YASHICHI,
+	CI_MEDAL,
 };
 class MGMItem :
 	public MGMMovableObject

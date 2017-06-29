@@ -25,6 +25,7 @@ Megaman * Megaman::getInstance()
 /*Cập nhật vận tốc */
 void Megaman::update()
 {
+	curStage = MGMStage::curStage;
 	bool isKeyLeftDown, isKeyRightDown, isKeyMoveDown, isKeyJumpPress, isKeyMovePress, isAttackPress, isSuperMan;
 	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress = isSuperMan = false;
 	//Nhận các sự kiện từ bàn phím
@@ -881,13 +882,35 @@ void Megaman::die() {
 }
 
 void Megaman::reset() {
+
 	isKill = false;
 	healthPoint = 28;
 	life = 2;
+	beingAttacked = false;
+	actionBeingAttacked = ATTACKED_NONE;
+	status = MEGAMAN_NORMAL;
+	
+}
+
+void Megaman::continueStage()
+{
+	isKill = false;
+	healthPoint = 28;
+	int index =0;
+	MGMCamera::getInstance()->x = positionCamera[index].x;
+	MGMCamera::getInstance()->y = positionCamera[index].y;
+	MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+	x = positionMegaman[index].x;
+	y = positionMegaman[index].y;
+	MGMStage::curStage = curStage;
+	beingAttacked = false;
+	actionBeingAttacked = ATTACKED_NONE;
+	status = MEGAMAN_NORMAL;
 }
 
 Megaman::Megaman()
 {
+	
 	isSuperMan = false;
 	isChangeCutMan = false;
 	lastIsJump = true;

@@ -10,6 +10,7 @@
 #include"DieEffect.h"
 #include"MGMAudioManager.h"
 #include "Blink.h"
+#include"Medal.h"
 
 BossGutsman* BossGutsman::instance = 0;
 BossGutsman* BossGutsman::getInstance() {
@@ -264,6 +265,7 @@ void BossGutsman::reset(){
 	appearHP = false;
 }
 void BossGutsman::Die() {
+
 	isKill = true;
 	count = 0;
 	Megaman::getInstance()->score += 9000;

@@ -10,6 +10,7 @@ List<DieAffect*>* DieAffect::getList()
 DieAffect::DieAffect(){
 
 }
+
 DieAffect::DieAffect(AFFECT_CATEGORY category)
 {
 	if(category == MEGAMAN_DIE){

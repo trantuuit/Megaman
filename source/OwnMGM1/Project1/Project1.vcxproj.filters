@@ -245,6 +245,9 @@
     <ClCompile Include="BossCutMan.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Medal.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -457,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="BossCutMan.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Medal.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
