@@ -61,6 +61,7 @@ void GameOverMenu::update(){
 				isOpen = false;
 				if (Megaman::getInstance()->map == 1) {
 					MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
+					MGMAudioManager::getInstance()->StopSound(AUDIO_GAME_OVER);
 				}
 			}
 			if (x == 54 && y == 117) {

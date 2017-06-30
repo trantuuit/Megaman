@@ -503,6 +503,9 @@ void Megaman::update()
 					vx = objectDirection*MEGAMAN_VX_GO;
 				}
 			}
+			else {
+				vx = 0;
+			}
 		}
 	}
 	delayAnimateStandStairShoot.update();
@@ -576,7 +579,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	if (!isSuperMan){
 		if (otherObject->collisionCategory == CC_ENEMY){
 			MGMEnemy* enemy = (MGMEnemy*)otherObject;
-			if (enemy->categoryEnemy == DEATH_LAND) {
+			if (enemy->categoryEnemy == DEATH_LAND && status == MEGAMAN_NORMAL) {
 				healthPoint -= 28;
 			}
 			if (actionBeingAttacked == ATTACKED_NONE){
@@ -893,25 +896,119 @@ void Megaman::reset() {
 	status = MEGAMAN_NORMAL;
 	if (BossCutMan::getInstance()->appearHP) {
 		BossCutMan::getInstance()->appearHP = false;
+		BossCutMan::getInstance()->appearMusic = false;
 	}
 	if (BossGutsman::getInstance()->appearHP) {
 		BossGutsman::getInstance()->appearHP = false;
+		BossGutsman::getInstance()->appearMusic = false;
 	}
 	objectDirection = RIGHT;
 	vy = 0;
+	vx = 0;
 }
 
 void Megaman::continueStage()
 {
 	isKill = false;
 	healthPoint = 28;
-	int index =0;
-	MGMCamera::getInstance()->x = positionCamera[index].x;
-	MGMCamera::getInstance()->y = positionCamera[index].y;
-	MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
-	x = positionMegaman[index].x;
-	y = positionMegaman[index].y;
-	MGMStage::curStage = curStage;
+	int index =curStage->index;
+	
+	if (map == 1) {
+		switch (index)
+		{
+		case 0:
+		case 1:
+		case 2:
+			MGMCamera::getInstance()->x = 0;
+			MGMCamera::getInstance()->y = 232;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 22;
+			y = 111;
+			objectDirection = RIGHT;
+			break;
+		case 3:
+		case 4:
+		case 5:
+			MGMCamera::getInstance()->x = 760;
+			MGMCamera::getInstance()->y = 942;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 930;
+			y = 830;
+			objectDirection = LEFT;
+			break;
+		case 6:
+		case 7:
+		case 8:
+			MGMCamera::getInstance()->x = 1280;
+			MGMCamera::getInstance()->y = 1672;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 1470;
+			y = 1530;
+			objectDirection = LEFT;
+			break;
+		case 9:
+		case 10:
+		case 11:
+			MGMCamera::getInstance()->x = 1792;
+			MGMCamera::getInstance()->y = 1912;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 1960;
+			y = 1922;
+			objectDirection = LEFT;
+			break;
+		case 12:
+		case 13:
+			MGMCamera::getInstance()->x = 2304;
+			MGMCamera::getInstance()->y = 1432;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 2360;
+			y = 1360;
+			objectDirection = RIGHT;
+			break;
+		default:
+			break;
+		}
+	}
+	if (map == 2) {
+		switch (index)
+		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			MGMCamera::getInstance()->x = 0;
+			MGMCamera::getInstance()->y = 1176;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 22;
+			y = 1100;
+			objectDirection = RIGHT;
+			break;
+		case 4:
+		case 5:
+		case 6:
+			MGMCamera::getInstance()->x = 2304;
+			MGMCamera::getInstance()->y = 232;
+			MGMCamera::getInstance()->dx = MGMCamera::getInstance()->dy = 0;
+			x = 2390;
+			y = 160;
+			objectDirection = RIGHT;
+			break;
+		default:
+			break;
+		}
+		MGMStage::curStage = curStage;
+	}
+	if (BossCutMan::getInstance()->appearHP) {
+		BossCutMan::getInstance()->appearHP = false;
+		BossCutMan::getInstance()->appearMusic = false;
+	}
+	if (BossGutsman::getInstance()->appearHP) {
+		BossGutsman::getInstance()->appearHP = false;
+		BossGutsman::getInstance()->appearMusic = false;
+	}
+	
+	vy = 0;
+	vx = 0;
 	beingAttacked = false;
 	actionBeingAttacked = ATTACKED_NONE;
 	status = MEGAMAN_NORMAL;

@@ -387,6 +387,10 @@ void MGMMap::updateStageSaved()
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
+	if (KEY::getInstance()->isEightPress) {
+		Megaman::getInstance()->die();
+		keyNumberPress = true;
+	}
 	if (keyNumberPress)
 	{
 		for (int i = 0; i < nStage; i++)
