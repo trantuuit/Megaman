@@ -103,7 +103,7 @@ void Blader::update()
 					x += 3;
 				}
 				else{
-					t += 0.0115;
+					t += 0.0125;
 					x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
 					y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
 				}	
@@ -117,7 +117,7 @@ void Blader::update()
 					x -= 3;
 				}
 				else{
-					t += 0.0115;
+					t += 0.0125;
 					y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
 					x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
 				}	
@@ -159,7 +159,7 @@ void Blader::update()
 			y3 = y;
 		}
 
-		t += 0.0115;
+		t += 0.025;
 		x = pow(1 - t, 2)*x3 + 2 * (1 - t)*t*x0mg + t*t*x2;
 		y = pow(1 - t, 2)*y3 + 2 * (1 - t)*t*y0mg + t*t*y2;
 	}
@@ -174,11 +174,7 @@ void Blader::onCollision(MGMBox* otherObject, int nx, int ny){
 }
 void Blader::onIntersectRect(MGMBox* otherObject){
 	if (otherObject->collisionCategory == CC_MEGAMAN_BULLET){
-
 		MegamanBullet* mgmbullet = (MegamanBullet*)otherObject;
-		//mgmbullet->x = this->x;
-		//mgmbullet->y = this->y;
-		/*mgmbullet->setAction(FIRE);*/
 		isKill = true;
 		Megaman::getInstance()->score += 500;
 		EffectCreateItem::getInstance()->enemy = this;

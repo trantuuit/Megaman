@@ -25,6 +25,7 @@ void BigEye::onCollision(MGMBox * otherObject, int nx, int ny)
 		delayBeforeJump.start();
 		MGMAudioManager::getInstance()->Play(AUDIO_BIG_EYE);
 	}
+
 	MGMMovableObject::onCollision(otherObject, nx, ny);
 }
 void BigEye::onIntersectRect(MGMBox* otherObject){

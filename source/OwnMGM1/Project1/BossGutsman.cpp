@@ -267,7 +267,7 @@ void BossGutsman::reset(){
 void BossGutsman::Die() {
 	Medal* item = new Medal();
 	item->x = 3700;
-	/*item->y = y+100;*/
+	item->y = y+100;
 	isKill = true;
 	count = 0;
 	Megaman::getInstance()->score += 9000;

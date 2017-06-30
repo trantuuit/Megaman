@@ -16,6 +16,7 @@
 #include"MGMAudioManager.h"
 #include"BossCutMan.h"
 #include"BossGutsman.h"
+#include"MGMGame.h"
 Megaman * Megaman::instance = 0;
 
 Megaman * Megaman::getInstance()
@@ -648,6 +649,9 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 		if (item->categoryItem == CI_BONUS_BALL) {
 			MGMAudioManager::getInstance()->Play(AUDIO_BONUS_BALL);
 		}
+		if (item->categoryItem == CI_MEDAL) {
+			MGMGame::getInstance()->isStart = true;
+		}
 	}
 	if (healthPoint > 28) {
 		healthPoint = 28;
@@ -777,14 +781,16 @@ void Megaman::updateFrameAnimation()
 
 void Megaman::onCollision(MGMBox * otherObject, int nx, int ny)
 {
+	MGMEnemy *m = (MGMEnemy*)otherObject;
 	MGMMovableObject::onCollision(otherObject, nx, ny);
+
 	if (ny == 1)
 	{
 		isOnGround = true;
 		isOnStairs = false;
 	}
 	if (otherObject->collisionCategory == CC_ENEMY) {
-		MGMEnemy *m = (MGMEnemy*)otherObject;
+		
 		if (m->categoryEnemy == GREEN_BAR && ny == 1) {
 			if (m->curFrame == 0) {
 
