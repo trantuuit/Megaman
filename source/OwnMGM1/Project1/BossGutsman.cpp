@@ -105,6 +105,7 @@ void BossGutsman::update()
 		bigRock->init(this->x - (10 * objectDirection), 220, 32, 32);
 		bigRock->sprite = MGMSpriteManager::getInstance()->sprites[SPR_BIGROCK];
 		bigRock->objectDirection = this->objectDirection;
+		bigRock->isCollisionWithGutsman = false;
 		bigRock->isMoving = true; // Để phân biệt rằng viên gạch này có thể di chuyển được
 		bigRock->height = 28; // Giảm height sao cho viên gạch chạm tay Gutsman
 		isThrow = true; // Xác nhận đã ném
@@ -114,7 +115,7 @@ void BossGutsman::update()
 
 	if (bigRock != NULL)
 	{
-		if (bossAction == THROW_ROCK && curFrame == 2 && isSetVxVy == false) // Ném:
+		if (bossAction == THROW_ROCK && curFrame == 2 && isSetVxVy == false && bigRock->isCollisionWithGutsman) // Ném:
 		{
 			int distanceX = Megaman::getInstance()->x - bigRock->x;
 			int distanceY = Megaman::getInstance()->getTop() - bigRock->getTop();
@@ -253,8 +254,10 @@ void BossGutsman::onCollision(MGMBox * otherObject, int nx, int ny)
 		moveDirect = (nx == -1) ? TO_LEFT : TO_RIGHT;
 		vx = 0;
 	}
-	if (x <= 3600)
+	if (x <= 3620)
+	{
 		moveDirect = TO_RIGHT;
+	}
 
 	MGMMovableObject::onCollision(otherObject, nx, ny); // PreventMove và Set lại vy như mọi đối tượng khác
 }
@@ -371,6 +374,18 @@ void BossGutsman::onIntersectRect(MGMBox* otherObject) {
 			/*mgmbullet->setAction(NONE);*/
 		}
 	}
+}
+void BossGutsman::coordinateUpdate()
+{
+	if (isCollision && !isPreventMove)
+	{
+		dy = 0;
+	}
+	x += dx;
+	y += dy;
+
+	if (x < 3600)
+		x = 3600;
 }
 JUMP_TYPE BossGutsman::randomJumpType()
 {

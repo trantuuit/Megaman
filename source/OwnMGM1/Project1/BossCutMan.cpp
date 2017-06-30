@@ -99,8 +99,9 @@ void BossCutMan::update()
 				{
 					previousAction = CM_JUMP;
 					vx = 0.2 * objectDirection;
-					vy = (isSaveVy == true) ? vyBeforeAttack : 1.2;
-					isSaveVy = false;
+					//vy = (isSaveVy == true) ? vyBeforeAttack : 1.2;
+					vy = 1.2;
+					//isSaveVy = false;
 					isJumping = true;
 					(isThrow) ? setCurAction(6) : setCurAction(1);
 
@@ -145,8 +146,8 @@ void BossCutMan::update()
 
 				if (previousAction == CM_JUMP) // Nếu trước khi attack là đang JUMP
 				{
-					vyBeforeAttack = vy; // Lưu vy để gán lại sau khi attack
-					isSaveVy = true;
+					//vyBeforeAttack = vy; // Lưu vy để gán lại sau khi attack
+					//isSaveVy = true;
 				}
 				action = CM_ATTACK; //chuyển sang ATTACK
 				setCurAction(3);
@@ -163,7 +164,7 @@ void BossCutMan::update()
 			if (isDamaged)
 			{
 				vx = 0.17 * (-objectDirection); // Cho vx = 0
-				if (vx <= 3104)
+				if (x <= 3104)
 					vx = 0;
 				vy = 0;
 				action = CM_IS_DAMAGED; //Chuyển qua Animation trúng đạn

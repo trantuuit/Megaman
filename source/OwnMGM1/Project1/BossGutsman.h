@@ -48,6 +48,7 @@ public:
 	void onLastFrameAnimation(int action);
 	void onCollision(MGMBox* otherObject, int nx, int ny);
 	void onIntersectRect(MGMBox* otherObject);
+	void coordinateUpdate();
 	void Die();
 	void reset();
 	JUMP_TYPE randomJumpType();

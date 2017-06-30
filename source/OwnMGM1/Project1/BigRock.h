@@ -9,6 +9,7 @@ public:
 	bool isMoving; // Phân biệt viên gạch này do Gutsman ném
 	bool isDelay; // Đã delay trước khi ném đi
 	bool isBreak; // Dã vỡ
+	bool isCollisionWithGutsman;
 
 
 	bool isVibrate; // Biến thiết lập rung hoặc không

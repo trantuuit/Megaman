@@ -14,6 +14,7 @@ BigRock::BigRock()
 	isDelay = false;
 	isBreak = false;
 	isVibrate = false;
+	isCollisionWithGutsman = false;
 	categoryEnemy = BIG_ROCK;
 }
 
@@ -58,7 +59,7 @@ void BigRock::onCollision(MGMBox * otherObject, int nx, int ny)
 	// Bị chặn bởi Gutsman:
 	if (otherObject->collisionCategory == CC_ENEMY)
 	{
-
+		isCollisionWithGutsman = true;
 		if (isMoving == true) // Viên gạch này có thể ném được
 		{
 			Collision::preventMove(this, otherObject, nx, ny);
