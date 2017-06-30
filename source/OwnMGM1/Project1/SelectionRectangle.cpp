@@ -46,8 +46,19 @@ void SelectionRectangle::update()
 					}
 				}			
 			}
-			else
-				MGMGame::getInstance()->map = MGMGame::getInstance()->mapGut;
+			else {
+				if (Megaman::getInstance()) {
+					if (Megaman::getInstance()->isKill) {
+						Megaman::getInstance()->reset();
+						MGMGame::getInstance()->map = MGMGame::getInstance()->mapGut;
+					}
+					else {
+						MGMGame::getInstance()->map = MGMGame::getInstance()->mapGut;
+					}
+				}
+				
+			}
+				
 		}
 	}
 

@@ -49,6 +49,7 @@ private:
 	static Megaman* instance;
 
 public:
+	int map;
 	D3DXVECTOR2 * positionMegaman;
 	D3DXVECTOR2* positionCamera;
 	MGMStage* curStage;

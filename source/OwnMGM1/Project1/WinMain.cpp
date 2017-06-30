@@ -48,7 +48,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 					{
 						Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 111;
+						Megaman::getInstance()->map = 1;
 						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+						
 						/*Megaman::getInstance()->x = 830;
 						Megaman::getInstance()->y = 1100;
 						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
@@ -79,6 +81,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						
 						Megaman::getInstance()->x = 22;
 						Megaman::getInstance()->y = 1100;
+						Megaman::getInstance()->map = 2;
 						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
 
 						/*Megaman::getInstance()->x = 400;

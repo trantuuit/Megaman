@@ -14,6 +14,8 @@
 #include"GameOverMenu.h"
 #include"Room.h"
 #include"MGMAudioManager.h"
+#include"BossCutMan.h"
+#include"BossGutsman.h"
 Megaman * Megaman::instance = 0;
 
 Megaman * Megaman::getInstance()
@@ -889,7 +891,14 @@ void Megaman::reset() {
 	beingAttacked = false;
 	actionBeingAttacked = ATTACKED_NONE;
 	status = MEGAMAN_NORMAL;
-	
+	if (BossCutMan::getInstance()->appearHP) {
+		BossCutMan::getInstance()->appearHP = false;
+	}
+	if (BossGutsman::getInstance()->appearHP) {
+		BossGutsman::getInstance()->appearHP = false;
+	}
+	objectDirection = RIGHT;
+	vy = 0;
 }
 
 void Megaman::continueStage()

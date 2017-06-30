@@ -10,6 +10,7 @@ class GameOverMenu
 	MGMTexture * OpenScreen;
 	static GameOverMenu* menu;
 	MGMDelayTime delayAppearMenu, delayCloseMenu;
+	boolean check;
 	int point1, point2, point3, point4, point5, point6, point7;
 	
 public:

@@ -182,11 +182,15 @@ void MGMGame::render()
 void MGMGame::update(DWORD timesleep)
 {
 	if (map == mapCut){
-		MGMAudioManager::getInstance()->Play(AUDIO_CUTMAN);
+		
 		if (Megaman::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
+			MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
 		}
-		if (BossCutMan::getInstance()->appearMusic){
+		else {
+			MGMAudioManager::getInstance()->Play(AUDIO_CUTMAN);
+		}
+		if (BossCutMan::getInstance()->appearMusic && !Megaman::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_CUTMAN);
 			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_BATTLE);
 		}
@@ -195,11 +199,15 @@ void MGMGame::update(DWORD timesleep)
 		}
 	}
 	else{
-		MGMAudioManager::getInstance()->Play(AUDIO_GUTMAN);
+		
 		if (Megaman::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
+			MGMAudioManager::getInstance()->StopSound(AUDIO_BOSS_BATTLE);
 		}
-		if (BossGutsman::getInstance()->appearMusic){
+		else {
+			MGMAudioManager::getInstance()->Play(AUDIO_GUTMAN);
+		}
+		if (BossGutsman::getInstance()->appearMusic&&!Megaman::getInstance()->isKill){
 			MGMAudioManager::getInstance()->StopSound(AUDIO_GUTMAN);
 			MGMAudioManager::getInstance()->Play(AUDIO_BOSS_BATTLE);
 		}
@@ -216,6 +224,9 @@ void MGMGame::update(DWORD timesleep)
 			//Megaman ko chet thi update
 			if (!Megaman::getInstance()->isKill){
 				Megaman::getInstance()->update();
+			}
+			else {
+				int i = 0;
 			}
 			map->update();
 			//Cap nhat vi tri item
