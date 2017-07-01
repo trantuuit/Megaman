@@ -1,6 +1,5 @@
 #include<fstream>
 #include<string>
-#include"Config.h"
 using namespace std;
 
 void LineDown(ifstream& fs, int lineCount)

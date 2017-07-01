@@ -157,7 +157,6 @@
     <ClInclude Include="Blader.h" />
     <ClInclude Include="BonusBall.h" />
     <ClInclude Include="Collision.h" />
-    <ClInclude Include="Config.h" />
     <ClInclude Include="BossCutMan.h" />
     <ClInclude Include="CutmanBullet.h" />
     <ClInclude Include="Door.h" />

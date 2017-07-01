@@ -1,5 +1,4 @@
 #pragma once
-#include "Config.h"
 #include "MGMTexture.h"
 #include"MGMBox.h"
 #include"MGMObjectsCategory.h"
