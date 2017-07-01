@@ -18,7 +18,7 @@ MGMObject::MGMObject()
 
 void MGMObject::init(float x, float y, float width, float height)
 {
-	MGMRectangle::init(x, y, width, height);
+	MGMBox::init(x, y, width, height);
 	oldRect.init(x, y, width, height);
 }
 

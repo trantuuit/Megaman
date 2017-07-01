@@ -1,10 +1,10 @@
 #pragma once
-#include "MGMRectangle.h"
+#include "MGMBox.h"
 #include<fstream>
 #include"MGMObject.h"
 using namespace std;
 class QuadNode :
-	public MGMRectangle
+	public MGMBox
 {
 public:
 	double id;

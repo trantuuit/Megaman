@@ -13,7 +13,7 @@ public:
 	~Collision();
 
 	static MGMBox* GetSweptBroadphaseBox(MGMBox* box);
-	static bool AABBCheck(MGMRectangle* block, MGMRectangle* bigBox);
+	static bool AABBCheck(MGMBox* block, MGMBox* bigBox);
 	static float SweptAABB(MGMBox* box1, MGMBox* box2, float &normalX, float &normalY);
 	static void checkCollision(MGMBox*M, MGMBox*S);
 

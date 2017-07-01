@@ -25,7 +25,7 @@ MGMBox* Collision::GetSweptBroadphaseBox(MGMBox* box)
 	return bigBox;
 }
 
-bool Collision::AABBCheck(MGMRectangle* M, MGMRectangle* S)
+bool Collision::AABBCheck(MGMBox* M, MGMBox* S)
 {
 	// Code mới
 	return ((M->getLeft() <= S->getRight() && M->getRight() >= S->getLeft()) &&

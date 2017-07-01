@@ -15,7 +15,7 @@ void MGMAnimation::init(ifstream& fs)
 	 LineDown(fs, 6);
 	fs >> this->_framesCount;
 	 LineDown(fs, 4);
-	this->frames = new MGMRectangle[_framesCount];
+	this->frames = new MGMBox[_framesCount];
 	for (int i = 0; i < _framesCount; i++){
 		fs >> frames[i].x >> frames[i].y >> frames[i].width >> frames[i].height;
 	}

@@ -94,9 +94,6 @@
     <ClCompile Include="MGMObjectsCategory.cpp">
       <Filter>Framework\BaseObject</Filter>
     </ClCompile>
-    <ClCompile Include="MGMRectangle.cpp">
-      <Filter>Framework\BaseObject</Filter>
-    </ClCompile>
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="MGMEnemy.cpp">
       <Filter>Framework\BaseObject</Filter>
@@ -267,9 +264,6 @@
     </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="MGMRectangle.h">
-      <Filter>Framework\BaseObject</Filter>
     </ClInclude>
     <ClInclude Include="MGMObject.h">
       <Filter>Framework\BaseObject</Filter>

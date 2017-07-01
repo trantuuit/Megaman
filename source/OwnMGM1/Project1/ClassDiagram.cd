@@ -126,13 +126,6 @@
       <FileName>MGMPoint.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MGMRectangle" Collapsed="true">
-    <Position X="10.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IgAAAAAAgAAAAAQAQBAAAAAACIYAAAIAAAhgAAAAAAA=</HashCode>
-      <FileName>MGMRectangle.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MGMSprite" Collapsed="true">
     <Position X="20.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>

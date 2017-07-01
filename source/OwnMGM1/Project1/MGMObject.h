@@ -34,7 +34,7 @@ public:
 	int curAction;
 	int curFrame;
 	
-	MGMRectangle oldRect;
+	MGMBox oldRect;
 	
 	void init(float x, float y, float width, float height);
 

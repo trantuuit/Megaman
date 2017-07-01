@@ -1,5 +1,4 @@
 #pragma once
-#include "MGMRectangle.h"
 #include "Config.h"
 #include "MGMTexture.h"
 #include"MGMBox.h"

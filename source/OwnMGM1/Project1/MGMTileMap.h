@@ -1,7 +1,7 @@
 #pragma once
 #include <fstream>
 #include"MGMTexture.h"
-#include"MGMRectangle.h"
+#include"MGMBox.h"
 #include"MGMCamera.h"
 using namespace std;
 class MGMTileMap

@@ -5,7 +5,7 @@ class MGMMovableObject :
 	public MGMObject
 {
 public:
-	MGMRectangle spaceMove;
+	MGMBox spaceMove;
 	virtual void deltaUpdate();
 	virtual void update();
 	virtual	void onCollision(MGMBox* otherObject, int nx, int ny);
