@@ -16,7 +16,6 @@ QuadNode::QuadNode(ifstream& fs, MGMObject** allObjects, int heightMap)
 	fs >> nObjects;
 	if (nNodes != 0)
 	{
-		//loai 1- Co 4 node con 
 		TL = new QuadNode(fs, allObjects, heightMap);
 		TR = new QuadNode(fs, allObjects, heightMap);
 		BL = new QuadNode(fs, allObjects, heightMap);
@@ -26,7 +25,6 @@ QuadNode::QuadNode(ifstream& fs, MGMObject** allObjects, int heightMap)
 
 	if (nObjects != 0)
 	{
-		//loai 2 Node la
 		int index = 0;
 		objects = new MGMObject*[nObjects];
 		for (int i = 0; i < nObjects; i++)
@@ -35,7 +33,6 @@ QuadNode::QuadNode(ifstream& fs, MGMObject** allObjects, int heightMap)
 			objects[i] = allObjects[index];
 		}
 	}
-	//loai 3 
 }
 
 void QuadNode::fillObjectToCamera()

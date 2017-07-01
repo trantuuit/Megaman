@@ -3,7 +3,7 @@
 #include"Config.h"
 using namespace std;
 
-void ignoreLineIfstream(ifstream& fs, int lineCount)
+void LineDown(ifstream& fs, int lineCount)
 {
 	string s;
 	for (int i = 0; i < lineCount; i++)

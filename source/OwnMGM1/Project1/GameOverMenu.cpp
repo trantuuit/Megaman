@@ -1,7 +1,7 @@
 #include "GameOverMenu.h"
 #include"MGMSpriteManager.h"
 #include"Megaman.h"
-#include "KEY.h"
+#include "KeyCheck.h"
 #include"MGMGame.h"
 #include"Megaman.h"
 #include"MGMAudioManager.h"
@@ -42,20 +42,20 @@ void GameOverMenu::update(){
 		delayAppearMenu.update();
 	}
 	if (isOpen){
-		if (KEY::getInstance()->isDownHold){
+		if (KeyCheck::getInstance()->isDownHold){
 			if (!(x == 54 && y == 141)){
 				x = 54;
 				y = 141;
 			}
 
 		}
-		if (KEY::getInstance()->isUpHold){
+		if (KeyCheck::getInstance()->isUpHold){
 			if (!(x == 54 && y == 117)){
 				x = 54;
 				y = 117;
 			}
 		}
-		if (KEY::getInstance()->isEnterPress){
+		if (KeyCheck::getInstance()->isEnterPress){
 			if (x == 54 && y == 141){
 				MGMGame::getInstance()->isStart = true;
 				isOpen = false;

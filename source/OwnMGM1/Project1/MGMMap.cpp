@@ -27,7 +27,7 @@
 #include"Room.h"
 #include"MGMAudioManager.h"
 #include "CutmanRoom.h"
-extern void ignoreLineIfstream(ifstream& fs, int lineCount);
+extern void LineDown(ifstream& fs, int lineCount);
 
 void MGMMap::readObjects(char* objectsPath)
 {
@@ -299,7 +299,7 @@ void MGMMap::updateStage()
 void MGMMap::updateStageSaved()
 {
 	bool keyNumberPress = false;
-	if (KEY::getInstance()->isOnePress)
+	if (KeyCheck::getInstance()->isOnePress)
 	{
 		MGMCamera::getInstance()->x = positionCamera[0].x;
 		MGMCamera::getInstance()->y = positionCamera[0].y;
@@ -312,7 +312,7 @@ void MGMMap::updateStageSaved()
 		keyNumberPress = true;
 	}
 
-	if (KEY::getInstance()->isTwoPress)
+	if (KeyCheck::getInstance()->isTwoPress)
 	{
 		MGMCamera::getInstance()->x = positionCamera[1].x;
 		MGMCamera::getInstance()->y = positionCamera[1].y;
@@ -324,7 +324,7 @@ void MGMMap::updateStageSaved()
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
-	if (KEY::getInstance()->isThreePress)
+	if (KeyCheck::getInstance()->isThreePress)
 	{
 		MGMCamera::getInstance()->x = positionCamera[2].x;
 		MGMCamera::getInstance()->y = positionCamera[2].y;
@@ -336,7 +336,7 @@ void MGMMap::updateStageSaved()
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
-	if (KEY::getInstance()->isFourPress)
+	if (KeyCheck::getInstance()->isFourPress)
 	{
 		MGMCamera::getInstance()->x = positionCamera[3].x;
 		MGMCamera::getInstance()->y = positionCamera[3].y;
@@ -348,7 +348,7 @@ void MGMMap::updateStageSaved()
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
-	if (KEY::getInstance()->isFivePress)
+	if (KeyCheck::getInstance()->isFivePress)
 	{
 		MGMCamera::getInstance()->x = positionCamera[4].x;
 		MGMCamera::getInstance()->y = positionCamera[4].y;
@@ -362,7 +362,7 @@ void MGMMap::updateStageSaved()
 		doors[1]->reset();
 		keyNumberPress = true;
 	}
-	if (KEY::getInstance()->isSixPress)
+	if (KeyCheck::getInstance()->isSixPress)
 	{
 		MGMCamera::getInstance()->x = positionCamera[5].x;
 		MGMCamera::getInstance()->y = positionCamera[5].y;
@@ -374,7 +374,7 @@ void MGMMap::updateStageSaved()
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
-	if (KEY::getInstance()->isSevenPress)
+	if (KeyCheck::getInstance()->isSevenPress)
 	{
 
 		MGMCamera::getInstance()->x = positionCamera[6].x;
@@ -387,7 +387,7 @@ void MGMMap::updateStageSaved()
 		BossGutsman::getInstance()->reset();
 		keyNumberPress = true;
 	}
-	if (KEY::getInstance()->isEightPress) {
+	if (KeyCheck::getInstance()->isEightPress) {
 		Megaman::getInstance()->die();
 		keyNumberPress = true;
 	}

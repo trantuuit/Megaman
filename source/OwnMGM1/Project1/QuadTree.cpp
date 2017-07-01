@@ -2,13 +2,13 @@
 #include<string>
 #include "MGMSpriteManager.h"
 #include"MGMMovableObject.h"
-extern void ignoreLineIfstream(ifstream& fs, int lineCount);
+extern void LineDown(ifstream& fs, int lineCount);
 
 QuadTree::QuadTree(char * quadtreepath, MGMObject** allObjects, int heightMap)
 {
 	ifstream fs(quadtreepath);
-	ignoreLineIfstream(fs, 1);
-	root = new QuadNode(fs, allObjects, heightMap);
+	 LineDown(fs, 1);
+	BaseNode = new QuadNode(fs, allObjects, heightMap);
 }
 void QuadTree::restoreObjects(List<MGMObject*>* listObject){
 	bool isRestore;
@@ -35,7 +35,7 @@ void QuadTree::restoreObjects(List<MGMObject*>* listObject){
 		if (isRestore) listObject->_Remove(obj);
 	}
 }
-void QuadTree::removeObjectFromCamera()
+void QuadTree::RestoreClearObjectInCamera()
 {
 	List<MGMObject*>* allObjectInCams = &MGMCamera::getInstance()->objects.allObjects;
 	List<MGMObject*>* KilledObjects = &MGMCamera::getInstance()->objects.isKilledObject;
@@ -45,17 +45,10 @@ void QuadTree::removeObjectFromCamera()
 }
 
 
-void QuadTree::fillObjectFromQNodeToCamera()
-{
-	root->fillObjectToCamera();
-}
-
 void QuadTree::update()
 {
-	//lay nhung doi tuong khong con nam trong camera nua ra
-	removeObjectFromCamera();
-	//do doi tuong vao camera
-	fillObjectFromQNodeToCamera();
+	RestoreClearObjectInCamera();
+	BaseNode->fillObjectToCamera();
 }
 
 QuadTree::~QuadTree()

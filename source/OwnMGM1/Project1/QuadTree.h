@@ -5,14 +5,10 @@
 class QuadTree
 {
 public:
-	QuadNode* root;
+	QuadNode* BaseNode;
 	QuadTree(char* quadtreepath,MGMObject** allObjects,int heightMap);
 	void restoreObjects(List<MGMObject*>* listObject);
-	//xoa nhung doi tuong khong nam trong camera
-	void removeObjectFromCamera();
-
-	//do doi tuong tu node
-	void fillObjectFromQNodeToCamera();
+	void RestoreClearObjectInCamera();
 
 	void update();
 

@@ -74,7 +74,7 @@ void CKeyboard::UpdateKeyboard()
 	DWORD dwElements = 1024;
 	HRESULT hr = m_keyboard->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), m_keyEvents, &dwElements, 0);
 
-	// Scan through all data, check if the key is pressed or released
+	// Scan through all data, check if the KeyCheck is pressed or released
 	for (DWORD i = 0; i < dwElements; i++)
 	{
 		int KeyCode = m_keyEvents[i].dwOfs;

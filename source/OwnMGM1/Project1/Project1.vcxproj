@@ -102,7 +102,7 @@
     <ClCompile Include="MGMItem.cpp" />
     <ClCompile Include="OctopusBattery.cpp" />
     <ClCompile Include="Funtion.cpp" />
-    <ClCompile Include="KEY.cpp" />
+    <ClCompile Include="KeyCheck.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="PicketMan.cpp" />
     <ClCompile Include="MGMAnimation.cpp" />
@@ -176,7 +176,7 @@
     <ClInclude Include="MGMDelayTime.h" />
     <ClInclude Include="MGMItem.h" />
     <ClInclude Include="OctopusBattery.h" />
-    <ClInclude Include="KEY.h" />
+    <ClInclude Include="KeyCheck.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="PicketMan.h" />
     <ClInclude Include="List.h" />

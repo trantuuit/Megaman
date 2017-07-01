@@ -32,7 +32,7 @@ HRESULT DXUtil_FindMediaFileCb( TCHAR* szDestPath, int cbDest, LPCTSTR strFilena
 
 //-----------------------------------------------------------------------------
 // Name: DXUtil_Read*RegKey() and DXUtil_Write*RegKey()
-// Desc: Helper functions to read/write a string registry key 
+// Desc: Helper functions to read/write a string registry KeyCheck 
 //-----------------------------------------------------------------------------
 HRESULT DXUtil_WriteStringRegKey( HKEY hKey, LPCTSTR strRegName, LPCTSTR strValue );
 HRESULT DXUtil_WriteFloatRegKey( HKEY hKey, LPCTSTR strRegName, FLOAT fValue );

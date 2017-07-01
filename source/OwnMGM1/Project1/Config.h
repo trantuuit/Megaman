@@ -24,8 +24,5 @@
 
 #pragma endregion
 
-extern double MEGAMAN_VY_JUMP;
-extern double GRAVITY;
-extern int GAMETIME;
-extern double MEGAMAN_VX_GO;
+
 

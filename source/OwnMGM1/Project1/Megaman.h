@@ -2,6 +2,8 @@
 #include "MGMMovableObject.h"
 #include "MGMDelayTime.h"
 #include"MGMStage.h"
+
+
 enum MEGAMAN_STATUS{
 	MEGAMAN_NORMAL,
 	MEGAMAN_BE_ATTACKED,

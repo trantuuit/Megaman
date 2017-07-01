@@ -1,5 +1,5 @@
 #include "stairs.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 #include"Megaman.h"
 #include"Collision.h"
 
@@ -16,7 +16,7 @@ stairs::~stairs()
 
 void stairs::onCollision(MGMBox * otherObject, int nx, int ny)
 {
-	/*bool isKeyUpHold = KEY::getInstance()->isUpHold;
+	/*bool isKeyUpHold = KeyCheck::getInstance()->isUpHold;
 	if (otherObject->vx > 0 && otherObject->getRight() > this->getXCenter())
 	{
 		if (isKeyUpHold) otherObject->dy = 0.3;
@@ -30,8 +30,8 @@ void stairs::onCollision(MGMBox * otherObject, int nx, int ny)
 void stairs::climbStairs()
 {
 	Megaman *mgm = Megaman::getInstance();
-	bool isKeyUpHold = KEY::getInstance()->isUpHold;
-	bool isKeyDownHold = KEY::getInstance()->isDownHold;
+	bool isKeyUpHold = KeyCheck::getInstance()->isUpHold;
+	bool isKeyDownHold = KeyCheck::getInstance()->isDownHold;
 
 	//B1: neu truc trung tam cua cau thang nam giua hinh chu nhat doi tuong MGM lam tiep B2
 	//B2: neu toa 
@@ -108,7 +108,7 @@ void stairs::climbStairs()
 
 	if (mgm->isOnStairs)
 	{
-		if (KEY::getInstance()->isAttackDown)
+		if (KeyCheck::getInstance()->isAttackDown)
 		{
 			if (Megaman::getInstance()->isChangeCutMan){
 				Megaman::getInstance()->setCurAction(MGM_SKIN_STAND_STAIR_ATTACK);

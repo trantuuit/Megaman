@@ -1,6 +1,6 @@
 #include "BoardBar.h"
 #include"MGMSpriteManager.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 #include "Megaman.h"
 #include"MGMAudioManager.h"
 BoardBar* BoardBar::board = 0;
@@ -30,7 +30,7 @@ void BoardBar::update(){
 	int life = Megaman::getInstance()->life;
 	up1 = (life % 100) / 10;
 	up2 = life % 10;
-	if (KEY::getInstance()->isPauseBoardDown){
+	if (KeyCheck::getInstance()->isPauseBoardDown){
 		isPause = true;
 		MGMAudioManager::getInstance()->Play(AUDIO_PAUSE_MENU);
 		if (Megaman::getInstance()->isChangeCutMan){
@@ -44,19 +44,19 @@ void BoardBar::update(){
 
 
 	}
-	if (KEY::getInstance()->isDownHold&&isPause){
+	if (KeyCheck::getInstance()->isDownHold&&isPause){
 		if (isChooseCut){
 			isChooseMega = true;
 			isChooseCut = false;
 		}
 	}
-	if (KEY::getInstance()->isUpHold&&isPause){
+	if (KeyCheck::getInstance()->isUpHold&&isPause){
 		if (isChooseMega){
 			isChooseCut = true;
 			isChooseMega = false;
 		}
 	}
-	if (KEY::getInstance()->isEnterDown && isPause){
+	if (KeyCheck::getInstance()->isEnterDown && isPause){
 		if (isChooseMega){
 			Megaman::getInstance()->isChangeCutMan = false;
 			isPause = false;

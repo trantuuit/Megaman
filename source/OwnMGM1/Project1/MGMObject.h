@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include"MGMBox.h"
 #include"MGMSprite.h"
+extern double MEGAMAN_VY_JUMP;
+extern double GRAVITY;
+extern int GAMETIME;
+extern double MEGAMAN_VX_GO;
 
 //Dung: Thêm enum để vẽ khi map rung:
 enum DRAW_LOCATION

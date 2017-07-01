@@ -1,17 +1,17 @@
 #include "MGMSprite.h"
 
-extern void ignoreLineIfstream(ifstream& fs, int lineCount);
+extern void LineDown(ifstream& fs, int lineCount);
 MGMSprite::MGMSprite(char* infor, char* imagepath)
 {
 	ifstream fs(infor);
-	ignoreLineIfstream(fs, 1);
+	 LineDown(fs, 1);
 	int r, g, b;
 	fs >> r >> g >> b;
 	pImage = new MGMTexture(imagepath, D3DCOLOR_XRGB(r, g, b));
 
-	ignoreLineIfstream(fs, 2);
+	 LineDown(fs, 2);
 	fs >> this->animationCount;
-	ignoreLineIfstream(fs, 1);
+	 LineDown(fs, 1);
 
 	this->animations = new MGMAnimation[this->animationCount];
 	for (int i = 0; i < animationCount; i++) {
@@ -23,13 +23,13 @@ MGMSprite::MGMSprite(char* infor, char* imagepath)
 void MGMSprite::initInfoFromPath(char* infor)
 {
 	ifstream fs(infor);
-	ignoreLineIfstream(fs, 1);
+	 LineDown(fs, 1);
 	int r, g, b;
 	fs >> r >> g >> b;
 
-	ignoreLineIfstream(fs, 2);
+	 LineDown(fs, 2);
 	fs >> this->animationCount;
-	ignoreLineIfstream(fs, 1);
+	 LineDown(fs, 1);
 
 	this->animations = new MGMAnimation[this->animationCount];
 	for (int i = 0; i < animationCount; i++) {

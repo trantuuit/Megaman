@@ -7,14 +7,14 @@
 #include"SelectionRectangle.h"
 #include"GameOverMenu.h"
 #include"MGMAudioManager.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	MGMWindow::getInstance()->initHandleWindows(hInstance, nCmdShow); //Tạo cửa sổ
 	DWORD timeSleep = 1000.0 / FPS;
 	SelectionScreen *ss = new SelectionScreen();
 	SelectionRectangle *sr = new SelectionRectangle();
-	//Khoi tao thoi gian giua 2 frame = timeSleep
+
 	MGMGameTime timeDelay(timeSleep);
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
@@ -30,7 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (timeDelay.at())
 		{
 			CKeyboard::getInstance()->PollKeyboard();
-			KEY::getInstance()->update();
+			KeyCheck::getInstance()->update();
 			if (MGMGame::getInstance()->isStart)
 			{
 				sr->update();
@@ -50,31 +50,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						Megaman::getInstance()->y = 111;
 						Megaman::getInstance()->map = 1;
 						MGMCamera::getInstance()->init(0, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
-						
-						/*Megaman::getInstance()->x = 830;
-						Megaman::getInstance()->y = 1100;
-						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-						/*Megaman::getInstance()->x = 1880;
-						Megaman::getInstance()->y = 1400;
-						MGMCamera::getInstance()->init(1780, 1460, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-					/*	Megaman::getInstance()->x = 830;
-						Megaman::getInstance()->y = 1100;
-						MGMCamera::getInstance()->init(800, 1200, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-					/*	Megaman::getInstance()->x = 1322;
-						Megaman::getInstance()->y = 1975;
-						MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-
-					/*	Megaman::getInstance()->x = 1322;
-						Megaman::getInstance()->y = 1975;
-						MGMCamera::getInstance()->init(1300, 2100, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-
-					/*	Megaman::getInstance()->x = 1900;
-						Megaman::getInstance()->y = 1335;
-						MGMCamera::getInstance()->init(1800, 1435, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-						//dau voi cutman
-					/*	Megaman::getInstance()->x = 3120;
-						Megaman::getInstance()->y = 1432;
-						MGMCamera::getInstance()->init(3088, 1432, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
 					}
 					if (map == MGMGame::getInstance()->mapGut)
 					{
@@ -83,20 +58,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						Megaman::getInstance()->y = 1100;
 						Megaman::getInstance()->map = 2;
 						MGMCamera::getInstance()->init(0, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
-
-						/*Megaman::getInstance()->x = 400;
-						Megaman::getInstance()->y = 1170;
-						MGMCamera::getInstance()->init(350, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-
-						// Sau GreenBar
-				/*		Megaman::getInstance()->x = 1200;
-						Megaman::getInstance()->y = 1170;
-						MGMCamera::getInstance()->init(1150, 1176, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
-
-						/*Megaman::getInstance()->x = 3600;
-						Megaman::getInstance()->y = 140;
-						MGMCamera::getInstance()->init(3585, 232, BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);*/
-
 						
 					}
 					for (int i = 0; i < map->nStage; i++)

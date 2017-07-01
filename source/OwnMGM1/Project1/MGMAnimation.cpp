@@ -1,5 +1,5 @@
 #include "MGMAnimation.h"
-extern void ignoreLineIfstream(ifstream& fs, int lineCount);
+extern void LineDown(ifstream& fs, int lineCount);
 
 MGMAnimation::MGMAnimation()
 {
@@ -12,14 +12,14 @@ MGMAnimation::MGMAnimation(ifstream& fs){
 
 void MGMAnimation::init(ifstream& fs)
 {
-	ignoreLineIfstream(fs, 6);
+	 LineDown(fs, 6);
 	fs >> this->_framesCount;
-	ignoreLineIfstream(fs, 4);
+	 LineDown(fs, 4);
 	this->frames = new MGMRectangle[_framesCount];
 	for (int i = 0; i < _framesCount; i++){
 		fs >> frames[i].x >> frames[i].y >> frames[i].width >> frames[i].height;
 	}
-	ignoreLineIfstream(fs, 1);
+	 LineDown(fs, 1);
 }
 
 

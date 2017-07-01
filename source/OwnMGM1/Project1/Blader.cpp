@@ -4,7 +4,7 @@
 #include "MegamanBullet.h"
 #include"EffectCreateItem.h"
 #include"MGMAudioManager.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 Blader::Blader()
 {
 	curAction = 0;

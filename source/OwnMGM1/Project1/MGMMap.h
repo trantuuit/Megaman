@@ -6,7 +6,7 @@
 #include<fstream>
 #include"MGMBox.h"
 #include"Door.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 using namespace std;
 
 enum BossMap

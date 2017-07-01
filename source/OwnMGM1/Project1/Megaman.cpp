@@ -1,7 +1,7 @@
 ﻿#include"MGMCamera.h"
 #include "Megaman.h"
 #include"MGMSpriteManager.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 #include<string>
 #include"MegamanBullet.h"
 #include"MGMEnemy.h"
@@ -32,13 +32,13 @@ void Megaman::update()
 	bool isKeyLeftDown, isKeyRightDown, isKeyMoveDown, isKeyJumpPress, isKeyMovePress, isAttackPress, isSuperMan;
 	isKeyLeftDown = isKeyRightDown = isKeyMoveDown = isKeyJumpPress = isKeyMovePress = isAttackPress = isSuperMan = false;
 	//Nhận các sự kiện từ bàn phím
-	isKeyLeftDown = KEY::getInstance()->isLeftDown;
-	isKeyRightDown = KEY::getInstance()->isRightDown;
-	isKeyMoveDown = KEY::getInstance()->isMoveDown;
-	isKeyJumpPress = KEY::getInstance()->isJumpPress;
-	isKeyMovePress = KEY::getInstance()->isMovePress;
-	isAttackPress = KEY::getInstance()->isAttackPress;
-	isSuperMan = KEY::getInstance()->isNinePress;
+	isKeyLeftDown = KeyCheck::getInstance()->isLeftDown;
+	isKeyRightDown = KeyCheck::getInstance()->isRightDown;
+	isKeyMoveDown = KeyCheck::getInstance()->isMoveDown;
+	isKeyJumpPress = KeyCheck::getInstance()->isJumpPress;
+	isKeyMovePress = KeyCheck::getInstance()->isMovePress;
+	isAttackPress = KeyCheck::getInstance()->isAttackPress;
+	isSuperMan = KeyCheck::getInstance()->isNinePress;
 	if (isSuperMan){
 		if (this->isSuperMan){
 			this->isSuperMan = false;
@@ -662,7 +662,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 
 void Megaman::onLastFrameAnimation(int action)
 {
-	bool isKeyMoveDown = KEY::getInstance()->isMoveDown;
+	bool isKeyMoveDown = KeyCheck::getInstance()->isMoveDown;
 	if (action == MGM_PRE_RUN && isKeyMoveDown)
 	{
 		setCurAction(MGM_RUN);
@@ -703,7 +703,7 @@ void Megaman::updateFrameAnimation()
 								curFrame = 0;
 						}
 						else{
-							if (KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold)
+							if (KeyCheck::getInstance()->isUpHold || KeyCheck::getInstance()->isDownHold)
 								this->sprite->Update(curAction, curFrame);
 							if ( curFrame == 2)
 							curFrame = 0;
@@ -751,7 +751,7 @@ void Megaman::updateFrameAnimation()
 				int lastFrame = curFrame;
 
 				if (isOnStairs){	
-					if (KEY::getInstance()->isUpHold || KEY::getInstance()->isDownHold || KEY::getInstance()->isAttackPress){
+					if (KeyCheck::getInstance()->isUpHold || KeyCheck::getInstance()->isDownHold || KeyCheck::getInstance()->isAttackPress){
 						this->sprite->Update(curAction, curFrame);
 					 }
 					 else{

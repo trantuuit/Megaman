@@ -1,5 +1,5 @@
 #include "SelectionRectangle.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 #include"MGMGame.h"
 #include"MGMAudioManager.h"
 #include"BossCutMan.h"
@@ -10,7 +10,7 @@ void SelectionRectangle::update()
 	if (MGMGame::getInstance()->isStart) {
 		MGMAudioManager::getInstance()->LoopSound(AUDIO_SELECT_STAGE);
 	}
-	if (KEY::getInstance()->isMovePress)
+	if (KeyCheck::getInstance()->isMovePress)
 	{
 		if (x == 55)
 		{
@@ -30,7 +30,7 @@ void SelectionRectangle::update()
 	}
 	this->updateFrameAnimation();
 	if (MGMGame::getInstance()->isStart) {
-		if (KEY::getInstance()->isEnterPress)
+		if (KeyCheck::getInstance()->isEnterPress)
 		{
 			MGMAudioManager::getInstance()->StopSound(AUDIO_SELECT_STAGE);
 			MGMAudioManager::getInstance()->Play(AUDIO_GAME_START);

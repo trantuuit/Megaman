@@ -1,7 +1,7 @@
 ﻿#include "MGMGame.h"
 #include"Keyboard.h"
 #include"MGMEngine.h"
-#include"KEY.h"
+#include"KeyCheck.h"
 #include"MegamanBullet.h"
 #include"EnemyBullet.h"
 #include"SuperCutter.h"
