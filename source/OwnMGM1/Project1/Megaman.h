@@ -52,6 +52,7 @@ private:
 
 public:
 	int map;
+	bool attackOnStair;
 	D3DXVECTOR2 * positionMegaman;
 	D3DXVECTOR2* positionCamera;
 	MGMStage* curStage;

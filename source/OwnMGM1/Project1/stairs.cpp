@@ -32,6 +32,7 @@ void stairs::climbStairs()
 	Megaman *mgm = Megaman::getInstance();
 	bool isKeyUpHold = KeyCheck::getInstance()->isUpHold;
 	bool isKeyDownHold = KeyCheck::getInstance()->isDownHold;
+	bool isAttackPress = KeyCheck::getInstance()->isAttackPress;
 
 	//B1: neu truc trung tam cua cau thang nam giua hinh chu nhat doi tuong MGM lam tiep B2
 	//B2: neu toa 
@@ -87,6 +88,7 @@ void stairs::climbStairs()
 		{
 			mgm->dy = -1;
 		}
+
 	}
 
 	if (mgm->isOnStairs)

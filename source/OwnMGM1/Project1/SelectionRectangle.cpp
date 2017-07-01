@@ -46,6 +46,7 @@ void SelectionRectangle::update()
 						MGMGame::getInstance()->map = MGMGame::getInstance()->mapCut;
 					}
 					else {
+						Megaman::getInstance()->reset();
 						MGMGame::getInstance()->map = MGMGame::getInstance()->mapCut;
 					}
 				}			
@@ -61,6 +62,7 @@ void SelectionRectangle::update()
 						MGMGame::getInstance()->map = MGMGame::getInstance()->mapGut;
 					}
 					else {
+						Megaman::getInstance()->reset();
 						MGMGame::getInstance()->map = MGMGame::getInstance()->mapGut;
 					}
 				}

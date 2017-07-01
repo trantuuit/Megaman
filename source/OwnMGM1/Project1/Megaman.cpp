@@ -38,7 +38,7 @@ void Megaman::update()
 	isKeyJumpPress = KeyCheck::getInstance()->isJumpPress;
 	isKeyMovePress = KeyCheck::getInstance()->isMovePress;
 	isAttackPress = KeyCheck::getInstance()->isAttackPress;
-	isSuperMan = KeyCheck::getInstance()->isNinePress;
+	/*isSuperMan = KeyCheck::getInstance()->isNinePress;*/
 	if (isSuperMan){
 		if (this->isSuperMan){
 			this->isSuperMan = false;
@@ -165,6 +165,7 @@ void Megaman::update()
 						setCurAction(MGM_STAND_STAIR_ATTACK);
 					}
 				}
+				attackOnStair = true;
 				delayShoot.start();
 				lastStatusStandStairAttack = true;
 				pauseAnimation = false;
@@ -193,6 +194,7 @@ void Megaman::update()
 						setCurAction(MGM_CLIMB);
 					}
 					lastStatusStandStairAttack = false;
+					attackOnStair = false;
 				}
 
 			}
@@ -580,7 +582,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 	if (!isSuperMan){
 		if (otherObject->collisionCategory == CC_ENEMY){
 			MGMEnemy* enemy = (MGMEnemy*)otherObject;
-			if (enemy->categoryEnemy == DEATH_LAND && status == MEGAMAN_NORMAL) {
+			if (enemy->categoryEnemy == DEATH_LAND) {
 				healthPoint -= 28;
 			}
 			if (actionBeingAttacked == ATTACKED_NONE){
@@ -1023,7 +1025,7 @@ void Megaman::continueStage()
 
 Megaman::Megaman()
 {
-	
+	attackOnStair = false;
 	isSuperMan = false;
 	isChangeCutMan = false;
 	lastIsJump = true;
