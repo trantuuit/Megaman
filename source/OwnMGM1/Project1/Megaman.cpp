@@ -548,7 +548,7 @@ void Megaman::render()
 	if (objectDirection != sprite->pImage->imageDirection)
 	{
 		//Lật x bằng cách nhân tất cả điểm ảnh cho ma trận bên dưới
-		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+		MGMEngine::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
 			-1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
@@ -557,7 +557,7 @@ void Megaman::render()
 	this->sprite->Render(xDraw, yDraw, curAction, curFrame);
 	if (objectDirection != sprite->pImage->imageDirection)
 	{
-		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+		MGMEngine::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
 			1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
@@ -651,6 +651,7 @@ void Megaman::onIntersectRect(MGMBox * otherObject)
 		}
 		if (item->categoryItem == CI_MEDAL) {
 			MGMGame::getInstance()->isStart = true;
+			MGMAudioManager::getInstance()->Play(AUDIO_BONUS_BALL);
 		}
 	}
 	if (healthPoint > 28) {
@@ -692,7 +693,7 @@ void Megaman::updateFrameAnimation()
 				eyesTime2.update();
 			}
 			else {
-				if (timeFrame.atTime()) {
+				if (timeFrame.at()) {
 					int lastFrame = curFrame;
 					if (isOnStairs){
 
@@ -740,13 +741,13 @@ void Megaman::updateFrameAnimation()
 
 
 
-					if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
+					if (lastFrame == this->sprite->animations[curAction]._framesCount - 1 && curFrame == 0)
 						onLastFrameAnimation(curAction);
 				}
 			}
 		}
 		else if (status == MEGAMAN_BE_ATTACKED) {
-			if (timeFrame1.atTime()) {
+			if (timeFrame1.at()) {
 				int lastFrame = curFrame;
 
 				if (isOnStairs){	
@@ -772,7 +773,7 @@ void Megaman::updateFrameAnimation()
 					}
 				}
 
-				if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
+				if (lastFrame == this->sprite->animations[curAction]._framesCount - 1 && curFrame == 0)
 					onLastFrameAnimation(curAction);
 			}
 		}
@@ -1048,9 +1049,9 @@ Megaman::Megaman()
 	IntersectDoor = -1;
 	eyesTime1.init(100);
 	eyesTime2.init(100);
-	timeFrame2.tickPerFrame = 500;
-	timeFrame1.tickPerFrame = 50;
-	timeFrame.tickPerFrame = 80;
+	timeFrame2._tickPerFrame = 500;
+	timeFrame1._tickPerFrame = 50;
+	timeFrame._tickPerFrame = 80;
 	delayAnimateStandShoot.init(250);
 	delayAnimateRunShoot.init(300);
 	delayAnimateJumpShoot.init(200);

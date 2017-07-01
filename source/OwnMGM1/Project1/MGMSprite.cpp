@@ -20,7 +20,7 @@ MGMSprite::MGMSprite(char* infor, char* imagepath)
 
 }
 
-void MGMSprite::initInfo(char* infor)
+void MGMSprite::initInfoFromPath(char* infor)
 {
 	ifstream fs(infor);
 	ignoreLineIfstream(fs, 1);
@@ -41,12 +41,16 @@ void MGMSprite::initInfo(char* infor)
 
 void MGMSprite::Update(int curAction, int& curFrame)
 {
-	 animations[curAction].next(curFrame);
+	 animations[curAction].nextFrame(curFrame);
 }
 void MGMSprite::Render(float x, float y, int curAction, int curFrame)
 {
 	MGMAnimation* ani = &animations[curAction];
 	pImage->RenderTexture(x, y, &ani->frames[curFrame].toRect());
+}
+
+MGMSprite::MGMSprite()
+{
 }
 
 MGMSprite::~MGMSprite()

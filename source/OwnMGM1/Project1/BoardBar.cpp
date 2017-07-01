@@ -24,7 +24,7 @@ BoardBar::BoardBar()
 	y = 47;
 	isChooseCut = isChooseMega = false;
 	isPause = false;
-	timeFrame.tickPerFrame = 100;
+	timeFrame._tickPerFrame = 100;
 }
 void BoardBar::update(){
 	int life = Megaman::getInstance()->life;
@@ -72,7 +72,7 @@ void BoardBar::updateAnimation(){
 	if (sprite1 == 0){
 		return;
 	}
-	if (timeFrame.atTime()){
+	if (timeFrame.at()){
 		this->sprite1->Update(curAction, curFrame);
 		if (isChooseCut){
 			this->sprite1->Update(curActionForCut, curFrameForcut);

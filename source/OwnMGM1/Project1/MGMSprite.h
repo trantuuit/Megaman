@@ -12,10 +12,10 @@ public:
 	MGMAnimation* animations;
 	void Update(int curAction, int& curFrame);
 	void Render(float x, float y, int curAction, int curFrame);
-	MGMSprite(){}
+	MGMSprite();
 	MGMSprite(char* infor, char* imagepath);
 
-	void initInfo(char* infor);
+	void initInfoFromPath(char* infor);
 
 	~MGMSprite();
 };

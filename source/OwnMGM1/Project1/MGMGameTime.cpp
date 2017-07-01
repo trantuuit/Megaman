@@ -1,35 +1,30 @@
 #include "MGMGameTime.h"
 
 
-MGMGameTime::MGMGameTime(void)
+MGMGameTime::MGMGameTime()
 {
 }
-
+MGMGameTime::~MGMGameTime()
+{
+}
 void MGMGameTime::start()
 {
-	startTime = GetTickCount();
+	_timeStart = GetTickCount();
 }
-
 MGMGameTime::MGMGameTime(DWORD tickPerFrame)
 {
-	this->tickPerFrame = tickPerFrame;
+	this->_tickPerFrame = tickPerFrame;
 }
-
-
-bool MGMGameTime::atTime()
+bool MGMGameTime::at()
 {
 
 	DWORD now = GetTickCount();
-	deltaTime = now - startTime;
+	_timeDelta = now - _timeStart;
 
-	if (deltaTime >= tickPerFrame)
+	if (_timeDelta >= _tickPerFrame)
 	{
-		startTime = GetTickCount();
+		_timeStart = GetTickCount();
 		return true;
 	}
 	return false;
-}
-
-MGMGameTime::~MGMGameTime(void)
-{
 }

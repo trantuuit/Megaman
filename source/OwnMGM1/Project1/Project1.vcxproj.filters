@@ -55,12 +55,6 @@
     <ClCompile Include="MGMCamera.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="MGMDirectXTool.cpp">
-      <Filter>Framework\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="MGMForm.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="MGMGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -248,6 +242,12 @@
     <ClCompile Include="Medal.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="MGMWindow.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MGMEngine.cpp">
+      <Filter>Framework\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -296,13 +296,7 @@
     <ClInclude Include="MGMGame.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="MGMForm.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="MGMAnimation.h">
-      <Filter>Framework\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="MGMDirectXTool.h">
       <Filter>Framework\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="MGMSprite.h">
@@ -463,6 +457,12 @@
     </ClInclude>
     <ClInclude Include="Medal.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMWindow.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MGMEngine.h">
+      <Filter>Framework\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

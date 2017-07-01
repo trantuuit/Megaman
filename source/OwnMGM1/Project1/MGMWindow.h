@@ -1,18 +1,18 @@
 #pragma once
 #include<Windows.h>
 #include"Config.h"
-class MGMForm
+class MGMWindow
 {
 private:
-	MGMForm(void);
+	MGMWindow(void);
 	HWND hWnd;
-	static MGMForm *instance;
+	static MGMWindow *instance;
 public:
-	static MGMForm *getInstance();
+	static MGMWindow *getInstance();
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 	void initHandleWindows(HINSTANCE hInstance, int nCmdShow);
 	HWND getHandleWindow();
 	
-	~MGMForm(void);
+	~MGMWindow(void);
 };
 

@@ -4,17 +4,15 @@
 class MGMGameTime
 {
 public:
-	DWORD startTime;
-	DWORD tickPerFrame;
-	DWORD deltaTime;
-	MGMGameTime(void);
-	~MGMGameTime(void);
-
+	MGMGameTime();
+	~MGMGameTime();
+	DWORD _timeStart;
+	DWORD _tickPerFrame;
+	DWORD _timeDelta;
 	MGMGameTime(DWORD tickPerFrame);
 	//Điều kiện để delta time (giữa 2 frame) > tickPerFrame
-	virtual bool atTime(); 
+	virtual bool at(); 
 	//Lấy thời điểm bắt đầu ở hiện tại ( get tick count)
 	virtual void start();  
-
 };
 

@@ -108,9 +108,9 @@
     <ClCompile Include="MGMAnimation.cpp" />
     <ClCompile Include="MGMBox.cpp" />
     <ClCompile Include="MGMCamera.cpp" />
-    <ClCompile Include="MGMDirectXTool.cpp" />
+    <ClCompile Include="MGMEngine.cpp" />
     <ClCompile Include="MGMEnemy.cpp" />
-    <ClCompile Include="MGMForm.cpp" />
+    <ClCompile Include="MGMWindow.cpp" />
     <ClCompile Include="MGMGame.cpp" />
     <ClCompile Include="MGMGameTime.cpp" />
     <ClCompile Include="MGMMap.cpp" />
@@ -183,9 +183,9 @@
     <ClInclude Include="MGMAnimation.h" />
     <ClInclude Include="MGMBox.h" />
     <ClInclude Include="MGMCamera.h" />
-    <ClInclude Include="MGMDirectXTool.h" />
+    <ClInclude Include="MGMEngine.h" />
     <ClInclude Include="MGMEnemy.h" />
-    <ClInclude Include="MGMForm.h" />
+    <ClInclude Include="MGMWindow.h" />
     <ClInclude Include="MGMGame.h" />
     <ClInclude Include="MGMGameTime.h" />
     <ClInclude Include="MGMMap.h" />

@@ -72,7 +72,7 @@ void ScrewBomber::render()
 	if (id== 100 + SPR_SCREWBOMBER)
 	{
 		int heightSprite = sprite->animations[curAction].frames[curFrame].height;
-		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+		MGMEngine::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
 			1, 0, 0, 0,
 			0,-1, 0, 0,
 			0, 0, 1, 0,
@@ -83,7 +83,7 @@ void ScrewBomber::render()
 
 	if (id ==100+SPR_SCREWBOMBER)
 	{
-		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+		MGMEngine::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
 			1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,

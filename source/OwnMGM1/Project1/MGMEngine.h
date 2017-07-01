@@ -1,30 +1,25 @@
 #pragma once
 #include<Windows.h>
 #include<d3dx9.h>
-#include"MGMForm.h"
-class MGMDirectXTool
+#include"MGMWindow.h"
+class MGMEngine
 {
 public:
-	MGMDirectXTool();
-	~MGMDirectXTool();
-	static MGMDirectXTool* getInstance();
-private:
-	LPDIRECT3DDEVICE9 d3ddv;// Cong cu load hinh ve hinh ve surface
-	LPDIRECT3DSURFACE9 frameBuffer;// Hinh luon nam tren man hinh
-	LPDIRECT3DSURFACE9 backBuffer;// Bo nho tam
+	MGMEngine();
+	~MGMEngine();
+	static MGMEngine* getInstance();
+	LPDIRECT3DDEVICE9 d3ddv;
+	LPDIRECT3DSURFACE9 frameBuffer;
+	LPDIRECT3DSURFACE9 backBuffer;
 	LPD3DXSPRITE sprite;
 	HWND hWnd;
-	static MGMDirectXTool* instance;
-
+	static MGMEngine* instance;
 	bool isInitDirectX();
 	bool isInitSprite();
 	bool isSetFrameBuffer();
 	bool isSetBackBuffer();
 	void init();
-	void error();
-
-
-public:
+	void errorMessage();
 	void Release();
 	LPDIRECT3DDEVICE9 GetDevice();
 	LPDIRECT3DSURFACE9 GetBackBuffer();

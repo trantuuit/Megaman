@@ -19,7 +19,6 @@ enum SPRITE_LIST
 	SPR_FLEA = 7,
 	SPR_SCREWBOMBER = 8,
 	SPR_CUTMAN = 9,
-
 	SPR_HP_MEGAMAN = 10,
 	SPR_ITEM_YASHICHI = 11,
 	SPR_ITEM_UP = 12,
@@ -34,7 +33,6 @@ enum SPRITE_LIST
 	SPR_BULLET = 21,
 	SPR_DOOR = 22,
 	SPR_MET = 23,
-	// Dung
 	SPR_ROOM = 24,
 	SPR_BOSS_GUTSMAN = 25,
 	SPR_BIGROCK = 26,
@@ -56,7 +54,6 @@ class MGMSpriteManager
 	static MGMSpriteManager* instance;
 public:
 	static MGMSpriteManager* getInstance();
-
 	MGMSprite** sprites;
 	MGMSpriteManager();
 	~MGMSpriteManager();

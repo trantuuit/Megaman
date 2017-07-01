@@ -6,7 +6,7 @@
 
 
 #define TITLE_STR "Megaman"
-#define MGMFORM_CLASS_NAME "MegamanForm"  
+#define MGMWindow_CLASS_NAME "MegamanForm"  
 
 #pragma endregion
 

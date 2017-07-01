@@ -1,8 +1,8 @@
 #include "MGMAudioManager.h"
-#include"MGMForm.h"
+#include"MGMWindow.h"
 MGMAudioManager* MGMAudioManager::_Instance = 0;
 MGMAudioManager::MGMAudioManager(){
-	Init_DirectSound(MGMForm::getInstance()->getHandleWindow());
+	Init_DirectSound(MGMWindow::getInstance()->getHandleWindow());
 	sounds = new GSound*[AUDIO_COUNT];
 	sounds[AUDIO_GAME_START] = LoadSound("Data\\Audio\\01 - GameStart.wav");
 	sounds[AUDIO_PAUSE_MENU] = LoadSound("Data\\Audio\\02 - PauseMenu.wav");
@@ -78,7 +78,7 @@ GSound* MGMAudioManager::LoadSound(char *filename)
     result = dsound->Create(&wave, filename);
     if (result != DS_OK)
     {
-		MessageBox(MGMForm::getInstance()->getHandleWindow(), "[FAILED] Can not set the primary buffer", "Loi", MB_ICONERROR);
+		MessageBox(MGMWindow::getInstance()->getHandleWindow(), "[FAILED] Can not set the primary buffer", "Loi", MB_ICONERROR);
 		 return NULL;
 	}
 	//GLTrace("Sound file has been loaded");

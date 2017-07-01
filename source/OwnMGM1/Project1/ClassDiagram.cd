@@ -49,11 +49,11 @@
       <FileName>MGMCamera.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MGMDirectXTool" Collapsed="true">
+  <Class Name="MGMEngine" Collapsed="true">
     <Position X="21.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAACCAAAIAEEAAAEAEAIAAABBBACQ4AAAEAABIAAAA=</HashCode>
-      <FileName>MGMDirectXTool.h</FileName>
+      <FileName>MGMEngine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MGMEnemy" Collapsed="true">
@@ -63,11 +63,11 @@
       <FileName>MGMEnemy.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MGMForm" Collapsed="true">
+  <Class Name="MGMWindow" Collapsed="true">
     <Position X="23.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEBAIIAAAAABAAAQAAAAIQAAAAAA=</HashCode>
-      <FileName>MGMForm.h</FileName>
+      <FileName>MGMWindow.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MGMGame">

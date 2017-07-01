@@ -7,12 +7,11 @@ using namespace std;
 class MGMAnimation
 {
 public:
-
-	int framesCount; //Số frame của animation
+	int _framesCount;
 	MGMRectangle* frames;
 	MGMAnimation();
 	MGMAnimation(ifstream& fs);
 	void init(ifstream& fs);
 	~MGMAnimation();
-	void next(int& curFrame);
+	void nextFrame(int& curFrame);
 };

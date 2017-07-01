@@ -1,18 +1,18 @@
-#include "MGMDirectXTool.h"
+#include "MGMEngine.h"
 
-MGMDirectXTool* MGMDirectXTool::instance = 0;
-MGMDirectXTool::MGMDirectXTool()
+MGMEngine* MGMEngine::instance = 0;
+MGMEngine::MGMEngine()
 {
-	this->hWnd = MGMForm::getInstance()->getHandleWindow();
+	this->hWnd = MGMWindow::getInstance()->getHandleWindow();
 	init();
 }
-MGMDirectXTool* MGMDirectXTool::getInstance()
+MGMEngine* MGMEngine::getInstance()
 {
 	if (instance == 0)
-		instance = new MGMDirectXTool();
+		instance = new MGMEngine();
 	return instance;
 }
-bool MGMDirectXTool::isInitDirectX()
+bool MGMEngine::isInitDirectX()
 {
 	LPDIRECT3D9 d3d;
 	if (NULL == (d3d = Direct3DCreate9(D3D_SDK_VERSION)))
@@ -43,18 +43,18 @@ bool MGMDirectXTool::isInitDirectX()
 	d3d->Release();
 	return true;
 }
-bool MGMDirectXTool::isInitSprite()
+bool MGMEngine::isInitSprite()
 {
 	HRESULT hr = D3DXCreateSprite(d3ddv, &sprite);
 	return !FAILED(hr);
 }
-bool MGMDirectXTool::isSetBackBuffer()
+bool MGMEngine::isSetBackBuffer()
 {
 	HRESULT hr = d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO,
 		&backBuffer);
 	return !FAILED(hr);
 }
-bool MGMDirectXTool::isSetFrameBuffer()
+bool MGMEngine::isSetFrameBuffer()
 {
 
 	HRESULT hr = d3ddv->CreateOffscreenPlainSurface(272,
@@ -65,16 +65,16 @@ bool MGMDirectXTool::isSetFrameBuffer()
 		0);
 	return !FAILED(hr);
 }
-void MGMDirectXTool::init()
+void MGMEngine::init()
 {
 	if (!isInitDirectX() || !isInitSprite() || !isSetBackBuffer() || !isSetFrameBuffer())
-		error();
+		errorMessage();
 }
-void MGMDirectXTool::error()
+void MGMEngine::errorMessage()
 {
-	MessageBox(hWnd, "Không the khoi tao graphics", "Loi", MB_ICONERROR);
+	MessageBox(hWnd, "failed graphics", "Failed", MB_ICONERROR);
 }
-void MGMDirectXTool::Release()
+void MGMEngine::Release()
 {
 	if (d3ddv)
 	{
@@ -98,37 +98,37 @@ void MGMDirectXTool::Release()
 		sprite = 0;
 	}
 }
-LPDIRECT3DDEVICE9 MGMDirectXTool::GetDevice()
+LPDIRECT3DDEVICE9 MGMEngine::GetDevice()
 {
 	return d3ddv;
 }
 
-LPDIRECT3DSURFACE9 MGMDirectXTool::GetBackBuffer()
+LPDIRECT3DSURFACE9 MGMEngine::GetBackBuffer()
 {
 	return backBuffer;
 }
 
-LPD3DXSPRITE MGMDirectXTool::GetSprite()
+LPD3DXSPRITE MGMEngine::GetSprite()
 {
 	return sprite;
 }
-void MGMDirectXTool::PrintText(char* str, int size, int x, int y, DWORD color)
+void MGMEngine::PrintText(char* str, int size, int x, int y, DWORD color)
 {
 	ID3DXFont* dxfont;
 	RECT textbox;
 	SetRect(&textbox, x, y, 272, 272);
-	D3DXCreateFont(d3ddv,    // the D3D Device
-		size,    // font height
-		0,    // default font width
-		FW_NORMAL,    // font weight
-		1,    // not using MipLevels
-		false,    // italic font
-		DEFAULT_CHARSET,    // default character set
-		OUT_DEFAULT_PRECIS,    // default OutputPrecision,
-		DEFAULT_QUALITY,    // default Quality
-		DEFAULT_PITCH | FF_DONTCARE,    // default pitch and family
-		"Arial",    // use Facename Arial
-		&dxfont);    // the font object
+	D3DXCreateFont(d3ddv,
+		size, 
+		0, 
+		FW_NORMAL, 
+		1, 
+		false,
+		DEFAULT_CHARSET, 
+		OUT_DEFAULT_PRECIS,
+		DEFAULT_QUALITY,  
+		DEFAULT_PITCH | FF_DONTCARE,
+		"Arial",  
+		&dxfont);  
 	dxfont->DrawTextA(NULL,
 		str,
 		strlen(str),
@@ -138,34 +138,33 @@ void MGMDirectXTool::PrintText(char* str, int size, int x, int y, DWORD color)
 
 	dxfont->Release();
 }
-void MGMDirectXTool::BeginGraphics()
+void MGMEngine::BeginGraphics()
 {
 	HRESULT hr = d3ddv->BeginScene();
 	HRESULT hr1 = sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	d3ddv->Clear(0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(10, 10, 10), 1.0f, 0);
 	if (FAILED(hr) || FAILED(hr1))
 	{
-		MessageBox(0, "Khong the bat dau ve", "Loi", MB_ICONERROR);
+		MessageBox(0, "Not start", "Failed", MB_ICONERROR);
 		PostQuitMessage(0);
 	}
 }
 
-void MGMDirectXTool::EndGraphics()
+void MGMEngine::EndGraphics()
 {
 	HRESULT hr1 = sprite->End();
 	HRESULT hr = d3ddv->EndScene();
 	if (FAILED(hr) || FAILED(hr1))
 	{
-		MessageBox(0, "Khong the ket thuc ve", "Loi", MB_ICONERROR);
+		MessageBox(0, "Not end draw", "Failed", MB_ICONERROR);
 		PostQuitMessage(0);
 	}
-
 }
-void MGMDirectXTool::PresentBackBuffer()
+void MGMEngine::PresentBackBuffer()
 {
 	d3ddv->Present(0, 0, 0, 0);
 }
-MGMDirectXTool::~MGMDirectXTool()
+MGMEngine::~MGMEngine()
 {
 	Release();
 }

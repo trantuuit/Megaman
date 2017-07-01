@@ -28,7 +28,7 @@ void Door::updateFrameAnimation()
 	if (sprite == 0)
 		return;
 
-	if (timeFrame.atTime())
+	if (timeFrame.at())
 	{
 		if (!pauseAnimation)
 		{
@@ -36,7 +36,7 @@ void Door::updateFrameAnimation()
 			this->sprite->Update(curAction, curFrame);
 		}
 	}
-	if (curFrame == this->sprite->animations[curAction].framesCount - 1)
+	if (curFrame == this->sprite->animations[curAction]._framesCount - 1)
 		onLastFrameAnimation(curAction);
 }
 void Door::reset()

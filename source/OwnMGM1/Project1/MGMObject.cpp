@@ -6,7 +6,7 @@ MGMObject::MGMObject()
 {
 	curAction = 0;
 	curFrame = 0;
-	timeFrame.tickPerFrame = 100;
+	timeFrame._tickPerFrame = 100;
 	//ay = -0.005;
 	//vy = -0.4;
 	dx = 0;
@@ -46,14 +46,14 @@ void MGMObject::updateFrameAnimation() // this
 	if (sprite == 0)
 		return;
 	MGMBox::update();
-	if (timeFrame.atTime()) {
+	if (timeFrame.at()) {
 
 		int lastFrame = curFrame;
 
 		//if(isUpdateFrameAnimation)
 		this->sprite->Update(curAction, curFrame);
 
-		if (lastFrame == this->sprite->animations[curAction].framesCount - 1 && curFrame == 0)
+		if (lastFrame == this->sprite->animations[curAction]._framesCount - 1 && curFrame == 0)
 			onLastFrameAnimation(curAction);
 	}
 }
@@ -88,7 +88,7 @@ void MGMObject::render()
 	{
 		int widthSprite = sprite->animations[curAction].frames[curFrame].width;
 		//Lật x bằng cách nhân tất cả điểm ảnh cho ma trận bên dưới
-		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+		MGMEngine::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
 			-1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
@@ -100,7 +100,7 @@ void MGMObject::render()
 
 	if (objectDirection != sprite->pImage->imageDirection)
 	{
-		MGMDirectXTool::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
+		MGMEngine::getInstance()->GetSprite()->SetTransform(&(D3DXMATRIX(
 			1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,

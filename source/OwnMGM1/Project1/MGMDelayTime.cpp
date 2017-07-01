@@ -5,7 +5,7 @@ void MGMDelayTime::start(DWORD time)
 {
 	ready = false;
 	finished = false;
-	startTime = GetTickCount();
+	_start = GetTickCount();
 	if (time != (DWORD)-1)
 	{
 		init(time);
@@ -44,7 +44,7 @@ bool MGMDelayTime::isSchedule()
 void MGMDelayTime::update()
 {
 	DWORD now = GetTickCount();
-	DWORD deltaTime = now - startTime;
+	DWORD deltaTime = now - _start;
 	if (deltaTime >= tickPerFrame)
 	{
 		finished = true;

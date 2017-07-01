@@ -54,12 +54,12 @@ void PicketMan::update()
 }
 void PicketMan::updateFrameAnimation()
 {
-	timeFrame.tickPerFrame = 200;
+	timeFrame._tickPerFrame = 200;
 	if (sprite == 0)
 		return;
 	MGMBox::update();
-	if (timeFrame.atTime()) {
-		if (curAction==PKM_ATTACK && curFrame == this->sprite->animations[curAction].framesCount - 1)
+	if (timeFrame.at()) {
+		if (curAction==PKM_ATTACK && curFrame == this->sprite->animations[curAction]._framesCount - 1)
 			AxeThrowing();
 		this->sprite->Update(curAction, curFrame);
 	}

@@ -1,18 +1,18 @@
-﻿#include "MGMForm.h"
+﻿#include "MGMWindow.h"
 
 
-MGMForm::MGMForm(void)
+MGMWindow::MGMWindow(void)
 {
 }
-MGMForm* MGMForm::instance = 0;
-MGMForm *MGMForm::getInstance()
+MGMWindow* MGMWindow::instance = 0;
+MGMWindow *MGMWindow::getInstance()
 {
-	if (instance == 0) instance = new MGMForm();
+	if (instance == 0) instance = new MGMWindow();
 	return instance;
 }
 
 /*Hàm xử lý thông điệp*/
-LRESULT MGMForm::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT MGMWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
 	PAINTSTRUCT ps;
@@ -30,7 +30,7 @@ LRESULT MGMForm::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 /*Khởi tạo cửa sổ*/
-void MGMForm::initHandleWindows(HINSTANCE hInstance, int nCmdShow)
+void MGMWindow::initHandleWindows(HINSTANCE hInstance, int nCmdShow)
 {
 	WNDCLASSEX wcex;
 	ZeroMemory(&wcex, sizeof(wcex));
@@ -43,20 +43,20 @@ void MGMForm::initHandleWindows(HINSTANCE hInstance, int nCmdShow)
 	wcex.hInstance = hInstance;
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszClassName = MGMFORM_CLASS_NAME;
+	wcex.lpszClassName = MGMWindow_CLASS_NAME;
 	RegisterClassEx(&wcex);
-	HWND hWnd = CreateWindow(MGMFORM_CLASS_NAME, TITLE_STR, WS_OVERLAPPEDWINDOW,
+	HWND hWnd = CreateWindow(MGMWindow_CLASS_NAME, TITLE_STR, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, FORM_WIDTH, FORM_HEIGHT, 0, 0, hInstance, NULL);
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 	this->hWnd = hWnd;
 }
-HWND MGMForm::getHandleWindow()
+HWND MGMWindow::getHandleWindow()
 {
 	return hWnd;
 }
-MGMForm::~MGMForm(void)
+MGMWindow::~MGMWindow(void)
 {
 	if (instance != 0) delete instance;
 }

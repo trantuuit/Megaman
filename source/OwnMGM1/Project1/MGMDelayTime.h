@@ -3,7 +3,7 @@
 class MGMDelayTime
 {
 private:
-	DWORD startTime;
+	DWORD _start;
 	DWORD tickPerFrame;
 	bool ready, finished;
 public:

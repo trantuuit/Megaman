@@ -1059,7 +1059,7 @@ HRESULT GStreamingSound::HandleWaveStreamNotification( BOOL bLoopedPlay )
         }
     }
 
-    // Update where the buffer will lock (for next time)
+    // Update where the buffer will lock (for nextFrame time)
     m_dwNextWriteOffset += dwDSLockedBufferSize; 
     m_dwNextWriteOffset %= m_dwDSBufferSize; // Circular buffer
 
@@ -1287,7 +1287,7 @@ HRESULT CWaveFile::ReadMMIO()
                   sizeof(pcmWaveFormat)) != sizeof(pcmWaveFormat) )
         return DXTRACE_ERR( TEXT("mmioRead"), E_FAIL );
 
-    // Allocate the waveformatex, but if its not pcm format, read the next
+    // Allocate the waveformatex, but if its not pcm format, read the nextFrame
     // word, and thats how many extra bytes to allocate.
     if( pcmWaveFormat.wf.wFormatTag == WAVE_FORMAT_PCM )
     {

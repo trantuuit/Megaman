@@ -13,7 +13,6 @@ public:
 	static MGMCamera* getInstance();
 	void Transform(float x, float y, float& xRender, float& yRender);
 	void update();
-
 	MGMCamera();
 	~MGMCamera();
 };

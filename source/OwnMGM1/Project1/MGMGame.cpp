@@ -1,6 +1,6 @@
 ﻿#include "MGMGame.h"
 #include"Keyboard.h"
-#include"MGMDirectXTool.h"
+#include"MGMEngine.h"
 #include"KEY.h"
 #include"MegamanBullet.h"
 #include"EnemyBullet.h"

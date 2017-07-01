@@ -7,6 +7,10 @@ MGMTexture::MGMTexture(const char* filepath, D3DCOLOR transColor)
 	imageDirection = LEFT;
 }
 
+MGMTexture::MGMTexture()
+{
+}
+
 void MGMTexture::Init(const char* filepath, D3DCOLOR transColor)
 {
 	HRESULT result;
@@ -18,7 +22,7 @@ void MGMTexture::Init(const char* filepath, D3DCOLOR transColor)
 		return;
 
 	result = D3DXCreateTextureFromFileEx(
-		MGMDirectXTool::getInstance()->GetDevice(),
+		MGMEngine::getInstance()->GetDevice(),
 		filepath,
 		info.Width,
 		info.Height,
@@ -39,7 +43,7 @@ void MGMTexture::Init(const char* filepath, D3DCOLOR transColor)
 
 void MGMTexture::RenderTexture(int x, int y, RECT *r)
 {
-	MGMDirectXTool::getInstance()->GetSprite()->Draw(m_image,
+	MGMEngine::getInstance()->GetSprite()->Draw(m_image,
 		r,
 		0,
 		&D3DXVECTOR3(x, y, 0),
