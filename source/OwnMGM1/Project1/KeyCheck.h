@@ -1,6 +1,6 @@
 #pragma once
 #include"Keyboard.h"
-class KEY
+class KeyCheck
 {
 public:
 	bool	isLeftDown,
@@ -70,13 +70,13 @@ public:
 		isNinePress;
 		
 
-	static KEY* instance;
-	static KEY* getInstance();
+	static KeyCheck* instance;
+	static KeyCheck* getInstance();
 
 	void update();
 	void numberUpdate();
 
-	KEY();
-	~KEY();
+	KeyCheck();
+	~KeyCheck();
 };
 

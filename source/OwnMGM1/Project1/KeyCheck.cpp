@@ -1,16 +1,16 @@
-#include "KEY.h"
+#include "KeyCheck.h"
 
 
 
-KEY * KEY::instance = 0;
-KEY * KEY::getInstance()
+KeyCheck * KeyCheck::instance = 0;
+KeyCheck * KeyCheck::getInstance()
 {
 	if (instance == 0)
-		instance = new KEY();
+		instance = new KeyCheck();
 	return instance;
 }
 
-void KEY::update()
+void KeyCheck::update()
 {
 	CKeyboard::getInstance()->UpdateKeyboard();
 
@@ -57,7 +57,7 @@ void KEY::update()
 	numberUpdate();
 }
 
-void KEY::numberUpdate()
+void KeyCheck::numberUpdate()
 {
 	isOneDown = CKeyboard::getInstance()->IsKeyDown(DIK_1);
 	isOnePress = isOneDown && !isPreviousOne;
@@ -97,7 +97,7 @@ void KEY::numberUpdate()
 
 }
 
-KEY::KEY()
+KeyCheck::KeyCheck()
 {
 	isPreviousLeftDown = false;
 	isPreviousRightDown = false;
@@ -107,6 +107,6 @@ KEY::KEY()
 	isPreviousOne = false;
 
 }
-KEY::~KEY()
+KeyCheck::~KeyCheck()
 {
 }
